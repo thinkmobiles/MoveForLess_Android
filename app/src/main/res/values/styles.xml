@@ -5,4 +5,21 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="LoginActivityStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
+
+    <style name="LoginEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:minWidth">@dimen/edit_text_width</item>
+        <item name="android:layout_marginBottom">@dimen/edit_text_margin_top_bottom</item>
+    </style>
+
+    <style name="LoginButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_log_in</item>
+        <item name="android:layout_marginTop">@dimen/login_btn_margin_top</item>
+        <item name="android:text">@string/login</item>
+    </style>
 </resources>

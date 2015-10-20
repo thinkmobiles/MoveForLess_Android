@@ -3,4 +3,10 @@
     <string name="empty_message">empty</string>
     <string name="refresh_button_text">refresh</string>
     <string name="error_message">error</string>
+
+
+    <!--Login-->
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login">Log in</string>
 </resources>
