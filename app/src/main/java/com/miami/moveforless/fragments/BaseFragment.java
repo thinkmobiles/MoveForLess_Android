@@ -1,4 +1,4 @@
-package moveforless.miami.com.moreforless.fragments;
+package com.miami.moveforless.fragments;
 
 
 import android.support.annotation.IdRes;

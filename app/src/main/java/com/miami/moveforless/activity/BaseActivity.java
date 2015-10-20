@@ -1,4 +1,4 @@
-package moveforless.miami.com.moreforless.activity;
+package com.miami.moveforless.activity;
 
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
