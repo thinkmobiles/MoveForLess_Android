@@ -1,6 +1,5 @@
 package com.miami.moveforless.rest;
 
-import com.miami.moveforless.globalconstants.IMoverApi;
 import com.miami.moveforless.globalconstants.RestConst;
 import com.squareup.okhttp.OkHttpClient;
 

@@ -4,6 +4,9 @@
     <string name="refresh_button_text">refresh</string>
     <string name="error_message">error</string>
 
+    <string name="loading">Loading...</string>
+    <string name="Login">Log in...</string>
+    <string name="Logout">Log out...</string>
 
     <!--Login-->
     <string name="email">E-mail</string>

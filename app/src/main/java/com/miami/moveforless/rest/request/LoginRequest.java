@@ -7,8 +7,8 @@ public class LoginRequest {
     public String username;
     public String password;
 
-    public LoginRequest() {
-        username = "soslan";
-        password = "pass123";
+    public LoginRequest(String _userName, String _password) {
+        username = _userName;
+        password = _password;
     }
 }

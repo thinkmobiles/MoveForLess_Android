@@ -1,50 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_login"
     android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/tilEmail_AL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tilPassword_AL"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textColorHint="@color/white">
 
         <EditText
-            android:id="@+id/etEmail_AL"
-            style="@style/LoginEditText"
+            android:id="@+id/editext1"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
             android:inputType="text" />
-    </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/tilPassword_AL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textColorHint="@color/white">
 
         <EditText
-            android:id="@+id/etPassword_AL"
+            android:id="@+id/editext2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:inputType="textPassword"
-            style="@style/LoginEditText"/>
-    </android.support.design.widget.TextInputLayout>
+/>
 
     <Button
-        android:id="@+id/btnLogin_AL"
-        style="@style/LoginButton"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tilPassword_AL"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+
+/>
+</LinearLayout>
