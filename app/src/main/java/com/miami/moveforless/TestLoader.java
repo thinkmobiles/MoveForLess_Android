@@ -2,7 +2,6 @@ package com.miami.moveforless;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.support.v4.content.Loader;
 
 import com.miami.moveforless.globalconstants.IMoverApi;
 import com.miami.moveforless.rest.RestClientApi;
@@ -17,19 +16,20 @@ public class TestLoader extends AsyncTaskLoader{
 
     public TestLoader(Context context) {
         super(context);
-        restApi = RestClientApi.getApi();
+
     }
 
     @Override
     public Object loadInBackground() {
-
-        LoginResponse resp;
+        restApi = RestClientApi.getApi();
+        LoginResponse resp = null;
+        LoginRequest request  = new LoginRequest();
         try {
-            resp = restApi.login(new LoginRequest());
+            resp = restApi.login(request.username, request.password);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return null;
+        return resp;
     }
 }

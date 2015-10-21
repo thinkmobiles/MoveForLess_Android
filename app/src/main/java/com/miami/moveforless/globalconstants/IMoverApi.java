@@ -1,9 +1,9 @@
 package com.miami.moveforless.globalconstants;
 
-import com.miami.moveforless.rest.request.LoginRequest;
 import com.miami.moveforless.rest.response.LoginResponse;
 
-import retrofit.http.Body;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.POST;
 
 /**
@@ -12,5 +12,6 @@ import retrofit.http.POST;
 public interface IMoverApi {
 
     @POST("/user/login")
-    LoginResponse login(@Body LoginRequest _loginRequest);
+    @FormUrlEncoded
+    LoginResponse login(@Field("username") String user, @Field(("password")) String password);
 }

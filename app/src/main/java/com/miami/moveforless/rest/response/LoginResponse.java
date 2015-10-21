@@ -7,11 +7,14 @@ import com.google.gson.annotations.SerializedName;
  */
 public class LoginResponse {
     @SerializedName("user_id")
-    Integer user_id;
+    public Integer user_id;
 
     @SerializedName("token")
-    String token;
+    public String token;
 
     @SerializedName("timeout")
-    Long timeout;
+    public Long timeout;
+
+    public LoginResponse() {
+    }
 }
