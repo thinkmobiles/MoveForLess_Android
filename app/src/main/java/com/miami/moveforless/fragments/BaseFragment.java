@@ -3,15 +3,45 @@ package com.miami.moveforless.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by SetKrul on 14.07.2015.
  */
 public abstract class BaseFragment extends Fragment {
+
+    protected abstract int getLayoutResource();
+    protected abstract void setupViews();
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle savedInstanceState) {
+        super.onCreateView(_inflater, _container, savedInstanceState);
+
+        return _inflater.inflate(getLayoutResource(), _container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+        setupViews();
+    }
+
+    @Override
+    public void onDestroyView() {
+        ButterKnife.unbind(this);
+        super.onDestroyView();
+    }
 
     protected final void addFragment(final @IdRes int _containerId, final Fragment _fragment) {
         getChildFragmentManager().beginTransaction().add(_containerId, _fragment).commit();

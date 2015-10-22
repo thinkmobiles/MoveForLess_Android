@@ -4,6 +4,7 @@
     <string name="refresh_button_text">refresh</string>
     <string name="error_message">error</string>
 
+    <!--dialog messages-->
     <string name="loading">Loading...</string>
     <string name="Login">Log in...</string>
     <string name="Logout">Log out...</string>
@@ -12,4 +13,10 @@
     <string name="email">E-mail</string>
     <string name="password">Password</string>
     <string name="login">Log in</string>
+
+    <!--menu items-->
+    <string name="menu_settings">Settings</string>
+    <string name="menu_logout">Log out</string>
+    <string name="menu_search">Search contracts</string>
+    <string name="menu_refresh">Refresh contracts</string>
 </resources>

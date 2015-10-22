@@ -4,6 +4,8 @@
     <color name="white">#FFF</color>
     <color name="black">#000</color>
 
-
+    <color name="cyan_900">#004D40</color>
+    <color name="cyan_800">#00695C</color>
+    <color name="cyan_200">#80CBC4</color>
 
 </resources>

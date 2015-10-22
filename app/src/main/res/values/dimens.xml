@@ -8,4 +8,14 @@
     <dimen name="edit_text_margin_top_bottom">5dp</dimen>
     <dimen name="login_btn_margin_top">25dp</dimen>
     <dimen name="logo_margin_top">50dp</dimen>
+
+    <!--job fragment-->
+    <dimen name="job_content_margin_left_right">20dp</dimen>
+    <dimen name="job_title_text_size">20sp</dimen>
+    <dimen name="job_title_margin_top">10dp</dimen>
+    <dimen name="job_title_margin_bottom">10dp</dimen>
+
+    <!--questionnaire fragment-->
+    <dimen name="questionnaire_text_size">16sp</dimen>
+    <dimen name="questionnaire_text_margin_top_bottom">5dp</dimen>
 </resources>

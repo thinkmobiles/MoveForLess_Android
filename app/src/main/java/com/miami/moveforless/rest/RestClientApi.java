@@ -2,7 +2,6 @@ package com.miami.moveforless.rest;
 
 import com.miami.moveforless.globalconstants.RestConst;
 import com.miami.moveforless.rest.request.LoginRequest;
-import com.miami.moveforless.rest.response.LoginResponse;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.concurrent.TimeUnit;
@@ -11,7 +10,6 @@ import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -44,7 +42,7 @@ public class RestClientApi {
         return getInstance().api;
     }
 
-    public static rx.Observable<String> login(String _username, String _password) {
+    public static Observable<String> login(String _username, String _password) {
         final LoginRequest loginRequest = new LoginRequest(_username, _password);
         return RestClientApi.getApi().login(loginRequest.username, loginRequest.password)
                 .subscribeOn(Schedulers.io())
