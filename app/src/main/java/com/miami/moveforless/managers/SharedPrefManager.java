@@ -13,7 +13,6 @@ public class SharedPrefManager {
 
     private static SharedPrefManager instance;
     private SharedPreferences sharedPreferences;
-    private Context mContext;
 
     private SharedPrefManager(Context _context) {
         sharedPreferences = _context.getSharedPreferences(SharedPrefConst.SHARED_PREF_NAME, 0);

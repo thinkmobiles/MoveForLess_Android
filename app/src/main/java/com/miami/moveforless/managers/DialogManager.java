@@ -5,6 +5,8 @@ package com.miami.moveforless.managers;
  */
 public class DialogManager {
 
+    public static void showDialag() {
 
+    }
 
 }
