@@ -25,6 +25,7 @@
             android:label="@string/app_name"
             android:theme="@style/LoginActivityStyle"
             android:screenOrientation="reverseLandscape">
+
         </activity>
 
         <activity android:name=".activity.MainActivity"

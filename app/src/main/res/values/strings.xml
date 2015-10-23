@@ -19,4 +19,14 @@
     <string name="menu_logout">Log out</string>
     <string name="menu_search">Search contracts</string>
     <string name="menu_refresh">Refresh contracts</string>
+    
+    <!--job fragment-->
+    <string-array name="tabs_titles">
+        <item>Job Details</item>
+        <item>Questionnaire</item>
+        <item>Sign Contract</item>
+        <item>Stop Job</item>
+        <item>Sign Invoice</item>
+        <item>Payment</item>
+    </string-array>
 </resources>

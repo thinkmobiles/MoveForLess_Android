@@ -8,11 +8,17 @@
         android:id="@+id/tabLayout_FJ"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cyan_800"/>
+        style="@style/AppTabLayout"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/job_divider_height"
+        android:background="@drawable/toolbar_divider" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager_FJ"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

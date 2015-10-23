@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/job_content_margin_left_right"
-    android:layout_marginRight="@dimen/job_content_margin_left_right"
+    android:paddingLeft="@dimen/job_content_padding_left_right"
+    android:paddingRight="@dimen/job_content_padding_left_right"
     android:orientation="vertical">
 
     <TextView
@@ -22,34 +22,16 @@
             android:layout_height="match_parent">
 
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/questionnaire_row" />
 
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/questionnaire_row" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView"
-                    style="@style/QuestionnaireDescriptionTextStyle"
-                    />
-
-                <CheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Yes"
-                    style="@style/QuestionnaireCheckBox"
-                    />
-
-                <CheckBox
-                    android:id="@+id/checkBox2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="No"
-                    style="@style/QuestionnaireCheckBox"
-                    />
-            </TableRow>
         </TableLayout>
 
     </ScrollView>

@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/cyan_800"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/tvTitle_TL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/cyan_200"
-        />
+        android:layout_gravity="center_vertical"
+        android:text="tab"
+        android:textSize="@dimen/job_tab_text_size" />
 
     <ImageView
         android:id="@+id/ivTitleIcon_TL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"/>
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_arrow"/>
 </LinearLayout>

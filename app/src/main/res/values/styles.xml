@@ -7,7 +7,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="colorPrimary">@color/white</item>
         <item name="android:textColorPrimary">@color/cyan_800</item>
-        <item name="android:textColorSecondary">#ffff00</item>
+
     </style>
 
     <style name="LoginActivityStyle" parent="Theme.AppCompat.Light.NoActionBar">
@@ -23,6 +23,17 @@
     <style name="Dark.Overlay.LightPopup" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:background">@color/black</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTabLayout" parent="Widget.Design.TabLayout">
+        <item name="android:background">@color/cyan_800</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabPaddingStart">0dp</item>
+        <item name="tabPaddingEnd">0dp</item>
+        <item name="tabMode">scrollable</item>
     </style>
 
     <style name="PagesTitleStyle">
@@ -45,6 +56,7 @@
     <style name="QuestionnaireCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:textSize">@dimen/job_title_text_size</item>
         <item name="android:textColor">@color/cyan_800</item>
+        <item name="android:layout_marginLeft">@dimen/questionnaire_checkbox_margin_left</item>
     </style>
 
     <style name="LoginEditText" parent="Widget.AppCompat.EditText">
