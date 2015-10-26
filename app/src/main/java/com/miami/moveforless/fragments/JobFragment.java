@@ -38,9 +38,7 @@ public class JobFragment extends BaseFragment {
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.customizeTabs(mViewPager);
-        mViewPager.setCurrentItem(2);
-
-
+        mViewPager.setCurrentItem(selectedTab);
     }
 
 }

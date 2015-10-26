@@ -56,6 +56,7 @@
     <style name="QuestionnaireCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:textSize">@dimen/job_title_text_size</item>
         <item name="android:textColor">@color/cyan_800</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_marginLeft">@dimen/questionnaire_checkbox_margin_left</item>
     </style>
 

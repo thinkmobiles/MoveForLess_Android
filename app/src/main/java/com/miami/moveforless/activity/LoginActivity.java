@@ -14,6 +14,8 @@ import com.miami.moveforless.utils.RxUtils;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -28,6 +30,7 @@ public class LoginActivity extends BaseActivity {
 
 
     private CompositeSubscription _subscriptions = new CompositeSubscription();
+    private Subscription loginSubscription;
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
@@ -39,13 +42,14 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        _subscriptions = RxUtils.getNewCompositeSubIfUnsubscribed(_subscriptions);
+//        _subscriptions = RxUtils.getNewCompositeSubIfUnsubscribed(_subscriptions);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        RxUtils.unsubscribeIfNotNull(_subscriptions);
+//        RxUtils.unsubscribeIfNotNull(_subscriptions);
+        loginSubscription.unsubscribe();
     }
 
     @Override
@@ -61,9 +65,9 @@ public class LoginActivity extends BaseActivity {
 
     private void login() {
         showLoadingDialog();
-        _subscriptions.add(
+        loginSubscription =
                 RestClientApi.login(etEmail.getText().toString(), etPassword.getText().toString())
-                        .subscribe(token -> onSuccess(token), e -> onError(e)));
+                        .subscribe(token -> onSuccess(token), e -> onError(e));
 
     }
 

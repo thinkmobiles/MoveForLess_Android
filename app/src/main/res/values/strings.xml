@@ -8,6 +8,8 @@
     <string name="loading">Loading...</string>
     <string name="Login">Log in...</string>
     <string name="Logout">Log out...</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 
     <!--Login-->
     <string name="email">E-mail</string>
@@ -19,7 +21,9 @@
     <string name="menu_logout">Log out</string>
     <string name="menu_search">Search contracts</string>
     <string name="menu_refresh">Refresh contracts</string>
-    
+    <string name="questionnaire">Questionnaire</string>
+    <string name="next">Next</string>
+
     <!--job fragment-->
     <string-array name="tabs_titles">
         <item>Job Details</item>

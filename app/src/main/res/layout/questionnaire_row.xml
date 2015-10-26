@@ -1,29 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/question_row_QR"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
 
-<TextView
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:id="@+id/textView"
-    style="@style/QuestionnaireDescriptionTextStyle"
-    android:layout_weight="1" />
+    >
 
-<CheckBox
-    android:id="@+id/checkBox"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Yes"
-    style="@style/QuestionnaireCheckBox"
-    />
+    <TextView
+        android:id="@+id/textView"
+        android:paddingLeft="5dp"
+        style="@style/QuestionnaireDescriptionTextStyle"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="aasdf" />
 
-<CheckBox
-    android:id="@+id/checkBox2"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="No"
-    style="@style/QuestionnaireCheckBox"
-    />
-</TableRow>
+    <RadioGroup
+        android:id="@+id/rgCheckBoxes"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/cbYes"
+            style="@style/QuestionnaireCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yes" />
+
+        <RadioButton
+            android:id="@+id/cbNo"
+            style="@style/QuestionnaireCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:text="@string/no" />
+    </RadioGroup>
+
+</LinearLayout>

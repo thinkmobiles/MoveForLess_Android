@@ -7,38 +7,44 @@
     android:orientation="vertical">
 
     <TextView
-        style="@style/PagesTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title" />
+        android:text="@string/questionnaire"
+        style="@style/PagesTitleStyle"
+        />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <TableLayout
+        <LinearLayout
+            android:id="@+id/questions_container_FQ"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <include
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+
                 layout="@layout/questionnaire_row" />
 
             <include
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 layout="@layout/questionnaire_row" />
 
-        </TableLayout>
+        </LinearLayout>
 
     </ScrollView>
 
     <Button
+        android:id="@+id/btnNext_FQ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
+        android:text="@string/next"
         android:layout_gravity="right"/>
 </LinearLayout>
