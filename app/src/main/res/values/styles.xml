@@ -36,21 +36,38 @@
         <item name="tabMode">scrollable</item>
     </style>
 
-    <style name="PagesTitleStyle">
+    <style name="BaseTitleStyle">
         <item name="android:textSize">@dimen/job_title_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/cyan_900</item>
-        <item name="android:layout_marginTop">@dimen/job_title_margin_top</item>
-        <item name="android:layout_marginBottom">@dimen/job_title_margin_bottom</item>
+    </style>
+
+    <style name="BaseTextStyle">
+        <item name="android:textSize">@dimen/job_title_text_size</item>
+        <item name="android:textColor">@color/cyan_800</item>
 
     </style>
 
-    <style name="QuestionnaireDescriptionTextStyle">
-        <item name="android:textSize">@dimen/job_title_text_size</item>
-        <item name="android:textColor">@color/cyan_800</item>
+    <style name="PagesTitleStyle" parent="BaseTitleStyle">
+        <item name="android:layout_marginTop">@dimen/job_title_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/job_title_margin_bottom</item>
+    </style>
+
+
+
+    <style name="QuestionnaireDescriptionTextStyle" parent="BaseTextStyle">
         <item name="android:layout_marginTop">@dimen/questionnaire_text_margin_top_bottom</item>
         <item name="android:layout_marginBottom">@dimen/questionnaire_text_margin_top_bottom</item>
 
+    </style>
+
+    <!--dialog styles-->
+    <style name="DialogTitleStyle" parent="BaseTitleStyle">
+        <item name="android:layout_marginBottom">@dimen/dialog_title_margin_button</item>
+    </style>
+
+    <style name="DialogDescriptionStyle" parent="BaseTextStyle">
+        <item name="android:layout_marginBottom">@dimen/dialog_description_margin_button</item>
     </style>
 
     <style name="QuestionnaireCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">

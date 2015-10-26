@@ -21,4 +21,10 @@
     <dimen name="questionnaire_text_size">16sp</dimen>
     <dimen name="questionnaire_text_margin_top_bottom">5dp</dimen>
     <dimen name="questionnaire_checkbox_margin_left">25dp</dimen>
+
+    <!--base dialog-->
+    <dimen name="dialog_width">300dp</dimen>
+    <dimen name="dialog_padding">20dp</dimen>
+    <dimen name="dialog_title_margin_button">15dp</dimen>
+    <dimen name="dialog_description_margin_button">15dp</dimen>
 </resources>

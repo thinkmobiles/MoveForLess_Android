@@ -10,6 +10,8 @@
     <string name="Logout">Log out...</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="clear">Clear</string>
+    <string name="ok">Ok</string>
 
     <!--Login-->
     <string name="email">E-mail</string>
@@ -33,4 +35,9 @@
         <item>Sign Invoice</item>
         <item>Payment</item>
     </string-array>
+    
+    <!--dialogs-->
+    <string name="signature_title">Online Signature</string>
+    <string name="signature_description">Please Sign Below:</string>
+
 </resources>
