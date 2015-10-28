@@ -11,8 +11,10 @@
     </style>
 
     <style name="LoginActivityStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textColorSecondary">@color/white</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="color">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
     </style>
 
     <style name="Dark.Overlay" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -36,31 +38,6 @@
         <item name="tabMode">scrollable</item>
     </style>
 
-    <style name="BaseTitleStyle">
-        <item name="android:textSize">@dimen/job_title_text_size</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/cyan_900</item>
-    </style>
-
-    <style name="BaseTextStyle">
-        <item name="android:textSize">@dimen/job_title_text_size</item>
-        <item name="android:textColor">@color/cyan_800</item>
-
-    </style>
-
-    <style name="PagesTitleStyle" parent="BaseTitleStyle">
-        <item name="android:layout_marginTop">@dimen/job_title_margin_top</item>
-        <item name="android:layout_marginBottom">@dimen/job_title_margin_bottom</item>
-    </style>
-
-
-
-    <style name="QuestionnaireDescriptionTextStyle" parent="BaseTextStyle">
-        <item name="android:layout_marginTop">@dimen/questionnaire_text_margin_top_bottom</item>
-        <item name="android:layout_marginBottom">@dimen/questionnaire_text_margin_top_bottom</item>
-
-    </style>
-
     <!--dialog styles-->
     <style name="DialogTitleStyle" parent="BaseTitleStyle">
         <item name="android:layout_marginBottom">@dimen/dialog_title_margin_button</item>
@@ -70,6 +47,41 @@
         <item name="android:layout_marginBottom">@dimen/dialog_description_margin_button</item>
     </style>
 
+    <!--widgets styles-->
+
+    <!--BASE WIDGETS STYLE-->
+    <style name="BaseTitleStyle">
+        <item name="android:textSize">@dimen/job_title_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/cyan_900</item>
+    </style>
+
+    <style name="BaseTextStyle">
+        <item name="android:textSize">@dimen/job_title_text_size</item>
+        <item name="android:textColor">@color/cyan_800</item>
+    </style>
+
+    <style name="BaseEditTextStyle" >
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textSize">@dimen/edit_text_size</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <!--jobs ditails-->
+    <style name="PagesTitleStyle" parent="BaseTitleStyle">
+        <item name="android:layout_marginTop">@dimen/job_title_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/job_title_margin_bottom</item>
+    </style>
+
+
+    <!--questionnaire screen-->
+    <style name="QuestionnaireDescriptionTextStyle" parent="BaseTextStyle">
+        <item name="android:layout_marginTop">@dimen/questionnaire_text_margin_top_bottom</item>
+        <item name="android:layout_marginBottom">@dimen/questionnaire_text_margin_top_bottom</item>
+
+    </style>
+
     <style name="QuestionnaireCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:textSize">@dimen/job_title_text_size</item>
         <item name="android:textColor">@color/cyan_800</item>
@@ -77,9 +89,8 @@
         <item name="android:layout_marginLeft">@dimen/questionnaire_checkbox_margin_left</item>
     </style>
 
-    <style name="LoginEditText" parent="Widget.AppCompat.EditText">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textColorHint">@color/white</item>
+    <!--login screen-->
+    <style name="LoginEditText" parent="BaseEditTextStyle">
         <item name="android:minWidth">@dimen/edit_text_width</item>
         <item name="android:layout_marginBottom">@dimen/edit_text_margin_top_bottom</item>
     </style>
@@ -87,6 +98,8 @@
     <style name="LoginButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/btn_log_in</item>
         <item name="android:layout_marginTop">@dimen/login_btn_margin_top</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:text">@string/login</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 </resources>

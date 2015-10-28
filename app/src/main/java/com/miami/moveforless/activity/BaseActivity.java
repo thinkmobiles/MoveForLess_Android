@@ -1,9 +1,6 @@
 package com.miami.moveforless.activity;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;

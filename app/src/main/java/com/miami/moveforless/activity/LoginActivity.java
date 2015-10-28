@@ -10,11 +10,9 @@ import com.miami.moveforless.globalconstants.SharedPrefConst;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClientApi;
-import com.miami.moveforless.utils.RxUtils;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import rx.Observable;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -23,9 +21,9 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class LoginActivity extends BaseActivity {
 
-    @Bind(R.id.editext1)
+    @Bind(R.id.etEmail_AL)
     EditText etEmail;
-    @Bind(R.id.editext2)
+    @Bind(R.id.etPassword_AL)
     EditText etPassword;
 
 
@@ -36,7 +34,6 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.activity_login);
-
     }
 
     @Override
@@ -58,7 +55,7 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.button1)
+    @OnClick(R.id.btnLogin)
     public void loginClick(View view) {
         login();
     }

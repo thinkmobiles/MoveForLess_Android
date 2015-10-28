@@ -6,7 +6,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId 'com.miami.moreforless'
+        applicationId 'com.miami.moveforless'
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1

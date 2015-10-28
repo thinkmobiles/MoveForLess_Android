@@ -5,9 +5,10 @@
 
     <!--login screen-->
     <dimen name="edit_text_width">250dp</dimen>
-    <dimen name="edit_text_margin_top_bottom">5dp</dimen>
+    <dimen name="edit_text_size">16sp</dimen>
+    <dimen name="edit_text_margin_top_bottom">0dp</dimen>
     <dimen name="login_btn_margin_top">25dp</dimen>
-    <dimen name="logo_margin_top">50dp</dimen>
+    <dimen name="logo_margin_top">40dp</dimen>
 
     <!--job fragment-->
     <dimen name="job_content_padding_left_right">50dp</dimen>

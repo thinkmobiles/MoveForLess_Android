@@ -7,9 +7,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -53,7 +50,7 @@ public class CustomTabLayout extends TabLayout {
 
         LinearLayout tabStrip = ((LinearLayout)getChildAt(0));
         for(int i = 0; i < tabStrip.getChildCount(); i++) {
-            tabStrip.getChildAt(i).setOnTouchListener(new View.OnTouchListener() {
+            tabStrip.getChildAt(i).setOnTouchListener(new OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     return true;

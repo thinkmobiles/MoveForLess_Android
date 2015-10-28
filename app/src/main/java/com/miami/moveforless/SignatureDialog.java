@@ -4,14 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
-import android.os.Environment;
-import android.util.Log;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.miami.moveforless.fragments.BaseDialog;
-
-import java.io.File;
-import java.io.FileOutputStream;
 
 import butterknife.Bind;
 

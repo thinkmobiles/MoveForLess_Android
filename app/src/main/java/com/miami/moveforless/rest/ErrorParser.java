@@ -6,7 +6,6 @@ import java.util.concurrent.TimeoutException;
 
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import rx.exceptions.CompositeException;
 
 /**
  * Created by klim on 21.10.15.
