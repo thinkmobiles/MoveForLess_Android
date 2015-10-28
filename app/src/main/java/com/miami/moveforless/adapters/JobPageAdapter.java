@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.miami.moveforless.fragments.CongratulationFragment;
 import com.miami.moveforless.fragments.QuestionnaireFragment;
 
 /**
@@ -17,6 +18,11 @@ public class JobPageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        switch (position) {
+            case 5: {
+                return CongratulationFragment.newInstance();
+            }
+        }
         return QuestionnaireFragment.newInstance();
 
     }

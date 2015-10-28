@@ -61,11 +61,17 @@
         <item name="android:textColor">@color/cyan_800</item>
     </style>
 
-    <style name="BaseEditTextStyle" >
+    <style name="BaseEditTextStyle">
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textSize">@dimen/edit_text_size</item>
         <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="BaseButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/cyan_200</item>
+        <item name="android:textSize">@dimen/base_button_text_size</item>
+        <item name="android:background">@drawable/button_blue</item>
     </style>
 
     <!--jobs ditails-->
@@ -74,6 +80,11 @@
         <item name="android:layout_marginBottom">@dimen/job_title_margin_bottom</item>
     </style>
 
+    <!--congratulations screen-->
+    <style name="NavigateButtonStyle" parent="BaseButtonStyle">
+        <item name="android:textColor">@color/cyan_800</item>
+        <item name="android:background">@drawable/button_yellow</item>
+    </style>
 
     <!--questionnaire screen-->
     <style name="QuestionnaireDescriptionTextStyle" parent="BaseTextStyle">

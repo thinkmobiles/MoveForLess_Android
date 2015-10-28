@@ -19,7 +19,7 @@ public class JobFragment extends BaseFragment {
     ViewPager mViewPager;
 
 
-    private int selectedTab = 1;
+    private int selectedTab = 5;
 
     public static Fragment newInstance() {
         return new JobFragment();
