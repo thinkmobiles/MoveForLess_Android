@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
+import com.miami.moveforless.dialogs.InfoDialog;
+
 import butterknife.ButterKnife;
 
 /**
@@ -21,12 +23,13 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getLayoutResource();
     protected abstract void setupViews();
+    protected LayoutInflater mLayoutInflater;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle savedInstanceState) {
         super.onCreateView(_inflater, _container, savedInstanceState);
-
+        mLayoutInflater = _inflater;
         return _inflater.inflate(getLayoutResource(), _container, false);
     }
 
@@ -41,6 +44,12 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroyView() {
         ButterKnife.unbind(this);
         super.onDestroyView();
+    }
+
+    protected void showInfoDialog(String _message) {
+        InfoDialog dialog = new InfoDialog();
+        dialog.setTitle(_message);
+        dialog.show(getChildFragmentManager(), "");
     }
 
     protected final void addFragment(final @IdRes int _containerId, final Fragment _fragment) {

@@ -1,4 +1,4 @@
-package com.miami.moveforless.fragments;
+package com.miami.moveforless.dialogs;
 
 
 import android.os.Bundle;
@@ -40,6 +40,10 @@ public abstract class BaseDialog extends DialogFragment {
 
     private int mContentResource = getLayoutResource();
 
+    private String mTitle = "";
+    private String mDescription = "";
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
@@ -57,6 +61,15 @@ public abstract class BaseDialog extends DialogFragment {
     public void onViewCreated(View _view, Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
         ButterKnife.bind(this, _view);
+        if (!mTitle.isEmpty()) {
+            tvTitle.setVisibility(View.VISIBLE);
+            tvTitle.setText(mTitle);
+        }
+        if (!mDescription.isEmpty()) {
+            tvDescription.setVisibility(View.VISIBLE);
+            tvDescription.setText(mDescription);
+        }
+
         setupViews();
         RxView.clicks(btnPositive).throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(o -> onPositiveClicked());
         RxView.clicks(btnNegative).throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(o -> onNegativeClicked());
@@ -84,8 +97,7 @@ public abstract class BaseDialog extends DialogFragment {
     }
 
     public void setTitle(String _title) {
-        tvTitle.setVisibility(View.VISIBLE);
-        tvTitle.setText(_title);
+        mTitle = _title;
     }
 
     public void setPositiveTitle(String _title) {
@@ -99,8 +111,7 @@ public abstract class BaseDialog extends DialogFragment {
     }
 
     public void setDescription(String _description) {
-        tvDescription.setVisibility(View.VISIBLE);
-        tvDescription.setText(_description);
+        mDescription = _description;
     }
 
     public interface DialogListener {

@@ -6,11 +6,16 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.support.annotation.IntegerRes;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.utils.TypefaceManager;
+
+import butterknife.BindColor;
+import butterknife.ButterKnife;
 
 /**
  * Created by klim on 28.10.15.
@@ -31,6 +36,18 @@ public class HelveticaEditText extends EditText {
         super(context, attrs, defStyleAttr);
         defineTypeface(context, attrs);
         getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+    }
+
+    public void setUnderlineColor(int _colorId) {
+        getBackground().setColorFilter(getColorWrapper(getContext(), _colorId), PorterDuff.Mode.SRC_ATOP);
+    }
+
+    public static int getColorWrapper(Context context, int id) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return context.getColor(id);
+        } else {
+            return context.getResources().getColor(id);
+        }
     }
 
     private void defineTypeface(Context context, AttributeSet attrs){

@@ -47,7 +47,8 @@
             android:layout_marginLeft="10dp"
             android:layout_toEndOf="@+id/btnNegative_BDL"
             android:layout_toRightOf="@+id/btnNegative_BDL"
-            android:text="Ok" />
+            android:text="Ok"
+            android:visibility="gone" />
     </RelativeLayout>
 
 </LinearLayout>

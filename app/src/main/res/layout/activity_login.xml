@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/email"
             android:inputType="text"
-            custom:customFont="medium"
             style="@style/LoginEditText"/>
 
         <com.miami.moveforless.customviews.HelveticaEditText
@@ -37,14 +36,12 @@
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:inputType="textPassword"
-            custom:customFont="medium"
             style="@style/LoginEditText"/>
 
         <com.miami.moveforless.customviews.HelveticaButton
             android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            custom:customFont="medium"
             style="@style/LoginButton"
             />
     </LinearLayout>

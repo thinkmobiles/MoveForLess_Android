@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/bg_feedback"
+    android:paddingLeft="@dimen/job_content_padding_left_right"
+    android:paddingRight="@dimen/job_content_padding_left_right">
+
+    <TextView
+        style="@style/PagesTitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/payments" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/payments_container_FP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:background="@color/cyan_800"
+            android:orientation="horizontal">
+
+            <com.miami.moveforless.customviews.HelveticaTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/total"
+                android:textColor="@color/yellow"
+                android:paddingLeft="10dp"
+                style="@style/BaseTextStyle"/>
+
+            <com.miami.moveforless.customviews.HelveticaTextView
+                android:id="@+id/tvTotalAmount_FP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/yellow"
+                android:text="0"
+                style="@style/BaseTextStyle"
+                custom:customFont="bold"
+                />
+            <com.miami.moveforless.customviews.HelveticaTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/yellow"
+                android:text=" $"
+                style="@style/BaseTextStyle"
+                custom:customFont="bold"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnNext_FQ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/proceed"
+            style="@style/NavigateButtonStyle"/>
+    </FrameLayout>
+
+</LinearLayout>

@@ -3,7 +3,6 @@
     <string name="empty_message">empty</string>
     <string name="refresh_button_text">refresh</string>
     <string name="error_message">error</string>
-    <string name="back_to_schedule">Back to Schedule</string>
 
     <!--dialog messages-->
     <string name="loading">Loading...</string>
@@ -12,6 +11,7 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="clear">Clear</string>
+    <string name="close">Close</string>
     <string name="ok">Ok</string>
 
     <!--Login-->
@@ -24,7 +24,6 @@
     <string name="menu_logout">Log out</string>
     <string name="menu_search">Search contracts</string>
     <string name="menu_refresh">Refresh contracts</string>
-    <string name="questionnaire">Questionnaire</string>
     <string name="next">Next</string>
 
     <!--job fragment-->
@@ -35,11 +34,41 @@
         <item>Stop Job</item>
         <item>Sign Invoice</item>
         <item>Payment</item>
+        <item>Feedback</item>
     </string-array>
-    
+
+    <string name="questionnaire">Questionnaire</string>
+    <string name="payments">Payments</string>
+
+    <!--payment screen-->
+    <string name="total">Total:</string>
+    <string name="proceed">Proceed</string>
+    <string name="choose_payment_type">Choose payment type</string>
+    <string name="amount_error_message">Please, enter amount</string>
+
+    <string name="amount">amount</string>
+
+    <string-array name="payments_type">
+        <item>Cash</item>
+        <item>Check</item>
+        <item>MasterCard &amp; Visa</item>
+        <item>AmericanExpress</item>
+        <item>Discover</item>
+        <item>PayPal</item>
+        <item>Terminal</item>
+        <item>Choose payment type</item>
+    </string-array>
+
+
+
+    <!--congratulation screen-->
+    <string name="back_to_schedule">Back to Schedule</string>
+    <string name="congratulation_text">Congratulation! \n Your feedback \n has been saved</string>
+
     <!--dialogs-->
     <string name="signature_title">Online Signature</string>
     <string name="signature_description">Please Sign Below:</string>
+
 
 
 </resources>

@@ -1,11 +1,11 @@
-package com.miami.moveforless;
+package com.miami.moveforless.dialogs;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
 
-import com.miami.moveforless.fragments.BaseDialog;
+import com.miami.moveforless.R;
 
 import butterknife.Bind;
 
