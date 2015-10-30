@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.miami.moveforless.R;
+import com.miami.moveforless.utils.RxUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -71,8 +72,8 @@ public abstract class BaseDialog extends DialogFragment {
         }
 
         setupViews();
-        RxView.clicks(btnPositive).throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(o -> onPositiveClicked());
-        RxView.clicks(btnNegative).throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(o -> onNegativeClicked());
+        RxUtils.click(btnPositive, o -> onPositiveClicked());
+        RxUtils.click(btnNegative, o -> onNegativeClicked());
     }
 
     protected abstract int getLayoutResource();

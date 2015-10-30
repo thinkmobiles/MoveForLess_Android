@@ -1,7 +1,9 @@
 package com.miami.moveforless.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -10,6 +12,7 @@ import com.miami.moveforless.globalconstants.SharedPrefConst;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClientApi;
+import com.miami.moveforless.utils.RxUtils;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -21,31 +24,31 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class LoginActivity extends BaseActivity {
 
-    @Bind(R.id.etEmail_AL)
-    EditText etEmail;
-    @Bind(R.id.etPassword_AL)
-    EditText etPassword;
+    @Bind(R.id.etEmail_AL)      EditText etEmail;
+    @Bind(R.id.etPassword_AL)   EditText etPassword;
+    @Bind(R.id.btnLogin_AL)     Button btnLogin;
 
-
-    private CompositeSubscription _subscriptions = new CompositeSubscription();
     private Subscription loginSubscription;
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        setContentView(R.layout.activity_login);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        _subscriptions = RxUtils.getNewCompositeSubIfUnsubscribed(_subscriptions);
+        if (!SharedPrefManager.getInstance().retrieveToken().isEmpty()) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+        setContentView(R.layout.activity_login);
+        RxUtils.click(btnLogin, o -> login());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        RxUtils.unsubscribeIfNotNull(_subscriptions);
         loginSubscription.unsubscribe();
     }
 
@@ -53,11 +56,6 @@ public class LoginActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-    }
-
-    @OnClick(R.id.btnLogin)
-    public void loginClick(View view) {
-        login();
     }
 
     private void login() {
@@ -71,7 +69,7 @@ public class LoginActivity extends BaseActivity {
     private void onSuccess(String _token) {
         hideLoadingDialog();
         Toast.makeText(LoginActivity.this, "token = " + _token, Toast.LENGTH_SHORT).show();
-        SharedPrefManager.getInstance().saveString(SharedPrefConst.SHARED_PREF_USER_TOKEN, _token);
+        SharedPrefManager.getInstance().storeToken(_token);
     }
 
     private void onError(Throwable _throwable) {

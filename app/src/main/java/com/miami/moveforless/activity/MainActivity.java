@@ -36,6 +36,8 @@ public class MainActivity extends BaseActivity {
         return super.onCreateOptionsMenu(_menu);
     }
 
+
+
     public void switchContent(final Fragment _fragment, final boolean _addToBackStack) {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

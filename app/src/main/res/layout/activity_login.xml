@@ -39,7 +39,7 @@
             style="@style/LoginEditText"/>
 
         <com.miami.moveforless.customviews.HelveticaButton
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnLogin_AL"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             style="@style/LoginButton"

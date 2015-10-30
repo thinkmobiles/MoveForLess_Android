@@ -38,4 +38,15 @@ public class SharedPrefManager {
         editor.commit();
     }
 
+    public String retrieveString(String _s) {
+        return sharedPreferences.getString(_s, "");
+    }
+
+    public String retrieveToken() {
+        return retrieveString(SharedPrefConst.SHARED_PREF_USER_TOKEN);
+    }
+
+    public void storeToken(String _token) {
+        saveString(SharedPrefConst.SHARED_PREF_USER_TOKEN, _token);
+    }
 }

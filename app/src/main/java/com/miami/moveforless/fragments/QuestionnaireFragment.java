@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.miami.moveforless.R;
+import com.miami.moveforless.utils.RxUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +39,7 @@ public class QuestionnaireFragment extends BaseFragment {
 
     @Override
     protected void setupViews() {
-        RxView.clicks(btnNext)
-                .throttleFirst(1, TimeUnit.SECONDS)
+        RxUtils.click(btnNext)
                 .map(o -> checkAnswer())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(integers -> onValidationResult(integers));

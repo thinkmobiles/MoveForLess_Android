@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.miami.moveforless.R;
+import com.miami.moveforless.utils.RxUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -36,8 +37,6 @@ public class PaymentView extends LinearLayout {
     @Bind(R.id.ivDone_row)
     ImageView ivDone;
 
-
-
     private PaymentAction mActionListener;
 
     public PaymentView(Context context) {
@@ -57,8 +56,8 @@ public class PaymentView extends LinearLayout {
 
         final String[] mPaymentType = getResources().getStringArray(R.array.payments_type);
 
-        RxView.clicks(ivDelete).throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(o -> onDeleteClicked());
-        RxView.clicks(tvConfirm).throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(o -> onConfirmClicked());
+        RxUtils.click(ivDelete, o1 -> onDeleteClicked());
+        RxUtils.click(tvConfirm, o -> onConfirmClicked());
 
         final HintTextAdapter<String> adapter = new HintTextAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mPaymentType);
         mSpinner.setAdapter(adapter);
@@ -106,7 +105,7 @@ public class PaymentView extends LinearLayout {
         mActionListener = _action;
     }
 
-    public static interface PaymentAction {
+    public interface PaymentAction {
         void onConfirm(View _view, float _value);
 
         void onPaymentTypeSelected(View _view, String _type);
