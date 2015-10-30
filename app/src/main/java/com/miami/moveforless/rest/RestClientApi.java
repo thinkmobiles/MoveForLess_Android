@@ -7,7 +7,6 @@ import com.squareup.okhttp.OkHttpClient;
 
 import java.util.concurrent.TimeUnit;
 
-import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import rx.Observable;
@@ -24,17 +23,9 @@ public class RestClientApi {
 
     private RestClientApi() {
 
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setClient(new OkClient(new OkHttpClient()))
-                .setEndpoint(RestConst.END_POINT)
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setRequestInterceptor(new RequestInterceptor() {
-                    @Override
-                    public void intercept(RequestFacade request) {
-                        request.addHeader("Content-type", "application/json; charset=UTF-8");
-                    }
-                })
-                .build();
+        RestAdapter restAdapter = new RestAdapter.Builder().setClient(new OkClient(new OkHttpClient())).setEndpoint
+                (RestConst.END_POINT).setLogLevel(RestAdapter.LogLevel.FULL).setRequestInterceptor(request -> request
+                .addHeader("Content-type", "application/json; charset=UTF-8")).build();
 
         api = restAdapter.create(IMoverApi.class);
     }
@@ -52,21 +43,14 @@ public class RestClientApi {
 
     public static Observable<String> login(String _username, String _password) {
         final LoginRequest loginRequest = new LoginRequest(_username, _password);
-        return RestClientApi.getApi().login(loginRequest)
-                .subscribeOn(Schedulers.io())
-                .retry(2)
-                .timeout(10, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(loginResponse -> loginResponse.getToken());
+        return RestClientApi.getApi().login(loginRequest).subscribeOn(Schedulers.io()).retry(2).timeout(10, TimeUnit
+                .SECONDS).observeOn(AndroidSchedulers.mainThread()).map(loginResponse -> loginResponse.getToken());
     }
 
     public static Observable<Boolean> logout() {
         final String username = SharedPrefManager.getInstance().retriveUsername();
         final String password = SharedPrefManager.getInstance().retriveUserPassword();
-        return RestClientApi.getApi().logout(username, password)
-                .subscribeOn(Schedulers.io())
-                .retry(2)
-                .timeout(10, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread());
+        return RestClientApi.getApi().logout(username, password).subscribeOn(Schedulers.io()).retry(2).timeout(10,
+                TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread());
     }
 }
