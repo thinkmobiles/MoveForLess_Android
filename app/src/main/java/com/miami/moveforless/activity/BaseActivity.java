@@ -6,17 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.miami.moveforless.R;
+import com.miami.moveforless.utils.RxUtils;
 
 import butterknife.BindString;
 import butterknife.ButterKnife;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by SetKrul on 14.07.2015.
  */
 public abstract class BaseActivity extends AppCompatActivity {
-    @BindString(R.string.login) String loadingText;
+    @BindString(R.string.loading) String loadingText;
 
     private ProgressDialog progressDialog;
+    private CompositeSubscription mSubscriptions = new CompositeSubscription();
 
     @SuppressWarnings("unchecked")
     public final <T extends View> T findView(@IdRes int id) {
@@ -33,6 +37,27 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSubscriptions = RxUtils.getNewCompositeSubIfUnsubscribed(mSubscriptions);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        RxUtils.unsubscribeIfNotNull(mSubscriptions);
+
+    }
+
+    protected void addSubscription(Subscription _subscription) {
+        mSubscriptions.add(_subscription);
+    }
+
+    protected void removeSubscription(Subscription _subscription) {
+        mSubscriptions.remove(_subscription);
     }
 
     protected void showLoadingDialog() {

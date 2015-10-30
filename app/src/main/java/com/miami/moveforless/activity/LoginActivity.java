@@ -12,6 +12,8 @@ import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClientApi;
 import com.miami.moveforless.utils.RxUtils;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import rx.Subscription;
 
@@ -58,16 +60,23 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login() {
-        showLoadingDialog();
-        loginSubscription = RestClientApi.login(etEmail.getText().toString(), etPassword.getText().toString())
-                .subscribe(this::onSuccess, this::onError);
-
+        showLoadingDialog(getString(R.string.login));
+        loginSubscription =
+                RestClientApi.login(etEmail.getText().toString(), etPassword.getText().toString())
+                        .subscribe(token -> onSuccess(token), e -> onError(e));
     }
 
     private void onSuccess(String _token) {
         hideLoadingDialog();
-        Toast.makeText(LoginActivity.this, "token = " + _token, Toast.LENGTH_SHORT).show();
         SharedPrefManager.getInstance().storeToken(_token);
+        SharedPrefManager.getInstance().storeUsername(etEmail.getText().toString());
+        SharedPrefManager.getInstance().storeUserPassword(etPassword.getText().toString());
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
     }
 
     private void onError(Throwable _throwable) {

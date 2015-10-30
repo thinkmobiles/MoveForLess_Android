@@ -6,8 +6,8 @@
 
     <!--dialog messages-->
     <string name="loading">Loading...</string>
-    <string name="Login">Log in...</string>
-    <string name="Logout">Log out...</string>
+    <string name="login_loading">Log in...</string>
+    <string name="logout_loading">Log out...</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="clear">Clear</string>

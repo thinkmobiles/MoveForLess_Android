@@ -49,4 +49,21 @@ public class SharedPrefManager {
     public void storeToken(String _token) {
         saveString(SharedPrefConst.SHARED_PREF_USER_TOKEN, _token);
     }
+
+    public void storeUsername(String _username) {
+        saveString(SharedPrefConst.SHARED_PREF_USER_NAME, _username);
+    }
+
+    public String retriveUsername() {
+        return retrieveString(SharedPrefConst.SHARED_PREF_USER_NAME);
+    }
+
+    public void storeUserPassword(String _username) {
+        saveString(SharedPrefConst.SHARED_PREF_USER_PASSWORD, _username);
+    }
+
+    public String retriveUserPassword() {
+        return retrieveString(SharedPrefConst.SHARED_PREF_USER_PASSWORD);
+    }
+
 }

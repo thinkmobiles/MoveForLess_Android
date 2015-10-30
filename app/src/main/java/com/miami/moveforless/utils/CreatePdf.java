@@ -42,7 +42,7 @@ public class CreatePdf {
         this.mContext = _context;
     }
 
-    public void createPdf() throws DocumentException, IOException {
+    public File createPdf() throws DocumentException, IOException {
         File sdCard = Environment.getExternalStorageDirectory();
         File dir = new File(sdCard.getAbsolutePath());
         File file = new File(dir, "sample2.pdf");
@@ -67,6 +67,7 @@ public class CreatePdf {
         document.add(addSpace(50f));
         document.add(addSign());
         document.close();
+        return file;
     }
 
     public PdfPTable addHeader() {

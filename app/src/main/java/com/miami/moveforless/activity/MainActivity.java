@@ -1,14 +1,27 @@
 package com.miami.moveforless.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.fragments.JobFragment;
+import com.miami.moveforless.managers.SharedPrefManager;
+import com.miami.moveforless.rest.ErrorParser;
+import com.miami.moveforless.rest.RestClientApi;
+import com.miami.moveforless.utils.RxUtils;
 
 import butterknife.Bind;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by klim on 20.10.15.
@@ -16,6 +29,8 @@ import butterknife.Bind;
 public class MainActivity extends BaseFragmentActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+
+    private Subscription mLogoutSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,4 +54,45 @@ public class MainActivity extends BaseFragmentActivity {
         clearBackStack();
         replaceFragmentWithBackStack(R.id.contentContainer_AM, _fragment);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.menu_logout:
+                showLoadingDialog(getString(R.string.logout_loading));
+                if (mLogoutSubscription != null) {
+                    removeSubscription(mLogoutSubscription);
+                }
+
+                mLogoutSubscription = RestClientApi.logout()
+                        .subscribe(this::logoutSuccess, this::logoutError);
+                addSubscription(mLogoutSubscription);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void logoutSuccess(boolean _isSuccess) {
+        hideLoadingDialog();
+        if (_isSuccess) {
+            SharedPrefManager.getInstance().storeToken("");
+            SharedPrefManager.getInstance().storeUsername("");
+            SharedPrefManager.getInstance().storeUserPassword("");
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(MainActivity.this, "Logout was failed", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void logoutError(Throwable _throwable) {
+        hideLoadingDialog();
+        Toast.makeText(MainActivity.this, ErrorParser.parse(_throwable), Toast.LENGTH_SHORT).show();
+    }
+
 }
