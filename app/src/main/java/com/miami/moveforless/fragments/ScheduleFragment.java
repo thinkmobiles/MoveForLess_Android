@@ -28,10 +28,10 @@ import java.util.List;
 /**
  * Created by SetKrul on 30.10.2015.
  */
-public class Schedule extends Fragment implements SearchView.OnQueryTextListener {
+public class ScheduleFragment extends Fragment implements SearchView.OnQueryTextListener {
 
-    public static Schedule newInstance() {
-        return new Schedule();
+    public static ScheduleFragment newInstance() {
+        return new ScheduleFragment();
     }
 
     private RecyclerView mRecyclerView;

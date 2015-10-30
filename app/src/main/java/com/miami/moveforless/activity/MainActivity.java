@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.fragments.JobFragment;
+import com.miami.moveforless.fragments.ScheduleFragment;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClientApi;
@@ -35,7 +35,7 @@ public class MainActivity extends BaseFragmentActivity {
         setSupportActionBar(toolbar);
         getDelegate().getSupportActionBar().setDisplayShowTitleEnabled(false);
         if (getFragmentById(R.id.contentContainer_AM) == null) {
-            switchContent(JobFragment.newInstance());
+            switchContent(ScheduleFragment.newInstance());
         }
     }
 
