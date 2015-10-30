@@ -24,7 +24,8 @@
 
     <style name="Dark.Overlay.LightPopup" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:background">@color/blue_light</item>
-        <item name="android:textColor">@color/cyan_800</item>
+        <item name="android:itemBackground">@color/blue_light</item>
+        <item name="android:textColorPrimary">@color/cyan_800</item>
         <item name="android:textSize">24sp</item>
     </style>
 

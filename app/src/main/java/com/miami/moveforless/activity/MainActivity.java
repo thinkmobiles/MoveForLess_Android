@@ -3,7 +3,6 @@ package com.miami.moveforless.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,14 +13,10 @@ import com.miami.moveforless.fragments.JobFragment;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClientApi;
-import com.miami.moveforless.utils.RxUtils;
+import com.miami.moveforless.rest.response.LogoutResponse;
 
 import butterknife.Bind;
-import rx.Observable;
-import rx.Observer;
-import rx.Subscriber;
 import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by klim on 20.10.15.
@@ -74,9 +69,9 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
 
-    private void logoutSuccess(boolean _isSuccess) {
+    private void logoutSuccess(LogoutResponse _logoutResponse) {
         hideLoadingDialog();
-        if (_isSuccess) {
+        if (_logoutResponse.getResult()) {
             SharedPrefManager.getInstance().storeToken("");
             SharedPrefManager.getInstance().storeUsername("");
             SharedPrefManager.getInstance().storeUserPassword("");

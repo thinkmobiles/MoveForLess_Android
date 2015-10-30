@@ -63,7 +63,7 @@ public class LoginActivity extends BaseActivity {
         showLoadingDialog(getString(R.string.login));
         loginSubscription =
                 RestClientApi.login(etEmail.getText().toString(), etPassword.getText().toString())
-                        .subscribe(token -> onSuccess(token), e -> onError(e));
+                        .subscribe(this::onSuccess, this::onError);
     }
 
     private void onSuccess(String _token) {

@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/Dark.Overlay.LightPopup"
-        app:theme="@style/Dark.Overlay" />
+        app:theme="@style/Theme.AppCompat.Light" />
 
 </android.support.design.widget.AppBarLayout>

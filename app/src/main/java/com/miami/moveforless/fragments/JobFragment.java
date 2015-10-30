@@ -67,7 +67,6 @@ public class JobFragment extends BaseFragment {
         }
 */
 
-        mTabLayout.setBackgroundColor(unactivated_tab);
         JobPageAdapter adapter = new JobPageAdapter(getChildFragmentManager());
 
         mViewPager.setAdapter(adapter);

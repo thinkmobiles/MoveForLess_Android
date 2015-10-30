@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
+import com.miami.moveforless.dialogs.SignatureDialog;
 import com.miami.moveforless.utils.RxUtils;
 
 import java.util.ArrayList;
@@ -59,6 +60,8 @@ public class QuestionnaireFragment extends BaseFragment {
     }
 
     private void onValidationResult(List<Integer> uncheckedAnswer) {
+        SignatureDialog dialog = new SignatureDialog();
+        dialog.show(getChildFragmentManager(), "");
         if (uncheckedAnswer.size() > 0) {
             Toast.makeText(getActivity(), "Check answer", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < uncheckedAnswer.size(); i++) {
