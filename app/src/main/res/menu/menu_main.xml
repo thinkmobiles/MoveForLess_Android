@@ -7,11 +7,6 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_empty"
-        android:title=""
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/menu_logout"
         android:title="@string/menu_logout"
         app:showAsAction="never" />

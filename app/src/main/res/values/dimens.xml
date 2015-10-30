@@ -14,6 +14,7 @@
 
     <!--job fragment-->
     <dimen name="job_content_padding_left_right">50dp</dimen>
+    <dimen name="job_content_padding_bottom">20dp</dimen>
     <dimen name="job_title_text_size">20sp</dimen>
     <dimen name="job_title_margin_top">10dp</dimen>
     <dimen name="job_title_margin_bottom">10dp</dimen>

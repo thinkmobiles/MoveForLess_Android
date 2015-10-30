@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:background="@drawable/bg_feedback"
     android:paddingLeft="@dimen/job_content_padding_left_right"
-    android:paddingRight="@dimen/job_content_padding_left_right">
+    android:paddingRight="@dimen/job_content_padding_left_right"
+    android:paddingBottom="@dimen/job_content_padding_bottom">
 
     <TextView
         style="@style/PagesTitleStyle"
@@ -39,6 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|left"
             android:background="@color/cyan_800"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:orientation="horizontal">
 
             <com.miami.moveforless.customviews.HelveticaTextView
@@ -47,7 +50,6 @@
                 android:layout_weight="1"
                 android:text="@string/total"
                 android:textColor="@color/yellow"
-                android:paddingLeft="10dp"
                 style="@style/BaseTextStyle"/>
 
             <com.miami.moveforless.customviews.HelveticaTextView
