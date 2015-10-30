@@ -8,13 +8,11 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.miami.moveforless.R;
 import com.miami.moveforless.utils.RxUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import rx.android.schedulers.AndroidSchedulers;
@@ -42,7 +40,7 @@ public class QuestionnaireFragment extends BaseFragment {
         RxUtils.click(btnNext)
                 .map(o -> checkAnswer())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(integers -> onValidationResult(integers));
+                .subscribe(this::onValidationResult);
     }
 
     private List<Integer> checkAnswer() {

@@ -8,6 +8,7 @@ import com.miami.moveforless.adapters.JobPageAdapter;
 import com.miami.moveforless.customviews.CustomTabLayout;
 
 import butterknife.Bind;
+import butterknife.BindColor;
 
 /**
  * Created by klim on 22.10.15.
@@ -15,16 +16,18 @@ import butterknife.Bind;
 public class JobFragment extends BaseFragment {
     @Bind(R.id.tabLayout_FJ)
     CustomTabLayout mTabLayout;
+    @BindColor(R.color.unactivated_tab)
+    int unactivated_tab;
     @Bind(R.id.viewPager_FJ)
     ViewPager mViewPager;
 
 
-    private int selectedTab = 5;
+
+    private int selectedTab = 0;
 
     public static Fragment newInstance() {
         return new JobFragment();
     }
-
 
     @Override
     protected int getLayoutResource() {
@@ -33,6 +36,21 @@ public class JobFragment extends BaseFragment {
 
     @Override
     protected void setupViews() {
+
+//        try {
+//            new CreatePdf(this).createPdf();
+//        } catch (DocumentException | IOException e) {
+//            e.printStackTrace();
+//        }
+//        File sdCard = Environment.getExternalStorageDirectory();
+//        File dir = new File(sdCard.getAbsolutePath());
+//        File file = new File(dir, "sample2.pdf");
+//        if (file.exists()) {
+//            pdfView.fromFile(file).enableSwipe(true).showMinimap(true).load();
+//        }
+
+
+        mTabLayout.setBackgroundColor(unactivated_tab);
         JobPageAdapter adapter = new JobPageAdapter(getChildFragmentManager());
 
         mViewPager.setAdapter(adapter);

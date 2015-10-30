@@ -26,7 +26,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(containerId, fragment)
-                .commitAllowingStateLoss( );
+                .commitAllowingStateLoss();
     }
 
     public final void replaceFragmentWithoutBackStack(final @IdRes int containerId, final Fragment fragment) {
@@ -42,6 +42,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
     }
 
 
+    @SuppressWarnings("unchecked")
     public final <T extends Fragment> T getFragmentById(final @IdRes int containerId){
         return (T) getSupportFragmentManager().findFragmentById(containerId);
     }

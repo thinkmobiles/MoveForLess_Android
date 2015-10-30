@@ -20,12 +20,12 @@ public class JobPageAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 5: {
+            case 5:
                 return PaymentFragment.newInstance();
-            }
-            case 6: {
+
+            case 6:
                 return CongratulationFragment.newInstance();
-            }
+
         }
         return QuestionnaireFragment.newInstance();
 

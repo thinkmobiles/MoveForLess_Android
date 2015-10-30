@@ -27,33 +27,29 @@ public class HelveticaTextView extends TextView {
         defineTypeface(context, attrs);
     }
 
-    private void defineTypeface(Context context, AttributeSet attrs){
-        if(isInEditMode()){
+    private void defineTypeface(Context context, AttributeSet attrs) {
+        if (isInEditMode()) {
             return;
         }
 
-        TypedArray a = context.getTheme().obtainStyledAttributes(
-                attrs,
-                R.styleable.CustomEditText,
-                0, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CustomEditText, 0, 0);
 
         try {
             int font = a.getInteger(R.styleable.CustomEditText_customFont, 0);
             setTypefaceBasedOnInt(font);
-        }
-        finally {
+        } finally {
             a.recycle();
         }
     }
 
-    public void setFontStyle(CustomFontStyle style){
+    public void setFontStyle(CustomFontStyle style) {
         setTypefaceBasedOnInt(style.ordinal());
     }
 
-    private void setTypefaceBasedOnInt(int fontEnum){
-        Typeface typeface = null;
+    private void setTypefaceBasedOnInt(int fontEnum) {
+        Typeface typeface;
 
-        switch (fontEnum){
+        switch (fontEnum) {
             default:
             case 0:
                 typeface = TypefaceManager.getInstance().getHelveticaBlack();

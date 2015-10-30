@@ -7,15 +7,11 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.annotation.IntegerRes;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.utils.TypefaceManager;
-
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 
 /**
  * Created by klim on 28.10.15.
@@ -50,33 +46,29 @@ public class HelveticaEditText extends EditText {
         }
     }
 
-    private void defineTypeface(Context context, AttributeSet attrs){
-        if(isInEditMode()){
+    private void defineTypeface(Context context, AttributeSet attrs) {
+        if (isInEditMode()) {
             return;
         }
 
-        TypedArray a = context.getTheme().obtainStyledAttributes(
-                attrs,
-                R.styleable.CustomEditText,
-                0, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CustomEditText, 0, 0);
 
         try {
             int font = a.getInteger(R.styleable.CustomEditText_customFont, 0);
             setTypefaceBasedOnInt(font);
-        }
-        finally {
+        } finally {
             a.recycle();
         }
     }
 
-    public void setFontStyle(CustomFontStyle style){
+    public void setFontStyle(CustomFontStyle style) {
         setTypefaceBasedOnInt(style.ordinal());
     }
 
-    private void setTypefaceBasedOnInt(int fontEnum){
-        Typeface typeface = null;
+    private void setTypefaceBasedOnInt(int fontEnum) {
+        Typeface typeface;
 
-        switch (fontEnum){
+        switch (fontEnum) {
             default:
             case 0:
                 typeface = TypefaceManager.getInstance().getHelveticaBlack();
@@ -122,7 +114,6 @@ public class HelveticaEditText extends EditText {
         setTypeface(typeface);
         setPaintFlags(getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
     }
-
 
 
 }

@@ -45,8 +45,9 @@ public class HintTextAdapter<S> extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = super.getView(position, convertView, parent);
         if (position == getCount()) {
-            ((TextView)v.findViewById(android.R.id.text1)).setText("");
-            ((TextView)v.findViewById(android.R.id.text1)).setHint((CharSequence) getItem(getCount())); //"Hint to be displayed"
+            ((TextView) v.findViewById(android.R.id.text1)).setText("");
+            ((TextView) v.findViewById(android.R.id.text1)).setHint((CharSequence) getItem(getCount())); //"Hint to
+            // be displayed"
         }
 
         return v;

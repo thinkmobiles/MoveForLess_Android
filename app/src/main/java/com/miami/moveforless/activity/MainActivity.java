@@ -2,7 +2,6 @@ package com.miami.moveforless.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
@@ -14,7 +13,7 @@ import butterknife.Bind;
 /**
  * Created by klim on 20.10.15.
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseFragmentActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
@@ -24,10 +23,10 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        switchContent(JobFragment.newInstance(), false);
+        getDelegate().getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (getFragmentById(R.id.contentContainer_AM) == null) {
+            switchContent(JobFragment.newInstance());
+        }
     }
 
     @Override
@@ -36,18 +35,8 @@ public class MainActivity extends BaseActivity {
         return super.onCreateOptionsMenu(_menu);
     }
 
-
-
-    public void switchContent(final Fragment _fragment, final boolean _addToBackStack) {
-
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.contentContainer_AM, _fragment, _fragment.getClass().getCanonicalName());
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        if (_addToBackStack)
-            fragmentTransaction.addToBackStack("");
-        fragmentTransaction.commit();
-
+    public void switchContent(final Fragment _fragment) {
+        clearBackStack();
+        replaceFragmentWithBackStack(R.id.contentContainer_AM, _fragment);
     }
-
-
 }
