@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
+import com.miami.moveforless.dialogs.RouteDialog;
 import com.miami.moveforless.fragments.ScheduleFragment;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
@@ -62,7 +63,9 @@ public class MainActivity extends BaseFragmentActivity {
                 logout();
                 break;
             case R.id.menu_navigation:
-                openGoogleDirection();
+                RouteDialog dialog = new RouteDialog();
+                dialog.show(getSupportFragmentManager(), "");
+//                openGoogleDirection();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -85,7 +88,7 @@ public class MainActivity extends BaseFragmentActivity {
             removeSubscription(mLogoutSubscription);
         }
 
-        mLogoutSubscription = RestClientApi.logout()
+        mLogoutSubscription = RestClientApi.getInstance().logout()
                 .subscribe(this::logoutSuccess, this::logoutError);
         addSubscription(mLogoutSubscription);
     }

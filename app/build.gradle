@@ -48,4 +48,5 @@ dependencies {
     compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
     compile 'com.roomorama:caldroid:2.2.1'
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+    compile 'com.google.maps.android:android-maps-utils:0.4'
 }

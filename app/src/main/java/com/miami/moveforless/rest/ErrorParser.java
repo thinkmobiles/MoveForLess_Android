@@ -1,5 +1,7 @@
 package com.miami.moveforless.rest;
 
+import com.miami.moveforless.errors.LocationException;
+import com.miami.moveforless.errors.RouteException;
 import com.miami.moveforless.rest.response.ErrorModel;
 
 import java.util.concurrent.TimeoutException;
@@ -64,5 +66,28 @@ public class ErrorParser {
             return "Unknown error: " + _e.getLocalizedMessage();
         }
         return "Unknown error: " + _e.getLocalizedMessage();
+    }
+
+    public static String parseRouteError(Throwable _e) {
+        try {
+            if (_e instanceof RetrofitError) {
+                return parseRetrofitError(_e);
+            }
+            if (_e instanceof TimeoutException) {
+                return  "Bad network connection";
+            }
+            if (_e instanceof RouteException) {
+                return "Could not get the route";
+            }
+
+            if (_e instanceof LocationException) {
+                return "Could not get current location";
+            }
+
+        } catch (Exception exception) {
+            return "Unknown error: " + _e.getLocalizedMessage();
+        }
+        return "Unknown error: " + _e.getLocalizedMessage();
+
     }
 }

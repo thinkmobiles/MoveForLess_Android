@@ -56,7 +56,7 @@ public class LoginActivity extends BaseActivity {
     private void login() {
         showLoadingDialog(getString(R.string.login));
         if (loginSubscription != null) removeSubscription(loginSubscription);
-        loginSubscription = RestClientApi.login(etEmail.getText().toString(), etPassword.getText().toString())
+        loginSubscription = RestClientApi.getInstance().login(etEmail.getText().toString(), etPassword.getText().toString())
                         .subscribe(this::onSuccess, this::onError);
         addSubscription(loginSubscription);
     }
