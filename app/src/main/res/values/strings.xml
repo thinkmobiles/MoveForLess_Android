@@ -24,6 +24,7 @@
     <string name="menu_logout">Log out</string>
     <string name="menu_search">Search contracts</string>
     <string name="menu_refresh">Refresh contracts</string>
+    <string name="menu_navigation">Open navigation</string>
     <string name="next">Next</string>
 
     <!--job fragment-->

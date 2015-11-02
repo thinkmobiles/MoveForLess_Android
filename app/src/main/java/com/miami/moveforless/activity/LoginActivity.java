@@ -48,12 +48,6 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        loginSubscription.unsubscribe();
-    }
-
-    @Override
     public void onBackPressed() {
         super.onBackPressed();
 
@@ -61,9 +55,10 @@ public class LoginActivity extends BaseActivity {
 
     private void login() {
         showLoadingDialog(getString(R.string.login));
-        loginSubscription =
-                RestClientApi.login(etEmail.getText().toString(), etPassword.getText().toString())
+        if (loginSubscription != null) removeSubscription(loginSubscription);
+        loginSubscription = RestClientApi.login(etEmail.getText().toString(), etPassword.getText().toString())
                         .subscribe(this::onSuccess, this::onError);
+        addSubscription(loginSubscription);
     }
 
     private void onSuccess(String _token) {
