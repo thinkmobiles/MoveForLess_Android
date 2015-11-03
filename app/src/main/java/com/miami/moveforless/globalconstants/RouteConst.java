@@ -1,5 +1,8 @@
 package com.miami.moveforless.globalconstants;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * Created by klim on 02.11.15.
  */
@@ -19,4 +22,5 @@ public class RouteConst {
     public static final String GEOFENCE_ACTION = "geofence action";
     public static final String GEOFENCE_TYPE = "geofence type";
 
+    public static final LatLng DEFAULT_LOCATION = new LatLng(25.7738889, -80.1938889);
 }

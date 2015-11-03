@@ -1,20 +1,17 @@
 package com.miami.moveforless.rest;
 
-import android.location.Location;
-
-import com.google.android.gms.maps.model.LatLng;
+import com.miami.moveforless.App;
+import com.miami.moveforless.R;
 import com.miami.moveforless.errors.RouteException;
 import com.miami.moveforless.globalconstants.RestConst;
+import com.miami.moveforless.managers.CacheManager;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.request.LoginRequest;
 import com.miami.moveforless.rest.response.LogoutResponse;
 import com.miami.moveforless.rest.response.RouteInfo;
-import com.miami.moveforless.rest.response.RouteResponse;
 import com.miami.moveforless.utils.RouteUtils;
 import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Route;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
@@ -26,13 +23,16 @@ import rx.schedulers.Schedulers;
 /**
  * Created by SetKrul on 28.07.2015.
  */
-public class RestClientApi {
+public class RestClient {
+    private static final String TAG = "RestClient";
+    private static final String API_KEY = App.getAppContext().getString(R.string.google_maps_key);
 
     private IMoverApi mMoverApi;
     private RouteApi mRouteApi;
-    private static RestClientApi mInstance;
+    private static RestClient mInstance;
+    private CacheManager mCacheManager;
 
-    private RestClientApi() {
+    private RestClient() {
 
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(new OkHttpClient()))
@@ -47,15 +47,15 @@ public class RestClientApi {
                 .setClient(new OkClient(new OkHttpClient()))
                 .setEndpoint(RestConst.GOOGLE_DIRECTION_END_POINT)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setRequestInterceptor(request -> request.addHeader("Content-type", "application/json; charset=UTF-8"))
                 .build();
 
         mRouteApi = googleDirectionRestAdapter.create(RouteApi.class);
+        mCacheManager = CacheManager.getInstance();
     }
 
-    public static RestClientApi getInstance() {
+    public static RestClient getInstance() {
         if (mInstance == null) {
-            mInstance = new RestClientApi();
+            mInstance = new RestClient();
         }
         return mInstance;
     }
@@ -89,21 +89,32 @@ public class RestClientApi {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<RouteInfo> getRoute(Location _startLocation, String _endLocation) {
-        String str_origin = _startLocation.getLatitude() + "," + _startLocation.getLongitude();
+    public Observable<RouteInfo> getRoute(String _startLocation, String _endLocation) {
+        final long key = _startLocation.concat(_endLocation).hashCode();
+        try {
+            RouteInfo cachedResponse = RouteInfo.deserialize(mCacheManager.get(key));
+            if (cachedResponse != null)
+                return Observable.just(cachedResponse);
+        } catch (NullPointerException _e) {
 
-        return getInstance().getRouteApi().getRoute(str_origin, _endLocation, "imperial", "driving")
+        }
+        return getInstance().getRouteApi().getRoute(_startLocation, _endLocation, "imperial", "driving", API_KEY)
                 .subscribeOn(Schedulers.io())
                 .retry(2)
-                .timeout(30, TimeUnit.SECONDS)
+                .timeout(20, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(routeResponse -> RouteUtils.parseRouteResponse(routeResponse))
+                .doOnNext(routeInfo1 -> {
+                    if (routeInfo1 != null) mCacheManager.put(key, routeInfo1.serialize());
+                })
                 .flatMap(routeInfo -> Observable.create(subscriber -> {
-                    if (routeInfo == null) subscriber.onError(new RouteException());
-                    else subscriber.onNext(routeInfo);
+                    if (routeInfo == null)
+                        subscriber.onError(new RouteException());
+                    else {
+                        subscriber.onNext(routeInfo);
+                    }
                 }));
 
     }
-
 
 }

@@ -9,10 +9,8 @@ import android.widget.Toast;
 import com.miami.moveforless.R;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
-import com.miami.moveforless.rest.RestClientApi;
+import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.utils.RxUtils;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import rx.Subscription;
@@ -56,7 +54,7 @@ public class LoginActivity extends BaseActivity {
     private void login() {
         showLoadingDialog(getString(R.string.login));
         if (loginSubscription != null) removeSubscription(loginSubscription);
-        loginSubscription = RestClientApi.getInstance().login(etEmail.getText().toString(), etPassword.getText().toString())
+        loginSubscription = RestClient.getInstance().login(etEmail.getText().toString(), etPassword.getText().toString())
                         .subscribe(this::onSuccess, this::onError);
         addSubscription(loginSubscription);
     }

@@ -27,7 +27,7 @@ public class ErrorParser {
         switch (error.getKind()) {
 
             case NETWORK:
-                result = error.getLocalizedMessage();
+                result = "Network connection error";
                 break;
             case UNEXPECTED:
                 result = error.getLocalizedMessage();

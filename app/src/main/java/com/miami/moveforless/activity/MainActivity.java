@@ -12,9 +12,10 @@ import android.widget.Toast;
 import com.miami.moveforless.R;
 import com.miami.moveforless.dialogs.RouteDialog;
 import com.miami.moveforless.fragments.ScheduleFragment;
+import com.miami.moveforless.location.TrackingService;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
-import com.miami.moveforless.rest.RestClientApi;
+import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.LogoutResponse;
 
 import butterknife.Bind;
@@ -39,6 +40,7 @@ public class MainActivity extends BaseFragmentActivity {
         if (getFragmentById(R.id.contentContainer_AM) == null) {
             switchContent(ScheduleFragment.newInstance(), false);
         }
+
     }
 
     @Override
@@ -88,7 +90,7 @@ public class MainActivity extends BaseFragmentActivity {
             removeSubscription(mLogoutSubscription);
         }
 
-        mLogoutSubscription = RestClientApi.getInstance().logout()
+        mLogoutSubscription = RestClient.getInstance().logout()
                 .subscribe(this::logoutSuccess, this::logoutError);
         addSubscription(mLogoutSubscription);
     }
