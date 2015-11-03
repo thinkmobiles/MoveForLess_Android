@@ -1,9 +1,6 @@
 package com.miami.moveforless.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -28,7 +25,7 @@ import butterknife.Bind;
 /**
  * Created by SetKrul on 30.10.2015.
  */
-public class ScheduleFragment extends Fragment implements View.OnClickListener {
+public class ScheduleFragment extends BaseFragment implements View.OnClickListener {
 
     public static ScheduleFragment newInstance() {
         return new ScheduleFragment();
