@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
+import android.view.MotionEvent;
 
 import com.miami.moveforless.R;
 
@@ -28,10 +29,31 @@ public class SignatureDialog extends BaseDialog {
     protected void setupViews() {
         setTitle(getString(R.string.signature_title));
         setDescription(getString(R.string.signature_description));
-        setPositiveTitle(getString(R.string.ok));
         setNegativeTitle(getString(R.string.clear));
         setCancelable(true);
 
+        mGestureView.addOnGestureListener(new GestureOverlayView.OnGestureListener() {
+            @Override
+            public void onGestureStarted(GestureOverlayView gestureOverlayView, MotionEvent motionEvent) {
+                mGestureView.removeAllOnGestureListeners();
+                setPositiveTitle(getString(R.string.ok));
+            }
+
+            @Override
+            public void onGesture(GestureOverlayView gestureOverlayView, MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public void onGestureEnded(GestureOverlayView gestureOverlayView, MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public void onGestureCancelled(GestureOverlayView gestureOverlayView, MotionEvent motionEvent) {
+
+            }
+        });
     }
 
     @Override

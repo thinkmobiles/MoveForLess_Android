@@ -11,19 +11,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/DialogTitleStyle"
-        />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvDescription_BDL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/DialogDescriptionStyle"/>
+        style="@style/DialogDescriptionStyle"
+        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/content_container_BDL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1" />
 
     <RelativeLayout
         android:layout_width="match_parent"

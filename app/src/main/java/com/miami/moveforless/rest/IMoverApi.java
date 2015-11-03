@@ -2,6 +2,7 @@ package com.miami.moveforless.rest;
 
 import com.miami.moveforless.rest.request.LoginRequest;
 import com.miami.moveforless.rest.response.LoginResponse;
+import com.miami.moveforless.rest.response.LogoutResponse;
 
 import retrofit.http.Body;
 import retrofit.http.Field;
@@ -20,5 +21,5 @@ public interface IMoverApi {
     Observable<LoginResponse> login(@Body LoginRequest loginRequest);
 
     @GET("/user/logout")
-    Observable<Boolean> logout(@Query("key") String _key, @Query("token") String _token);
+    Observable<LogoutResponse> logout(@Query("key") String _key, @Query("token") String _token);
 }

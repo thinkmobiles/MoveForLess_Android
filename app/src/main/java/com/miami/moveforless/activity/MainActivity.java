@@ -1,6 +1,7 @@
 package com.miami.moveforless.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -9,9 +10,13 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.fragments.JobFragment;
+import com.miami.moveforless.dialogs.RouteDialog;
+import com.miami.moveforless.fragments.ScheduleFragment;
+import com.miami.moveforless.location.TrackingService;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
+import com.miami.moveforless.rest.RestClient;
+import com.miami.moveforless.rest.response.LogoutResponse;
 import com.miami.moveforless.rest.RestClientApi;
 
 import butterknife.Bind;
@@ -34,8 +39,9 @@ public class MainActivity extends BaseFragmentActivity {
         setSupportActionBar(toolbar);
         getDelegate().getSupportActionBar().setDisplayShowTitleEnabled(false);
         if (getFragmentById(R.id.contentContainer_AM) == null) {
-            switchContent(JobFragment.newInstance());
+            switchContent(ScheduleFragment.newInstance(), false);
         }
+
     }
 
     @Override
@@ -44,9 +50,11 @@ public class MainActivity extends BaseFragmentActivity {
         return super.onCreateOptionsMenu(_menu);
     }
 
-    public void switchContent(final Fragment _fragment) {
-        clearBackStack();
-        replaceFragmentWithBackStack(R.id.contentContainer_AM, _fragment);
+    public void switchContent(final Fragment _fragment, boolean _AddToBackStack) {
+        if (_AddToBackStack)
+            replaceFragmentWithBackStack(R.id.contentContainer_AM, _fragment);
+        else
+            replaceFragmentWithoutBackStack(R.id.contentContainer_AM, _fragment);
     }
 
     @Override
@@ -55,22 +63,42 @@ public class MainActivity extends BaseFragmentActivity {
 
             case R.id.menu_logout:
                 showLoadingDialog(getString(R.string.logout_loading));
-                if (mLogoutSubscription != null) {
-                    removeSubscription(mLogoutSubscription);
-                }
-
-                mLogoutSubscription = RestClientApi.logout()
-                        .subscribe(this::logoutSuccess, this::logoutError);
-                addSubscription(mLogoutSubscription);
+                logout();
+                break;
+            case R.id.menu_navigation:
+                RouteDialog dialog = new RouteDialog();
+                dialog.show(getSupportFragmentManager(), "");
+//                openGoogleDirection();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void openGoogleDirection() {
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=Seattle, Lakewood");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
 
-    private void logoutSuccess(boolean _isSuccess) {
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+
+        }
+    }
+
+    private void logout() {
+        if (mLogoutSubscription != null) {
+            removeSubscription(mLogoutSubscription);
+        }
+
+        mLogoutSubscription = RestClient.getInstance().logout()
+                .subscribe(this::logoutSuccess, this::logoutError);
+        addSubscription(mLogoutSubscription);
+    }
+
+    private void logoutSuccess(LogoutResponse _logoutResponse) {
         hideLoadingDialog();
-        if (_isSuccess) {
+        if (_logoutResponse.getResult()) {
             SharedPrefManager.getInstance().storeToken("");
             SharedPrefManager.getInstance().storeUsername("");
             SharedPrefManager.getInstance().storeUserPassword("");

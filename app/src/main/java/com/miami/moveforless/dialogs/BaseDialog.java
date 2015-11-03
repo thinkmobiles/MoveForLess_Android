@@ -12,14 +12,13 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.miami.moveforless.R;
 import com.miami.moveforless.utils.RxUtils;
 
-import java.util.concurrent.TimeUnit;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by klim on 26.10.15.
@@ -44,6 +43,7 @@ public abstract class BaseDialog extends DialogFragment {
     private String mTitle = "";
     private String mDescription = "";
 
+    private CompositeSubscription mSubscriptions = new CompositeSubscription();
 
     @Nullable
     @Override
@@ -57,6 +57,8 @@ public abstract class BaseDialog extends DialogFragment {
         }
         return rootView;
     }
+
+
 
     @Override
     public void onViewCreated(View _view, Bundle _savedInstanceState) {
@@ -74,6 +76,33 @@ public abstract class BaseDialog extends DialogFragment {
         setupViews();
         RxUtils.click(btnPositive, o -> onPositiveClicked());
         RxUtils.click(btnNegative, o -> onNegativeClicked());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSubscriptions = RxUtils.getNewCompositeSubIfUnsubscribed(mSubscriptions);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        RxUtils.unsubscribeIfNotNull(mSubscriptions);
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
+
+    protected void addSubscription(Subscription _subscription) {
+        mSubscriptions.add(_subscription);
+    }
+
+    protected void removeSubscription(Subscription _subscription) {
+        mSubscriptions.remove(_subscription);
     }
 
     protected abstract int getLayoutResource();

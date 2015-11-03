@@ -21,6 +21,7 @@ public class App extends Application {
         mContext = getApplicationContext();
         TypefaceManager.init(this);
         SharedPrefManager.getInstance();
+
     }
 
     @Override
@@ -32,4 +33,5 @@ public class App extends Application {
     public static Context getAppContext() {
         return mContext;
     }
+
 }

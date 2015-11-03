@@ -4,5 +4,9 @@ package com.miami.moveforless.globalconstants;
  * Created by klim on 20.10.15.
  */
 public class RestConst {
-    public static final String END_POINT = "http://test.imover.biz/api";
+    public static final String IMOVER_END_POINT = "http://test.imover.biz/api";
+    public static final String GOOGLE_DIRECTION_END_POINT = "https://maps.googleapis.com";
+
+    public static final long CACHE_SIZE = 10 * 1024 * 1024;
+
 }

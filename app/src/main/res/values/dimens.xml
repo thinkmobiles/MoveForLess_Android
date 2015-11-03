@@ -28,7 +28,7 @@
 
     <!--base dialog-->
     <dimen name="dialog_width">300dp</dimen>
-    <dimen name="dialog_padding">20dp</dimen>
+    <dimen name="dialog_padding">2dp</dimen>
     <dimen name="dialog_title_margin_button">15dp</dimen>
     <dimen name="dialog_description_margin_button">15dp</dimen>
 </resources>
