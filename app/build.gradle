@@ -47,5 +47,5 @@ dependencies {
     compile 'com.itextpdf:itextpdf:5.5.4'
     compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
     compile 'com.roomorama:caldroid:2.2.1'
-
+    compile project(':libs:paralloid')
 }

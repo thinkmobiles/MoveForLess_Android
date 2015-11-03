@@ -39,6 +39,17 @@
         <item name="tabMode">scrollable</item>
     </style>
 
+    <style name="AppTabLayoutJobList" parent="Widget.Design.TabLayout">
+        <item name="android:background">@color/unactivated_tab</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabPaddingStart">0dp</item>
+        <item name="tabPaddingEnd">0dp</item>
+        <item name="tabMode">scrollable</item>
+    </style>
+
     <!--dialog styles-->
     <style name="DialogTitleStyle" parent="BaseTitleStyle">
         <item name="android:layout_marginBottom">@dimen/dialog_title_margin_button</item>
@@ -118,5 +129,19 @@
         <item name="android:layout_marginTop">@dimen/login_btn_margin_top</item>
         <item name="android:text">@string/login</item>
 
+    </style>
+
+    <style name="FixedHeightBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:text">"fghfgjgh  rt dft hdf h dfgh df ghdfg s jgfgj th"</item>
+    </style>
+
+    <style name="JobDetailsEditText">
+        <item name="android:layout_marginLeft">35dp</item>
     </style>
 </resources>
