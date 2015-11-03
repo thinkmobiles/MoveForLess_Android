@@ -18,6 +18,9 @@ import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.LogoutResponse;
 import com.miami.moveforless.rest.RestClientApi;
+import com.miami.moveforless.rest.RestClient;
+import com.miami.moveforless.rest.RestClient;
+import com.miami.moveforless.rest.response.LogoutResponse;
 
 import butterknife.Bind;
 import rx.Subscription;
