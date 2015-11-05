@@ -37,13 +37,6 @@ public class SignatureDialog extends BaseDialog implements GestureOverlayView.On
         mGestureView.getLayoutParams().width = width;
         mGestureView.getLayoutParams().height = height;
 
-        mGestureView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                mGestureView.getViewTreeObserver().removeOnPreDrawListener(this);
-                return false;
-            }
-        });
         setTitle(getString(R.string.signature_title));
         setDescription(getString(R.string.signature_description));
         setNegativeTitle(getString(R.string.close));
@@ -57,6 +50,7 @@ public class SignatureDialog extends BaseDialog implements GestureOverlayView.On
     @Override
     public void onNegativeClicked() {
         if (isGestured) {
+            mGestureView.cancelClearAnimation();
             mGestureView.clear(true);
             mGestureView.addOnGestureListener(this);
             setNegativeTitle(getString(R.string.close));

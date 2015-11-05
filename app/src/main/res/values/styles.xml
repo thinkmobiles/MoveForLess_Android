@@ -53,16 +53,17 @@
 
     <!--dialog styles-->
     <style name="DialogTitleStyle" parent="BaseTitleStyle">
-        <item name="android:layout_marginBottom">@dimen/dialog_title_margin_button</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">@dimen/base_dialog_title_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/base_dialog_title_margin_button</item>
+        <item name="android:layout_marginLeft">@dimen/base_dialog_layout_margin_left_right</item>
+        <item name="android:layout_marginRight">@dimen/base_dialog_layout_margin_left_right</item>
     </style>
 
     <style name="DialogDescriptionStyle" parent="BaseTextStyle">
-        <item name="android:layout_marginBottom">@dimen/dialog_description_margin_button</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
-        <item name="android:maxWidth">300dp</item>
+        <item name="android:layout_marginBottom">@dimen/base_dialog_description_margin_button</item>
+        <item name="android:layout_marginLeft">@dimen/base_dialog_layout_margin_left_right</item>
+        <item name="android:layout_marginRight">@dimen/base_dialog_layout_margin_left_right</item>
+        <item name="android:maxWidth">@dimen/base_dialog_message_max_width</item>
     </style>
 
     <!--widgets styles-->
@@ -71,7 +72,7 @@
     <style name="BaseTitleStyle">
         <item name="android:textSize">@dimen/base_title_size</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/cyan_900</item>
+        <item name="android:textColor">@color/cyan_800</item>
         <item name="customFont">medium</item>
     </style>
 
@@ -98,7 +99,7 @@
         <item name="customFont">bold</item>
     </style>
 
-    <!--jobs ditails-->
+    <!--jobs details-->
     <style name="PagesTitleStyle" parent="BaseTitleStyle">
         <item name="android:layout_marginTop">@dimen/job_title_margin_top</item>
         <item name="android:layout_marginBottom">@dimen/job_title_margin_bottom</item>

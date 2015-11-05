@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
 
-    android:padding="@dimen/dialog_padding"
+    android:padding="@dimen/base_dialog_padding"
     android:orientation="vertical">
 
     <TextView
@@ -17,6 +17,7 @@
         android:id="@+id/tvDescription_BDL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autoLink="web"
         style="@style/DialogDescriptionStyle"
         android:visibility="gone" />
 

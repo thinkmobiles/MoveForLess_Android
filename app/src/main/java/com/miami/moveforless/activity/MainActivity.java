@@ -1,29 +1,24 @@
 package com.miami.moveforless.activity;
 
 import android.content.Intent;
-import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.miami.moveforless.Exceptions.LocationException;
 import com.miami.moveforless.R;
-import com.miami.moveforless.dialogs.ConfirmDialog;
 import com.miami.moveforless.dialogs.RouteDialog;
 import com.miami.moveforless.dialogs.SignatureDialog;
 import com.miami.moveforless.fragments.ScheduleFragment;
+import com.miami.moveforless.managers.PlayServices;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.LogoutResponse;
 
 import butterknife.Bind;
-import rx.Observable;
 import rx.Subscription;
 
 /**
@@ -98,43 +93,10 @@ public class MainActivity extends BaseFragmentActivity {
                 dialog1.show(getSupportFragmentManager(), "");
                 break;
             case R.id.menu_dummy_google_maps:
-                startNavigation();
+                mPlayServices.startNavigation();
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void startNavigation() {
-        if (mPlayServices.isAvailable()) {
-            Location currentLocation = mPlayServices.getCurrentLocation();
-            if (currentLocation != null) {
-                openGoogleDirection();
-            } else showGpsOffDialog();
-        } else mPlayServices.onFailedConnection();
-    }
-
-    private void showGpsOffDialog() {
-        ConfirmDialog dialog = new ConfirmDialog();
-        dialog.setTitle("Error");
-        dialog.setDescription("Gps is not enabled. Do you want to change settings?");
-        dialog.setPositiveClickListener(() -> {
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        });
-        dialog.show(getSupportFragmentManager(), "");
-    }
-
-    private void openGoogleDirection() {
-
-        Uri gmmIntentUri = Uri.parse("google.navigation:q=Seattle, Lakewood");
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-
-        if (mapIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(mapIntent);
-        } else {
-
-        }
     }
 
     private void logout() {

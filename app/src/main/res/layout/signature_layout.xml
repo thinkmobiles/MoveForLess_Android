@@ -7,8 +7,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/signature_background">
 
         <android.gesture.GestureOverlayView
@@ -17,8 +17,9 @@
             android:layout_height="match_parent"
             android:eventsInterceptionEnabled="true"
             android:fadeEnabled="false"
-            android:gestureColor="@color/black"
+            android:gestureColor="@color/cyan_800"
             android:gestureStrokeLengthThreshold="0.1"
+            android:gestureStrokeWidth="4.0"
             android:gestureStrokeType="multiple"
             android:orientation="vertical">
 
