@@ -11,12 +11,19 @@ import android.widget.Toast;
 import com.miami.moveforless.R;
 import com.miami.moveforless.dialogs.RouteDialog;
 import com.miami.moveforless.dialogs.SignatureDialog;
+import com.miami.moveforless.fragments.JobFragment;
 import com.miami.moveforless.fragments.ScheduleFragment;
+import com.miami.moveforless.fragments.eventbus.BusProvider;
+import com.miami.moveforless.fragments.eventbus.FragmentType;
+import com.miami.moveforless.fragments.eventbus.OpenJobDetailsEvent;
 import com.miami.moveforless.managers.PlayServices;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.LogoutResponse;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+import com.squareup.otto.ThreadEnforcer;
 
 import butterknife.Bind;
 import rx.Subscription;
@@ -30,6 +37,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     private Subscription mLogoutSubscription;
     private PlayServices mPlayServices;
+    private Bus mBus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,13 @@ public class MainActivity extends BaseFragmentActivity {
             switchContent(ScheduleFragment.newInstance(), false);
         }
         mPlayServices = new PlayServices(this);
+    }
+
+    @Subscribe
+    public void OpenJobFragment(OpenJobDetailsEvent _event) {
+        if (_event.getType() == FragmentType.JOB) {
+            switchContent(JobFragment.newInstance(_event.getId()), true);
+        }
     }
 
     @Override

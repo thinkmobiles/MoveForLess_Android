@@ -13,6 +13,9 @@ import com.miami.moveforless.R;
 import com.miami.moveforless.adapters.ExampleAdapter;
 import com.miami.moveforless.adapters.models.ExampleModel;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
+import com.miami.moveforless.fragments.eventbus.BusProvider;
+import com.miami.moveforless.fragments.eventbus.FragmentType;
+import com.miami.moveforless.fragments.eventbus.OpenJobDetailsEvent;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -174,7 +177,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                     mAdapter.removeChild(_position + 1, mAdapter.getItem(_position));
                 }
             } else {
-                //set viewpager deal
+                BusProvider.getInstance().post(new OpenJobDetailsEvent(FragmentType.JOB, 0));
             }
         }));
 

@@ -1,11 +1,13 @@
 package com.miami.moveforless.fragments;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.adapters.JobPageAdapter;
 import com.miami.moveforless.customviews.CustomTabLayout;
+import com.miami.moveforless.globalconstants.Const;
 
 import butterknife.Bind;
 import butterknife.BindColor;
@@ -25,8 +27,12 @@ public class JobFragment extends BaseFragment {
 
     private int selectedTab = 0;
 
-    public static Fragment newInstance() {
-        return new JobFragment();
+    public static Fragment newInstance(int _id) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Const.JOB_ID_KEY, _id);
+        JobFragment fragment = new JobFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.miami.moveforless.R;
+import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.utils.RxUtils;
 
 import butterknife.BindString;
@@ -43,13 +44,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mSubscriptions = RxUtils.getNewCompositeSubIfUnsubscribed(mSubscriptions);
+        BusProvider.getInstance().register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         RxUtils.unsubscribeIfNotNull(mSubscriptions);
-
+        BusProvider.getInstance().unregister(this);
     }
 
     protected void addSubscription(Subscription _subscription) {

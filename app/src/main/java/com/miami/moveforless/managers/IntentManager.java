@@ -3,6 +3,7 @@ package com.miami.moveforless.managers;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 
 import com.miami.moveforless.Exceptions.GoogleMapsException;
 
@@ -32,4 +33,7 @@ public class IntentManager {
         return intent;
     }
 
+    public static Intent getGpsSettingsIntent() {
+        return new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+    }
 }
