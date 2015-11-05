@@ -2,7 +2,6 @@ package com.miami.moveforless.utils;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.PolyUtil;
-import com.miami.moveforless.errors.RouteException;
 import com.miami.moveforless.rest.response.RouteInfo;
 import com.miami.moveforless.rest.response.RouteResponse;
 

@@ -1,7 +1,7 @@
 package com.miami.moveforless.rest;
 
-import com.miami.moveforless.errors.LocationException;
-import com.miami.moveforless.errors.RouteException;
+import com.miami.moveforless.Exceptions.LocationException;
+import com.miami.moveforless.Exceptions.RouteException;
 import com.miami.moveforless.rest.response.ErrorModel;
 
 import java.util.concurrent.TimeoutException;

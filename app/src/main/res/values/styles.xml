@@ -26,7 +26,7 @@
         <item name="android:background">@color/blue_light</item>
         <item name="android:itemBackground">@color/blue_light</item>
         <item name="android:textColorPrimary">@color/cyan_800</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/base_title_size</item>
     </style>
 
     <style name="AppTabLayout" parent="Widget.Design.TabLayout">
@@ -54,24 +54,29 @@
     <!--dialog styles-->
     <style name="DialogTitleStyle" parent="BaseTitleStyle">
         <item name="android:layout_marginBottom">@dimen/dialog_title_margin_button</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
     </style>
 
     <style name="DialogDescriptionStyle" parent="BaseTextStyle">
         <item name="android:layout_marginBottom">@dimen/dialog_description_margin_button</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:maxWidth">300dp</item>
     </style>
 
     <!--widgets styles-->
 
     <!--BASE WIDGETS STYLE-->
     <style name="BaseTitleStyle">
-        <item name="android:textSize">@dimen/job_title_text_size</item>
+        <item name="android:textSize">@dimen/base_title_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/cyan_900</item>
         <item name="customFont">medium</item>
     </style>
 
     <style name="BaseTextStyle">
-        <item name="android:textSize">@dimen/job_title_text_size</item>
+        <item name="android:textSize">@dimen/base_text_size</item>
         <item name="android:textColor">@color/cyan_800</item>
         <item name="customFont">medium</item>
     </style>
@@ -79,7 +84,7 @@
     <style name="BaseEditTextStyle">
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">@color/white</item>
-        <item name="android:textSize">@dimen/edit_text_size</item>
+        <item name="android:textSize">@dimen/base_edit_text_size</item>
         <item name="android:ems">10</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="customFont">medium</item>
@@ -113,7 +118,7 @@
     </style>
 
     <style name="QuestionnaireCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:textSize">@dimen/job_title_text_size</item>
+        <item name="android:textSize">@dimen/base_text_size</item>
         <item name="android:textColor">@color/cyan_800</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_marginLeft">@dimen/questionnaire_checkbox_margin_left</item>
@@ -130,16 +135,6 @@
         <item name="android:layout_marginTop">@dimen/login_btn_margin_top</item>
         <item name="android:text">@string/login</item>
 
-    </style>
-
-    <style name="FixedHeightBox">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">20dp</item>
-        <item name="android:layout_margin">20dp</item>
-        <item name="android:gravity">left|center_vertical</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:text">"fghfgjgh  rt dft hdf h dfgh df ghdfg s jgfgj th"</item>
     </style>
 
     <style name="JobDetailsEditText">

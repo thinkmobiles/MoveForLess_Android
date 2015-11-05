@@ -24,8 +24,6 @@ import rx.subscriptions.CompositeSubscription;
  * Created by klim on 26.10.15.
  */
 public abstract class BaseDialog extends DialogFragment {
-    @Bind(R.id.content_container_BDL)
-    FrameLayout mContainerLayout;
     @Bind(R.id.tvTitle_BDL)
     TextView tvTitle;
     @Bind(R.id.tvDescription_BDL)
@@ -53,17 +51,18 @@ public abstract class BaseDialog extends DialogFragment {
         View rootView = _inflater.inflate(R.layout.base_dialog_layout, _container, false);
         if (mContentResource != 0) {
             FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.content_container_BDL);
+            frameLayout.removeAllViews();
             frameLayout.addView(_inflater.inflate(mContentResource, frameLayout, false));
         }
         return rootView;
     }
 
-
-
     @Override
     public void onViewCreated(View _view, Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
         ButterKnife.bind(this, _view);
+        setupViews();
+
         if (!mTitle.isEmpty()) {
             tvTitle.setVisibility(View.VISIBLE);
             tvTitle.setText(mTitle);
@@ -73,7 +72,6 @@ public abstract class BaseDialog extends DialogFragment {
             tvDescription.setText(mDescription);
         }
 
-        setupViews();
         RxUtils.click(btnPositive, o -> onPositiveClicked());
         RxUtils.click(btnNegative, o -> onNegativeClicked());
     }
@@ -106,6 +104,7 @@ public abstract class BaseDialog extends DialogFragment {
     }
 
     protected abstract int getLayoutResource();
+
     protected abstract void setupViews();
 
     public void onPositiveClicked() {
@@ -113,7 +112,7 @@ public abstract class BaseDialog extends DialogFragment {
         dismiss();
     }
 
-    public void onNegativeClicked(){
+    public void onNegativeClicked() {
         if (negativeOnClick != null) negativeOnClick.onClick();
         dismiss();
     }
@@ -131,14 +130,29 @@ public abstract class BaseDialog extends DialogFragment {
     }
 
     public void setPositiveTitle(String _title) {
-        btnPositive.setVisibility(View.VISIBLE);
-        btnPositive.setText(_title);
+        if (btnPositive != null) {
+            btnPositive.setText(_title);
+            btnPositive.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setNegativeTitle(String _title) {
-        btnNegative.setVisibility(View.VISIBLE);
-        btnNegative.setText(_title);
+        if (btnNegative != null) {
+            btnNegative.setText(_title);
+            btnNegative.setVisibility(View.VISIBLE);
+        }
     }
+
+    public void setPositiveVisibility(boolean isVisible) {
+        if (btnPositive != null)
+            btnPositive.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    public void setNegativeVisibility(boolean isVisible) {
+        if (btnNegative != null)
+            btnNegative.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
 
     public void setDescription(String _description) {
         mDescription = _description;

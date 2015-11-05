@@ -2,7 +2,7 @@ package com.miami.moveforless.rest;
 
 import com.miami.moveforless.App;
 import com.miami.moveforless.R;
-import com.miami.moveforless.errors.RouteException;
+import com.miami.moveforless.Exceptions.RouteException;
 import com.miami.moveforless.globalconstants.RestConst;
 import com.miami.moveforless.managers.CacheManager;
 import com.miami.moveforless.managers.SharedPrefManager;
@@ -74,7 +74,7 @@ public class RestClient {
         return getInstance().getIMoverApi().login(loginRequest)
                 .subscribeOn(Schedulers.io())
                 .retry(2)
-                .timeout(10, TimeUnit.SECONDS)
+                .timeout(30, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(loginResponse -> loginResponse.getToken());
     }

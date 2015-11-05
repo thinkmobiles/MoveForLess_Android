@@ -1,41 +1,32 @@
 package com.miami.moveforless.managers;
 
 import android.graphics.Color;
-import android.location.Location;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.miami.moveforless.R;
-import com.miami.moveforless.globalconstants.RouteConst;
-import com.miami.moveforless.location.TrackingService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by klim on 23.09.15.
  */
-public final class MapManager implements GoogleMap.OnMapLoadedCallback{
+public final class MapManager {
     private GoogleMap mMap;
-    private boolean isMapReady = false;
-    private List<LatLng> mRoutes;
 
-    public MapManager(final GoogleMap _map) {
+    public MapManager(final GoogleMap _map, List<LatLng> _routes) {
         mMap = _map;
-        mMap.setOnMapLoadedCallback(this);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        drawDefaultLocation();
+        mMap.setOnCameraChangeListener(cameraPosition -> {
+            drawRoute(_routes);
+            mMap.setOnCameraChangeListener(null);
+        });
+
     }
 
 
@@ -70,32 +61,4 @@ public final class MapManager implements GoogleMap.OnMapLoadedCallback{
 
     }
 
-    public final void showRoute(List<LatLng> _points) {
-        if (isMapReady) {
-            drawRoute(_points);
-        } else {
-            mRoutes = _points;
-        }
-    }
-
-    private void drawDefaultLocation() {
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(RouteConst.DEFAULT_LOCATION)
-                .zoom(13)
-                .build();
-
-        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-    }
-
-    @Override
-    public void onMapLoaded() {
-        isMapReady = true;
-        if (mRoutes != null) {
-            drawRoute(mRoutes);
-            mRoutes = null;
-        } else {
-
-        }
-    }
 }

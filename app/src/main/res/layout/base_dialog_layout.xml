@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:minWidth="@dimen/dialog_width"
+
     android:padding="@dimen/dialog_padding"
     android:orientation="vertical">
 
@@ -22,7 +22,7 @@
 
     <FrameLayout
         android:id="@+id/content_container_BDL"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1" />
@@ -30,7 +30,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_gravity="center_horizontal">
 
         <Button
@@ -39,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="Clear" />
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btnPositive_BDL"
@@ -49,7 +50,6 @@
             android:layout_marginLeft="10dp"
             android:layout_toEndOf="@+id/btnNegative_BDL"
             android:layout_toRightOf="@+id/btnNegative_BDL"
-            android:text="Ok"
             android:visibility="gone" />
     </RelativeLayout>
 

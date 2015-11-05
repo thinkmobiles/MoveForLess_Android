@@ -1,16 +1,21 @@
 package com.miami.moveforless.activity;
 
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.miami.moveforless.Exceptions.LocationException;
 import com.miami.moveforless.R;
+import com.miami.moveforless.dialogs.ConfirmDialog;
 import com.miami.moveforless.dialogs.RouteDialog;
+import com.miami.moveforless.dialogs.SignatureDialog;
 import com.miami.moveforless.fragments.ScheduleFragment;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
@@ -18,6 +23,7 @@ import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.LogoutResponse;
 
 import butterknife.Bind;
+import rx.Observable;
 import rx.Subscription;
 
 /**
@@ -28,6 +34,7 @@ public class MainActivity extends BaseFragmentActivity {
     Toolbar toolbar;
 
     private Subscription mLogoutSubscription;
+    private PlayServices mPlayServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +46,7 @@ public class MainActivity extends BaseFragmentActivity {
         if (getFragmentById(R.id.contentContainer_AM) == null) {
             switchContent(ScheduleFragment.newInstance(), false);
         }
-
+        mPlayServices = new PlayServices(this);
     }
 
     @Override
@@ -56,6 +63,25 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     @Override
+    protected void onStop() {
+        mPlayServices.onStop();
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        mPlayServices.onStart();
+        super.onStart();
+    }
+
+
+    @Override
+    protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
+        super.onActivityResult(_requestCode, _resultCode, _data);
+        mPlayServices.onActivityResult(_requestCode, _resultCode, _data);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
@@ -66,13 +92,40 @@ public class MainActivity extends BaseFragmentActivity {
             case R.id.menu_navigation:
                 RouteDialog dialog = new RouteDialog();
                 dialog.show(getSupportFragmentManager(), "");
-//                openGoogleDirection();
+                break;
+            case R.id.menu_dummy_signature_dialog:
+                SignatureDialog dialog1 = new SignatureDialog();
+                dialog1.show(getSupportFragmentManager(), "");
+                break;
+            case R.id.menu_dummy_google_maps:
+                startNavigation();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void startNavigation() {
+        if (mPlayServices.isAvailable()) {
+            Location currentLocation = mPlayServices.getCurrentLocation();
+            if (currentLocation != null) {
+                openGoogleDirection();
+            } else showGpsOffDialog();
+        } else mPlayServices.onFailedConnection();
+    }
+
+    private void showGpsOffDialog() {
+        ConfirmDialog dialog = new ConfirmDialog();
+        dialog.setTitle("Error");
+        dialog.setDescription("Gps is not enabled. Do you want to change settings?");
+        dialog.setPositiveClickListener(() -> {
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        });
+        dialog.show(getSupportFragmentManager(), "");
+    }
+
     private void openGoogleDirection() {
+
         Uri gmmIntentUri = Uri.parse("google.navigation:q=Seattle, Lakewood");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
