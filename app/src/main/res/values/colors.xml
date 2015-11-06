@@ -4,13 +4,12 @@
     <color name="white">#FFF</color>
     <color name="black">#000</color>
     <color name="grey">#9E9E9E</color>
-    <color name="yellow">#ffb800</color>
+    <color name="yellow">#FFB800</color>
 
-    <color name="cyan_900">#004D40</color>
-    <color name="cyan_800">#00695C</color>
-    <color name="cyan_200">#80CBC4</color>
-    <color name="text_color">#005E46</color>
-    <color name="unactivated_tab">#D2EEE8</color>
-    <color name="blue_light">#effaf9</color>
+    <color name="cyan_dark">#005E46</color>
+    <color name="cyan_ultra_dark">#005A3F</color>
+    <color name="cyan_light">#80CBC4</color>
+
+    <color name="blue_light">#EFFAF9</color>
 
 </resources>

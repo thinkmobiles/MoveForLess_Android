@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.dialogs.SignatureDialog;
+import com.miami.moveforless.fragments.eventbus.BusProvider;
+import com.miami.moveforless.fragments.eventbus.FragmentType;
+import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.utils.RxUtils;
 
 import java.util.ArrayList;
@@ -60,15 +63,14 @@ public class QuestionnaireFragment extends BaseFragment {
     }
 
     private void onValidationResult(List<Integer> uncheckedAnswer) {
-        SignatureDialog dialog = new SignatureDialog();
-        dialog.show(getChildFragmentManager(), "");
+
         if (uncheckedAnswer.size() > 0) {
             Toast.makeText(getActivity(), "Check answer", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < uncheckedAnswer.size(); i++) {
                 mQuestionsContainer.getChildAt(uncheckedAnswer.get(i)).setBackgroundResource(R.drawable.unchecked_question_background);
             }
         } else {
-            Toast.makeText(getActivity(), "Go to next screen", Toast.LENGTH_SHORT).show();
+            BusProvider.getInstance().post(new SwitchJobDetailsEvent(FragmentType.SIGN_CONTRACT));
         }
     }
 

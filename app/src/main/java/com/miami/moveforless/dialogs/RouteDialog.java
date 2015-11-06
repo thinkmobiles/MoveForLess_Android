@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.miami.moveforless.App;
@@ -24,7 +23,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.BindString;
-import rx.Subscription;
 
 /**
  * Created by klim on 02.11.15.
@@ -34,7 +32,7 @@ public class RouteDialog extends BaseDialog {
 
     @BindString(R.string.close)
     String strBtnNegativeTitle;
-    @BindColor(R.color.cyan_800)
+    @BindColor(R.color.cyan_dark)
     int loadingColor;
     @Bind(R.id.pbLoading_DR)
     ProgressBar pbLoading;

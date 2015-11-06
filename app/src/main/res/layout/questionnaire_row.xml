@@ -27,16 +27,16 @@
 
         <RadioButton
             android:id="@+id/cbYes"
-            style="@style/QuestionnaireCheckBox"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            style="@style/BaseRadioButtonStyle"
             android:text="@string/yes" />
 
         <RadioButton
             android:id="@+id/cbNo"
-            style="@style/QuestionnaireCheckBox"
+            style="@style/BaseRadioButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingRight="5dp"
             android:text="@string/no" />
     </RadioGroup>

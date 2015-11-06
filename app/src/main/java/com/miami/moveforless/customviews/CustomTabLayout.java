@@ -19,9 +19,9 @@ import butterknife.ButterKnife;
  * Created by klim on 22.10.15.
  */
 public class CustomTabLayout extends TabLayout {
-    @BindColor(R.color.cyan_200)
+    @BindColor(R.color.cyan_light)
     int cyan_200;
-    @BindColor(R.color.cyan_800)
+    @BindColor(R.color.cyan_dark)
     int cyan_800;
     @BindColor(R.color.yellow)
     int yellow;

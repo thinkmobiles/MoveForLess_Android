@@ -1,4 +1,4 @@
-package com.miami.moveforless.utils;
+package com.miami.moveforless.customviews;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

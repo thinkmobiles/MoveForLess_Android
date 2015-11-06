@@ -54,8 +54,8 @@
             android:hint="0"
             android:inputType="numberDecimal|numberSigned"
             android:minWidth="50dp"
-            android:textColor="@color/cyan_800"
-            android:textColorHint="@color/cyan_800"
+            android:textColor="@color/cyan_dark"
+            android:textColorHint="@color/cyan_dark"
             android:textSize="24sp"
             android:visibility="gone" />
 

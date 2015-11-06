@@ -8,6 +8,8 @@ import com.miami.moveforless.fragments.CongratulationFragment;
 import com.miami.moveforless.fragments.JobDetailsFragment;
 import com.miami.moveforless.fragments.PaymentFragment;
 import com.miami.moveforless.fragments.QuestionnaireFragment;
+import com.miami.moveforless.fragments.eventbus.FragmentType;
+import com.miami.moveforless.globalconstants.Const;
 
 /**
  * Created by klim on 22.10.15.
@@ -20,21 +22,25 @@ public class JobPageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
+        final FragmentType type = Const.JOB_DETAILS_ORDER[position];
+
+        switch (type) {
+            case JOB_DETAILS:
                 return JobDetailsFragment.newInstance();
-            case 5:
+            case QUESTIONNAIRE:
+                return QuestionnaireFragment.newInstance();
+            case PAYMENT:
                 return PaymentFragment.newInstance();
-            case 6:
+            case FEEDBACK:
                 return CongratulationFragment.newInstance();
 
+            default:
+                return JobDetailsFragment.newInstance();
         }
-        return QuestionnaireFragment.newInstance();
-
     }
 
     @Override
     public int getCount() {
-        return 7;
+        return Const.JOB_DETAILS_ORDER.length;
     }
 }

@@ -7,7 +7,7 @@ public enum FragmentType {
 
     SCHEDULE,
     JOB,
-    JOB_DETAILES,
+    JOB_DETAILS,
     QUESTIONNAIRE,
     SIGN_CONTRACT,
     STOP_JOB,

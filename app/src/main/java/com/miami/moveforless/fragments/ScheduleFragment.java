@@ -50,7 +50,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.schedule_fragment;
+        return R.layout.fragment_schedule;
     }
 
     @Override

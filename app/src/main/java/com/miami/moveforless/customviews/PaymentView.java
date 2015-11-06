@@ -3,18 +3,14 @@ package com.miami.moveforless.customviews;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.miami.moveforless.R;
 import com.miami.moveforless.utils.RxUtils;
-
-import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,7 +48,7 @@ public class PaymentView extends LinearLayout {
         inflate(getContext(), R.layout.payment_row_layout, this);
 
         ButterKnife.bind(this);
-        etAmount.setUnderlineColor(R.color.cyan_800);
+        etAmount.setUnderlineColor(R.color.cyan_dark);
 
         final String[] mPaymentType = getResources().getStringArray(R.array.payments_type);
 
