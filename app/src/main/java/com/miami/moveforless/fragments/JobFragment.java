@@ -3,10 +3,12 @@ package com.miami.moveforless.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.adapters.JobPageAdapter;
 import com.miami.moveforless.customviews.CustomTabLayout;
+import com.miami.moveforless.dialogs.ConfirmDialog;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.FragmentType;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
@@ -15,21 +17,20 @@ import com.squareup.otto.Subscribe;
 
 import butterknife.Bind;
 import butterknife.BindColor;
+import butterknife.BindString;
 
 /**
  * Created by klim on 22.10.15.
  */
 public class JobFragment extends BaseFragment {
+    @BindString(R.string.back__pressed_confirm_message) String strBackPressed;
     @Bind(R.id.tabLayout_FJ)
     CustomTabLayout mTabLayout;
-    @BindColor(R.color.blue_light)
-    int unactivated_tab;
     @Bind(R.id.viewPager_FJ)
     ViewPager mViewPager;
 
-
-
     private int selectedTab = 0;
+    private JobPageAdapter mAdapter;
 
     public static Fragment newInstance(int _id) {
         Bundle bundle = new Bundle();
@@ -49,29 +50,11 @@ public class JobFragment extends BaseFragment {
 
 //        try {
 //            new CreatePdf(this).createPdf();
-//        } catch (DocumentException | IOException e) {
-//            e.printStackTrace();
-//        }
-//        File sdCard = Environment.getExternalStorageDirectory();
-//        File dir = new File(sdCard.getAbsolutePath());
-//        File file = new File(dir, "sample2.pdf");
-//        if (file.exists()) {
-//            pdfView.fromFile(file).enableSwipe(true).showMinimap(true).load();
-//        }
 
-//        try {
-//            Observable.just(new CreatePdf(getActivity()).createPdf())
-//                    .subscribeOn(Schedulers.io())
-//                    .subscribe(file -> pdfView);
-//        } catch (DocumentException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
-        JobPageAdapter adapter = new JobPageAdapter(getChildFragmentManager());
-
-        mViewPager.setAdapter(adapter);
+        mAdapter = new JobPageAdapter(getChildFragmentManager());
+        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.customizeTabs(mViewPager);
         mViewPager.setCurrentItem(selectedTab);
@@ -89,10 +72,39 @@ public class JobFragment extends BaseFragment {
         BusProvider.getInstance().register(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = mAdapter.getItem(mViewPager.getCurrentItem());
+        if (fragment != null && fragment instanceof BaseJobDetailFragment) {
+            if (((BaseJobDetailFragment)fragment).isAllowGoHome()) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            } else {
+                ConfirmDialog dialog = new ConfirmDialog();
+                dialog.setDescription(strBackPressed);
+                dialog.setPositiveClickListener(() -> getActivity().getSupportFragmentManager().popBackStack());
+                dialog.show(getActivity().getSupportFragmentManager(), "");
+            }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Subscribe
     public void switchFragment(SwitchJobDetailsEvent _event) {
         int position = -1;
+
+
+        if (_event.getType() == FragmentType.SCHEDULE) {
+            getFragmentManager().popBackStack();
+            return;
+        }
 
         for (int i = 0; i < Const.JOB_DETAILS_ORDER.length; i++) {
             if (_event.getType() == Const.JOB_DETAILS_ORDER[i]) {

@@ -6,14 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.dialogs.RouteDialog;
 import com.miami.moveforless.dialogs.SignatureDialog;
+import com.miami.moveforless.fragments.BaseFragment;
 import com.miami.moveforless.fragments.JobFragment;
 import com.miami.moveforless.fragments.ScheduleFragment;
-import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.FragmentType;
 import com.miami.moveforless.fragments.eventbus.OpenJobDetailsEvent;
 import com.miami.moveforless.managers.PlayServices;
@@ -23,7 +24,6 @@ import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.LogoutResponse;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
-import com.squareup.otto.ThreadEnforcer;
 
 import butterknife.Bind;
 import rx.Subscription;
@@ -31,32 +31,26 @@ import rx.Subscription;
 /**
  * Created by klim on 20.10.15.
  */
-public class MainActivity extends BaseFragmentActivity {
+public class MainActivity extends BaseFragmentActivity implements FragmentChanger {
     @Bind(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
 
     private Subscription mLogoutSubscription;
     private PlayServices mPlayServices;
-    private Bus mBus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mToolbar);
         getDelegate().getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mToolbar.setNavigationIcon(R.drawable.logo);
+
         if (getFragmentById(R.id.contentContainer_AM) == null) {
             switchContent(ScheduleFragment.newInstance(), false);
         }
         mPlayServices = new PlayServices(this);
-    }
-
-    @Subscribe
-    public void OpenJobFragment(OpenJobDetailsEvent _event) {
-        if (_event.getType() == FragmentType.JOB) {
-            switchContent(JobFragment.newInstance(_event.getId()), true);
-        }
     }
 
     @Override
@@ -114,6 +108,15 @@ public class MainActivity extends BaseFragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer_AM);
+        if (fragment != null && fragment instanceof BaseFragment && !(fragment instanceof ScheduleFragment)) {
+            ((BaseFragment) fragment).onBackPressed();
+        } else
+            super.onBackPressed();
+    }
+
     private void logout() {
         if (mLogoutSubscription != null) {
             removeSubscription(mLogoutSubscription);
@@ -145,4 +148,8 @@ public class MainActivity extends BaseFragmentActivity {
         Toast.makeText(MainActivity.this, ErrorParser.parse(_throwable), Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void switchFragment(Fragment _fragment, boolean _isAddToBackStack) {
+        switchContent(_fragment, _isAddToBackStack);
+    }
 }

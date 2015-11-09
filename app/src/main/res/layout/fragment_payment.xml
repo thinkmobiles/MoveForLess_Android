@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/bg_feedback"
+    android:background="@drawable/job_feedback_background"
     android:paddingLeft="@dimen/job_content_padding_left_right"
     android:paddingRight="@dimen/job_content_padding_left_right"
     android:paddingBottom="@dimen/job_content_padding_bottom">

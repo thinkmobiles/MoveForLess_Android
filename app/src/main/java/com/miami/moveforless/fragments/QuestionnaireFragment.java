@@ -9,10 +9,10 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.dialogs.SignatureDialog;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.FragmentType;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
+import com.miami.moveforless.utils.BitmapUtils;
 import com.miami.moveforless.utils.RxUtils;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import rx.android.schedulers.AndroidSchedulers;
 /**
  * Created by klim on 22.10.15.
  */
-public class QuestionnaireFragment extends BaseFragment {
+public class QuestionnaireFragment extends BaseJobDetailFragment {
     @Bind(R.id.btnNext_FQ)
     Button btnNext;
     @Bind(R.id.questions_container_FQ)
@@ -45,6 +45,7 @@ public class QuestionnaireFragment extends BaseFragment {
                 .map(o -> checkAnswer())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onValidationResult);
+
     }
 
     private List<Integer> checkAnswer() {
@@ -74,4 +75,8 @@ public class QuestionnaireFragment extends BaseFragment {
         }
     }
 
+    @Override
+    protected boolean isAllowGoHome() {
+        return false;
+    }
 }

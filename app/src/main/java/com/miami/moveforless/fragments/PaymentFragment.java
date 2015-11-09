@@ -14,7 +14,7 @@ import butterknife.BindString;
 /**
  * Created by klim on 29.10.15.
  */
-public class PaymentFragment extends BaseFragment implements PaymentView.PaymentAction{
+public class PaymentFragment extends BaseJobDetailFragment implements PaymentView.PaymentAction{
     @BindString(R.string.amount_error_message)
     String strAmountMessage;
     @Bind(R.id.payments_container_FP)
@@ -65,5 +65,10 @@ public class PaymentFragment extends BaseFragment implements PaymentView.Payment
     @Override
     public void onDelete(View _view) {
         mContainer.removeView(_view);
+    }
+
+    @Override
+    protected boolean isAllowGoHome() {
+        return false;
     }
 }

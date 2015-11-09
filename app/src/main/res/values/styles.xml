@@ -21,6 +21,7 @@
     <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:background">@color/white</item>
         <item name="android:textColorPrimary">@color/cyan_dark</item>
+        <item name="android:itemBackground">@color/yellow</item>
     </style>
 
     <style name="ToolbarStyle.PopupMenuStyle" parent="ThemeOverlay.AppCompat.Light">

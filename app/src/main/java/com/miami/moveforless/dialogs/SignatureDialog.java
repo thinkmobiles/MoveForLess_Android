@@ -32,7 +32,7 @@ public class SignatureDialog extends BaseDialog implements GestureOverlayView.On
 
     @Override
     protected void setupViews() {
-        int width = ScreenUtils.getScreenWidth(App.getAppContext()) / 3 ;
+        int width = ScreenUtils.getScreenWidth(App.getAppContext());
         int height = width * 9 /16;
         mGestureView.getLayoutParams().width = width;
         mGestureView.getLayoutParams().height = height;

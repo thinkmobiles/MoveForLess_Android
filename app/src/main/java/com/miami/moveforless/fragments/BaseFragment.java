@@ -3,17 +3,25 @@ package com.miami.moveforless.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
+import com.miami.moveforless.R;
+import com.miami.moveforless.dialogs.ConfirmDialog;
 import com.miami.moveforless.dialogs.InfoDialog;
+import com.miami.moveforless.utils.BitmapUtils;
 
+import butterknife.BindString;
 import butterknife.ButterKnife;
 
 /**
@@ -30,7 +38,8 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle savedInstanceState) {
         super.onCreateView(_inflater, _container, savedInstanceState);
         mLayoutInflater = _inflater;
-        return _inflater.inflate(getLayoutResource(), _container, false);
+        View view = _inflater.inflate(getLayoutResource(), _container, false);
+        return view;
     }
 
     @Override
@@ -50,6 +59,10 @@ public abstract class BaseFragment extends Fragment {
         InfoDialog dialog = new InfoDialog();
         dialog.setTitle(_message);
         dialog.show(getChildFragmentManager(), "");
+    }
+
+    public void onBackPressed() {
+
     }
 
     protected final void addFragment(final @IdRes int _containerId, final Fragment _fragment) {

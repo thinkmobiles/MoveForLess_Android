@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.miami.moveforless.R;
+import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ExampleAdapter;
 import com.miami.moveforless.adapters.models.ExampleModel;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
@@ -177,7 +178,9 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                     mAdapter.removeChild(_position + 1, mAdapter.getItem(_position));
                 }
             } else {
-                BusProvider.getInstance().post(new OpenJobDetailsEvent(FragmentType.JOB, 0));
+                if (getActivity() instanceof FragmentChanger) {
+                    ((FragmentChanger)getActivity()).switchFragment(JobFragment.newInstance(0), true);
+                }
             }
         }));
 

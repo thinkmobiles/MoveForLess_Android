@@ -24,7 +24,7 @@ public class Const {
             SIGN_INVOICE,
             PAYMENT,
             FEEDBACK,
-            JOB_DETAILS};
+    };
 
 
 }

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/bg_login"
+    android:background="@drawable/login_background"
     android:weightSum="1">
 
     <ImageView

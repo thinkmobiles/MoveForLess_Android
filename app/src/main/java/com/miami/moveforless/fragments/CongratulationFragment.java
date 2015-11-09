@@ -3,18 +3,18 @@ package com.miami.moveforless.fragments;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.miami.moveforless.R;
+import com.miami.moveforless.fragments.eventbus.BusProvider;
+import com.miami.moveforless.fragments.eventbus.FragmentType;
+import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.utils.RxUtils;
-
-import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 
 /**
  * Created by klim on 28.10.15.
  */
-public class CongratulationFragment extends BaseFragment {
+public class CongratulationFragment extends BaseJobDetailFragment {
     @Bind(R.id.btnBack_FC)      Button btnBack;
 
     @Override
@@ -32,9 +32,14 @@ public class CongratulationFragment extends BaseFragment {
         RxUtils.click(btnBack, o -> btnBackClicked());
     }
 
+    @Override
+    protected boolean isAllowGoHome() {
+        return true;
+    }
+
     private void btnBackClicked() {
         //TODO implement back to list job screen
-        Toast.makeText(getActivity(), "Back to list job", Toast.LENGTH_SHORT).show();
+        BusProvider.getInstance().post(new SwitchJobDetailsEvent(FragmentType.SCHEDULE));
     }
 
 }
