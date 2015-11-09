@@ -29,7 +29,7 @@
 
     <Spinner
         android:id="@+id/spinnerSelector_row"
-        style="@style/BaseTextStyle"
+        style="@style/BaseSpinnerStyle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

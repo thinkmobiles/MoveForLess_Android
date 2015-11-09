@@ -5,20 +5,25 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/job_feedback_background"
-    android:paddingLeft="@dimen/job_content_padding_left_right"
-    android:paddingRight="@dimen/job_content_padding_left_right"
     android:paddingBottom="@dimen/job_content_padding_bottom">
+
 
     <TextView
         style="@style/PagesTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/job_content_padding_left_right"
+        android:paddingRight="@dimen/job_content_padding_left_right"
         android:text="@string/payments" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/job_content_padding_left_right"
+        android:paddingRight="@dimen/job_content_padding_left_right"
+        android:scrollbars="none"
+        >
 
         <LinearLayout
             android:id="@+id/payments_container_FP"
@@ -33,7 +38,9 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/job_content_padding_left_right"
+        >
 
         <LinearLayout
             android:layout_width="200dp"

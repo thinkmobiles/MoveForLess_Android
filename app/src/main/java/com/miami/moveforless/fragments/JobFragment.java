@@ -50,7 +50,7 @@ public class JobFragment extends BaseFragment {
 
 //        try {
 //            new CreatePdf(this).createPdf();
-
+        setHasOptionsMenu(true);
 
         mAdapter = new JobPageAdapter(getChildFragmentManager());
         mViewPager.setOffscreenPageLimit(1);

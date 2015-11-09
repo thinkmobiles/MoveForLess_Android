@@ -38,7 +38,6 @@ public class CongratulationFragment extends BaseJobDetailFragment {
     }
 
     private void btnBackClicked() {
-        //TODO implement back to list job screen
         BusProvider.getInstance().post(new SwitchJobDetailsEvent(FragmentType.SCHEDULE));
     }
 

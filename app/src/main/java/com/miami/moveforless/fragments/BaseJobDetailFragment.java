@@ -16,7 +16,6 @@ public abstract class BaseJobDetailFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
         return  super.onCreateView(_inflater, _container, savedInstanceState);
     }
 
