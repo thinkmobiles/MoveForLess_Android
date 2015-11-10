@@ -29,7 +29,7 @@ public class JobFragment extends BaseFragment {
     @Bind(R.id.viewPager_FJ)
     ViewPager mViewPager;
 
-    private int selectedTab = 0;
+    private int selectedTab = 5;
     private JobPageAdapter mAdapter;
 
     public static Fragment newInstance(int _id) {

@@ -10,22 +10,27 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.miami.moveforless.R;
+import com.miami.moveforless.customviews.quickActionMenu.ActionItem;
 import com.miami.moveforless.utils.RxUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
+import butterknife.BindString;
 import butterknife.ButterKnife;
 
 /**
  * Created by klim on 29.10.15.
  */
 public class PaymentView extends LinearLayout {
-
+    @BindString(R.string.choose_payment_type) String strChoosePayment;
     @Bind(R.id.btnPaymentDelete_row)
     ImageView ivDelete;
     @Bind(R.id.btnConfirm_row)
     TextView tvConfirm;
     @Bind(R.id.spinnerSelector_row)
-    Spinner mSpinner;
+    CustomSpinner mSpinner;
     @Bind(R.id.amount_dollar_row)
     TextView tvAmountDollar;
     @Bind(R.id.tvAmount_row)
@@ -55,29 +60,21 @@ public class PaymentView extends LinearLayout {
         RxUtils.click(ivDelete, o1 -> onDeleteClicked());
         RxUtils.click(tvConfirm, o -> onConfirmClicked());
 
-        final HintTextAdapter<String> adapter = new HintTextAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mPaymentType);
-        mSpinner.setAdapter(adapter);
-        mSpinner.setSelection(adapter.getCount());
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position < adapter.getCount()) {
-                    tvAmountDollar.setVisibility(View.VISIBLE);
-                    etAmount.setVisibility(View.VISIBLE);
-                    ivDelete.setVisibility(View.VISIBLE);
-                    tvConfirm.setVisibility(View.VISIBLE);
-                    etAmount.requestFocus();
-                    mActionListener.onPaymentTypeSelected(PaymentView.this, mPaymentType[position]);
-                }
+        List<ActionItem> items = new ArrayList<>();
+        for (int i = 0; i < mPaymentType.length; i++) {
+            items.add(new ActionItem(i, mPaymentType[i], R.drawable.ic_launcher));
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
+        }
+        mSpinner.setDropDownItems(items);
+        mSpinner.setOnDropDownItemClicked(_position -> {
+            tvAmountDollar.setVisibility(View.VISIBLE);
+            etAmount.setVisibility(View.VISIBLE);
+            ivDelete.setVisibility(View.VISIBLE);
+            tvConfirm.setVisibility(View.VISIBLE);
+            etAmount.requestFocus();
+            mActionListener.onPaymentTypeSelected(PaymentView.this, mPaymentType[_position]);
         });
-
+        mSpinner.setHint(strChoosePayment);
 
     }
 
@@ -87,14 +84,15 @@ public class PaymentView extends LinearLayout {
 
     private void onConfirmClicked() {
         float amount = parseAmountInput(etAmount.getText().toString());
+        if (amount > 0) {
             ivDelete.setVisibility(View.INVISIBLE);
             ivDone.setVisibility(View.VISIBLE);
             tvConfirm.setVisibility(View.GONE);
             tvAmountDollar.setEnabled(false);
             etAmount.setEnabled(false);
             mSpinner.setEnabled(false);
-            mActionListener.onConfirm(this, amount);
-
+        }
+        mActionListener.onConfirm(this, amount);
     }
 
     public void setOnPaymentListner(PaymentAction _action) {
