@@ -57,18 +57,6 @@
 
     <string name="amount">amount</string>
 
-    <string-array name="payments_type">
-        <item>Cash</item>
-        <item>Check</item>
-        <item>MasterCard &amp; Visa</item>
-        <item>AmericanExpress</item>
-        <item>Discover</item>
-        <item>PayPal</item>
-        <item>Terminal</item>
-    </string-array>
-
-
-
     <!--congratulation screen-->
     <string name="back_to_schedule">Back to Schedule</string>
     <string name="congratulation_text">Congratulation! \n Your feedback \n has been saved</string>

@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:background="@drawable/tab_layout_background"
+    android:orientation="horizontal"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:orientation="horizontal">
+    android:paddingRight="10dp">
 
-    <TextView
+    <com.miami.moveforless.customviews.HelveticaTextView
         android:id="@+id/tvTitle_TL"
+        style="@style/BaseTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:text="tab"
-        android:textSize="@dimen/job_tab_text_size" />
+        android:textColor="@drawable/tab_layout_title_selector"
+        android:textSize="@dimen/job_tab_text_size"
+        custom:customFont="medium" />
 
     <ImageView
         android:id="@+id/ivTitleIcon_TL"
@@ -20,5 +25,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/ic_arrow"/>
+        android:background="@drawable/tab_layout_arrow_selector" />
 </LinearLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="payments_titles">
+        <item>Cash</item>
+        <item>Check</item>
+        <item>MasterCard</item>
+        <item>Visa</item>
+        <item>AmericanExpress</item>
+        <item>Discover</item>
+        <item>PayPal</item>
+        <item>Terminal</item>
+    </string-array>
+
+    <string-array name="payment_icons">
+        <item>@drawable/icn_quote</item>
+        <item>@drawable/icn_check_book</item>
+        <item>@drawable/icn_mastercard</item>
+        <item>@drawable/icn_visa</item>
+        <item>@drawable/icn_american_express</item>
+        <item>@drawable/icn_discover</item>
+        <item>@drawable/icn_paypal</item>
+        <item>@drawable/icn_terminal</item>
+
+    </string-array>
+
+</resources>

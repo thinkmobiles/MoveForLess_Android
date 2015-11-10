@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -90,7 +91,9 @@ public class CustomTabLayout extends TabLayout {
     private View getTabView(String _title, boolean _isSelected) {
         View tabView = LayoutInflater.from(getContext()).inflate(R.layout.tab_layout, this, false);
         TextView title = (TextView) tabView.findViewById(R.id.tvTitle_TL);
+//        ImageView arrow = (ImageView) tabView.findViewById(R.id.ivTitleIcon_TL);
         title.setText(_title);
+//        arrow.setImageResource(_isSelected? R.drawable.icn_right : R.drawable.icn_right_green);
         tabView.setBackgroundColor(_isSelected? yellow : cyan_800);
         title.setTextColor(_isSelected ? cyan_800: cyan_200);
         return tabView;

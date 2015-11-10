@@ -66,9 +66,10 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/yellow"
                 android:text="0"
+                android:minWidth="80dp"
                 style="@style/BaseTextStyle"
                 custom:customFont="bold"
-                />
+                android:gravity="right" />
             <com.miami.moveforless.customviews.HelveticaTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

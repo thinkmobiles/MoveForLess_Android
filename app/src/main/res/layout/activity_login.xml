@@ -1,49 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:id="@+id/root_container_AL"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/login_background"
-    android:weightSum="1">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/logo_margin_top"
-        android:src="@drawable/logo_login"
-        android:scaleType="fitCenter" />
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="100">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:layout_marginTop="35dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="100">
 
-        <com.miami.moveforless.customviews.HelveticaEditText
-            android:id="@+id/etEmail_AL"
-            android:layout_width="match_parent"
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:inputType="text"
-            style="@style/LoginEditText"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="50"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:weightSum="100">
 
-        <com.miami.moveforless.customviews.HelveticaEditText
-            android:id="@+id/etPassword_AL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            style="@style/LoginEditText"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/logo_margin_top">
 
-        <com.miami.moveforless.customviews.HelveticaButton
-            android:id="@+id/btnLogin_AL"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            style="@style/LoginButton"
-            />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/logo_login" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/input_container_margin_top"
+                android:layout_marginLeft="@dimen/input_container_paddingLeft_right"
+                android:layout_marginRight="@dimen/input_container_paddingLeft_right"
+                >
+
+                <com.miami.moveforless.customviews.HelveticaEditText
+                    android:id="@+id/etEmail_AL"
+                    style="@style/BaseEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="text" />
+
+                <com.miami.moveforless.customviews.HelveticaEditText
+                    android:id="@+id/etPassword_AL"
+                    style="@style/BaseEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/password_margin_top"
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
+
+                <com.miami.moveforless.customviews.HelveticaButton
+                    android:id="@+id/btnLogin_AL"
+                    style="@style/LoginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/login_button_margin_top" />
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

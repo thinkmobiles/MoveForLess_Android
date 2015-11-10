@@ -27,6 +27,12 @@
             android:screenOrientation="sensorLandscape"
             android:theme="@style/LoginActivityStyle" >
 
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/MainTheme" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,11 +40,6 @@
             </intent-filter>
 
 
-        </activity>
-        <activity
-            android:name=".activity.LoginActivity"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@style/MainTheme" >
         </activity>
     </application>
 

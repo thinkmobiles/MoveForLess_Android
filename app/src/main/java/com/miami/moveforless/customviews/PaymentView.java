@@ -1,12 +1,11 @@
 package com.miami.moveforless.customviews;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.miami.moveforless.R;
@@ -55,14 +54,16 @@ public class PaymentView extends LinearLayout {
         ButterKnife.bind(this);
         etAmount.setUnderlineColor(R.color.cyan_dark);
 
-        final String[] mPaymentType = getResources().getStringArray(R.array.payments_type);
-
         RxUtils.click(ivDelete, o1 -> onDeleteClicked());
         RxUtils.click(tvConfirm, o -> onConfirmClicked());
 
+        final String[] mPaymentType = getResources().getStringArray(R.array.payments_titles);
+        final TypedArray icons = getResources().obtainTypedArray(R.array.payment_icons);
+
+
         List<ActionItem> items = new ArrayList<>();
         for (int i = 0; i < mPaymentType.length; i++) {
-            items.add(new ActionItem(i, mPaymentType[i], R.drawable.ic_launcher));
+            items.add(new ActionItem(i, mPaymentType[i], icons.getResourceId(i, -1)));
 
         }
         mSpinner.setDropDownItems(items);
@@ -118,6 +119,14 @@ public class PaymentView extends LinearLayout {
         } catch (Exception e) {
             return -1;
         }
+    }
+
+    private List<ActionItem> createDropDownList() {
+        List<ActionItem> items = new ArrayList<>();
+
+
+
+        return items;
     }
 
 }

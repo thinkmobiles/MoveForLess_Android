@@ -1,41 +1,43 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="10dp"
+    android:background="@drawable/spinner_dropdown_item_background"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/ivIcon_SDRL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        />
+        android:paddingLeft="20dp"
+        android:layout_gravity="center_vertical" />
 
     <com.miami.moveforless.customviews.HelveticaTextView
         android:id="@+id/tvTitle_SDRL"
+        style="@style/BaseTextStyle"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
         android:gravity="left|center_vertical"
         android:paddingLeft="5dip"
         android:paddingRight="5dip"
-        android:layout_gravity="center_vertical"
         android:text="Chart"
-        style="@style/BaseTextStyle"
-        />
+        custom:customFont="light" />
 
     <ImageView
         android:id="@+id/ivArrow_SDRL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_spinner_up"
-        android:paddingTop="7dp"
-        android:paddingRight="10dp"
         android:paddingBottom="7dp"
-        android:visibility="invisible"
-        />
+        android:paddingRight="10dp"
+        android:paddingTop="7dp"
+        android:src="@drawable/ic_spinner_up"
+        android:visibility="invisible" />
+
+
 </LinearLayout>
