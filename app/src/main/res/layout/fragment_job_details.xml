@@ -14,13 +14,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/job_content_padding_left_right"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/job_content_padding_left_right">
+
             <TextView
+                style="@style/PagesTitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Number JOB"
-                style="@style/PagesTitleStyle"
                 />
         </LinearLayout>
 
@@ -90,22 +91,112 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:background="@color/blue_light">
+            android:background="@color/blue_light"
+            android:gravity="center_vertical">
+
             <TextView
                 android:layout_width="125dp"
-                android:layout_height="50dp"
-                android:gravity="right"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:paddingRight="25dp"
                 android:background="@color/yellow"
+                android:gravity="right|center_vertical"
+                android:paddingRight="25dp"
                 android:text="From"
-                android:textSize="25sp"
-                android:textColor="@color/cyan_dark"/>
+                android:textColor="@color/cyan_dark"
+                android:textSize="25sp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/job_details_from_text_details_merge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/job_details_from_details_check_merge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/blue_light"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="125dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/yellow"
+                android:gravity="right|center_vertical"
+                android:paddingRight="25dp"
+                android:text="To"
+                android:textColor="@color/cyan_dark"
+                android:textSize="25sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/job_details_to_text_details_merge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/job_details_to_details_check_merge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </com.miami.moveforless.customviews.ParallaxScrollView>

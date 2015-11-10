@@ -3,10 +3,8 @@ package com.miami.moveforless.customviews;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.miami.moveforless.R;
@@ -62,7 +60,7 @@ public class PaymentView extends LinearLayout {
 
         List<ActionItem> items = new ArrayList<>();
         for (int i = 0; i < mPaymentType.length; i++) {
-            items.add(new ActionItem(i, mPaymentType[i], R.drawable.ic_launcher));
+            items.add(new ActionItem(i, mPaymentType[i], R.drawable.icn_launcher));
 
         }
         mSpinner.setDropDownItems(items);
