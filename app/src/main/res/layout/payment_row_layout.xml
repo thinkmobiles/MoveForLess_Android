@@ -2,43 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
     android:orientation="horizontal">
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp">
 
         <ImageView
             android:id="@+id/ivDone_row"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="left|center_vertical"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_check_yellow"
             android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/btnPaymentDelete_row"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_delete"
+            android:src="@drawable/button_delete"
             android:visibility="invisible" />
 
 
     </FrameLayout>
 
-    <Spinner
+    <com.miami.moveforless.customviews.CustomSpinner
         android:id="@+id/spinnerSelector_row"
         style="@style/BaseSpinnerStyle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:focusable="false"
-        android:spinnerMode="dropdown" />
+        android:focusable="false" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:gravity="center_vertical"
@@ -53,11 +54,12 @@
             android:gravity="right"
             android:hint="0"
             android:inputType="numberDecimal|numberSigned"
-            android:minWidth="50dp"
-            android:textColor="@color/cyan_dark"
+            android:minWidth="110dp"
+            android:textColor="@drawable/base_text_color_selector"
             android:textColorHint="@color/cyan_dark"
             android:textSize="24sp"
-            android:visibility="gone" />
+            android:visibility="invisible"
+            android:nestedScrollingEnabled="true" />
 
         <com.miami.moveforless.customviews.HelveticaTextView
             android:id="@+id/amount_dollar_row"

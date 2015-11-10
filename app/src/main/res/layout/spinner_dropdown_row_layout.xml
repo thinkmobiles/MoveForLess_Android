@@ -1,0 +1,41 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/ivIcon_SDRL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        />
+
+    <com.miami.moveforless.customviews.HelveticaTextView
+        android:id="@+id/tvTitle_SDRL"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:layout_gravity="center_vertical"
+        android:text="Chart"
+        style="@style/BaseTextStyle"
+        />
+
+    <ImageView
+        android:id="@+id/ivArrow_SDRL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_spinner_up"
+        android:paddingTop="7dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="7dp"
+        android:visibility="invisible"
+        />
+</LinearLayout>

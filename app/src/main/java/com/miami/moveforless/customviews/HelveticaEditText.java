@@ -25,16 +25,19 @@ public class HelveticaEditText extends EditText {
     public HelveticaEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         defineTypeface(context, attrs);
-        getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        if (getBackground() != null)
+            getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
     }
 
     public HelveticaEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         defineTypeface(context, attrs);
-        getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        if (getBackground() != null)
+            getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
     }
 
     public void setUnderlineColor(int _colorId) {
+        if (getBackground() != null)
         getBackground().setColorFilter(getColorWrapper(getContext(), _colorId), PorterDuff.Mode.SRC_ATOP);
     }
 
