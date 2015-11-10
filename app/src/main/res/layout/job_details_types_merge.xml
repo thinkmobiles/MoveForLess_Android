@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
@@ -8,8 +9,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
@@ -17,14 +16,25 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_calendar"/>
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:src="@drawable/icn_job"/>
 
             <Spinner
-                android:id="@+id/spinner2"
-                android:layout_width="200dp"
+                android:id="@+id/spJobTypeId"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="35dp"
-                android:background="@drawable/form_borders"/>
+                android:layout_weight="3"
+                android:background="@drawable/form_borders"
+                android:gravity="center_vertical"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -39,14 +49,20 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_calendar"/>
+                android:src="@drawable/icn_cust"/>
 
             <Spinner
-                android:id="@+id/spinner1"
-                android:layout_width="200dp"
+                android:id="@+id/spCustTypeId"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
+                android:layout_weight="3"
                 android:background="@drawable/form_borders"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
         </LinearLayout>
 
         <LinearLayout
@@ -61,14 +77,21 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_calendar"/>
+                android:src="@drawable/icn_quote"/>
 
             <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="200dp"
+                android:id="@+id/spQuoteTypeId"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
+                android:layout_weight="3"
                 android:background="@drawable/form_borders"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
+
         </LinearLayout>
 
 

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingRight="50dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_estim"/>
+
+            <EditText
+                android:id="@+id/etAgentName"
+                style="@style/JobDetailsEditText"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/form_borders"/>
+
+            <ImageView
+                style="@style/JobDetailsEditText"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_rate_type"/>
+
+            <Spinner
+                android:id="@+id/etAgentName1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/form_borders"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingRight="50dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_man"/>
+
+            <EditText
+                android:id="@+id/etAgentName2"
+                style="@style/JobDetailsEditText"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/form_borders"/>
+
+            <ImageView
+                style="@style/JobDetailsEditText"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_people"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/form_borders">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:textColor="@android:color/black"/>
+
+                <ImageView
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icn_man"/>
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icn_car"/>
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingRight="50dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_earth"/>
+
+            <EditText
+                android:id="@+id/etAgentName3"
+                style="@style/JobDetailsEditText"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/form_borders"/>
+
+            <ImageView
+            style="@style/JobDetailsEditText"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icn_rate_time"/>
+
+            <EditText
+                android:id="@+id/etAgentName135"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/form_borders"/>
+
+            <ImageView
+                style="@style/JobDetailsEditText"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_dropbox"/>
+
+            <EditText
+                android:id="@+id/etAgentName15"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/form_borders"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingRight="50dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_sum"/>
+
+            <EditText
+                android:id="@+id/etAgentName36"
+                style="@style/JobDetailsEditText"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/form_borders"/>
+
+            <ImageView
+                style="@style/JobDetailsEditText"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_estim"/>
+
+            <EditText
+                android:id="@+id/etAgentName1335"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/form_borders"/>
+
+            <ImageView
+                style="@style/JobDetailsEditText"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_finish"/>
+
+            <EditText
+                android:id="@+id/etAgentName155"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/form_borders"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</merge>

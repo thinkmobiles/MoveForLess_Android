@@ -34,8 +34,8 @@ public final class MapManager {
         MarkerOptions marker = new MarkerOptions().position(_latLng);
 
         if (_isMyLocation)
-            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_a));
-        else marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_b));
+            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.icn_location_a));
+        else marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.icn_location_b));
         return marker;
     }
 

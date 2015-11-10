@@ -18,10 +18,11 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_calendar"/>
+                android:src="@drawable/icn_plus"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="3"
                 android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
                 android:layout_gravity="center_vertical"
@@ -29,15 +30,22 @@
                 android:background="@drawable/form_borders">
 
                 <TextView
-                    android:layout_width="155dp"
+                    android:id="@+id/tvCreateDate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="match_parent"/>
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_calendar"/>
+                    android:src="@drawable/icn_calendar_deactive"/>
             </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
 
         </LinearLayout>
 
@@ -53,10 +61,11 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_calendar"/>
+                android:src="@drawable/icn_archive"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="3"
                 android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
                 android:layout_gravity="center_vertical"
@@ -64,15 +73,22 @@
                 android:background="@drawable/form_borders">
 
                 <TextView
-                    android:layout_width="155dp"
+                    android:id="@+id/tvReceivedDate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="match_parent"/>
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_calendar"/>
+                    android:src="@drawable/icn_calendar_deactive"/>
             </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
 
         </LinearLayout>
 
@@ -88,10 +104,11 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_calendar"/>
+                android:src="@drawable/icn_visibility"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="3"
                 android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
                 android:layout_gravity="center_vertical"
@@ -99,15 +116,22 @@
                 android:background="@drawable/form_borders">
 
                 <TextView
-                    android:layout_width="155dp"
+                    android:id="@+id/tvEstimatedDate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="match_parent"/>
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_calendar"/>
+                    android:src="@drawable/icn_calendar_deactive"/>
             </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
 
         </LinearLayout>
 
@@ -123,10 +147,11 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_calendar"/>
+                android:src="@drawable/icn_timer"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="3"
                 android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
                 android:layout_gravity="center_vertical"
@@ -134,15 +159,22 @@
                 android:background="@drawable/form_borders">
 
                 <TextView
-                    android:layout_width="155dp"
+                    android:id="@+id/tvBookingDate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="match_parent"/>
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_calendar"/>
+                    android:src="@drawable/icn_calendar_deactive"/>
             </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
 
         </LinearLayout>
 

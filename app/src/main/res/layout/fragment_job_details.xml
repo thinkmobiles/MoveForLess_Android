@@ -4,7 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingRight="@dimen/job_content_padding_left_right"
     android:fillViewport="true">
 
     <LinearLayout
@@ -73,9 +72,40 @@
                 <include
                     layout="@layout/job_details_names_marge"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"/>
+                    android:layout_height="wrap_content"/>
+
+                <include
+                    layout="@layout/job_details_confirm_with_client_merge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <include
+                    layout="@layout/job_details_location_merge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <include
+                    layout="@layout/job_details_local_details_merge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:background="@color/blue_light">
+            <TextView
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="25dp"
+                android:background="@color/yellow"
+                android:text="From"
+                android:textSize="25sp"
+                android:textColor="@color/cyan_dark"/>
         </LinearLayout>
     </LinearLayout>
 </com.miami.moveforless.customviews.ParallaxScrollView>

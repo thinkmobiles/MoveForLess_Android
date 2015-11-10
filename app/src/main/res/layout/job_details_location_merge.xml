@@ -17,14 +17,24 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_agent"/>
+                android:src="@drawable/icn_state"/>
 
             <EditText
-                android:id="@+id/etAgentName"
+                android:id="@+id/etFromState"
                 style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:background="@drawable/form_borders"/>
+
+            <EditText
+                android:id="@+id/etFromZipCode"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="3"
                 android:background="@drawable/form_borders"/>
         </LinearLayout>
 
@@ -39,14 +49,24 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_manager"/>
+                android:src="@drawable/icn_wisconsin_map"/>
 
             <EditText
-                android:id="@+id/etManagerName"
+                android:id="@+id/etToState"
                 style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:background="@drawable/form_borders"/>
+
+            <EditText
+                android:id="@+id/etToZipCode"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="3"
                 android:background="@drawable/form_borders"/>
         </LinearLayout>
 
@@ -61,76 +81,10 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_local"/>
+                android:src="@drawable/icn_distance"/>
 
             <EditText
-                android:id="@+id/etEstimatorName"
-                style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/form_borders"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp"
-            android:paddingRight="50dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/icn_driver"/>
-
-            <EditText
-                android:id="@+id/etDriverName"
-                style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/form_borders"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp"
-            android:paddingRight="50dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/icn_car"/>
-
-            <EditText
-                android:id="@+id/etTruckName"
-                style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/form_borders"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp"
-            android:paddingRight="50dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/icn_bag"/>
-
-            <EditText
-                android:id="@+id/etMovers1Name"
+                android:id="@+id/etDistanceTotal"
                 style="@style/JobDetailsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -149,10 +103,10 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_bag"/>
+                android:src="@drawable/icn_purpose"/>
 
             <EditText
-                android:id="@+id/etMovers2Name"
+                android:id="@+id/etDistanceOffice"
                 style="@style/JobDetailsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
