@@ -49,7 +49,8 @@
                 android:layout_marginTop="@dimen/input_container_margin_top"
                 android:layout_marginLeft="@dimen/input_container_paddingLeft_right"
                 android:layout_marginRight="@dimen/input_container_paddingLeft_right"
-                >
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal">
 
                 <com.miami.moveforless.customviews.HelveticaEditText
                     android:id="@+id/etEmail_AL"
@@ -57,7 +58,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:layout_gravity="center_horizontal" />
 
                 <com.miami.moveforless.customviews.HelveticaEditText
                     android:id="@+id/etPassword_AL"
@@ -66,7 +68,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/password_margin_top"
                     android:hint="@string/password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:layout_gravity="center_horizontal" />
 
                 <com.miami.moveforless.customviews.HelveticaButton
                     android:id="@+id/btnLogin_AL"
@@ -75,6 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/login_button_margin_top" />
+
+
             </LinearLayout>
         </LinearLayout>
 

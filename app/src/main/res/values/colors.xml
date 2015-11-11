@@ -13,4 +13,5 @@
 
     <color name="blue_light">#d2eee8</color>
     <color name="blue_ultra_light">#f2faf9</color>
+    <color name="blue_dialog">#e4f7f3</color>
 </resources>

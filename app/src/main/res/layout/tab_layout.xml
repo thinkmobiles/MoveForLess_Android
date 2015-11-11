@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:text="tab"
-        android:textColor="@drawable/tab_layout_title_selector"
+        android:textColor="@color/cyan_light"
         android:textSize="@dimen/job_tab_text_size"
         custom:customFont="medium" />
 
@@ -25,5 +25,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/tab_layout_arrow_selector" />
+        android:background="@drawable/icn_right" />
 </LinearLayout>

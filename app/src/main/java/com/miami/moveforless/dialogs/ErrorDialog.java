@@ -10,35 +10,34 @@ import butterknife.Bind;
 import butterknife.BindString;
 
 /**
- * Created by klim on 29.10.15.
+ * Created by klim on 11.11.15.
  */
-public class InfoDialog extends BaseDialog {
-    @BindString(R.string.close) String strClose;
-
-    @Bind(R.id.tvMessage_DIL)
-    TextView tvTitle;
-    @Bind(R.id.btnNegative_DIL)
+public class ErrorDialog extends BaseDialog {
+    @Bind(R.id.tvMessage_DEL)
+    TextView tvMessage;
+    @Bind(R.id.btnNegative_DEL)
     Button btnClose;
+
+
+    @BindString(R.string.close) String strClose;
 
     private String mMessage = "";
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.dialog_info_layout;
+        return R.layout.dialog_error_layout;
     }
 
     @Override
     protected void setupViews() {
         RxUtils.click(btnClose).subscribe(o -> dismiss());
         btnClose.setText(strClose);
-
         if (!mMessage.isEmpty()) {
-            tvTitle.setText(mMessage);
+            tvMessage.setText(mMessage);
         }
     }
 
-    public void setMessage(String _text) {
-        mMessage = _text;
+    public void setMessage(String _message) {
+        mMessage = _message;
     }
-
 }

@@ -57,7 +57,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected void showInfoDialog(String _message) {
         InfoDialog dialog = new InfoDialog();
-        dialog.setTitle(_message);
+        dialog.setMessage(_message);
         dialog.show(getChildFragmentManager(), "");
     }
 

@@ -50,13 +50,11 @@ public class CustomTabLayout extends TabLayout {
         }
 
         LinearLayout tabStrip = ((LinearLayout)getChildAt(0));
+
+        getTabAt(titles.length-1).getCustomView().findViewById(R.id.ivTitleIcon_TL).setVisibility(GONE);
+
         for(int i = 0; i < tabStrip.getChildCount(); i++) {
-            tabStrip.getChildAt(i).setOnTouchListener(new OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return true;
-                }
-            });
+            tabStrip.getChildAt(i).setOnTouchListener((v, event) -> true);
         }
 
         setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(_viewPager) {
@@ -66,8 +64,10 @@ public class CustomTabLayout extends TabLayout {
                 final View tabView = tab.getCustomView();
                 if (tabView != null) {
                     TextView title = (TextView) tabView.findViewById(R.id.tvTitle_TL);
+                    ImageView icon = (ImageView) tabView.findViewById(R.id.ivTitleIcon_TL);
                     tabView.setBackgroundColor(yellow);
                     title.setTextColor(cyan_800);
+                    icon.setImageResource(R.drawable.icn_right_green);
                     tab.setCustomView(tabView);
                 }
 
@@ -79,8 +79,10 @@ public class CustomTabLayout extends TabLayout {
                 final View tabView = tab.getCustomView();
                 if (tabView != null) {
                     TextView title = (TextView) tabView.findViewById(R.id.tvTitle_TL);
+                    ImageView icon = (ImageView) tabView.findViewById(R.id.ivTitleIcon_TL);
                     tabView.setBackgroundColor(cyan_800);
                     title.setTextColor(cyan_200);
+                    icon.setImageResource(R.drawable.icn_right);
                     tab.setCustomView(tabView);
                 }
             }
@@ -91,9 +93,7 @@ public class CustomTabLayout extends TabLayout {
     private View getTabView(String _title, boolean _isSelected) {
         View tabView = LayoutInflater.from(getContext()).inflate(R.layout.tab_layout, this, false);
         TextView title = (TextView) tabView.findViewById(R.id.tvTitle_TL);
-//        ImageView arrow = (ImageView) tabView.findViewById(R.id.ivTitleIcon_TL);
         title.setText(_title);
-//        arrow.setImageResource(_isSelected? R.drawable.icn_right : R.drawable.icn_right_green);
         tabView.setBackgroundColor(_isSelected? yellow : cyan_800);
         title.setTextColor(_isSelected ? cyan_800: cyan_200);
         return tabView;

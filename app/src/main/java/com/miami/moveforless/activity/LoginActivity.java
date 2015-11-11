@@ -3,9 +3,11 @@ package com.miami.moveforless.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,10 +32,6 @@ public class LoginActivity extends BaseActivity {
     EditText etPassword;
     @Bind(R.id.btnLogin_AL)
     Button btnLogin;
-    @Bind(R.id.root_container_AL)
-    View mRootView;
-    @BindColor(R.color.yellow) int clrYellow;
-    @BindColor(R.color.cyan_dark) int clrCyan;
 
     private Subscription loginSubscription;
 
@@ -63,7 +61,7 @@ public class LoginActivity extends BaseActivity {
         showLoadingDialog(getString(R.string.login));
         if (loginSubscription != null) removeSubscription(loginSubscription);
         loginSubscription = RestClient.getInstance().login(etEmail.getText().toString(), etPassword.getText().toString())
-                        .subscribe(this::onSuccess, this::onError);
+                .subscribe(this::onSuccess, this::onError);
         addSubscription(loginSubscription);
     }
 
@@ -82,11 +80,12 @@ public class LoginActivity extends BaseActivity {
 
     private void onError(Throwable _throwable) {
         hideLoadingDialog();
-
-        Snackbar snackbar = Snackbar.
-                make(mRootView, ErrorParser.parse(_throwable), Snackbar.LENGTH_LONG);
-        TextView textView = (TextView) snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(clrYellow);
-        snackbar.show();
+        showErrorDialog(ErrorParser.parse(_throwable));
+//        Snackbar snackbar = Snackbar.
+//                make(mRootView, ErrorParser.parse(_throwable), Snackbar.LENGTH_LONG);
+//        TextView textView = (TextView) snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
+//        textView.setTextSize(20f);
+//        textView.setTextColor(clrYellow);
+//        snackbar.show();
     }
 }
