@@ -1,5 +1,6 @@
 package com.miami.moveforless.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,15 +9,16 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ExampleAdapter;
 import com.miami.moveforless.adapters.models.ExampleModel;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
-import com.miami.moveforless.fragments.eventbus.BusProvider;
-import com.miami.moveforless.fragments.eventbus.FragmentType;
-import com.miami.moveforless.fragments.eventbus.OpenJobDetailsEvent;
+import com.miami.moveforless.rest.ErrorParser;
+import com.miami.moveforless.rest.RestClient;
+import com.miami.moveforless.rest.response.JobResponse;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -25,6 +27,8 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by SetKrul on 30.10.2015.
@@ -47,7 +51,20 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private List<ExampleModel> mModels;
     private CaldroidFragment dialogCaldroidFragment;
     private Date dateNow;
-    CaldroidListener listener;
+    private CaldroidListener listener;
+    private Subscription jobListSubscription;
+    private CompositeSubscription mSubscriptions = new CompositeSubscription();
+    private ProgressDialog progressDialog;
+    private List<JobResponse> jobResponses;
+
+    protected void addSubscription(Subscription _subscription) {
+        mSubscriptions.add(_subscription);
+    }
+
+    protected void removeSubscription(Subscription _subscription) {
+        mSubscriptions.remove(_subscription);
+    }
+
 
     @Override
     protected int getLayoutResource() {
@@ -58,6 +75,37 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     protected void setupViews() {
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
+        //RxUtils.click(btnLogin, o -> login());
+        getJobList();
+    }
+
+    private void getJobList() {
+        showLoadingDialog(getString(R.string.login));
+        if (jobListSubscription != null) removeSubscription(jobListSubscription);
+        jobListSubscription = RestClient.getInstance().jobList()
+                .subscribe(this::onSuccess, this::onError);
+        addSubscription(jobListSubscription);
+    }
+
+    private void onSuccess(List<JobResponse> _jobResponses) {
+        jobResponses = _jobResponses;
+        hideLoadingDialog();
+    }
+
+    private void onError(Throwable _throwable) {
+        hideLoadingDialog();
+        Toast.makeText(getActivity(), ErrorParser.parse(_throwable), Toast.LENGTH_SHORT).show();
+    }
+
+    protected void showLoadingDialog(String _message) {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(_message);
+        progressDialog.show();
+    }
+
+    protected void hideLoadingDialog() {
+        if (progressDialog != null && progressDialog.isShowing())
+            progressDialog.dismiss();
     }
 
     @Override
@@ -179,7 +227,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                 }
             } else {
                 if (getActivity() instanceof FragmentChanger) {
-                    ((FragmentChanger)getActivity()).switchFragment(JobFragment.newInstance(0), true);
+                    ((FragmentChanger)getActivity()).switchFragment(JobFragment.newInstance(0, jobResponses.get(0)),
+                            true);
                 }
             }
         }));
