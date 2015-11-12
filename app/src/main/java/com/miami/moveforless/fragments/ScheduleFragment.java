@@ -86,8 +86,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private void getJobList() {
         showLoadingDialog(getString(R.string.login));
         if (jobListSubscription != null) removeSubscription(jobListSubscription);
-        jobListSubscription = RestClient.getInstance().jobList()
-                .subscribe(this::onSuccess, this::onError);
+        jobListSubscription = RestClient.getInstance().jobList().subscribe(this::onSuccess, this::onError);
         addSubscription(jobListSubscription);
     }
 
@@ -118,6 +117,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 
     private void onSuccess(List<JobResponse> _jobResponses) {
         jobResponses = _jobResponses;
+        //view and write to bd
         hideLoadingDialog();
     }
 
@@ -133,8 +133,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     }
 
     protected void hideLoadingDialog() {
-        if (progressDialog != null && progressDialog.isShowing())
-            progressDialog.dismiss();
+        if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
     }
 
     @Override
@@ -256,7 +255,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                 }
             } else {
                 if (getActivity() instanceof FragmentChanger) {
-                    ((FragmentChanger)getActivity()).switchFragment(JobFragment.newInstance(0, jobResponses.get(0)),
+                    ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0, jobResponses.get(0)),
                             true);
                 }
             }

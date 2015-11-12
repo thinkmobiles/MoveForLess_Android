@@ -26,4 +26,10 @@ public class Const {
             FEEDBACK,
     };
 
+    final public static String IMAGE_MIME_TYPE_PREFIX = "image";
+    final public static String IMAGE_MIME_TYPE = IMAGE_MIME_TYPE_PREFIX + "/*";
+
+    final public static int REQUEST_PHOTO = 1;
+    final public static int REQUEST_GALLERY_IMAGE = 2;
+
 }
