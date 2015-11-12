@@ -16,15 +16,24 @@ import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ExampleAdapter;
 import com.miami.moveforless.adapters.models.ExampleModel;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
+import com.miami.moveforless.database.table.NumberMen;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.JobResponse;
-import com.miami.moveforless.rest.response.ListMoveSizeResponse;
 import com.miami.moveforless.rest.response.ListNumberMenResponse;
+import com.miami.moveforless.rest.response.NumberMenResponse;
+import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.runtime.DBBatchSaveQueue;
+import com.raizlabs.android.dbflow.runtime.TransactionManager;
+import com.raizlabs.android.dbflow.runtime.transaction.process.ProcessModelInfo;
+import com.raizlabs.android.dbflow.runtime.transaction.process.SaveModelTransaction;
+import com.raizlabs.android.dbflow.sql.SqlUtils;
+import com.raizlabs.android.dbflow.structure.Model;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +89,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         tvEnd.setOnClickListener(this);
         //RxUtils.click(btnLogin, o -> login());
 //        getJobList();
-        getListMoveSize();
+        getListNumberMen();
     }
 
     private void getJobList() {
@@ -90,7 +99,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         addSubscription(jobListSubscription);
     }
 
-    private void getListMoveSize() {
+    private void getListNumberMen() {
         showLoadingDialog(getString(R.string.login));
         if (moveListSubscription != null) removeSubscription(moveListSubscription);
 //        moveListSubscription = RestClient.getInstance().getListMoveSize()
@@ -108,6 +117,17 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private void onSuccesss(ListNumberMenResponse _listNumberMen) {
 //        ListMoveSizeResponse listMoveSizeResponse = _listMoveSizeResponse;
         hideLoadingDialog();
+
+        for (int i = 0; i < _listNumberMen.number_men.size(); i++) {
+            _listNumberMen.number_men.get(i).async().save();
+        }
+
+//        numberMen.save();
+//        SqlUtils.save(numberMen,numberMen.getModelAdapter(), numberMen.getModelAdapter());
+
+//        TransactionManager.getInstance().addTransaction(new SaveModelTransaction
+//                <>(ProcessModelInfo.withModels(numberMen)));
+//        TransactionManager.getInstance().saveOnSaveQueue(numberMen);
     }
 
     private void onErrors(Throwable _throwable) {
@@ -130,6 +150,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(_message);
         progressDialog.show();
+
     }
 
     protected void hideLoadingDialog() {
