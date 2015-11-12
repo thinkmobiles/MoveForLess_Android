@@ -3,7 +3,7 @@
     <!-- NOTE: order is important (the first matching state(s) is what is rendered) -->
     <item
         android:state_pressed="true"
-        android:drawable="@drawable/btn_start_job_selected" />
+        android:drawable="@drawable/btn_yellow_selected" />
     <item
-        android:drawable="@drawable/btn_start_job_active" />
+        android:drawable="@drawable/btn_yellow" />
 </selector>

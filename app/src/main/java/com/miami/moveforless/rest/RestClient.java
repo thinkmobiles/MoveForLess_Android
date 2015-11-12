@@ -9,8 +9,11 @@ import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.request.JobRequest;
 import com.miami.moveforless.rest.request.LoginRequest;
 import com.miami.moveforless.rest.response.JobResponse;
+import com.miami.moveforless.rest.response.ListMoveSizeResponse;
+import com.miami.moveforless.rest.response.ListNumberMenResponse;
 import com.miami.moveforless.rest.response.LoginResponse;
 import com.miami.moveforless.rest.response.LogoutResponse;
+import com.miami.moveforless.rest.response.MoveSizeResponse;
 import com.miami.moveforless.rest.response.RouteInfo;
 import com.miami.moveforless.utils.RouteUtils;
 import com.squareup.okhttp.OkHttpClient;
@@ -96,7 +99,8 @@ public class RestClient {
     public Observable<List<JobResponse>> jobList() {
         final String username = SharedPrefManager.getInstance().retriveUsername();
         final String token = SharedPrefManager.getInstance().retrieveToken();
-        return getInstance().getIMoverApi().jobList(new JobRequest("soslan", "40ac7c2188bbe76267f7f583ba144ec1"))
+        return getInstance().getIMoverApi().jobList(new JobRequest("soslan",
+                "40ac7c2188bbe76267f7f583ba144ec1"))
                 .subscribeOn(Schedulers.io()).retry(2)
                 .timeout(10, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
@@ -121,13 +125,29 @@ public class RestClient {
                     if (routeInfo1 != null) mCacheManager.put(key, routeInfo1.serialize());
                 })
                 .flatMap(routeInfo -> Observable.create(subscriber -> {
-                    if (routeInfo == null)
-                        subscriber.onError(new RouteException());
+                    if (routeInfo == null) subscriber.onError(new RouteException());
                     else {
                         subscriber.onNext(routeInfo);
                     }
                 }));
 
+    }
+
+    public Observable<ListMoveSizeResponse> getListMoveSize() {
+        return getInstance().getIMoverApi().moveSizeList("26", "1988", "soslan",
+                "40ac7c2188bbe76267f7f583ba144ec1")
+                .subscribeOn(Schedulers.io())
+                .retry(2)
+                .timeout(10, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<ListNumberMenResponse> getListNumberMen() {
+        return getInstance().getIMoverApi().numberMenList("2069", "soslan", "40ac7c2188bbe76267f7f583ba144ec1")
+                .subscribeOn(Schedulers.io())
+                .retry(2)
+                .timeout(10, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
 }

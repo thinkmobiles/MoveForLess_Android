@@ -19,6 +19,8 @@ import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.JobResponse;
+import com.miami.moveforless.rest.response.ListMoveSizeResponse;
+import com.miami.moveforless.rest.response.ListNumberMenResponse;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -53,6 +55,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private Date dateNow;
     private CaldroidListener listener;
     private Subscription jobListSubscription;
+    private Subscription moveListSubscription;
     private CompositeSubscription mSubscriptions = new CompositeSubscription();
     private ProgressDialog progressDialog;
     private List<JobResponse> jobResponses;
@@ -76,7 +79,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
         //RxUtils.click(btnLogin, o -> login());
-        getJobList();
+//        getJobList();
+        getListMoveSize();
     }
 
     private void getJobList() {
@@ -85,6 +89,31 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         jobListSubscription = RestClient.getInstance().jobList()
                 .subscribe(this::onSuccess, this::onError);
         addSubscription(jobListSubscription);
+    }
+
+    private void getListMoveSize() {
+        showLoadingDialog(getString(R.string.login));
+        if (moveListSubscription != null) removeSubscription(moveListSubscription);
+//        moveListSubscription = RestClient.getInstance().getListMoveSize()
+//                .subscribe(this::onSuccesss, this::onErrors);
+        moveListSubscription = RestClient.getInstance().getListNumberMen()
+                .subscribe(this::onSuccesss, this::onErrors);
+        addSubscription(moveListSubscription);
+    }
+
+//    private void onSuccesss(ListMoveSizeResponse _listMoveSizeResponse) {
+//        ListMoveSizeResponse listMoveSizeResponse = _listMoveSizeResponse;
+//        hideLoadingDialog();
+//    }
+
+    private void onSuccesss(ListNumberMenResponse _listNumberMen) {
+//        ListMoveSizeResponse listMoveSizeResponse = _listMoveSizeResponse;
+        hideLoadingDialog();
+    }
+
+    private void onErrors(Throwable _throwable) {
+        hideLoadingDialog();
+        Toast.makeText(getActivity(), ErrorParser.parse(_throwable), Toast.LENGTH_LONG).show();
     }
 
     private void onSuccess(List<JobResponse> _jobResponses) {
