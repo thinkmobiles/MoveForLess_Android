@@ -21,7 +21,6 @@ public class App extends Application {
         mContext = getApplicationContext();
         TypefaceManager.init(this);
         SharedPrefManager.getInstance();
-
     }
 
     @Override

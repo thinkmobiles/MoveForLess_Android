@@ -13,10 +13,10 @@ import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.FragmentType;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.globalconstants.Const;
+import com.miami.moveforless.rest.response.JobResponse;
 import com.squareup.otto.Subscribe;
 
 import butterknife.Bind;
-import butterknife.BindColor;
 import butterknife.BindString;
 
 /**
@@ -28,16 +28,24 @@ public class JobFragment extends BaseFragment {
     CustomTabLayout mTabLayout;
     @Bind(R.id.viewPager_FJ)
     ViewPager mViewPager;
+    JobResponse mJobResponse;
 
-    private int selectedTab = 5;
+    private int selectedTab = 0;
     private JobPageAdapter mAdapter;
 
-    public static Fragment newInstance(int _id) {
+    public static Fragment newInstance(int _id, JobResponse _jobResponse) {
         Bundle bundle = new Bundle();
+        bundle.putParcelable("key", _jobResponse);
         bundle.putInt(Const.JOB_ID_KEY, _id);
         JobFragment fragment = new JobFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mJobResponse = getArguments().getParcelable("key");
     }
 
     @Override

@@ -1,12 +1,14 @@
 package com.miami.moveforless.rest;
 
+import com.miami.moveforless.rest.request.JobRequest;
 import com.miami.moveforless.rest.request.LoginRequest;
+import com.miami.moveforless.rest.response.JobResponse;
 import com.miami.moveforless.rest.response.LoginResponse;
 import com.miami.moveforless.rest.response.LogoutResponse;
 
+import java.util.List;
+
 import retrofit.http.Body;
-import retrofit.http.Field;
-import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -18,8 +20,11 @@ import rx.Observable;
 public interface IMoverApi {
 
     @POST("/user/login")
-    Observable<LoginResponse> login(@Body LoginRequest loginRequest);
+    Observable<LoginResponse> login(@Body LoginRequest _loginRequest);
 
     @GET("/user/logout")
     Observable<LogoutResponse> logout(@Query("key") String _key, @Query("token") String _token);
+
+    @POST("/job/list")
+    Observable<List<JobResponse>> jobList(@Body JobRequest _jobRequest);
 }

@@ -1,17 +1,21 @@
 package com.miami.moveforless.rest;
 
 import com.miami.moveforless.App;
-import com.miami.moveforless.R;
 import com.miami.moveforless.Exceptions.RouteException;
+import com.miami.moveforless.R;
 import com.miami.moveforless.globalconstants.RestConst;
 import com.miami.moveforless.managers.CacheManager;
 import com.miami.moveforless.managers.SharedPrefManager;
+import com.miami.moveforless.rest.request.JobRequest;
 import com.miami.moveforless.rest.request.LoginRequest;
+import com.miami.moveforless.rest.response.JobResponse;
+import com.miami.moveforless.rest.response.LoginResponse;
 import com.miami.moveforless.rest.response.LogoutResponse;
 import com.miami.moveforless.rest.response.RouteInfo;
 import com.miami.moveforless.utils.RouteUtils;
 import com.squareup.okhttp.OkHttpClient;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
@@ -76,7 +80,7 @@ public class RestClient {
                 .retry(2)
                 .timeout(30, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(loginResponse -> loginResponse.getToken());
+                .map(LoginResponse::getToken);
     }
 
     public Observable<LogoutResponse> logout() {
@@ -89,13 +93,22 @@ public class RestClient {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<List<JobResponse>> jobList() {
+        final String username = SharedPrefManager.getInstance().retriveUsername();
+        final String token = SharedPrefManager.getInstance().retrieveToken();
+        return getInstance().getIMoverApi().jobList(new JobRequest("soslan", "40ac7c2188bbe76267f7f583ba144ec1"))
+                .subscribeOn(Schedulers.io()).retry(2)
+                .timeout(10, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<RouteInfo> getRoute(String _startLocation, String _endLocation) {
         final long key = _startLocation.concat(_endLocation).hashCode();
         try {
             RouteInfo cachedResponse = RouteInfo.deserialize(mCacheManager.get(key));
             if (cachedResponse != null)
                 return Observable.just(cachedResponse);
-        } catch (NullPointerException _e) {
+        } catch (NullPointerException ignored) {
 
         }
         return getInstance().getRouteApi().getRoute(_startLocation, _endLocation, "imperial", "driving", API_KEY)
@@ -103,7 +116,7 @@ public class RestClient {
                 .retry(2)
                 .timeout(20, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(routeResponse -> RouteUtils.parseRouteResponse(routeResponse))
+                .map(RouteUtils::parseRouteResponse)
                 .doOnNext(routeInfo1 -> {
                     if (routeInfo1 != null) mCacheManager.put(key, routeInfo1.serialize());
                 })
