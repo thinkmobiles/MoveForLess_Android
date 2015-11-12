@@ -5,21 +5,15 @@ import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.location.Location;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
-import com.miami.moveforless.R;
 import com.miami.moveforless.dialogs.ConfirmDialog;
 import com.miami.moveforless.dialogs.ErrorDialog;
-import com.miami.moveforless.dialogs.InfoDialog;
-import com.miami.moveforless.managers.IntentManager;
 
 
 public class PlayServices implements

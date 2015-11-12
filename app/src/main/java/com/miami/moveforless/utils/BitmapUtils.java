@@ -1,5 +1,7 @@
 package com.miami.moveforless.utils;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,8 +9,17 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Build;
 
 import com.miami.moveforless.App;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by klim on 06.11.15.
@@ -87,6 +98,86 @@ public class BitmapUtils {
             }
         }
         return inSampleSize;
+    }
+
+    /**
+     * Method for return file path of Gallery image
+     *
+     * @param _context context
+     * @param _uri     file uri
+     * @return path of the selected image file from gallery
+     */
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public static String getPath(final Context _context, final Uri _uri) {
+        return new FilePath().getPath(_context, _uri);
+    }
+
+    /**
+     * Method for return compress image to set size
+     *
+     * @param _file         image file
+     * @param _requiredSize out file size in kb
+     * @return bitmap with resize image
+     */
+    public static Bitmap compressImage(File _file, int _requiredSize) {
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(new FileInputStream(_file), null, options);
+
+            int scale = 1;
+            while (options.outWidth / scale / 2 >= _requiredSize && options.outHeight / scale / 2 >= _requiredSize)
+                scale *= 2;
+
+            BitmapFactory.Options optionsResize = new BitmapFactory.Options();
+            optionsResize.inSampleSize = scale;
+            return BitmapFactory.decodeStream(new FileInputStream(_file), null, optionsResize);
+        } catch (FileNotFoundException e) {
+            return null;
+        }
+    }
+
+    public static Bitmap handleSamplingAndRotationBitmap(Context context, Uri selectedImage, int width, int height)
+            throws IOException {
+//        int MAX_HEIGHT = 1024;
+//        int MAX_WIDTH = 1024;
+// First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        InputStream imageStream = context.getContentResolver().openInputStream(selectedImage);
+        BitmapFactory.decodeStream(imageStream, null, options);
+        imageStream.close();
+// Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, width, height);
+// Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        imageStream = context.getContentResolver().openInputStream(selectedImage);
+        Bitmap img = BitmapFactory.decodeStream(imageStream, null, options);
+        img = rotateImageIfRequired(img, selectedImage);
+        return img;
+    }
+
+    private static Bitmap rotateImageIfRequired(Bitmap img, Uri selectedImage) throws IOException {
+        ExifInterface ei = new ExifInterface(selectedImage.getPath());
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                return rotateImage(img, 90);
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                return rotateImage(img, 180);
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                return rotateImage(img, 270);
+            default:
+                return img;
+        }
+    }
+
+    public static Bitmap rotateImage(Bitmap img, int degree) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        Bitmap rotatedImg = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+        img.recycle();
+        return rotatedImg;
     }
 
 }

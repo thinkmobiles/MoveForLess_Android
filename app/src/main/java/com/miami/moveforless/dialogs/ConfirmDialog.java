@@ -14,8 +14,10 @@ import butterknife.BindString;
  * Created by klim on 04.11.15.
  */
 public class ConfirmDialog extends BaseDialog {
-    @BindString(R.string.cancel) String strCancel;
-    @BindString(R.string.ok) String strOk;
+    @BindString(R.string.cancel)
+    String strCancel;
+    @BindString(R.string.ok)
+    String strOk;
 
     @Bind(R.id.tvMessage_DCL)
     TextView tvMessage;
@@ -41,12 +43,11 @@ public class ConfirmDialog extends BaseDialog {
 
         RxUtils.click(btnNegative).subscribe(o -> dismiss());
         RxUtils.click(btnPositive).subscribe(o -> {
-           if (mListener != null) mListener.onClick(null);
+            if (mListener != null) mListener.onClick(null);
             dismiss();
         });
 
-        if (!mMessage.isEmpty())
-        tvMessage.setText(mMessage);
+        if (!mMessage.isEmpty()) tvMessage.setText(mMessage);
 
     }
 
