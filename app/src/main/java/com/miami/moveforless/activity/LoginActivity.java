@@ -2,8 +2,13 @@ package com.miami.moveforless.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
@@ -13,6 +18,7 @@ import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.utils.RxUtils;
 
 import butterknife.Bind;
+import butterknife.BindColor;
 import rx.Subscription;
 
 /**
@@ -55,7 +61,7 @@ public class LoginActivity extends BaseActivity {
         showLoadingDialog(getString(R.string.login));
         if (loginSubscription != null) removeSubscription(loginSubscription);
         loginSubscription = RestClient.getInstance().login(etEmail.getText().toString(), etPassword.getText().toString())
-                        .subscribe(this::onSuccess, this::onError);
+                .subscribe(this::onSuccess, this::onError);
         addSubscription(loginSubscription);
     }
 
@@ -74,7 +80,12 @@ public class LoginActivity extends BaseActivity {
 
     private void onError(Throwable _throwable) {
         hideLoadingDialog();
-        Toast.makeText(LoginActivity.this, ErrorParser.parse(_throwable), Toast.LENGTH_SHORT).show();
-
+        showErrorDialog(ErrorParser.parse(_throwable));
+//        Snackbar snackbar = Snackbar.
+//                make(mRootView, ErrorParser.parse(_throwable), Snackbar.LENGTH_LONG);
+//        TextView textView = (TextView) snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
+//        textView.setTextSize(20f);
+//        textView.setTextColor(clrYellow);
+//        snackbar.show();
     }
 }

@@ -88,8 +88,8 @@ public class JobFragment extends BaseFragment {
                 getActivity().getSupportFragmentManager().popBackStack();
             } else {
                 ConfirmDialog dialog = new ConfirmDialog();
-                dialog.setDescription(strBackPressed);
-                dialog.setPositiveClickListener(() -> getActivity().getSupportFragmentManager().popBackStack());
+                dialog.setMesssage(strBackPressed);
+                dialog.setOnPositiveListener(view -> getActivity().getSupportFragmentManager().popBackStack());
                 dialog.show(getActivity().getSupportFragmentManager(), "");
             }
         }

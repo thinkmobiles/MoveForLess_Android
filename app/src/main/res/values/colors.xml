@@ -7,10 +7,11 @@
     <color name="grey_light">#E0E0E0</color>
     <color name="yellow">#FFB800</color>
 
-    <color name="cyan_dark">#005E46</color>
+    <color name="cyan_dark">#007051</color>
     <color name="cyan_ultra_dark">#005A3F</color>
     <color name="cyan_light">#80CBC4</color>
 
-    <color name="blue_light">#EFFAF9</color>
-
+    <color name="blue_light">#d2eee8</color>
+    <color name="blue_ultra_light">#f2faf9</color>
+    <color name="blue_dialog">#e4f7f3</color>
 </resources>

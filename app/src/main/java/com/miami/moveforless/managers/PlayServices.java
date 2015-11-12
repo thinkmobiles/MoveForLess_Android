@@ -17,6 +17,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.miami.moveforless.R;
 import com.miami.moveforless.dialogs.ConfirmDialog;
+import com.miami.moveforless.dialogs.ErrorDialog;
 import com.miami.moveforless.dialogs.InfoDialog;
 import com.miami.moveforless.managers.IntentManager;
 
@@ -173,18 +174,16 @@ public class PlayServices implements
     }
 
     private void showGoogleMapsErrorDialog() {
-        InfoDialog dialog = new InfoDialog();
-        dialog.setTitle("Error");
-        dialog.setDescription("Google maps is not installed, please install it");
+        ErrorDialog dialog = new ErrorDialog();
+        dialog.setMessage("Google maps is not installed, please install it");
         dialog.show(mActivity.getSupportFragmentManager(), "");
     }
 
 
     private void showGpsOffDialog() {
         ConfirmDialog dialog = new ConfirmDialog();
-        dialog.setTitle("Error");
-        dialog.setDescription("Gps is not enabled. Do you want to change settings?");
-        dialog.setPositiveClickListener(() -> mActivity.startActivity(IntentManager.getGpsSettingsIntent()));
+        dialog.setMesssage("Gps is not enabled. Do you want to change settings?");
+        dialog.setOnPositiveListener(view -> mActivity.startActivity(IntentManager.getGpsSettingsIntent()));
         dialog.show(mActivity.getSupportFragmentManager(), "");
     }
 

@@ -1,7 +1,12 @@
 package com.miami.moveforless.dialogs;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,6 +21,7 @@ import com.miami.moveforless.managers.MapManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.RouteInfo;
+import com.miami.moveforless.utils.RxUtils;
 import com.miami.moveforless.utils.ScreenUtils;
 
 import java.util.List;
@@ -36,12 +42,14 @@ public class RouteDialog extends BaseDialog {
     int loadingColor;
     @Bind(R.id.pbLoading_DR)
     ProgressBar pbLoading;
-    @Bind(R.id.tvDuration_DR)
+    @Bind(R.id.tvEndAddress_DR)
     TextView tvDuration;
-    @Bind(R.id.tvDistance_DR)
+    @Bind(R.id.tvStartAddress_DR)
     TextView tvDistance;
     @Bind(R.id.map_container_DR)
     FrameLayout mMapContainer;
+    @Bind(R.id.btnNegative_DR)
+    Button btnClose;
 
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
@@ -51,14 +59,23 @@ public class RouteDialog extends BaseDialog {
         return R.layout.dialog_route;
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
+        View view = super.onCreateView(_inflater, _container, _savedInstanceState);
+        final int height = ScreenUtils.getScreenHeight(App.getAppContext());
+        mMapContainer.getLayoutParams().height = (int) (height * 0.6);
+        mMapContainer.getLayoutParams().width = (int) (height *0.8);
+
+        return view;
+    }
+
     @Override
     protected void setupViews() {
-        setNegativeTitle(strBtnNegativeTitle);
+        btnClose.setText(strBtnNegativeTitle);
+        RxUtils.click(btnClose).subscribe(o -> dismiss());
+
         setCancelable(true);
-        final int width = ScreenUtils.getScreenWidth(App.getAppContext());
-        final int height = ScreenUtils.getScreenHeight(App.getAppContext());
-        mMapContainer.getLayoutParams().width = width / 2;
-        mMapContainer.getLayoutParams().height = (int) (height * 0.75);
 
         pbLoading.getIndeterminateDrawable().setColorFilter(loadingColor,
                 android.graphics.PorterDuff.Mode.MULTIPLY);

@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -49,13 +50,11 @@ public class CustomTabLayout extends TabLayout {
         }
 
         LinearLayout tabStrip = ((LinearLayout)getChildAt(0));
+
+        getTabAt(titles.length-1).getCustomView().findViewById(R.id.ivTitleIcon_TL).setVisibility(GONE);
+
         for(int i = 0; i < tabStrip.getChildCount(); i++) {
-            tabStrip.getChildAt(i).setOnTouchListener(new OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return true;
-                }
-            });
+            tabStrip.getChildAt(i).setOnTouchListener((v, event) -> true);
         }
 
         setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(_viewPager) {
@@ -65,8 +64,10 @@ public class CustomTabLayout extends TabLayout {
                 final View tabView = tab.getCustomView();
                 if (tabView != null) {
                     TextView title = (TextView) tabView.findViewById(R.id.tvTitle_TL);
+                    ImageView icon = (ImageView) tabView.findViewById(R.id.ivTitleIcon_TL);
                     tabView.setBackgroundColor(yellow);
                     title.setTextColor(cyan_800);
+                    icon.setImageResource(R.drawable.icn_right_green);
                     tab.setCustomView(tabView);
                 }
 
@@ -78,8 +79,10 @@ public class CustomTabLayout extends TabLayout {
                 final View tabView = tab.getCustomView();
                 if (tabView != null) {
                     TextView title = (TextView) tabView.findViewById(R.id.tvTitle_TL);
+                    ImageView icon = (ImageView) tabView.findViewById(R.id.ivTitleIcon_TL);
                     tabView.setBackgroundColor(cyan_800);
                     title.setTextColor(cyan_200);
+                    icon.setImageResource(R.drawable.icn_right);
                     tab.setCustomView(tabView);
                 }
             }

@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
-    <FrameLayout
-        android:id="@+id/map_container_DR"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <fragment
-            android:id="@+id/map_DR"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -29,18 +17,24 @@
             android:layout_margin="10dp"
             android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icn_location_a" />
+
             <com.miami.moveforless.customviews.HelveticaTextView
-                android:id="@+id/tvDistanceLabel_DR"
+                android:id="@+id/tvStartAddress_DR"
                 style="@style/BaseTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/distance" />
-
-            <com.miami.moveforless.customviews.HelveticaTextView
-                android:id="@+id/tvDistance_DR"
-                style="@style/BaseTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="asdfasdf"
+                android:textColor="#829d9a"
+                custom:customFont="medium"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -50,28 +44,62 @@
             android:layout_margin="10dp"
             android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icn_location_b" />
+
             <com.miami.moveforless.customviews.HelveticaTextView
-                android:id="@+id/tvDurationLabel_DR"
+                android:id="@+id/tvEndAddress_DR"
                 style="@style/BaseTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/duration" />
-
-            <com.miami.moveforless.customviews.HelveticaTextView
-                android:id="@+id/tvDuration_DR"
-                style="@style/BaseTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="asdfasdf"
+                android:textColor="@color/yellow"
+                custom:customFont="medium"
+                />
         </LinearLayout>
 
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/pbLoading_DR"
-        style="?android:attr/progressBarStyleLarge"
+
+    <FrameLayout
         android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/form_borders"
+        android:padding="1dp">
+
+        <FrameLayout
+            android:id="@+id/map_container_DR"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/map_DR"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ProgressBar
+                android:id="@+id/pbLoading_DR"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnNegative_DR"
+        style="@style/DialogButtonStyle"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_marginBottom="20dp" />
 
-
-</FrameLayout>
+</LinearLayout>

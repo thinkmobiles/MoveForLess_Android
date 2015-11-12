@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -52,9 +53,18 @@ public class QuestionnaireFragment extends BaseJobDetailFragment {
         List<Integer> checkList = new ArrayList<>();
         for (int i = 0; i < mQuestionsContainer.getChildCount(); i++) {
             final View vContainer = mQuestionsContainer.getChildAt(i);
-            vContainer.setBackgroundColor(Color.TRANSPARENT);
             final RadioButton yes = (RadioButton) vContainer.findViewById(R.id.cbYes);
             final RadioButton no = (RadioButton) vContainer.findViewById(R.id.cbNo);
+            yes.setOnCheckedChangeListener((compoundButton, b) -> {
+                yes.setButtonDrawable(R.drawable.radiobutton_button);
+                no.setButtonDrawable(R.drawable.radiobutton_button);
+
+
+            });
+            no.setOnCheckedChangeListener((compoundButton, b) -> {
+                yes.setButtonDrawable(R.drawable.radiobutton_button);
+                no.setButtonDrawable(R.drawable.radiobutton_button);
+            });
             if (!yes.isChecked() && !no.isChecked()) {
                 checkList.add(i);
             }
@@ -68,7 +78,11 @@ public class QuestionnaireFragment extends BaseJobDetailFragment {
         if (uncheckedAnswer.size() > 0) {
             Toast.makeText(getActivity(), "Check answer", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < uncheckedAnswer.size(); i++) {
-                mQuestionsContainer.getChildAt(uncheckedAnswer.get(i)).setBackgroundResource(R.drawable.unchecked_question_background);
+                final View vContainer = mQuestionsContainer.getChildAt(uncheckedAnswer.get(i));
+                RadioButton yes = (RadioButton) vContainer.findViewById(R.id.cbYes);
+                RadioButton no = (RadioButton) vContainer.findViewById(R.id.cbNo);
+                yes.setButtonDrawable(R.drawable.icn_checkbox_error);
+                no.setButtonDrawable(R.drawable.icn_checkbox_error);
             }
         } else {
             BusProvider.getInstance().post(new SwitchJobDetailsEvent(FragmentType.SIGN_CONTRACT));

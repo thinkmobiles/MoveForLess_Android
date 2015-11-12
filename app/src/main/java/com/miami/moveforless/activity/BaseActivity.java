@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.miami.moveforless.R;
+import com.miami.moveforless.dialogs.ErrorDialog;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.utils.RxUtils;
 
@@ -75,5 +76,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void hideLoadingDialog() {
         if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
+    }
+
+    protected void showErrorDialog(String _message) {
+        ErrorDialog dialog = new ErrorDialog();
+        dialog.setMessage(_message);
+        dialog.show(getSupportFragmentManager(), "");
     }
 }
