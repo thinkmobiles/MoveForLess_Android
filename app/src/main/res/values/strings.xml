@@ -81,6 +81,8 @@
     <string name="title_activity_google_play_services">GooglePlayServicesActivity</string>
     <string name="cant_create_photo">Can not  create photo</string>
     <string name="not_found_camera">Do not found camera</string>
+    <string name="file_is_not_found">File not found</string>
+    <string name="uncompilable_type">Uncompatible type</string>
 
 
 </resources>
