@@ -32,6 +32,12 @@ public class App extends Application {
 //        MultiDex.install(this);
     }
 
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        FlowManager.destroy();
+    }
+
     public static Context getAppContext() {
         return mContext;
     }

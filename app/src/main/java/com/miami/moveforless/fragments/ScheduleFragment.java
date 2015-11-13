@@ -62,6 +62,9 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private CompositeSubscription mSubscriptions = new CompositeSubscription();
     private ProgressDialog progressDialog;
     private List<JobResponse> jobResponses;
+    private boolean first = false;
+    private boolean second = false;
+    private boolean third = false;
 
     protected void addSubscription(Subscription _subscription) {
         mSubscriptions.add(_subscription);
@@ -82,68 +85,63 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
         //RxUtils.click(btnLogin, o -> login());
-        getJobList();
-        getListNumberMen();
-        getListMoveSize();
+        DatabaseController.getInstance().dropDataBase(getActivity());
+        getData();
     }
 
-    private void getJobList() {
+    private void getData(){
         showLoadingDialog(getString(R.string.login));
         if (jobListSubscription != null) removeSubscription(jobListSubscription);
         jobListSubscription = RestClient.getInstance().jobList().subscribe(this::onSuccess,
                 this::onError);
         addSubscription(jobListSubscription);
-    }
 
-    private void getListNumberMen() {
-        showLoadingDialog(getString(R.string.login));
-        if (numberListSubscription != null) removeSubscription(numberListSubscription);
-        numberListSubscription = RestClient.getInstance().getListNumberMen().subscribe
-                (this::onSuccesss, this::onErrors);
-        addSubscription(numberListSubscription);
-    }
+//        if (numberListSubscription != null) removeSubscription(numberListSubscription);
+//        numberListSubscription = RestClient.getInstance().getListNumberMen().subscribe
+//                (this::onSuccesss, this::onError);
+//        addSubscription(numberListSubscription);
+//
+//        if (moveListSubscription != null) removeSubscription(moveListSubscription);
+//
+//        moveListSubscription = RestClient.getInstance().getListMoveSize().subscribe
+//                (this::onListMoveSuccess, this::onError);
+//        addSubscription(moveListSubscription);
 
-    private void getListMoveSize() {
-        showLoadingDialog(getString(R.string.login));
-        if (moveListSubscription != null) removeSubscription(moveListSubscription);
-
-        moveListSubscription = RestClient.getInstance().getListMoveSize().subscribe
-                (this::onListMoveSuccess, this::onErrors);
-        addSubscription(moveListSubscription);
     }
 
 
     private void onListMoveSuccess(ListMoveSizeResponse _listMoveSizeResponse){
-        hideLoadingDialog();
+        first = true;
+        if (first && second && third)
+            hideLoadingDialog();
 
         for (int i = 0; i < _listMoveSizeResponse.move_sizes.size(); i++) {
-            _listMoveSizeResponse.move_sizes.get(i).async().save();
+            _listMoveSizeResponse.move_sizes.get(i).save();
         }
     }
 
     private void onSuccesss(ListNumberMenResponse _listNumberMen) {
-        hideLoadingDialog();
+        second = true;
+        if (first && second && third)
+            hideLoadingDialog();
 
         for (int i = 0; i < _listNumberMen.number_men.size(); i++) {
-            _listNumberMen.number_men.get(i).async().save();
+            _listNumberMen.number_men.get(i).save();
         }
-    }
-
-    private void onErrors(Throwable _throwable) {
-        hideLoadingDialog();
-        Toast.makeText(getActivity(), ErrorParser.parse(_throwable), Toast.LENGTH_LONG).show();
     }
 
     private void onSuccess(List<JobResponse> _jobResponses) {
         jobResponses = _jobResponses;
         //view and write to bd
-        hideLoadingDialog();
+        third = true;
+        if (first && second && third)
+            hideLoadingDialog();
 
         for (int i = 0; i < _jobResponses.size(); i++) {
-            _jobResponses.get(i).async().save();
+            _jobResponses.get(i).save();
         }
 
-        DatabaseController.getInstance().dropDataBase(getActivity());
+//        DatabaseController.getInstance().dropDataBase(getActivity());
     }
 
     private void onError(Throwable _throwable) {
@@ -244,9 +242,11 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         super.onViewCreated(view, savedInstanceState);
 //        setHasOptionsMenu(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        List<JobModel> jobModels = DatabaseController.getInstance().getListJob();
         mModels = new ArrayList<>();
 
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 5; i++) {
             List<ExampleModel> child = new ArrayList<>();
             List<ExampleModel> child2 = new ArrayList<>();
             child2.add(new ExampleModel("Text child2 " + i, false, null));

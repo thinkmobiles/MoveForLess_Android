@@ -9,6 +9,7 @@ public class ExampleModel  {
 
     public final String mText;
     public Boolean mExpand;
+    public Boolean mSub;
     public final List<ExampleModel> child;
 
     public ExampleModel(String _text, Boolean _expand, List<ExampleModel> _child) {
