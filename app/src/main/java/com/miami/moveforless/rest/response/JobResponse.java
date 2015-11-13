@@ -3,263 +3,405 @@ package com.miami.moveforless.rest.response;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.miami.moveforless.database.MoveForLessDatabase;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by SetKrul on 30.10.2015.
  */
-public class JobResponse implements Parcelable {
 
+@Table(databaseName = MoveForLessDatabase.NAME)
+public class JobResponse extends BaseModel implements Parcelable {
+
+
+
+    @Column
+    @PrimaryKey(autoincrement = true)
+    public long _id;
+
+    @Column
     @SerializedName("ID")
     public Integer id;
+    @Column
     @SerializedName("post_author")
     public String post_author;
+    @Column
     @SerializedName("post_date")
     public String post_date;
+    @Column
     @SerializedName("post_date_gmt")
     public String post_date_gmt;
+    @Column
     @SerializedName("post_content")
     public String post_content;
+    @Column
     @SerializedName("post_title")
     public String post_title;
+    @Column
     @SerializedName("post_excerpt")
     public String post_excerpt;
+    @Column
     @SerializedName("post_status")
     public String post_status;
+    @Column
     @SerializedName("comment_status")
     public String comment_status;
     //@SerializedName("ping_status");
     //public String ping_status;
+    @Column
     @SerializedName("post_password")
     public String post_password;
+    @Column
     @SerializedName("post_name")
     public String post_name;
+    @Column
     @SerializedName("to_ping")
     public String to_ping;
+    @Column
     @SerializedName("pinged")
     public String pinged;
+    @Column
     @SerializedName("post_modified")
     public String post_modified;
+    @Column
     @SerializedName("post_modified_gmt")
     public String post_modified_gmt;
+    @Column
     @SerializedName("post_content_filtered")
     public String post_content_filtered;
+    @Column
     @SerializedName("post_parent")
     public Integer post_parent;
+    @Column
     @SerializedName("guid")
     public String guid;
+    @Column
     @SerializedName("menu_order")
     public Integer menu_order;
+    @Column
     @SerializedName("post_type")
     public String post_type;
+    @Column
     @SerializedName("post_mime_type")
     public String post_mime_type;
+    @Column
     @SerializedName("comment_count")
     public String comment_count;
+    @Column
     @SerializedName("filter")
     public String filter;
+    @Column
     @SerializedName("views")
     public String views;
+    @Column
     @SerializedName("manager")
     public String manager;
+    @Column
     @SerializedName("partner")
     public String partner;
+    @Column
     @SerializedName("commission_partner")
     public String commission_partner;
+    @Column
     @SerializedName("hear_about_us")
     public String hear_about_us;
+    @Column
     @SerializedName("LocalLabor")
     public String LocalLabor;
+    @Column
     @SerializedName("CreatedDate")
     public Integer CreatedDate;
+    @Column
     @SerializedName("ReceivedDate")
     public Integer ReceivedDate;
+    @Column
     @SerializedName("RCVD")
     public String RCVD;
+    @Column
     @SerializedName("EstimatedDate")
     public Integer EstimatedDate;
+    @Column
     @SerializedName("BookingDate")
     public Integer BookingDate;
+    @Column
     @SerializedName("RequiredPickupDate")
     public Integer RequiredPickupDate;
+    @Column
     @SerializedName("FollowUpDate")
     public Integer FollowUpDate;
+    @Column
     @SerializedName("StartTime")
     public String StartTime;
+    @Column
     @SerializedName("StopTime")
     public String StopTime;
+    @Column
     @SerializedName("pickup_date")
     public Integer pickup_date;
+    @Column
     @SerializedName("from_fullname")
     public String from_fullname;
+    @Column
     @SerializedName("from_email")
     public String from_email;
+    @Column
     @SerializedName("from_phone")
     public String from_phone;
+    @Column
     @SerializedName("from_cellphone")
     public String from_cellphone;
+    @Column
     @SerializedName("from_fax")
     public String from_fax;
+    @Column
     @SerializedName("from_address")
     public String from_address;
+    @Column
     @SerializedName("from_apt")
     public String from_apt;
+    @Column
     @SerializedName("from_zipcode")
     public String from_zipcode;
+    @Column
     @SerializedName("from_city")
     public String from_city;
+    @Column
     @SerializedName("from_state")
     public String from_state;
+    @Column
     @SerializedName("to_fullname")
     public String to_fullname;
+    @Column
     @SerializedName("to_email")
     public String to_email;
+    @Column
     @SerializedName("to_phone")
     public String to_phone;
+    @Column
     @SerializedName("to_cellphone")
     public String to_cellphone;
+    @Column
     @SerializedName("to_fax")
     public String to_fax;
+    @Column
     @SerializedName("to_address")
     public String to_address;
+    @Column
     @SerializedName("to_apt")
     public String to_apt;
+    @Column
     @SerializedName("to_zipcode")
     public String to_zipcode;
+    @Column
     @SerializedName("to_city")
     public String to_city;
+    @Column
     @SerializedName("to_state")
     public String to_state;
+    @Column
     @SerializedName("DistanceTotal")
     public String DistanceTotal;
+    @Column
     @SerializedName("DistanceOffice")
     public String DistanceOffice;
+    @Column
     @SerializedName("from_elevator_start")
     public String from_elevator_start;
+    @Column
     @SerializedName("from_elevator_end")
     public String from_elevator_end;
+    @Column
     @SerializedName("to_elevator_start")
     public String to_elevator_start;
+    @Column
     @SerializedName("to_elevator_end")
     public String to_elevator_end;
+    @Column
     @SerializedName("there_any_stairs")
     public String there_any_stairs;
+    @Column
     @SerializedName("from_trailer_access")
     public String from_trailer_access;
+    @Column
     @SerializedName("is_from_insurance")
     public String is_from_insurance;
+    @Column
     @SerializedName("is_to_insurance")
     public String is_to_insurance;
+    @Column
     @SerializedName("NumberMen")
     public String NumberMen;
+    @Column
     @SerializedName("number_truck")
     public String number_truck;
+    @Column
     @SerializedName("additional_inf_bedrooms")
     public String additional_inf_bedrooms;
+    @Column
     @SerializedName("LocalRateType")
     public String LocalRateType;
+    @Column
     @SerializedName("LocalNumberEstimate")
     public String LocalNumberEstimate;
+    @Column
     @SerializedName("LocalTravel")
     public String LocalTravel;
+    @Column
     @SerializedName("LocalRate")
     public String LocalRate;
+    @Column
     @SerializedName("EstimatedTotal")
     public String EstimatedTotal;
+    @Column
     @SerializedName("additional_inf_bedrooms_sets")
     public String additional_inf_bedrooms_sets;
+    @Column
     @SerializedName("kind_of_building")
     public String kind_of_building;
+    @Column
     @SerializedName("apartment_fully_furnished")
     public String apartment_fully_furnished;
+    @Column
     @SerializedName("any_time_restrictions")
     public String any_time_restrictions;
+    @Column
     @SerializedName("packing_miscellaneous_items")
     public String packing_miscellaneous_items;
+    @Column
     @SerializedName("fragile_items")
     public String fragile_items;
+    @Column
     @SerializedName("bubble_wrap")
     public String bubble_wrap;
+    @Column
     @SerializedName("reason_cancel")
     public String reason_cancel;
+    @Column
     @SerializedName("reason_cancel_date")
     public Integer reason_cancel_date;
+    @Column
     @SerializedName("Estimator")
     public String Estimator;
+    @Column
     @SerializedName("driver")
     public String driver;
+    @Column
     @SerializedName("mover")
     public String mover;
+    @Column
     @SerializedName("movers")
     public String movers;
+    @Column
     @SerializedName("ActualPickupDate")
     public Integer ActualPickupDate;
+    @Column
     @SerializedName("RequiredDeliveryDate")
     public Integer RequiredDeliveryDate;
+    @Column
     @SerializedName("RatePerCF")
     public String RatePerCF;
+    @Column
     @SerializedName("TotalCF")
     public String TotalCF;
+    @Column
     @SerializedName("PickupBalance")
     public String PickupBalance;
+    @Column
     @SerializedName("TotalPacking")
     public String TotalPacking;
+    @Column
     @SerializedName("TotalLB")
     public String TotalLB;
+    @Column
     @SerializedName("DeliveryBalance")
     public String DeliveryBalance;
+    @Column
     @SerializedName("GrandTotal")
     public String GrandTotal;
+    @Column
     @SerializedName("ActualTotal")
     public String ActualTotal;
+    @Column
     @SerializedName("estimated_total")
     public String estimated_total;
+    @Column
     @SerializedName("EstimatedPackingTax")
     public String EstimatedPackingTax;
+    @Column
     @SerializedName("ActualPackingTax")
     public String ActualPackingTax;
+    @Column
     @SerializedName("agent_commission")
     public String agent_commission;
+    @Column
     @SerializedName("total_salary")
     public String total_salary;
+    @Column
     @SerializedName("total_expense")
     public String total_expense;
+    @Column
     @SerializedName("is_from_repeated")
     public String is_from_repeated;
+    @Column
     @SerializedName("is_to_repeated")
     public String is_to_repeated;
+    @Column
     @SerializedName("is_referral")
     public String is_referral;
+    @Column
     @SerializedName("from_mobile")
     public String from_mobile;
+    @Column
     @SerializedName("from_stairs")
     public String from_stairs;
+    @Column
     @SerializedName("to_mobile")
     public String to_mobile;
+    @Column
     @SerializedName("to_trailer_access")
     public String to_trailer_access;
+    @Column
     @SerializedName("to_stairs")
     public String to_stairs;
+    @Column
     @SerializedName("truck_id")
     public String truck_id;
+    @Column
     @SerializedName("Stop1")
     public String Stop1;
+    @Column
     @SerializedName("Stop2")
     public String Stop2;
+    @Column
     @SerializedName("Stop3")
     public String Stop3;
+    @Column
     @SerializedName("driver_name")
     public String driver_name;
+    @Column
     @SerializedName("agent_name")
     public String agent_name;
+    @Column
     @SerializedName("company_name")
     public String company_name;
+    @Column
     @SerializedName("move_size_name")
     public String move_size_name;
+    @Column
     @SerializedName("job_code")
     public String job_code;
+    @Column
     @SerializedName("status_slug")
     public String status_slug;
+
+
+    public JobResponse() {
+    }
 
     protected JobResponse(Parcel in) {
         id = in.readInt();

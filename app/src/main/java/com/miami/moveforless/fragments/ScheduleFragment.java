@@ -16,24 +16,17 @@ import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ExampleAdapter;
 import com.miami.moveforless.adapters.models.ExampleModel;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
-import com.miami.moveforless.database.table.NumberMen;
+import com.miami.moveforless.database.DatabaseController;
+import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.JobResponse;
+import com.miami.moveforless.rest.response.ListMoveSizeResponse;
 import com.miami.moveforless.rest.response.ListNumberMenResponse;
-import com.miami.moveforless.rest.response.NumberMenResponse;
-import com.raizlabs.android.dbflow.config.FlowManager;
-import com.raizlabs.android.dbflow.runtime.DBBatchSaveQueue;
-import com.raizlabs.android.dbflow.runtime.TransactionManager;
-import com.raizlabs.android.dbflow.runtime.transaction.process.ProcessModelInfo;
-import com.raizlabs.android.dbflow.runtime.transaction.process.SaveModelTransaction;
-import com.raizlabs.android.dbflow.sql.SqlUtils;
-import com.raizlabs.android.dbflow.structure.Model;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -64,6 +57,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private Date dateNow;
     private CaldroidListener listener;
     private Subscription jobListSubscription;
+    private Subscription numberListSubscription;
     private Subscription moveListSubscription;
     private CompositeSubscription mSubscriptions = new CompositeSubscription();
     private ProgressDialog progressDialog;
@@ -88,46 +82,51 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
         //RxUtils.click(btnLogin, o -> login());
-//        getJobList();
+        getJobList();
         getListNumberMen();
+        getListMoveSize();
     }
 
     private void getJobList() {
         showLoadingDialog(getString(R.string.login));
         if (jobListSubscription != null) removeSubscription(jobListSubscription);
-        jobListSubscription = RestClient.getInstance().jobList().subscribe(this::onSuccess, this::onError);
+        jobListSubscription = RestClient.getInstance().jobList().subscribe(this::onSuccess,
+                this::onError);
         addSubscription(jobListSubscription);
     }
 
     private void getListNumberMen() {
         showLoadingDialog(getString(R.string.login));
+        if (numberListSubscription != null) removeSubscription(numberListSubscription);
+        numberListSubscription = RestClient.getInstance().getListNumberMen().subscribe
+                (this::onSuccesss, this::onErrors);
+        addSubscription(numberListSubscription);
+    }
+
+    private void getListMoveSize() {
+        showLoadingDialog(getString(R.string.login));
         if (moveListSubscription != null) removeSubscription(moveListSubscription);
-//        moveListSubscription = RestClient.getInstance().getListMoveSize()
-//                .subscribe(this::onSuccesss, this::onErrors);
-        moveListSubscription = RestClient.getInstance().getListNumberMen()
-                .subscribe(this::onSuccesss, this::onErrors);
+
+        moveListSubscription = RestClient.getInstance().getListMoveSize().subscribe
+                (this::onListMoveSuccess, this::onErrors);
         addSubscription(moveListSubscription);
     }
 
-//    private void onSuccesss(ListMoveSizeResponse _listMoveSizeResponse) {
-//        ListMoveSizeResponse listMoveSizeResponse = _listMoveSizeResponse;
-//        hideLoadingDialog();
-//    }
+
+    private void onListMoveSuccess(ListMoveSizeResponse _listMoveSizeResponse){
+        hideLoadingDialog();
+
+        for (int i = 0; i < _listMoveSizeResponse.move_sizes.size(); i++) {
+            _listMoveSizeResponse.move_sizes.get(i).async().save();
+        }
+    }
 
     private void onSuccesss(ListNumberMenResponse _listNumberMen) {
-//        ListMoveSizeResponse listMoveSizeResponse = _listMoveSizeResponse;
         hideLoadingDialog();
 
         for (int i = 0; i < _listNumberMen.number_men.size(); i++) {
             _listNumberMen.number_men.get(i).async().save();
         }
-
-//        numberMen.save();
-//        SqlUtils.save(numberMen,numberMen.getModelAdapter(), numberMen.getModelAdapter());
-
-//        TransactionManager.getInstance().addTransaction(new SaveModelTransaction
-//                <>(ProcessModelInfo.withModels(numberMen)));
-//        TransactionManager.getInstance().saveOnSaveQueue(numberMen);
     }
 
     private void onErrors(Throwable _throwable) {
@@ -139,6 +138,12 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         jobResponses = _jobResponses;
         //view and write to bd
         hideLoadingDialog();
+
+        for (int i = 0; i < _jobResponses.size(); i++) {
+            _jobResponses.get(i).async().save();
+        }
+
+        DatabaseController.getInstance().dropDataBase(getActivity());
     }
 
     private void onError(Throwable _throwable) {
@@ -229,7 +234,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 //                    bundle.putString(CaldroidFragment.DIALOG_TITLE, "Select a date");
 //                    dialogCaldroidFragment.setArguments(bundle);
 
-        dialogCaldroidFragment.show(getActivity().getSupportFragmentManager(), "CALDROID_DIALOG_FRAGMENT");
+        dialogCaldroidFragment.show(getActivity().getSupportFragmentManager(),
+                "CALDROID_DIALOG_FRAGMENT");
         return "";
     }
 
@@ -258,8 +264,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         }
         mAdapter = new ExampleAdapter(getActivity(), mModels);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
-                (_context, _view, _position) -> {
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity()
+                .getApplicationContext(), (_context, _view, _position) -> {
             if (mAdapter.getItem(_position).child != null) {
                 if (!mAdapter.getItem(_position).mExpand) {
                     mAdapter.getItem(_position).mExpand = true;
@@ -269,15 +275,16 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                     for (int i = 0; i < mAdapter.getItem(_position).child.size(); i++) {
                         if (mAdapter.getItem(_position).child.get(i).mExpand) {
                             mAdapter.getItem(_position).child.get(i).mExpand = false;
-                            mAdapter.removeChild(_position + i + 1, mAdapter.getItem(_position).child.get(i));
+                            mAdapter.removeChild(_position + i + 1, mAdapter.getItem(_position)
+                                    .child.get(i));
                         }
                     }
                     mAdapter.removeChild(_position + 1, mAdapter.getItem(_position));
                 }
             } else {
                 if (getActivity() instanceof FragmentChanger) {
-                    ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0, jobResponses.get(0)),
-                            true);
+                    ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0,
+                            jobResponses.get(0)), true);
                 }
             }
         }));
