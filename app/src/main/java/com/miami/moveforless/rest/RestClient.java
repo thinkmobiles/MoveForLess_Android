@@ -102,7 +102,7 @@ public class RestClient {
         return getInstance().getIMoverApi().jobList(new JobRequest("soslan",
                 "40ac7c2188bbe76267f7f583ba144ec1"))
                 .subscribeOn(Schedulers.io()).retry(2)
-                .timeout(10, TimeUnit.SECONDS)
+                .timeout(40, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -118,7 +118,7 @@ public class RestClient {
         return getInstance().getRouteApi().getRoute(_startLocation, _endLocation, "imperial", "driving", API_KEY)
                 .subscribeOn(Schedulers.io())
                 .retry(2)
-                .timeout(20, TimeUnit.SECONDS)
+                .timeout(40, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(RouteUtils::parseRouteResponse)
                 .doOnNext(routeInfo1 -> {
@@ -138,7 +138,7 @@ public class RestClient {
                 "40ac7c2188bbe76267f7f583ba144ec1")
                 .subscribeOn(Schedulers.io())
                 .retry(2)
-                .timeout(10, TimeUnit.SECONDS)
+                .timeout(40, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -146,7 +146,7 @@ public class RestClient {
         return getInstance().getIMoverApi().numberMenList("2069", "soslan", "40ac7c2188bbe76267f7f583ba144ec1")
                 .subscribeOn(Schedulers.io())
                 .retry(2)
-                .timeout(10, TimeUnit.SECONDS)
+                .timeout(40, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
