@@ -13,7 +13,9 @@ public enum FragmentType {
     STOP_JOB,
     SIGN_INVOICE,
     PAYMENT,
+    CONFIRMATION,
+    SETTINGS,
     FEEDBACK,
-    SETTINGS
+    CLAIM
 
 }

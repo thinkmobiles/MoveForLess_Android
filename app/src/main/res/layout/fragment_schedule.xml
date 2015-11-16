@@ -4,16 +4,11 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.miami.moveforless.customviews.CustomTabLayout
-        android:id="@+id/tabLayout_FJ"
-        style="@style/AppTabLayoutJobList"
+    <include
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/job_divider_height"
-        android:background="@drawable/toolbar_divider"/>
+        android:layout_height="wrap_content"
+        layout="@layout/tablayout"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"

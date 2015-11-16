@@ -43,13 +43,7 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
 
     private int mChildPos;
     private int mInsertPos;
-    private int rootWidth = 0;
     private int rootHeight = 0;
-
-    public static final int HORIZONTAL_TOP = 0;
-    public static final int VERTICAL_TOP = 1;
-    public static final int VERTICAL_BOTTOM = 2;
-    public static final int VERTICAL_RIGHT = 3;
 
     /**
      * Constructor allowing orientation override
@@ -74,7 +68,7 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
      * @param id Layout resource id
      */
     public void setRootViewId(int id) {
-        mRootView = (ViewGroup) mInflater.inflate(id, null);
+        mRootView = mInflater.inflate(id, null);
         mTrack = (ViewGroup) mRootView.findViewById(R.id.tracks);
 
         //This was previously defined on show() method, moved here to prevent force close that occured
@@ -123,15 +117,13 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
         final int pos = mChildPos;
         final int actionId = action.getActionId();
 
-        container.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mItemClickListener != null) {
-                    mItemClickListener.onItemClick(QuickAction.this, pos, actionId);
-                }
-
-                dismiss();
+        container.setOnClickListener(view -> {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(QuickAction.this, pos, actionId);
             }
+
+            dismiss();
+
         });
 
         container.setFocusable(true);
@@ -161,7 +153,7 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
         mRootView.measure(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
         mRootView.getLayoutParams().width = anchor.getMeasuredWidth();
-        rootWidth = anchor.getMeasuredWidth();
+
         rootHeight = mRootView.getMeasuredHeight();
 
         Display display = mWindowManager.getDefaultDisplay();
@@ -184,8 +176,7 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
             arrow.setVisibility(View.VISIBLE);
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) arrow.getLayoutParams();
             params.gravity = Gravity.TOP;
-        }
-        else if (!onTop && mTrack.getChildCount() > 0) {
+        } else if (!onTop && mTrack.getChildCount() > 0) {
             ImageView arrow = (ImageView) mTrack.getChildAt(mTrack.getChildCount() - 1).findViewById(R.id.ivArrow_SDRL);
             arrow.setVisibility(View.VISIBLE);
             arrow.setImageResource(R.drawable.ic_spinner_down);
@@ -203,16 +194,6 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
         else y = anchorRect.bottom - rootHeight;
 
         return y;
-    }
-
-    /**
-     * Set listener for window dismissed. This listener will only be fired if the quicakction dialog is dismissed
-     * by clicking outside the dialog or clicking on sticky item.
-     */
-    public void setOnDismissListener(OnDismissListener listener) {
-        setOnDismissListener(this);
-
-        mDismissListener = listener;
     }
 
     @Override

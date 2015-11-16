@@ -24,4 +24,17 @@
 
     </string-array>
 
+    <!--job fragment-->
+    <string-array name="tabs_titles">
+        <item>Job Details</item>
+        <item>Questionnaire</item>
+        <item>Sign Contract</item>
+        <item>Stop Job</item>
+        <item>Sign Invoice</item>
+        <item>Payment</item>
+        <item>Confirmation</item>
+        <item>Feedback</item>
+        <item>Claim</item>
+    </string-array>
+
 </resources>

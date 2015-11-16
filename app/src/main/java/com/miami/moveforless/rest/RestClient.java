@@ -1,5 +1,9 @@
 package com.miami.moveforless.rest;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.miami.moveforless.App;
 import com.miami.moveforless.Exceptions.RouteException;
 import com.miami.moveforless.R;
@@ -16,6 +20,7 @@ import com.miami.moveforless.rest.response.LogoutResponse;
 import com.miami.moveforless.rest.response.MoveSizeResponse;
 import com.miami.moveforless.rest.response.RouteInfo;
 import com.miami.moveforless.utils.RouteUtils;
+import com.raizlabs.android.dbflow.structure.ModelAdapter;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.List;
@@ -23,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
+import retrofit.converter.GsonConverter;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -41,8 +47,23 @@ public class RestClient {
 
     private RestClient() {
 
+        Gson gson = new GsonBuilder()
+                .setExclusionStrategies(new ExclusionStrategy() {
+                    @Override
+                    public boolean shouldSkipField(FieldAttributes f) {
+                        return f.getDeclaredClass().equals(ModelAdapter.class);
+                    }
+
+                    @Override
+                    public boolean shouldSkipClass(Class<?> clazz) {
+                        return false;
+                    }
+                })
+                .create();
+
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(new OkHttpClient()))
+                .setConverter(new GsonConverter(gson))
                 .setEndpoint(RestConst.IMOVER_END_POINT)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setRequestInterceptor(request -> request.addHeader("Content-type", "application/json; charset=UTF-8"))
@@ -99,11 +120,11 @@ public class RestClient {
     public Observable<List<JobResponse>> jobList() {
         final String username = SharedPrefManager.getInstance().retriveUsername();
         final String token = SharedPrefManager.getInstance().retrieveToken();
-        return getInstance().getIMoverApi().jobList(new JobRequest("soslan",
-                "40ac7c2188bbe76267f7f583ba144ec1"))
-                .subscribeOn(Schedulers.io()).retry(2)
-                .timeout(40, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread());
+        Observable<List<JobResponse>> resp =  getInstance().getIMoverApi().jobList(new JobRequest("soslan", token))
+                        .subscribeOn(Schedulers.io()).retry(2)
+                        .timeout(40, TimeUnit.SECONDS)
+                        .observeOn(AndroidSchedulers.mainThread());
+        return resp;
     }
 
     public Observable<RouteInfo> getRoute(String _startLocation, String _endLocation) {
@@ -134,8 +155,9 @@ public class RestClient {
     }
 
     public Observable<ListMoveSizeResponse> getListMoveSize() {
+        final String token = SharedPrefManager.getInstance().retrieveToken();
         return getInstance().getIMoverApi().moveSizeList("26", "1988", "soslan",
-                "40ac7c2188bbe76267f7f583ba144ec1")
+                token)
                 .subscribeOn(Schedulers.io())
                 .retry(2)
                 .timeout(40, TimeUnit.SECONDS)
@@ -143,11 +165,16 @@ public class RestClient {
     }
 
     public Observable<ListNumberMenResponse> getListNumberMen() {
-        return getInstance().getIMoverApi().numberMenList("2069", "soslan", "40ac7c2188bbe76267f7f583ba144ec1")
+        final String token = SharedPrefManager.getInstance().retrieveToken();
+        return getInstance().getIMoverApi().numberMenList("2069", "soslan", token)
                 .subscribeOn(Schedulers.io())
                 .retry(2)
                 .timeout(40, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<Boolean> sendFeedback() {
+        return Observable.just(new Boolean(true)).delay(3, TimeUnit.SECONDS);
     }
 
 }

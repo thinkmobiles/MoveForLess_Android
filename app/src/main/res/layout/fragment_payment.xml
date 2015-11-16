@@ -44,11 +44,12 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical|left"
             android:background="@color/cyan_dark"
             android:paddingLeft="50dp"
             android:paddingRight="10dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <com.miami.moveforless.customviews.HelveticaTextView
@@ -57,11 +58,12 @@
                 android:layout_weight="1"
                 android:text="@string/total"
                 android:textColor="@color/yellow"
+
                 style="@style/BaseTextStyle"
                 android:layout_marginRight="60dp" />
 
             <com.miami.moveforless.customviews.HelveticaTextView
-                android:id="@+id/tvTotalAmount_FP"
+                android:id="@+id/tvRequiredAmount_FP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/yellow"
@@ -70,6 +72,26 @@
                 style="@style/BaseTextStyle"
                 custom:customFont="bold"
                 android:gravity="right" />
+
+            <com.miami.moveforless.customviews.HelveticaTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/yellow"
+                android:text=" / "
+                style="@style/BaseTextStyle"
+                custom:customFont="bold"
+                android:gravity="right" />
+
+            <com.miami.moveforless.customviews.HelveticaTextView
+                android:id="@+id/tvTotalAmount_FP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/yellow"
+                android:text="0"
+                style="@style/BaseTextStyle"
+                custom:customFont="bold"
+                android:gravity="right" />
+
             <com.miami.moveforless.customviews.HelveticaTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,12 +106,13 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnNext_FQ"
+            android:id="@+id/btnNext_FP"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_gravity="right"
             android:text="@string/proceed"
-            style="@style/NavigateButtonStyle"/>
+            android:minWidth="130dp"
+            style="@style/BaseButtonStyle"/>
     </FrameLayout>
 
 </LinearLayout>

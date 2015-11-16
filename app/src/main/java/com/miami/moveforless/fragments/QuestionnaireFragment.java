@@ -1,6 +1,7 @@
 package com.miami.moveforless.fragments;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +42,7 @@ public class QuestionnaireFragment extends BaseJobDetailFragment {
     }
 
     @Override
-    protected void setupViews() {
+    protected void setupViews(Bundle _savedInstanceState) {
         RxUtils.click(btnNext)
                 .map(o -> checkAnswer())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -85,7 +86,7 @@ public class QuestionnaireFragment extends BaseJobDetailFragment {
                 no.setButtonDrawable(R.drawable.icn_checkbox_error);
             }
         } else {
-            BusProvider.getInstance().post(new SwitchJobDetailsEvent(FragmentType.SIGN_CONTRACT));
+            BusProvider.getInstance().post(new SwitchJobDetailsEvent());
         }
     }
 

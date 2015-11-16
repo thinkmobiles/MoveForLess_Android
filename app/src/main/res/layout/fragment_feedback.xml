@@ -1,6 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/job_details_background"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/job_content_padding_bottom">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/tablayout"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/job_content_padding_left_right"
+        android:paddingRight="@dimen/job_content_padding_left_right"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/PagesTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/review" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/BaseTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/rate" />
+
+            <RatingBar
+                android:id="@+id/ratingbar_FF"
+                style="@style/BaseRatingBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:numStars="5"
+                android:stepSize="0.5" />
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/form_borders"
+            android:layout_weight="1">
+
+            <com.miami.moveforless.customviews.HelveticaEditText
+                android:id="@+id/etFeedBack_FF"
+                style="@style/ReviewEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top|left"
+                android:hint="@string/write_feedback"
+                android:inputType="textMultiLine"
+                android:background="@android:color/transparent"
+                android:paddingTop="5dp"
+                android:minLines="1"
+                android:singleLine="false" />
+
+        </FrameLayout>
+
+        <GridLayout
+            android:id="@+id/photos_container_FF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
+
+
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+
+            >
+
+            <com.miami.moveforless.customviews.HelveticaButton
+                android:id="@+id/btnAdd_FF"
+                style="@style/BaseButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginRight="30dp"
+                android:text="@string/add"
+                />
+
+            <com.miami.moveforless.customviews.HelveticaButton
+                android:id="@+id/btnSend_FF"
+                style="@style/BaseButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:text="@string/send"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>

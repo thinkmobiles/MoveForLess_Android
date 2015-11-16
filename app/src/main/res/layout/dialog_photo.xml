@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"/>
 
         <Button
-            android:text="Galery"
+            android:text="Gallery"
             android:id="@+id/btnGallery_DP"
             android:layout_height="wrap_content"
             style="@style/DialogButtonStyle"
@@ -31,7 +31,6 @@
             android:text="Camera"
             android:id="@+id/btnCamera_DP"
             android:layout_height="wrap_content"
-            android:textColor="@color/cyan_dark"
             style="@style/DialogButtonStyle"
             android:layout_width="match_parent"/>
     </LinearLayout>

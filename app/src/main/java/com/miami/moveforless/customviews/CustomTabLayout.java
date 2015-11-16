@@ -46,14 +46,15 @@ public class CustomTabLayout extends TabLayout {
         for (int i = 0; i < getTabCount(); i++) {
             if (i < titles.length) {
                 getTabAt(i).setCustomView(getTabView(titles[i], _viewPager.getCurrentItem() == i));
+                if (i >= getTabCount() - 2) getTabAt(i).getCustomView().setVisibility(GONE);
+                if (i == getTabCount() - 3)
+                    getTabAt(i).getCustomView().findViewById(R.id.ivTitleIcon_TL).setVisibility(GONE);
             }
         }
 
-        LinearLayout tabStrip = ((LinearLayout)getChildAt(0));
+        LinearLayout tabStrip = ((LinearLayout) getChildAt(0));
 
-        getTabAt(titles.length-1).getCustomView().findViewById(R.id.ivTitleIcon_TL).setVisibility(GONE);
-
-        for(int i = 0; i < tabStrip.getChildCount(); i++) {
+        for (int i = 0; i < tabStrip.getChildCount(); i++) {
             tabStrip.getChildAt(i).setOnTouchListener((v, event) -> true);
         }
 
@@ -63,8 +64,18 @@ public class CustomTabLayout extends TabLayout {
                 super.onTabSelected(tab);
                 final View tabView = tab.getCustomView();
                 if (tabView != null) {
+                    tabView.setVisibility(VISIBLE);
                     TextView title = (TextView) tabView.findViewById(R.id.tvTitle_TL);
                     ImageView icon = (ImageView) tabView.findViewById(R.id.ivTitleIcon_TL);
+                    if (tab.getPosition() >= getTabCount() - 3) {
+                        icon.setVisibility(GONE);
+                        getTabAt(tab.getPosition() - 1).getCustomView().findViewById(R.id.ivTitleIcon_TL).setVisibility(VISIBLE);
+
+                        for (int i = tab.getPosition() + 1; i < getTabCount(); i++) {
+                            getTabAt(i).getCustomView().setVisibility(GONE);
+                        }
+                    }
+
                     tabView.setBackgroundColor(yellow);
                     title.setTextColor(cyan_800);
                     icon.setImageResource(R.drawable.icn_right_green);
@@ -94,8 +105,8 @@ public class CustomTabLayout extends TabLayout {
         View tabView = LayoutInflater.from(getContext()).inflate(R.layout.tab_layout, this, false);
         TextView title = (TextView) tabView.findViewById(R.id.tvTitle_TL);
         title.setText(_title);
-        tabView.setBackgroundColor(_isSelected? yellow : cyan_800);
-        title.setTextColor(_isSelected ? cyan_800: cyan_200);
+        tabView.setBackgroundColor(_isSelected ? yellow : cyan_800);
+        title.setTextColor(_isSelected ? cyan_800 : cyan_200);
         return tabView;
     }
 

@@ -14,7 +14,7 @@ import com.raizlabs.android.dbflow.config.FlowManager;
  */
 public class App extends Application {
 
-    public static Context mContext;
+    private static Context mContext;
 
     @Override
     public void onCreate() {
@@ -23,7 +23,7 @@ public class App extends Application {
         mContext = getApplicationContext();
         TypefaceManager.init(this);
         SharedPrefManager.getInstance();
-        FlowManager.init(this);
+//        FlowManager.init(this);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class App extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        FlowManager.destroy();
+//        FlowManager.destroy();
     }
 
     public static Context getAppContext() {

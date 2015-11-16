@@ -52,7 +52,7 @@
         </shape>
     </item>
 
-    <item
+<!--    <item
         android:bottom="4px"
         android:left="-6px"
         android:right="4px"
@@ -88,6 +88,6 @@
                 android:topRightRadius="8px" />
 
         </shape>
-    </item>
+    </item>-->
 
 </layer-list>

@@ -1,8 +1,11 @@
 package com.miami.moveforless.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.miami.moveforless.R;
@@ -10,21 +13,28 @@ import com.miami.moveforless.adapters.JobPageAdapter;
 import com.miami.moveforless.customviews.CustomTabLayout;
 import com.miami.moveforless.dialogs.ConfirmDialog;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
-import com.miami.moveforless.fragments.eventbus.FragmentType;
+import com.miami.moveforless.fragments.eventbus.FragmentEvent;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.globalconstants.Const;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.squareup.otto.Subscribe;
 
+import java.util.List;
+
 import butterknife.Bind;
+import butterknife.BindColor;
 import butterknife.BindString;
 
 /**
  * Created by klim on 22.10.15.
  */
 public class JobFragment extends BaseFragment {
-    @BindString(R.string.back__pressed_confirm_message) String strBackPressed;
-    @Bind(R.id.tabLayout_FJ)
+    @BindString(R.string.back__pressed_confirm_message)
+    String strBackPressed;
+    @BindColor(R.color.cyan_dark)
+    int clrCyanDark;
+
+    @Bind(R.id.tabLayout)
     CustomTabLayout mTabLayout;
     @Bind(R.id.viewPager_FJ)
     ViewPager mViewPager;
@@ -35,17 +45,11 @@ public class JobFragment extends BaseFragment {
 
     public static Fragment newInstance(int _id, JobResponse _jobResponse) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable("key", _jobResponse);
+//        bundle.putParcelable("key", _jobResponse);
         bundle.putInt(Const.JOB_ID_KEY, _id);
         JobFragment fragment = new JobFragment();
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mJobResponse = getArguments().getParcelable("key");
     }
 
     @Override
@@ -54,18 +58,20 @@ public class JobFragment extends BaseFragment {
     }
 
     @Override
-    protected void setupViews() {
-
+    protected void setupViews(Bundle _savedInstanceState) {
+//        mJobResponse = getArguments().getParcelable("key");
 //        try {
 //            new CreatePdf(this).createPdf();
         setHasOptionsMenu(true);
-
+        mTabLayout.setBackgroundColor(clrCyanDark);
         mAdapter = new JobPageAdapter(getChildFragmentManager());
-        mViewPager.setOffscreenPageLimit(1);
+//        mViewPager.setOffscreenPageLimit(1);
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.customizeTabs(mViewPager);
         mViewPager.setCurrentItem(selectedTab);
+        mViewPager.addOnPageChangeListener(mAdapter);
+
     }
 
     @Override
@@ -81,46 +87,76 @@ public class JobFragment extends BaseFragment {
     }
 
     @Override
-    public void onBackPressed() {
-        Fragment fragment = mAdapter.getItem(mViewPager.getCurrentItem());
-        if (fragment != null && fragment instanceof BaseJobDetailFragment) {
-            if (((BaseJobDetailFragment)fragment).isAllowGoHome()) {
-                getActivity().getSupportFragmentManager().popBackStack();
-            } else {
-                ConfirmDialog dialog = new ConfirmDialog();
-                dialog.setMesssage(strBackPressed);
-                dialog.setOnPositiveListener(view -> getActivity().getSupportFragmentManager().popBackStack());
-                dialog.show(getActivity().getSupportFragmentManager(), "");
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        List<Fragment> fragments = getChildFragmentManager().getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                fragment.onActivityResult(requestCode, resultCode, data);
             }
         }
     }
 
     @Override
+    public void onBackPressed() {
+        if (getChildFragmentManager().getBackStackEntryCount() > 0) {
+            getChildFragmentManager().popBackStack();
+            return;
+        }
+
+        final int position = mViewPager.getCurrentItem();
+        if (position == 0 ) {
+            getFragmentManager().popBackStack();
+        } else {
+            mViewPager.setCurrentItem(position - 1);
+        }
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_job_details, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
+            Fragment fragment = mAdapter.getItem(mViewPager.getCurrentItem());
+            if (fragment != null && fragment instanceof BaseJobDetailFragment) {
+                if (((BaseJobDetailFragment) fragment).isAllowGoHome()) {
+                    getActivity().getSupportFragmentManager().popBackStack();
+                } else {
+                    ConfirmDialog dialog = new ConfirmDialog();
+                    dialog.setMesssage(strBackPressed);
+                    dialog.setOnPositiveListener(view -> getActivity().getSupportFragmentManager().popBackStack());
+                    dialog.show(getActivity().getSupportFragmentManager(), "");
+                }
+            }
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Subscribe
+    public void SwitchFragment(FragmentEvent _event) {
+        if (_event.getFragment() != null) {
+            if (_event.isAddToBackStack())
+                replaceFragmentWithBackStack(R.id.job_container_FJ, _event.getFragment());
+            else
+                replaceFragmentWithoutBackStack(R.id.job_container_FJ, _event.getFragment());
+        }
+    }
 
     @Subscribe
-    public void switchFragment(SwitchJobDetailsEvent _event) {
-        int position = -1;
+    public void switchViewPager(SwitchJobDetailsEvent _event) {
 
-
-        if (_event.getType() == FragmentType.SCHEDULE) {
+        final int position = mViewPager.getCurrentItem();
+        if (position == mAdapter.getCount() - 1) {
             getFragmentManager().popBackStack();
-            return;
+        } else {
+            mViewPager.setCurrentItem(position + 1);
         }
-
-        for (int i = 0; i < Const.JOB_DETAILS_ORDER.length; i++) {
-            if (_event.getType() == Const.JOB_DETAILS_ORDER[i]) {
-                position = i;
-                break;
-            }
-        }
-        mViewPager.setCurrentItem(position);
     }
 
 }

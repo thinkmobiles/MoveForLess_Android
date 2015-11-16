@@ -20,6 +20,7 @@
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
     <string name="back__pressed_confirm_message">Do you really want go to the home screen?</string>
+    <string name="payment_error">Entered amount is not enough. Please pay the required amount</string>
 
 
     <!--Login-->
@@ -35,19 +36,17 @@
     <string name="menu_navigation">Open navigation</string>
     <string name="next">Next</string>
 
-    <!--job fragment-->
-    <string-array name="tabs_titles">
-        <item>Job Details</item>
-        <item>Questionnaire</item>
-        <item>Sign Contract</item>
-        <item>Stop Job</item>
-        <item>Sign Invoice</item>
-        <item>Payment</item>
-        <item>Feedback</item>
-    </string-array>
-
     <string name="questionnaire">Questionnaire</string>
     <string name="payments">Payments</string>
+    
+    <!--feedback screen-->
+    <string name="review">Review</string>
+    <string name="rate">Rate our service</string>
+    <string name="write_feedback">Write a feedback</string>
+    <string name="open_claim">Open a Claim</string>
+    <string name="send">Send</string>
+    <string name="add">Add</string>
+    <string name="send_successfull">Feedback has been sent successfully</string>
 
     <!--payment screen-->
     <string name="total">Total:</string>
@@ -59,7 +58,9 @@
 
     <!--congratulation screen-->
     <string name="back_to_schedule">Back to Schedule</string>
+    <string name="write_review">Write Review</string>
     <string name="congratulation_text">Congratulation! \n Your feedback \n has been saved</string>
+    <string name="invoice_successfull">Congratulation! \n Your invoice \n has been paid successfully</string>
 
     <!--dialogs-->
     <string name="signature_title">Online Signature</string>

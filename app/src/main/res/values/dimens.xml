@@ -37,4 +37,7 @@
     <dimen name="base_dialog_description_margin_button">15dp</dimen>
     <dimen name="base_dialog_layout_margin_left_right">10dp</dimen>
     <dimen name="base_dialog_message_max_width">300dp</dimen>
+
+    <!--feedback screen-->
+    <dimen name="review_text_size">16sp</dimen>
 </resources>

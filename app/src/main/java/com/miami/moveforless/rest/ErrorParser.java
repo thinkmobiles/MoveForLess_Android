@@ -30,7 +30,7 @@ public class ErrorParser {
                 result = "Network connection error";
                 break;
             case UNEXPECTED:
-                result = error.getLocalizedMessage();
+                result = error.getCause().getMessage();
                 break;
             case HTTP:
                 Response response = error.getResponse();

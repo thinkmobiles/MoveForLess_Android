@@ -27,7 +27,7 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
 
 
     protected int getLayoutResource() {
-        return R.layout.base_four_state_layout;
+        return R.layout.layout_base_four_state;
     }
 
     protected void setListeners() {

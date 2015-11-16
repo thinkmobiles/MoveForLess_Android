@@ -20,7 +20,7 @@ public class IntentUtils {
         return galleryIntent;
     }
 
-    public static Intent getCameraStartIntent(final Uri _fileUri) {
+    public static Intent getCameraStartIntent(Uri _fileUri) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, _fileUri);
         return takePictureIntent;

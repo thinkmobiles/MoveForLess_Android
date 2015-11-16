@@ -1,32 +1,28 @@
 package com.miami.moveforless.fragments;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.jakewharton.rxbinding.widget.RxTextView;
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ExampleAdapter;
 import com.miami.moveforless.adapters.models.ExampleModel;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
-import com.miami.moveforless.database.DatabaseController;
-import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.JobResponse;
-import com.miami.moveforless.rest.response.ListMoveSizeResponse;
-import com.miami.moveforless.rest.response.ListNumberMenResponse;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
+
+import butterknife.BindString;
 import rx.Observable;
 
 import java.util.ArrayList;
@@ -34,17 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
-import rx.Observer;
 import rx.Subscription;
-import rx.functions.Action1;
-import rx.functions.Func2;
-import rx.functions.Func3;
-import rx.functions.FuncN;
-import rx.observers.Observers;
-import rx.subscriptions.CompositeSubscription;
-
-import static android.text.TextUtils.isEmpty;
-import static android.util.Patterns.EMAIL_ADDRESS;
 
 /**
  * Created by SetKrul on 30.10.2015.
@@ -55,6 +41,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         return new ScheduleFragment();
     }
 
+    @BindString(R.string.loading) String strLoading;
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @Bind(R.id.etSearch_FS)
@@ -68,23 +55,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private CaldroidFragment dialogCaldroidFragment;
     private Date dateNow;
     private CaldroidListener listener;
-    private Subscription jobListSubscription;
-    private Subscription numberListSubscription;
-    private Subscription moveListSubscription;
-    private CompositeSubscription mSubscriptions = new CompositeSubscription();
-    private ProgressDialog progressDialog;
     private List<JobResponse> jobResponses;
-
-    private Subscription _subscription = null;
-
-    protected void addSubscription(Subscription _subscription) {
-        mSubscriptions.add(_subscription);
-    }
-
-    protected void removeSubscription(Subscription _subscription) {
-        mSubscriptions.remove(_subscription);
-    }
-
+    private Subscription mJobDataSubscription;
 
     @Override
     protected int getLayoutResource() {
@@ -92,124 +64,40 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     }
 
     @Override
-    protected void setupViews() {
+    protected void setupViews(Bundle _savedInstanceState) {
+        setHasOptionsMenu(true);
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
-        //RxUtils.click(btnLogin, o -> login());
-//        DatabaseController.getInstance().dropDataBase(getActivity());
-        getData();
-//        combineLatestEvents();
+        combineLatestEvents();
     }
 
 
     private void combineLatestEvents() {
-        _subscription = Observable.combineLatest(RestClient.getInstance().jobList(), RestClient
-                .getInstance().getListNumberMen(), RestClient.getInstance().getListMoveSize(),
-                (jobResponses1, listNumberMenResponse, listMoveSizeResponse) -> {
-                    boolean jobResponsesValid = jobResponses1 != null;
-
-                    boolean listNumberMenResponseValid = listNumberMenResponse != null;
-
-                    boolean listMoveSizeResponseValid = listMoveSizeResponse != null;
-
-                    return jobResponsesValid && listNumberMenResponseValid && listMoveSizeResponseValid;
-
-                }).subscribe((new Observer<Boolean>() {
-            @Override
-            public void onCompleted() {
-                Log.d("www","onCompleted");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.d("www",e.toString());
-            }
-
-            @Override
-            public void onNext(Boolean aBoolean) {
-                if (aBoolean)
-                    hideLoadingDialog();
-            }
-
-
-        }));
+        showLoadingDialog(strLoading);
+        if (mJobDataSubscription != null) removeSubscription(mJobDataSubscription);
+        mJobDataSubscription = Observable.combineLatest(
+                RestClient.getInstance().jobList(),
+                RestClient.getInstance().getListNumberMen(),
+                RestClient.getInstance().getListMoveSize(),
+                (jobResponses1, listNumberMenResponse, listMoveSizeResponse) ->
+                        jobResponses1 != null && listNumberMenResponse != null && listMoveSizeResponse != null)
+                .subscribe(this::onJobDataSuccess, this::onError);
+        addSubscription(mJobDataSubscription);
     }
 
-
-
-
-    private void getData() {
-        showLoadingDialog(getString(R.string.login));
-//        if (jobListSubscription != null) removeSubscription(jobListSubscription);
-//        jobListSubscription = RestClient.getInstance().jobList().subscribe(this::onSuccess,
-//                this::onError);
-//        addSubscription(jobListSubscription);
-
-//        if (numberListSubscription != null) removeSubscription(numberListSubscription);
-//        numberListSubscription = RestClient.getInstance().getListNumberMen().subscribe
-//                (this::onSuccesss, this::onError);
-//        addSubscription(numberListSubscription);
-//
-        if (moveListSubscription != null) removeSubscription(moveListSubscription);
-//
-        moveListSubscription = RestClient.getInstance().getListMoveSize().subscribe
-                (this::onListMoveSuccess, this::onError);
-        addSubscription(moveListSubscription);
-
-    }
-
-
-    private void onListMoveSuccess(ListMoveSizeResponse _listMoveSizeResponse) {
-        for (int i = 0; i < _listMoveSizeResponse.move_sizes.size(); i++) {
-            _listMoveSizeResponse.move_sizes.get(i).save();
-        }
-
-//        moveListSubscription.unsubscribe();
-//        hideLoadingDialog();
-    }
-
-    private void onSuccesss(ListNumberMenResponse _listNumberMen) {
-
-        for (int i = 0; i < _listNumberMen.number_men.size(); i++) {
-            _listNumberMen.number_men.get(i).save();
-        }
-
-//        numberListSubscription.unsubscribe();
-//        hideLoadingDialog();
-    }
-
-    private void onSuccess(List<JobResponse> _jobResponses) {
-        jobResponses = _jobResponses;
-        //view and write to bd
-
-        for (int i = 0; i < _jobResponses.size(); i++) {
-            _jobResponses.get(i).save();
-        }
-
-//        jobListSubscription.unsubscribe();
-//        hideLoadingDialog();
-
-//        List<JobModel> jobModels = DatabaseController.getInstance().getListJob();
-//        jobModels.size();
-//        DatabaseController.getInstance().dropDataBase(getActivity());
+    private void onJobDataSuccess(boolean _isloaded) {
+        hideLoadingDialog();
     }
 
     private void onError(Throwable _throwable) {
-//        hideLoadingDialog();
-        Toast.makeText(getActivity(), ErrorParser.parse(_throwable), Toast.LENGTH_SHORT).show();
+        hideLoadingDialog();
+        showErrorDialog(ErrorParser.parse(_throwable));
     }
 
-    protected void showLoadingDialog(String _message) {
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage(_message);
-        progressDialog.show();
-
-    }
-
-    protected void hideLoadingDialog() {
-//        if (jobListSubscription.isUnsubscribed() && numberListSubscription.isUnsubscribed() &&
-//                moveListSubscription.isUnsubscribed())
-            if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_schedule, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -336,7 +224,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             } else {
                 if (getActivity() instanceof FragmentChanger) {
                     ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0,
-                            jobResponses.get(0)), true);
+                            null), true);
                 }
             }
         }));

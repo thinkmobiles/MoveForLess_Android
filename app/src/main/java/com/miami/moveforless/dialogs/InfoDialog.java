@@ -1,5 +1,6 @@
 package com.miami.moveforless.dialogs;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ public class InfoDialog extends BaseDialog {
     Button btnClose;
 
     private String mMessage = "";
+    private View.OnClickListener mListener;
 
     @Override
     protected int getLayoutResource() {
@@ -29,7 +31,7 @@ public class InfoDialog extends BaseDialog {
 
     @Override
     protected void setupViews() {
-        RxUtils.click(btnClose).subscribe(o -> dismiss());
+        RxUtils.click(btnClose).subscribe(o -> onClick());
         btnClose.setText(strClose);
 
         if (!mMessage.isEmpty()) {
@@ -37,8 +39,16 @@ public class InfoDialog extends BaseDialog {
         }
     }
 
+    private void onClick() {
+        dismiss();
+        if (mListener != null) mListener.onClick(null);
+    }
+
     public void setMessage(String _text) {
         mMessage = _text;
     }
 
+    public void setOnClickListener(View.OnClickListener _listener) {
+        mListener = _listener;
+    }
 }
