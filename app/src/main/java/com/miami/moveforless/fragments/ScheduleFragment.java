@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -62,9 +63,6 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private CompositeSubscription mSubscriptions = new CompositeSubscription();
     private ProgressDialog progressDialog;
     private List<JobResponse> jobResponses;
-    private boolean first = false;
-    private boolean second = false;
-    private boolean third = false;
 
     protected void addSubscription(Subscription _subscription) {
         mSubscriptions.add(_subscription);
@@ -85,62 +83,63 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
         //RxUtils.click(btnLogin, o -> login());
-        DatabaseController.getInstance().dropDataBase(getActivity());
+//        DatabaseController.getInstance().dropDataBase(getActivity());
         getData();
     }
 
-    private void getData(){
+    private void getData() {
         showLoadingDialog(getString(R.string.login));
         if (jobListSubscription != null) removeSubscription(jobListSubscription);
         jobListSubscription = RestClient.getInstance().jobList().subscribe(this::onSuccess,
                 this::onError);
         addSubscription(jobListSubscription);
 
-//        if (numberListSubscription != null) removeSubscription(numberListSubscription);
-//        numberListSubscription = RestClient.getInstance().getListNumberMen().subscribe
-//                (this::onSuccesss, this::onError);
-//        addSubscription(numberListSubscription);
-//
-//        if (moveListSubscription != null) removeSubscription(moveListSubscription);
-//
-//        moveListSubscription = RestClient.getInstance().getListMoveSize().subscribe
-//                (this::onListMoveSuccess, this::onError);
-//        addSubscription(moveListSubscription);
+        if (numberListSubscription != null) removeSubscription(numberListSubscription);
+        numberListSubscription = RestClient.getInstance().getListNumberMen().subscribe
+                (this::onSuccesss, this::onError);
+        addSubscription(numberListSubscription);
+
+        if (moveListSubscription != null) removeSubscription(moveListSubscription);
+
+        moveListSubscription = RestClient.getInstance().getListMoveSize().subscribe
+                (this::onListMoveSuccess, this::onError);
+        addSubscription(moveListSubscription);
 
     }
 
 
-    private void onListMoveSuccess(ListMoveSizeResponse _listMoveSizeResponse){
-        first = true;
-        if (first && second && third)
-            hideLoadingDialog();
-
+    private void onListMoveSuccess(ListMoveSizeResponse _listMoveSizeResponse) {
         for (int i = 0; i < _listMoveSizeResponse.move_sizes.size(); i++) {
             _listMoveSizeResponse.move_sizes.get(i).save();
         }
+
+        moveListSubscription.unsubscribe();
+        hideLoadingDialog();
     }
 
     private void onSuccesss(ListNumberMenResponse _listNumberMen) {
-        second = true;
-        if (first && second && third)
-            hideLoadingDialog();
 
         for (int i = 0; i < _listNumberMen.number_men.size(); i++) {
             _listNumberMen.number_men.get(i).save();
         }
+
+        numberListSubscription.unsubscribe();
+        hideLoadingDialog();
     }
 
     private void onSuccess(List<JobResponse> _jobResponses) {
         jobResponses = _jobResponses;
         //view and write to bd
-        third = true;
-        if (first && second && third)
-            hideLoadingDialog();
 
         for (int i = 0; i < _jobResponses.size(); i++) {
             _jobResponses.get(i).save();
         }
 
+        jobListSubscription.unsubscribe();
+        hideLoadingDialog();
+
+//        List<JobModel> jobModels = DatabaseController.getInstance().getListJob();
+//        jobModels.size();
 //        DatabaseController.getInstance().dropDataBase(getActivity());
     }
 
@@ -157,7 +156,9 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     }
 
     protected void hideLoadingDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+        if (jobListSubscription.isUnsubscribed() && numberListSubscription.isUnsubscribed() &&
+                moveListSubscription.isUnsubscribed())
+            if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
     }
 
     @Override
@@ -243,7 +244,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 //        setHasOptionsMenu(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<JobModel> jobModels = DatabaseController.getInstance().getListJob();
+//        List<JobModel> jobModels = DatabaseController.getInstance().getListJob();
         mModels = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {

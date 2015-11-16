@@ -26,6 +26,7 @@ public class DatabaseController implements AbstractControllerData {
 
     @Override
     public List<JobModel> getListJob() {
+//        return new Select().from(JobResponse.class).where("WHERE DATA > DATENOW || ISACTIVE = 1 ORDER BY ASC DATE").queryCustomList(JobModel.class);
         return new Select().from(JobResponse.class).queryCustomList(JobModel.class);
     }
 
