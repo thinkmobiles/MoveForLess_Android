@@ -6,29 +6,18 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.dialogs.RouteDialog;
 import com.miami.moveforless.dialogs.SignatureDialog;
 import com.miami.moveforless.fragments.BaseFragment;
-import com.miami.moveforless.fragments.JobFragment;
 import com.miami.moveforless.fragments.ScheduleFragment;
-import com.miami.moveforless.fragments.eventbus.FragmentType;
-import com.miami.moveforless.fragments.eventbus.OpenJobDetailsEvent;
-import com.miami.moveforless.managers.PlayServices;
+import com.miami.moveforless.managers.PlayServicesManager;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.LogoutResponse;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 import butterknife.Bind;
 import rx.Subscription;
@@ -41,7 +30,7 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
     Toolbar mToolbar;
 
     private Subscription mLogoutSubscription;
-    private PlayServices mPlayServices;
+    private PlayServicesManager mPlayServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +44,7 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
         if (getFragmentById(R.id.contentContainer_AM) == null) {
             switchContent(ScheduleFragment.newInstance(), false);
         }
-        mPlayServices = new PlayServices(this);
+        mPlayServices = new PlayServicesManager(this);
     }
 
     @Override

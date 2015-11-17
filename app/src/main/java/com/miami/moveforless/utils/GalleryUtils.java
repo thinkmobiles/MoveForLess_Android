@@ -7,28 +7,29 @@ import android.net.Uri;
 import android.support.v4.app.Fragment;
 
 import com.miami.moveforless.globalconstants.Const;
+import com.miami.moveforless.managers.IntentManager;
 
 import java.io.File;
 
 /**
  * Created by SetKrul on 12.11.2015.
  */
-public class Gallery {
+public class GalleryUtils {
 
     Activity mActivity;
 
-    public Gallery(Activity _activity){
+    public GalleryUtils(Activity _activity){
         this.mActivity = _activity;
     }
 
     public ComponentName isCanGetGalleryPicture() {
-        Intent galleryIntent = IntentUtils.getGalleryStartIntent();
+        Intent galleryIntent = IntentManager.getGalleryStartIntent();
         return galleryIntent.resolveActivity(mActivity.getPackageManager());
     }
 
     public void openGallery(Fragment _fragment) {
         if (isCanGetGalleryPicture() != null) {
-            Intent galleryIntent = IntentUtils.getGalleryStartIntent();
+            Intent galleryIntent = IntentManager.getGalleryStartIntent();
             if (galleryIntent.resolveActivity(mActivity.getPackageManager()) != null) {
                 _fragment.getParentFragment().startActivityForResult(galleryIntent, Const.REQUEST_GALLERY_IMAGE);
             }

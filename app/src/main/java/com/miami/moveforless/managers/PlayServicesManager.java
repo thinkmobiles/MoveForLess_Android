@@ -16,7 +16,7 @@ import com.miami.moveforless.dialogs.ConfirmDialog;
 import com.miami.moveforless.dialogs.ErrorDialog;
 
 
-public class PlayServices implements
+public class PlayServicesManager implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
@@ -51,7 +51,7 @@ public class PlayServices implements
      * activities itself.
      */
 
-    public PlayServices(Activity _activity) {
+    public PlayServicesManager(Activity _activity) {
         mActivity = (AppCompatActivity) _activity;
     }
 

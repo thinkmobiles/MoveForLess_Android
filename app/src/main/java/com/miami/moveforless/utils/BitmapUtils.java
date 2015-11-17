@@ -101,7 +101,7 @@ public class BitmapUtils {
     }
 
     /**
-     * Method for return file path of Gallery image
+     * Method for return file path of GalleryUtils image
      *
      * @param _context context
      * @param _uri     file uri

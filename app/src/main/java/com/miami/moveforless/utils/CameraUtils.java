@@ -21,12 +21,12 @@ import java.util.Date;
 /**
  * Created by SetKrul on 12.11.2015.
  */
-public class Camera {
+public class CameraUtils {
 
     Activity mActivity;
     private static final String PHOTO_FILE_EXTENSION = ".jpg";
 
-    public Camera(Activity _activity){
+    public CameraUtils(Activity _activity){
         this.mActivity = _activity;
     }
 

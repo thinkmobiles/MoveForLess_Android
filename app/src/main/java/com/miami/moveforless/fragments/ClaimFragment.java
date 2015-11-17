@@ -15,8 +15,8 @@ import com.miami.moveforless.globalconstants.Const;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.utils.BitmapUtils;
-import com.miami.moveforless.utils.Camera;
-import com.miami.moveforless.utils.Gallery;
+import com.miami.moveforless.utils.CameraUtils;
+import com.miami.moveforless.utils.GalleryUtils;
 import com.miami.moveforless.utils.RxUtils;
 
 import java.io.File;
@@ -42,8 +42,8 @@ public class ClaimFragment extends BaseJobDetailFragment {
     @Bind(R.id.etClaim_FC)
     EditText etClaim;
 
-    private Camera mCamera;
-    private Gallery mGallery;
+    private CameraUtils mCamera;
+    private GalleryUtils mGallery;
     private String mPhotoFilePath;
     private Subscription sendSubscription;
     private List<File> mPhotos;
@@ -67,8 +67,8 @@ public class ClaimFragment extends BaseJobDetailFragment {
 
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
-        mCamera = new Camera(getActivity());
-        mGallery = new Gallery(getActivity());
+        mCamera = new CameraUtils(getActivity());
+        mGallery = new GalleryUtils(getActivity());
         mPhotos = new ArrayList<>();
 
         RxUtils.click(btnAdd, o -> btnAddPhoto());
