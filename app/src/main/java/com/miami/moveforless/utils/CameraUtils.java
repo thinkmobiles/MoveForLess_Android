@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.globalconstants.Const;
+import com.miami.moveforless.managers.IntentManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class CameraUtils {
                 }
                 if (imageFile != null) {
                     mPhotoFilePath = imageFile.getPath();
-                    Intent takePictureIntent = IntentUtils.getCameraStartIntent(Uri.fromFile(imageFile));
+                    Intent takePictureIntent = IntentManager.getCameraStartIntent(Uri.fromFile(imageFile));
                     _fragment.getParentFragment().startActivityForResult(takePictureIntent, Const.REQUEST_PHOTO);
                 }
 
