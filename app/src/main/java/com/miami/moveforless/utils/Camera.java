@@ -53,7 +53,7 @@ public class Camera {
                 if (imageFile != null) {
                     mPhotoFilePath = imageFile.getPath();
                     Intent takePictureIntent = IntentUtils.getCameraStartIntent(Uri.fromFile(imageFile));
-                    _fragment.startActivityForResult(takePictureIntent, Const.REQUEST_PHOTO);
+                    _fragment.getParentFragment().startActivityForResult(takePictureIntent, Const.REQUEST_PHOTO);
                 }
 
             } else {
@@ -63,5 +63,19 @@ public class Camera {
             Toast.makeText(mActivity, mActivity.getResources().getString(R.string.not_found_camera), Toast.LENGTH_SHORT).show();
         }
         return mPhotoFilePath;
+    }
+
+    public void deleteImage(Activity _activity, File _file) {
+        try {
+
+            _activity.getContentResolver() .delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    MediaStore.Images.Media.DATA
+                            + "='"
+                            + _file.getPath()
+                            + "'", null);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
     }
 }

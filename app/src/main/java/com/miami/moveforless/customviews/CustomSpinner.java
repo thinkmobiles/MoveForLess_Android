@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.miami.moveforless.customviews.Helvetica.HelveticaTextView;
 import com.miami.moveforless.customviews.quickActionMenu.ActionItem;
 import com.miami.moveforless.customviews.quickActionMenu.QuickAction;
 

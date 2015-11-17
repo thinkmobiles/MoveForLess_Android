@@ -41,12 +41,15 @@
     
     <!--feedback screen-->
     <string name="review">Review</string>
+    <string name="claim">Claim</string>
     <string name="rate">Rate our service</string>
     <string name="write_feedback">Write a feedback</string>
+    <string name="write_claim">Write a claim</string>
     <string name="open_claim">Open a Claim</string>
     <string name="send">Send</string>
     <string name="add">Add</string>
-    <string name="send_successfull">Feedback has been sent successfully</string>
+    <string name="send_feedback_successfull">Feedback has been sent successfully</string>
+    <string name="send_claim_successfull">Claim has been sent successfully</string>
 
     <!--payment screen-->
     <string name="total">Total:</string>

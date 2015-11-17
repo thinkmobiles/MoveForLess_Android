@@ -14,7 +14,7 @@
         android:paddingLeft="20dp"
         android:layout_gravity="center_vertical" />
 
-    <com.miami.moveforless.customviews.HelveticaTextView
+    <com.miami.moveforless.customviews.Helvetica.HelveticaTextView
         android:id="@+id/tvTitle_SDRL"
         style="@style/BaseTextStyle"
         android:layout_width="0dp"

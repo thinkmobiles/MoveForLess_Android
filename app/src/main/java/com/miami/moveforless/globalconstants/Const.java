@@ -3,22 +3,15 @@ package com.miami.moveforless.globalconstants;
 import com.miami.moveforless.fragments.eventbus.FragmentType;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 
-import static com.miami.moveforless.fragments.eventbus.FragmentType.CLAIM;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.CONFIRMATION;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.FEEDBACK;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.JOB_DETAILS;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.PAYMENT;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.QUESTIONNAIRE;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.SIGN_CONTRACT;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.SIGN_INVOICE;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.STOP_JOB;
+import static com.miami.moveforless.fragments.eventbus.FragmentType.*;
 
 /**
  * Created by klim on 21.10.15.
  */
 public class Const {
 
-    public static final int FEEDBACK_REQUEST_ID = 1000;
+    public static final int FEEDBACK_REQUEST_ID = 1234;
+    public static final int CLAIM_REQUEST_ID = 1235;
 
     public static final String JOB_ID_KEY = "job_id_key";
     public static final FragmentType[] JOB_DETAILS_ORDER = {

@@ -93,7 +93,8 @@ public class JobFragment extends BaseFragment {
         List<Fragment> fragments = getChildFragmentManager().getFragments();
         if (fragments != null) {
             for (Fragment fragment : fragments) {
-                fragment.onActivityResult(requestCode, resultCode, data);
+                if (fragment != null)
+                    fragment.onActivityResult(requestCode, resultCode, data);
             }
         }
     }
@@ -105,8 +106,9 @@ public class JobFragment extends BaseFragment {
             return;
         }
 
+        Fragment currFragment = mAdapter.getItem(mViewPager.getCurrentItem());
         final int position = mViewPager.getCurrentItem();
-        if (position == 0 ) {
+        if (position == 0 || currFragment instanceof CongratulationFragment) {
             getFragmentManager().popBackStack();
         } else {
             mViewPager.setCurrentItem(position - 1);

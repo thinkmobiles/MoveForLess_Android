@@ -1,5 +1,6 @@
+/libs/libs.iml
+/libs/paralloid
 /app/app.iml
-/MyApplication.iml
 /MoveForLess.iml
 .gradle
 /local.properties
