@@ -25,6 +25,11 @@ import com.miami.moveforless.rest.response.LogoutResponse;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import butterknife.Bind;
 import rx.Subscription;
 

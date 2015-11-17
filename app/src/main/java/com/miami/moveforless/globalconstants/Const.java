@@ -1,23 +1,17 @@
 package com.miami.moveforless.globalconstants;
 
 import com.miami.moveforless.fragments.eventbus.FragmentType;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
 
-import static com.miami.moveforless.fragments.eventbus.FragmentType.CLAIM;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.CONFIRMATION;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.FEEDBACK;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.JOB_DETAILS;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.PAYMENT;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.QUESTIONNAIRE;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.SIGN_CONTRACT;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.SIGN_INVOICE;
-import static com.miami.moveforless.fragments.eventbus.FragmentType.STOP_JOB;
+import static com.miami.moveforless.fragments.eventbus.FragmentType.*;
 
 /**
  * Created by klim on 21.10.15.
  */
 public class Const {
 
-    public static final int FEEDBACK_REQUEST_ID = 1000;
+    public static final int FEEDBACK_REQUEST_ID = 1234;
+    public static final int CLAIM_REQUEST_ID = 1235;
 
     public static final String JOB_ID_KEY = "job_id_key";
     public static final FragmentType[] JOB_DETAILS_ORDER = {
@@ -39,6 +33,22 @@ public class Const {
     final public static int REQUEST_TYPE_PHOTO = 0;
     final public static int REQUEST_PHOTO = 10000;
     final public static int REQUEST_GALLERY_IMAGE = 10002;
+
+    //pay
+    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_SANDBOX;
+    //sendbox test
+    private static final String CONFIG_CLIENT_ID =
+            "AekC6Q3O01zbLuDkSQEcbrCawwXXo5Hzi68OyHGHVcRU2D6neCcvwO6wrZli7YNpFvC55ZfT4zFcc_UA";
+    //real test
+//    private static final String CONFIG_CLIENT_ID = "AVWOzMxGpnIUKb6Zz-nQQUIixuEwcEkHQVuGaSLJpY0kd3vwLmd2fDQYh8KqgkCpjGnnopk_YG1zW5ia";
+
+
+    public static final int REQUEST_CODE_PAYMENT = 1;
+    public static final int REQUEST_CODE_FUTURE_PAYMENT = 2;
+    public static final int REQUEST_CODE_PROFILE_SHARING = 3;
+
+    public static PayPalConfiguration config = new PayPalConfiguration().environment(CONFIG_ENVIRONMENT).clientId
+            (CONFIG_CLIENT_ID).rememberUser(false);
 
     public static final String TIME_12_HOUR_FORMAT = "hh:mmaa";
     public static final String TIME_MONTH_DAY_FORMAT = "MM/dd";

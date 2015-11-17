@@ -30,7 +30,7 @@ public class Gallery {
         if (isCanGetGalleryPicture() != null) {
             Intent galleryIntent = IntentUtils.getGalleryStartIntent();
             if (galleryIntent.resolveActivity(mActivity.getPackageManager()) != null) {
-                _fragment.startActivityForResult(galleryIntent, Const.REQUEST_GALLERY_IMAGE);
+                _fragment.getParentFragment().startActivityForResult(galleryIntent, Const.REQUEST_GALLERY_IMAGE);
             }
         }
     }

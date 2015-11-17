@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.miami.moveforless.R;
+import com.miami.moveforless.customviews.Helvetica.HelveticaEditText;
 import com.miami.moveforless.customviews.quickActionMenu.ActionItem;
 import com.miami.moveforless.utils.RxUtils;
 

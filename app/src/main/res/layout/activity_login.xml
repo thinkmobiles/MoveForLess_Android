@@ -52,7 +52,7 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal">
 
-                <com.miami.moveforless.customviews.HelveticaEditText
+                <com.miami.moveforless.customviews.Helvetica.HelveticaEditText
                     android:id="@+id/etEmail_AL"
                     style="@style/BaseEditTextStyle"
                     android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                     android:inputType="text"
                     android:layout_gravity="center_horizontal" />
 
-                <com.miami.moveforless.customviews.HelveticaEditText
+                <com.miami.moveforless.customviews.Helvetica.HelveticaEditText
                     android:id="@+id/etPassword_AL"
                     style="@style/BaseEditTextStyle"
                     android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                     android:inputType="textPassword"
                     android:layout_gravity="center_horizontal" />
 
-                <com.miami.moveforless.customviews.HelveticaButton
+                <com.miami.moveforless.customviews.Helvetica.HelveticaButton
                     android:id="@+id/btnLogin_AL"
                     style="@style/LoginButton"
                     android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
 
 import com.miami.moveforless.fragments.BaseJobDetailFragment;
+import com.miami.moveforless.fragments.ClaimFragment;
 import com.miami.moveforless.fragments.CongratulationFragment;
 import com.miami.moveforless.fragments.FeedbackFragment;
 import com.miami.moveforless.fragments.JobDetailsFragment;
@@ -41,6 +42,8 @@ public class JobPageAdapter extends FragmentStatePagerAdapter implements ViewPag
                 return CongratulationFragment.newInstance();
             case FEEDBACK:
                 return FeedbackFragment.newInstance();
+            case CLAIM:
+                return ClaimFragment.newInstance();
             default:
                 return JobDetailsFragment.newInstance();
         }

@@ -12,6 +12,13 @@
         <attr name="customFont"/>
     </declare-styleable>
 
+    <declare-styleable name="CustomProgressBar">
+        <attr name="progressColour" format="color" />
+        <attr name="secondaryProgressColour" format="color" />
+        <attr name="backgroundColour" format="color" />
+        <attr name="duration" format="integer" />
+    </declare-styleable>
+
 
     <attr name="customFont" format="enum">
         <enum name="black" value="0"/>

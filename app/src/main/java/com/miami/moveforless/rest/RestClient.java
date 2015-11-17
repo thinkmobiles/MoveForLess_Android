@@ -177,4 +177,9 @@ public class RestClient {
         return Observable.just(new Boolean(true)).delay(3, TimeUnit.SECONDS);
     }
 
+    public Observable<Boolean> sendClaim() {
+        return Observable.just(new Boolean(true)).delay(3, TimeUnit.SECONDS);
+    }
+
+
 }

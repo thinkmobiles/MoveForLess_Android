@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
 
-    <com.miami.moveforless.customviews.HelveticaTextView
+    <com.miami.moveforless.customviews.Helvetica.HelveticaTextView
         android:id="@+id/tvMessage_FC"
         style="@style/BaseTitleStyle"
         android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
 
         >
 
-        <com.miami.moveforless.customviews.HelveticaButton
+        <com.miami.moveforless.customviews.Helvetica.HelveticaButton
             android:id="@+id/btnReview_FC"
             style="@style/BaseButtonStyle"
             android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
             custom:customFont="light" />
 
 
-        <com.miami.moveforless.customviews.HelveticaButton
+        <com.miami.moveforless.customviews.Helvetica.HelveticaButton
             android:id="@+id/btnBack_FC"
             style="@style/BaseButtonStyle"
 

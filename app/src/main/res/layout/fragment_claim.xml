@@ -7,6 +7,7 @@
     android:fillViewport="true"
     android:paddingBottom="@dimen/job_content_padding_bottom">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -19,34 +20,7 @@
             style="@style/PagesTitleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/review" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/BaseTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:text="@string/rate" />
-
-            <RatingBar
-                android:id="@+id/ratingbar_FF"
-                style="@style/BaseRatingBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:numStars="5"
-                android:stepSize="0.5" />
-
-        </RelativeLayout>
+            android:text="@string/claim" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -56,20 +30,29 @@
             android:layout_weight="1">
 
             <com.miami.moveforless.customviews.Helvetica.HelveticaEditText
-                android:id="@+id/etFeedBack_FF"
+                android:id="@+id/etClaim_FC"
                 style="@style/ReviewEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:minHeight="150dp"
                 android:gravity="top|left"
-                android:hint="@string/write_feedback"
+                android:hint="@string/write_claim"
                 android:inputType="textMultiLine"
                 android:background="@android:color/transparent"
                 android:paddingTop="5dp"
-                android:minHeight="150dp"
                 android:minLines="4"
                 android:singleLine="false" />
 
         </FrameLayout>
+
+        <com.miami.moveforless.customviews.PhotoLayout.PhotoLayout
+            android:id="@+id/photos_container_FF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:columnCount="6"
+            >
+        </com.miami.moveforless.customviews.PhotoLayout.PhotoLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -78,20 +61,19 @@
             android:layout_marginTop="40dp"
             android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
-
             >
 
             <com.miami.moveforless.customviews.Helvetica.HelveticaButton
-                android:id="@+id/btnClaim_FF"
+                android:id="@+id/btnAdd_FC"
                 style="@style/BaseButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginRight="30dp"
-                android:text="@string/open_claim"
+                android:text="@string/add"
                 />
 
             <com.miami.moveforless.customviews.Helvetica.HelveticaButton
-                android:id="@+id/btnSend_FF"
+                android:id="@+id/btnSend_FC"
                 style="@style/BaseButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
