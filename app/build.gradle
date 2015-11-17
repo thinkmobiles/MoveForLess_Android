@@ -15,6 +15,15 @@ android {
 //        multiDexEnabled true
     }
 
+//    signingConfigs {
+//        myConfig {
+//            storeFile file("example.keystore")
+//            storePassword "abc123"
+//            keyAlias "example-alias"
+//            keyPassword "abc123"
+//        }
+//    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -29,9 +38,21 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+//            proguardFile file('paypal-proguard.cnf')
+//            signingConfig signingConfigs.myConfig
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+//
+//    android.applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            def outputFile = output.outputFile
+//            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                output.outputFile = new File(outputFile.parent, "paypal-sample-app-${variant.name}.apk")
+//            }
+//        }
+//    }
+
     productFlavors {
     }
 }
