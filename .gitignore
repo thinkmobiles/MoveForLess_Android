@@ -1,7 +1,8 @@
 /libs/libs.iml
 /libs/paralloid
-/app/app.iml
-/MoveForLess.iml
+# Android Studio
+*.iml
+
 .gradle
 /local.properties
 /.idea/workspace.xml
