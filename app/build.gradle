@@ -12,7 +12,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-//        multiDexEnabled true
+        multiDexEnabled true
     }
 
 //    signingConfigs {
@@ -28,12 +28,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-//
-//    dexOptions {
-//        incremental true
-//        javaMaxHeapSize "2048M"
-//        jumboMode = true
-//    }
+
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "2048M"
+        jumboMode = true
+    }
 
     buildTypes {
         release {
