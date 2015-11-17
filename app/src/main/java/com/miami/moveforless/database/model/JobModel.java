@@ -5,12 +5,22 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.QueryModel;
 import com.raizlabs.android.dbflow.structure.BaseQueryModel;
 
+import java.util.List;
+
 /**
  * Created by Sergbek on 13.11.2015.
  */
 
 @QueryModel(databaseName = MoveForLessDatabase.NAME)
 public class JobModel extends BaseQueryModel {
+
+    public Boolean mExpand;
+    public Boolean mSub;
+    public List<JobModel> child;
+
+    public JobModel(List<JobModel> child) {
+        this.child = child;
+    }
 
     @Column
     public String status_slug;
@@ -47,6 +57,9 @@ public class JobModel extends BaseQueryModel {
 
     @Column
     public String pickup_date;
+
+    @Column
+    public Integer isActive;
 
     public JobModel() {
     }

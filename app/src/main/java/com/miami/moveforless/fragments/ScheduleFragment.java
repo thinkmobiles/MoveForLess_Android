@@ -11,14 +11,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.miami.moveforless.App;
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ExampleAdapter;
 import com.miami.moveforless.adapters.models.ExampleModel;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
+import com.miami.moveforless.database.DatabaseController;
+import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.JobResponse;
+import com.miami.moveforless.utils.TimeUtil;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -57,6 +62,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private CaldroidListener listener;
     private List<JobResponse> jobResponses;
     private Subscription mJobDataSubscription;
+    private List<JobModel> jobModels;
 
     @Override
     protected int getLayoutResource() {
@@ -68,21 +74,36 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         setHasOptionsMenu(true);
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
-        combineLatestEvents();
+        getData();
     }
 
 
-    private void combineLatestEvents() {
+    private void getData() {
         showLoadingDialog(strLoading);
         if (mJobDataSubscription != null) removeSubscription(mJobDataSubscription);
         mJobDataSubscription = Observable.combineLatest(
                 RestClient.getInstance().jobList(),
                 RestClient.getInstance().getListNumberMen(),
                 RestClient.getInstance().getListMoveSize(),
-                (jobResponses1, listNumberMenResponse, listMoveSizeResponse) ->
-                        jobResponses1 != null && listNumberMenResponse != null && listMoveSizeResponse != null)
+                (jobResponses1, listNumberMenResponse, listMoveSizeResponse) ->{
+                    DatabaseController.getInstance().dropDataBase(App.getAppContext());
+                    saveInDatabase(jobResponses1);
+                    saveInDatabase(listNumberMenResponse.number_men);
+                    saveInDatabase(listMoveSizeResponse.move_sizes);
+
+                    jobModels = DatabaseController.getInstance().getListJob();
+                    mAdapter = new ExampleAdapter(getActivity(), jobModels);
+                    mRecyclerView.setAdapter(mAdapter);
+                        return jobResponses1 != null && listNumberMenResponse != null && listMoveSizeResponse != null;
+                })
                 .subscribe(this::onJobDataSuccess, this::onError);
         addSubscription(mJobDataSubscription);
+    }
+
+    private void saveInDatabase(List<? extends BaseModel> list) {
+        for (BaseModel item : list) {
+            item.save();
+        }
     }
 
     private void onJobDataSuccess(boolean _isloaded) {
@@ -183,27 +204,28 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 //        setHasOptionsMenu(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-//        List<JobModel> jobModels = DatabaseController.getInstance().getListJob();
-        mModels = new ArrayList<>();
+//        jobModels = DatabaseController.getInstance().getListJob();
 
-        for (int i = 0; i < 5; i++) {
-            List<ExampleModel> child = new ArrayList<>();
-            List<ExampleModel> child2 = new ArrayList<>();
-            child2.add(new ExampleModel("Text child2 " + i, false, null));
-            child2.add(new ExampleModel("Text child2 " + i, false, null));
-            child2.add(new ExampleModel("Text child2 " + i, false, null));
-            child2.add(new ExampleModel("Text child2 " + i, false, null));
-            child2.add(new ExampleModel("Text child2 " + i, false, null));
-            child2.add(new ExampleModel("Text child2 " + i, false, null));
-            child.add(new ExampleModel("Text child with child " + i, false, child2));
-            child.add(new ExampleModel("Text child " + i, false, null));
-            child.add(new ExampleModel("Text child with child " + i, false, child2));
-            child.add(new ExampleModel("Text child " + i, false, null));
-            child.add(new ExampleModel("Text child with child " + i, false, child2));
-            mModels.add(new ExampleModel("Header " + i, false, child));
-        }
-        mAdapter = new ExampleAdapter(getActivity(), mModels);
-        mRecyclerView.setAdapter(mAdapter);
+//        mModels = new ArrayList<>();
+
+//        for (int i = 0; i < 5; i++) {
+//            List<ExampleModel> child = new ArrayList<>();
+//            List<ExampleModel> child2 = new ArrayList<>();
+//            child2.add(new ExampleModel("Text child2 " + i, false, null));
+//            child2.add(new ExampleModel("Text child2 " + i, false, null));
+//            child2.add(new ExampleModel("Text child2 " + i, false, null));
+//            child2.add(new ExampleModel("Text child2 " + i, false, null));
+//            child2.add(new ExampleModel("Text child2 " + i, false, null));
+//            child2.add(new ExampleModel("Text child2 " + i, false, null));
+//            child.add(new ExampleModel("Text child with child " + i, false, child2));
+//            child.add(new ExampleModel("Text child " + i, false, null));
+//            child.add(new ExampleModel("Text child with child " + i, false, child2));
+//            child.add(new ExampleModel("Text child " + i, false, null));
+//            child.add(new ExampleModel("Text child with child " + i, false, child2));
+//            mModels.add(new ExampleModel("Header " + i, false, child));
+//        }
+//        mAdapter = new ExampleAdapter(getActivity(), jobModels);
+//        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity()
                 .getApplicationContext(), (_context, _view, _position) -> {
             if (mAdapter.getItem(_position).child != null) {
@@ -242,7 +264,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void afterTextChanged(Editable s) {
-                final List<ExampleModel> filteredModelList = filter(mModels, s.toString());
+                final List<JobModel> filteredModelList = filter(jobModels, s.toString());
                 mAdapter.animateTo(filteredModelList);
                 mRecyclerView.scrollToPosition(0);
             }
@@ -272,12 +294,12 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 //        return false;
 //    }
 
-    private List<ExampleModel> filter(List<ExampleModel> models, String query) {
+    private List<JobModel> filter(List<JobModel> models, String query) {
         query = query.toLowerCase();
 
-        final List<ExampleModel> filteredModelList = new ArrayList<>();
-        for (ExampleModel model : models) {
-            final String text = model.mText.toLowerCase();
+        final List<JobModel> filteredModelList = new ArrayList<>();
+        for (JobModel model : models) {
+            final String text = model.from_fullname.toLowerCase();
             if (text.contains(query)) {
                 filteredModelList.add(model);
             }

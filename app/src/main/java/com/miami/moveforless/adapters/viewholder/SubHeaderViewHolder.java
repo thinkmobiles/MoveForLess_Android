@@ -3,6 +3,7 @@ package com.miami.moveforless.adapters.viewholder;
 import android.view.View;
 
 import com.miami.moveforless.adapters.models.ExampleModel;
+import com.miami.moveforless.database.model.JobModel;
 
 /**
  * Created by SetKrul on 30.10.2015.
@@ -17,7 +18,9 @@ public class SubHeaderViewHolder extends AbstractViewHolder {
     }
 
     @Override
-    public void bind(ExampleModel model) {
-//        tvText.setText(model.mText + " @@@@@");
+    public void bind(JobModel model) {
+
     }
+
+
 }

@@ -40,4 +40,8 @@ public class Const {
     final public static int REQUEST_PHOTO = 10000;
     final public static int REQUEST_GALLERY_IMAGE = 10002;
 
+    public static final String TIME_12_HOUR_FORMAT = "hh:mmaa";
+    public static final String TIME_MONTH_DAY_FORMAT = "MM/dd";
+    public static final String TIME_MONTH_DAY_YEAR_FORMAT = "E MM/dd/yyyy";
+
 }
