@@ -14,6 +14,7 @@ import com.miami.moveforless.adapters.viewholder.HeaderViewHolder;
 import com.miami.moveforless.adapters.viewholder.ItemViewHolder;
 import com.miami.moveforless.adapters.viewholder.SubHeaderViewHolder;
 import com.miami.moveforless.adapters.viewholder.SubItemViewHolder;
+import com.miami.moveforless.database.model.JobModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,24 +25,24 @@ import java.util.List;
 public class ExampleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
 
     private final LayoutInflater mInflater;
-    private final List<ExampleModel> mModels;
+    private final List<JobModel> mModels;
 
-    public ExampleAdapter(Context context, List<ExampleModel> models) {
-        mInflater = LayoutInflater.from(context);
-        mModels = new ArrayList<>(models);
+    public ExampleAdapter(Context context, List<JobModel> models) {
+        this.mInflater = LayoutInflater.from(context);
+        this.mModels = models;
     }
 
     @Override
     public int getItemViewType(int _position) {
-        if (getItem(_position).child == null){
+//        if (getItem(_position).child == null){
             return ConstantHolder.Item;
-        } else {
-            if (getItem(_position).child != null && getItem(_position).child.get(0).child == null){
-                return ConstantHolder.SubHeader;
-            } else {
-                return ConstantHolder.Header;
-            }
-        }
+//        } else {
+//            if (getItem(_position).child != null && getItem(_position).child.get(0).child == null){
+//                return ConstantHolder.SubHeader;
+//            } else {
+//                return ConstantHolder.Header;
+//            }
+//        }
 //        return getItem(_position).child == null ? ConstantHolder.Item :  ConstantHolder.Header;
     }
 
@@ -69,11 +70,11 @@ public class ExampleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
 
     @Override
     public void onBindViewHolder(AbstractViewHolder holder, int position) {
-        final ExampleModel model = mModels.get(position);
-        holder.bind(model);
+        final JobModel jobModel = mModels.get(position);
+        holder.bind(jobModel);
     }
 
-    public ExampleModel getItem(int _position) {
+    public JobModel getItem(int _position) {
         return mModels.get(_position);
     }
 
@@ -82,33 +83,33 @@ public class ExampleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
         return mModels.size();
     }
 
-    public void animateTo(List<ExampleModel> models) {
+    public void animateTo(List<JobModel> models) {
         applyAndAnimateRemovals(models);
         applyAndAnimateAdditions(models);
         applyAndAnimateMovedItems(models);
     }
 
-    public void applyAndAnimateRemovals(List<ExampleModel> newModels) {
+    public void applyAndAnimateRemovals(List<JobModel> newModels) {
         for (int i = mModels.size() - 1; i >= 0; i--) {
-            final ExampleModel model = mModels.get(i);
+            final JobModel model = mModels.get(i);
             if (!newModels.contains(model)) {
                 removeItem(i);
             }
         }
     }
 
-    public void applyAndAnimateAdditions(List<ExampleModel> newModels) {
+    public void applyAndAnimateAdditions(List<JobModel> newModels) {
         for (int i = 0, count = newModels.size(); i < count; i++) {
-            final ExampleModel model = newModels.get(i);
+            final JobModel model = newModels.get(i);
             if (!mModels.contains(model)) {
                 addItem(i, model);
             }
         }
     }
 
-    private void applyAndAnimateMovedItems(List<ExampleModel> newModels) {
+    private void applyAndAnimateMovedItems(List<JobModel> newModels) {
         for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
-            final ExampleModel model = newModels.get(toPosition);
+            final JobModel model = newModels.get(toPosition);
             final int fromPosition = mModels.indexOf(model);
             if (fromPosition >= 0 && fromPosition != toPosition) {
                 moveItem(fromPosition, toPosition);
@@ -116,26 +117,26 @@ public class ExampleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
         }
     }
 
-    public ExampleModel removeItem(int position) {
-        final ExampleModel model = mModels.remove(position);
+    public JobModel removeItem(int position) {
+        final JobModel model = mModels.remove(position);
         notifyItemRemoved(position);
         return model;
     }
 
-    public void addItem(int position, ExampleModel model) {
+    public void addItem(int position, JobModel model) {
         mModels.add(position, model);
         notifyItemInserted(position);
     }
 
-    public void addChild(int position, ExampleModel model) {
-        for (ExampleModel e : model.child) {
+    public void addChild(int position, JobModel model) {
+        for (JobModel e : model.child) {
             mModels.add(position, e);
             notifyItemInserted(position);
         }
     }
 
-    public ExampleModel removeChild(int position, ExampleModel model) {
-        for (ExampleModel e : model.child) {
+    public JobModel removeChild(int position, JobModel model) {
+        for (JobModel e : model.child) {
             mModels.remove(position);
             notifyItemRemoved(position);
         }
@@ -143,7 +144,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
     }
 
     public void moveItem(int fromPosition, int toPosition) {
-        final ExampleModel model = mModels.remove(fromPosition);
+        final JobModel model = mModels.remove(fromPosition);
         mModels.add(toPosition, model);
         notifyItemMoved(fromPosition, toPosition);
     }

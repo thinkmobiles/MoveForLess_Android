@@ -50,4 +50,8 @@ public class Const {
     public static PayPalConfiguration config = new PayPalConfiguration().environment(CONFIG_ENVIRONMENT).clientId
             (CONFIG_CLIENT_ID).rememberUser(false);
 
+    public static final String TIME_12_HOUR_FORMAT = "hh:mmaa";
+    public static final String TIME_MONTH_DAY_FORMAT = "MM/dd";
+    public static final String TIME_MONTH_DAY_YEAR_FORMAT = "E MM/dd/yyyy";
+
 }
