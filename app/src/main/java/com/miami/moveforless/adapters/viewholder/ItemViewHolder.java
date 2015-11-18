@@ -1,20 +1,12 @@
 package com.miami.moveforless.adapters.viewholder;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
-import android.location.Location;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.miami.moveforless.App;
 import com.miami.moveforless.R;
+import com.miami.moveforless.customviews.DetailAddressPopupWindow;
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.globalconstants.Const;
 import com.miami.moveforless.utils.TimeUtil;
@@ -46,6 +38,7 @@ public class ItemViewHolder extends AbstractViewHolder implements View.OnClickLi
         tvRequiredPickupDate = (TextView) itemView.findViewById(R.id.tvRequiredPickupDate_IE);
 
         tvToZipcode.setOnClickListener(this);
+        tvFromZipcode.setOnClickListener(this);
     }
 
     @Override
@@ -57,10 +50,10 @@ public class ItemViewHolder extends AbstractViewHolder implements View.OnClickLi
         tvFromZipcode.setText(model.from_zipcode.trim());
         tvFullname.setText(model.from_fullname.trim());
         tvToZipcode.setText(model.to_zipcode.trim());
-        tvRequiredPickupDate.setText(TimeUtil.getDate(model.RequiredPickupDate.trim(),
-                Const.TIME_12_HOUR_FORMAT));
-        tvPickupDate.setText(TimeUtil.getDate(model.pickup_date.trim(),
-                Const.TIME_MONTH_DAY_FORMAT));
+        tvRequiredPickupDate.setText(TimeUtil.getDate(model.RequiredPickupDate.trim(), Const
+                .TIME_12_HOUR_FORMAT));
+        tvPickupDate.setText(TimeUtil.getDate(model.pickup_date.trim(), Const
+                .TIME_MONTH_DAY_FORMAT));
     }
 
 
@@ -84,21 +77,18 @@ public class ItemViewHolder extends AbstractViewHolder implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        LayoutInflater layoutInflater = (LayoutInflater) App.getAppContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popupView = layoutInflater.inflate(R.layout.popup_window, null);
-
-        final PopupWindow popupWindow = new PopupWindow(popupView,
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        tvDetailAddress = (TextView) popupView.findViewById(R.id.tvDetailAddress_PW);
-
-        tvDetailAddress.setText(mJobModel.from_address.trim());
-
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setFocusable(true);
-
-        popupWindow.showAtLocation(v, Gravity.TOP | Gravity.LEFT, locateView(v).left, locateView(v).bottom);
+        int id = v.getId();
+        switch (id) {
+            case R.id.tvToZipcode_IE:
+                DetailAddressPopupWindow toPopup = new DetailAddressPopupWindow(App.getAppContext(), mJobModel.to_city + " " +
+                        mJobModel.to_address);
+                toPopup.show(v);
+                break;
+            case R.id.tvFromZipcode_IE:
+                DetailAddressPopupWindow fromPopups = new DetailAddressPopupWindow(App.getAppContext(), mJobModel.from_city + " " +
+                        mJobModel.from_address);
+                fromPopups.show(v);
+                break;
+        }
     }
 }

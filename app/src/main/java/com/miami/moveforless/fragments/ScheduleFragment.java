@@ -86,12 +86,16 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                 RestClient.getInstance().getListNumberMen(),
                 RestClient.getInstance().getListMoveSize(),
                 (jobResponses1, listNumberMenResponse, listMoveSizeResponse) ->{
-                    DatabaseController.getInstance().dropDataBase(App.getAppContext());
+//                    DatabaseController.getInstance().dropDataBase(App.getAppContext());
+                    for (int i = 0; i < 5; i++) {
                     saveInDatabase(jobResponses1);
+
+                    }
                     saveInDatabase(listNumberMenResponse.number_men);
                     saveInDatabase(listMoveSizeResponse.move_sizes);
 
                     jobModels = DatabaseController.getInstance().getListJob();
+
                     mAdapter = new ExampleAdapter(getActivity(), jobModels);
                     mRecyclerView.setAdapter(mAdapter);
                         return jobResponses1 != null && listNumberMenResponse != null && listMoveSizeResponse != null;

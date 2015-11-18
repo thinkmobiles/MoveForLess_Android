@@ -102,7 +102,7 @@
         <item name="customFont">medium</item>
     </style>
 
-    <style name="BaseButtonStyle" >
+    <style name="BaseButtonStyle">
         <item name="android:background">@drawable/button_green</item>
         <item name="android:textColor">@color/cyan_light</item>
         <item name="android:textSize">@dimen/base_button_text_size</item>
@@ -150,7 +150,6 @@
     </style>
 
 
-
     <!--questionnaire screen-->
     <style name="QuestionnaireDescriptionTextStyle" parent="BaseTextStyle">
         <item name="android:layout_marginTop">@dimen/questionnaire_text_margin_top_bottom</item>
@@ -173,10 +172,10 @@
         <item name="android:layout_marginLeft">35dp</item>
     </style>
 
-    <style name="Animations" />
+    <style name="Animations"/>
 
     <!-- PopDownMenu -->
-    <style name="Animations.PopDownMenu" />
+    <style name="Animations.PopDownMenu"/>
 
     <style name="Animations.PopDownMenu.Center">
         <item name="@android:windowEnterAnimation">@anim/grow_from_top</item>
@@ -185,11 +184,22 @@
 
 
     <!-- PopUpMenu -->
-    <style name="Animations.PopUpMenu" />
+    <style name="Animations.PopUpMenu"/>
 
     <style name="Animations.PopUpMenu.Center">
         <item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
         <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
+    </style>
+
+    <style name="ChromeStylePopup" parent="android:Widget.TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:minWidth">75dp</item>
+        <item name="android:maxWidth">175dp</item>
+        <item name="android:padding">6dp</item>
+        <item name="android:textColor">@color/cyan_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
 
 
