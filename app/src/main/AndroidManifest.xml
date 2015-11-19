@@ -38,6 +38,7 @@
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="stateHidden"
             android:theme="@style/MainTheme">
 
             <intent-filter>

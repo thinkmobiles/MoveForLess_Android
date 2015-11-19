@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root_container_AL"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:paddingBottom="30dp"
     android:weightSum="100">
 
     <LinearLayout
@@ -18,19 +18,21 @@
         android:weightSum="100">
 
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/root_container_AL"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="match_parent"
             android:layout_weight="50"
-            android:gravity="center_horizontal"
+            android:gravity="center_vertical"
             android:orientation="vertical"
             android:weightSum="100">
 
             <LinearLayout
+                android:id='@+id/animation_logo_AL'
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/logo_margin_top">
+                android:layout_marginTop="@dimen/logo_margin_top"
+                android:layout_gravity="center">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -46,44 +48,84 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/input_container_margin_top"
-                android:layout_marginLeft="@dimen/input_container_paddingLeft_right"
-                android:layout_marginRight="@dimen/input_container_paddingLeft_right"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal">
+                android:animateLayoutChanges="true"
+                >
 
-                <com.miami.moveforless.customviews.Helvetica.HelveticaEditText
-                    android:id="@+id/etEmail_AL"
-                    style="@style/BaseEditTextStyle"
+                <LinearLayout
+                    android:id="@+id/non_animation_logo_AL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email"
-                    android:text="soslan"
-                    android:inputType="text"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_marginTop="@dimen/logo_margin_top"
+                    android:layout_gravity="center"
 
-                <com.miami.moveforless.customviews.Helvetica.HelveticaEditText
-                    android:id="@+id/etPassword_AL"
-                    style="@style/BaseEditTextStyle"
+                    android:visibility="invisible">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/logo_login" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/login_container_AL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/password_margin_top"
-                    android:hint="@string/password"
-                    android:text="pass123"
-                    android:inputType="textPassword"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_marginLeft="@dimen/input_container_paddingLeft_right"
+                    android:layout_marginRight="@dimen/input_container_paddingLeft_right"
+                    android:layout_marginTop="@dimen/input_container_margin_top"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <com.miami.moveforless.customviews.Helvetica.HelveticaButton
-                    android:id="@+id/btnLogin_AL"
-                    style="@style/LoginButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/login_button_margin_top" />
+                    <com.miami.moveforless.customviews.Helvetica.HelveticaEditText
+                        android:id="@+id/etEmail_AL"
+                        style="@style/BaseEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/email"
+                        android:inputType="text"
+                        android:text="soslan" />
+
+                    <com.miami.moveforless.customviews.Helvetica.HelveticaEditText
+                        android:id="@+id/etPassword_AL"
+                        style="@style/BaseEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/password_margin_top"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:text="pass123" />
+
+                    <com.miami.moveforless.customviews.Helvetica.HelveticaButton
+                        android:id="@+id/btnLogin_AL"
+                        style="@style/LoginButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/login_button_margin_top" />
 
 
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+            <com.miami.moveforless.customviews.CustomProgressBar
+                android:id="@+id/progress_AL"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:indeterminate="true"
+                android:visibility="invisible"
+                custom:duration="2500"
+                custom:progressColour="@color/cyan_ultra_dark_alpha"
+                custom:backgroundColour="@color/cyan_light_alpha"
+                android:layout_gravity="bottom" />
+
+        </FrameLayout>
 
     </LinearLayout>
 

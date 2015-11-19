@@ -10,7 +10,8 @@
     <color name="cyan_dark">#007051</color>
     <color name="cyan_ultra_dark">#005A3F</color>
     <color name="cyan_light">#80CBC4</color>
-
+    <color name="cyan_light_alpha">#4480CBC4</color>
+    <color name="cyan_ultra_dark_alpha">#88005A3F</color>
     <color name="blue_light">#d2eee8</color>
     <color name="blue_ultra_light">#f2faf9</color>
     <color name="blue_dialog">#e4f7f3</color>

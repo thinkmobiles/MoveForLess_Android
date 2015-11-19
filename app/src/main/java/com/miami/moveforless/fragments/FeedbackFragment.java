@@ -2,6 +2,8 @@ package com.miami.moveforless.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.RatingBar;
 
@@ -14,18 +16,28 @@ import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.utils.RxUtils;
 
 import butterknife.Bind;
+import butterknife.BindColor;
 import butterknife.BindString;
 import rx.Subscription;
 
 /**
  * Created by klim on 12.11.15.
  */
-public class FeedbackFragment extends BaseJobDetailFragment {
-    @BindString(R.string.send_feedback_successfull)      String strSendSuccessfull;
-    @Bind(R.id.btnSend_FF)                                  Button btnSend;
-    @Bind(R.id.btnClaim_FF)                                 Button btnClaim;
-    @Bind(R.id.etFeedBack_FF)                               HelveticaEditText etFeedback;
-    @Bind(R.id.ratingbar_FF)                                RatingBar mRatingBar;
+public class FeedbackFragment extends BaseJobDetailFragment implements TextWatcher {
+    @BindString(R.string.send_feedback_successfull)
+    String strSendSuccessfull;
+    @BindColor(R.color.cyan_dark)
+    int cyanDark;
+    @BindColor(R.color.cyan_light)
+    int cyanLight;
+    @Bind(R.id.btnSend_FF)
+    Button btnSend;
+    @Bind(R.id.btnClaim_FF)
+    Button btnClaim;
+    @Bind(R.id.etFeedBack_FF)
+    HelveticaEditText etFeedback;
+    @Bind(R.id.ratingbar_FF)
+    RatingBar mRatingBar;
 
     private Subscription sendSubscription;
 
@@ -45,6 +57,7 @@ public class FeedbackFragment extends BaseJobDetailFragment {
 
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
+        mRatingBar.setOnRatingBarChangeListener((ratingBar, v, b) -> changeSendButton(true));
         RxUtils.click(btnSend, o -> btnSendClicked());
         RxUtils.click(btnClaim, o -> btnOpenClaim());
     }
@@ -85,4 +98,30 @@ public class FeedbackFragment extends BaseJobDetailFragment {
         etFeedback.setText("");
         mRatingBar.setRating(0f);
     }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        changeSendButton(charSequence.length() == 0 ? false : true);
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
+
+    private void changeSendButton(boolean _isEnabled) {
+        if (_isEnabled) {
+            btnSend.setBackgroundResource(R.drawable.button_yellow);
+            btnSend.setTextColor(cyanDark);
+        } else {
+            btnSend.setBackgroundResource(R.drawable.button_green);
+            btnSend.setTextColor(cyanLight);
+        }
+    }
+
 }

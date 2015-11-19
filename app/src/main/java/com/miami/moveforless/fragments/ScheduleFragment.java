@@ -61,7 +61,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private Date dateNow;
     private CaldroidListener listener;
     private List<JobResponse> jobResponses;
-    private Subscription mJobDataSubscription;
+
     private List<JobModel> jobModels;
 
     @Override
@@ -74,45 +74,11 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         setHasOptionsMenu(true);
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
-        getData();
-    }
 
+        jobModels = DatabaseController.getInstance().getListJob();
+//        mAdapter = new ExampleAdapter(getActivity(), jobModels);
+//        mRecyclerView.setAdapter(mAdapter);
 
-    private void getData() {
-        showLoadingDialog(strLoading);
-        if (mJobDataSubscription != null) removeSubscription(mJobDataSubscription);
-        mJobDataSubscription = Observable.combineLatest(
-                RestClient.getInstance().jobList(),
-                RestClient.getInstance().getListNumberMen(),
-                RestClient.getInstance().getListMoveSize(),
-                (jobResponses1, listNumberMenResponse, listMoveSizeResponse) ->{
-                    DatabaseController.getInstance().dropDataBase(App.getAppContext());
-                    saveInDatabase(jobResponses1);
-                    saveInDatabase(listNumberMenResponse.number_men);
-                    saveInDatabase(listMoveSizeResponse.move_sizes);
-
-                    jobModels = DatabaseController.getInstance().getListJob();
-                    mAdapter = new ExampleAdapter(getActivity(), jobModels);
-                    mRecyclerView.setAdapter(mAdapter);
-                        return jobResponses1 != null && listNumberMenResponse != null && listMoveSizeResponse != null;
-                })
-                .subscribe(this::onJobDataSuccess, this::onError);
-        addSubscription(mJobDataSubscription);
-    }
-
-    private void saveInDatabase(List<? extends BaseModel> list) {
-        for (BaseModel item : list) {
-            item.save();
-        }
-    }
-
-    private void onJobDataSuccess(boolean _isloaded) {
-        hideLoadingDialog();
-    }
-
-    private void onError(Throwable _throwable) {
-        hideLoadingDialog();
-        showErrorDialog(ErrorParser.parse(_throwable));
     }
 
     @Override

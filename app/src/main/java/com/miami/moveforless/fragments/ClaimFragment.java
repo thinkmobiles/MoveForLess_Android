@@ -3,11 +3,14 @@ package com.miami.moveforless.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.miami.moveforless.R;
 import com.miami.moveforless.customviews.PhotoLayout.PhotoLayout;
 import com.miami.moveforless.dialogs.PhotoDialog;
@@ -24,15 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.BindColor;
 import butterknife.BindString;
 import rx.Subscription;
 
 /**
  * Created by klim on 16.11.15.
  */
-public class ClaimFragment extends BaseJobDetailFragment {
+public class ClaimFragment extends BaseJobDetailFragment implements TextWatcher{
     @BindString(R.string.send_claim_successfull)
     String strSendSuccessfull;
+    @BindColor(R.color.cyan_dark) int cyanDark;
+    @BindColor(R.color.cyan_light) int cyanLight;
     @Bind(R.id.photos_container_FF)
     PhotoLayout mPhotosContainer;
     @Bind(R.id.btnAdd_FC)
@@ -73,6 +79,7 @@ public class ClaimFragment extends BaseJobDetailFragment {
 
         RxUtils.click(btnAdd, o -> btnAddPhoto());
         RxUtils.click(btnSend, o -> btnSendClicked());
+        etClaim.addTextChangedListener(this);
     }
 
     @Override
@@ -154,7 +161,7 @@ public class ClaimFragment extends BaseJobDetailFragment {
         hideLoadingDialog();
 
         showInfoDialog(strSendSuccessfull, view -> {
-            clearAll();
+//            clearAll();
             getParentFragment().onActivityResult(Const.CLAIM_REQUEST_ID, Activity.RESULT_OK, null);
             getActivity().onBackPressed();
         });
@@ -178,4 +185,24 @@ public class ClaimFragment extends BaseJobDetailFragment {
         mPhotos.clear();
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        if (charSequence.length() == 0) {
+            btnSend.setBackgroundResource(R.drawable.button_green);
+            btnSend.setTextColor(cyanLight);
+        } else {
+            btnSend.setBackgroundResource(R.drawable.button_yellow);
+            btnSend.setTextColor(cyanDark);
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
 }

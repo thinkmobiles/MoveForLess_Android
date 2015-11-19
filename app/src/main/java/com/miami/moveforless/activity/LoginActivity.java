@@ -1,91 +1,158 @@
 package com.miami.moveforless.activity;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.miami.moveforless.App;
 import com.miami.moveforless.R;
+import com.miami.moveforless.customviews.CustomProgressBar;
+import com.miami.moveforless.database.DatabaseController;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.utils.RxUtils;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+import java.util.List;
 
 import butterknife.Bind;
-import butterknife.BindColor;
+import butterknife.BindString;
+import rx.Observable;
 import rx.Subscription;
 
 /**
  * Created by klim on 20.10.15.
  */
 public class LoginActivity extends BaseActivity {
-
-    @Bind(R.id.etEmail_AL)
-    EditText etEmail;
-    @Bind(R.id.etPassword_AL)
-    EditText etPassword;
-    @Bind(R.id.btnLogin_AL)
-    Button btnLogin;
+    @BindString(R.string.login_loading)         String strLogin;
+    @Bind(R.id.etEmail_AL)                      EditText etEmail;
+    @Bind(R.id.etPassword_AL)                   EditText etPassword;
+    @Bind(R.id.btnLogin_AL)                     Button btnLogin;
+    @Bind(R.id.non_animation_logo_AL)           ViewGroup mNonAnimLogoContainer;
+    @Bind(R.id.animation_logo_AL)               ViewGroup mAnimLogoContainer;
+    @Bind(R.id.login_container_AL)              ViewGroup mLoginContainer;
+    @Bind(R.id.root_container_AL)               ViewGroup mRootContainer;
+    @Bind(R.id.progress_AL)                     CustomProgressBar mProgressBar;
 
     private Subscription loginSubscription;
+    private Subscription mJobDataSubscription;
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-
-        if (!SharedPrefManager.getInstance().retrieveToken().isEmpty()) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-            return;
-        }
-
         setContentView(R.layout.activity_login);
-        RxUtils.click(btnLogin, o -> login());
-    }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+        RxUtils.click(btnLogin, o -> login());
+
+        if (SharedPrefManager.getInstance().retrieveToken().isEmpty()) {
+            mNonAnimLogoContainer.setVisibility(View.VISIBLE);
+            mLoginContainer.setVisibility(View.VISIBLE);
+            mAnimLogoContainer.setVisibility(View.GONE);
+            mProgressBar.setVisibility(View.INVISIBLE);
+        } else {
+            mAnimLogoContainer.setVisibility(View.VISIBLE);
+            mNonAnimLogoContainer.setVisibility(View.INVISIBLE);
+            mLoginContainer.setVisibility(View.GONE);
+            mProgressBar.setVisibility(View.VISIBLE);
+            getData();
+        }
 
     }
 
     private void login() {
-        showLoadingDialog(getString(R.string.login));
+        showLoadingDialog(strLogin);
         if (loginSubscription != null) removeSubscription(loginSubscription);
         loginSubscription = RestClient.getInstance().login(etEmail.getText().toString(), etPassword.getText().toString())
-                .subscribe(this::onSuccess, this::onError);
+                .subscribe(this::onLoginSuccess, this::onError);
         addSubscription(loginSubscription);
     }
 
-    private void onSuccess(String _token) {
-        hideLoadingDialog();
+    private void onLoginSuccess(String _token) {
         SharedPrefManager.getInstance().storeToken(_token);
-        SharedPrefManager.getInstance().storeUsername(etEmail.getText().toString());
-        SharedPrefManager.getInstance().storeUserPassword(etPassword.getText().toString());
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
-
+        getData();
     }
 
     private void onError(Throwable _throwable) {
         hideLoadingDialog();
-        showErrorDialog(ErrorParser.parse(_throwable));
-//        Snackbar snackbar = Snackbar.
-//                make(mRootView, ErrorParser.parse(_throwable), Snackbar.LENGTH_LONG);
-//        TextView textView = (TextView) snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
-//        textView.setTextSize(20f);
-//        textView.setTextColor(clrYellow);
-//        snackbar.show();
+        String error = ErrorParser.parse(_throwable);
+        if (error.equals("Invalid token")) {
+            startTransitionAnimation();
+        } else {
+            showErrorDialog(error);
+        }
+    }
+
+
+    private void getData() {
+        if (mJobDataSubscription != null) removeSubscription(mJobDataSubscription);
+        mJobDataSubscription = Observable.combineLatest(
+                RestClient.getInstance().jobList(),
+                RestClient.getInstance().getListNumberMen(),
+                RestClient.getInstance().getListMoveSize(),
+                (jobResponses1, listNumberMenResponse, listMoveSizeResponse) -> {
+                    DatabaseController.getInstance().dropDataBase(App.getAppContext());
+                    saveInDatabase(jobResponses1);
+                    saveInDatabase(listNumberMenResponse.number_men);
+                    saveInDatabase(listMoveSizeResponse.move_sizes);
+
+                    return jobResponses1 != null && listNumberMenResponse != null && listMoveSizeResponse != null;
+                })
+                .subscribe(this::onJobDataSuccess, this::onError);
+        addSubscription(mJobDataSubscription);
+    }
+
+    private void saveInDatabase(List<? extends BaseModel> list) {
+        for (BaseModel item : list) {
+            item.save();
+        }
+    }
+
+    private void onJobDataSuccess(boolean _isloaded) {
+        hideLoadingDialog();
+        startMainActivity();
+    }
+
+    public void startTransitionAnimation() {
+        mProgressBar.setVisibility(View.INVISIBLE);
+        int startY = mAnimLogoContainer.getTop();
+        float targetY = getResources().getDimension(R.dimen.logo_margin_top);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mAnimLogoContainer, "y", startY, targetY);
+        animator.setDuration(500);
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                mLoginContainer.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        animator.start();
+    }
+
+
+    private void startMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }
