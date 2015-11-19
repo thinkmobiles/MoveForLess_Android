@@ -33,7 +33,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
     @Override
     public int getItemViewType(int _position) {
 //        if (getItem(_position).child == null){
-            return ConstantHolder.Item;
+//            return ConstantHolder.Item;
 //        } else {
 //            if (getItem(_position).child != null && getItem(_position).child.get(0).child == null){
 //                return ConstantHolder.SubHeader;
@@ -42,6 +42,12 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
 //            }
 //        }
 //        return getItem(_position).child == null ? ConstantHolder.Item :  ConstantHolder.Header;
+
+        if (getItem(_position).isActive == 1){
+            return ConstantHolder.Header;
+        } else {
+            return ConstantHolder.Item;
+        }
     }
 
     @Override

@@ -38,9 +38,6 @@ public final class DetailAddressPopupWindow {
 
     private Drawable mBackgroundDrawable = null;
 
-    private static final int CORRECTION_TOP_COORDINATES = 15;
-    private static final int CORRECTION_BOTTOM_COORDINATES = -20;
-
     public DetailAddressPopupWindow(Context context, String text, int viewResource) {
         mContext = context;
         mWindow = new PopupWindow(context);
@@ -56,18 +53,14 @@ public final class DetailAddressPopupWindow {
         mUpImageView = (ImageView) mView.findViewById(R.id.arrow_up);
         mDownImageView = (ImageView) mView.findViewById(R.id.arrow_down);
 
-        mHelpTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
-        mHelpTextView.setSelected(true);
     }
 
     public DetailAddressPopupWindow(Context context) {
         this(context, "", R.layout.popup_window);
-
     }
 
     public DetailAddressPopupWindow(Context context, String text) {
         this(context);
-
         setText(text);
     }
 
@@ -97,7 +90,7 @@ public final class DetailAddressPopupWindow {
 
         boolean onTop = true;
 
-        if (anchorRect.top < screenHeight / 2 + 15) {
+        if (anchorRect.top < rootHeight) {
             yPos = anchorRect.bottom;
             onTop = false;
         }
@@ -112,6 +105,10 @@ public final class DetailAddressPopupWindow {
 
         final int arrowWidth = arrow.getMeasuredWidth();
 
+        if (!onTop){
+            hideArrow.setRotation(180);
+        }
+
         arrow.setVisibility(View.VISIBLE);
 
         ViewGroup.MarginLayoutParams param = (ViewGroup.MarginLayoutParams) arrow.getLayoutParams();
@@ -120,34 +117,24 @@ public final class DetailAddressPopupWindow {
 
         int xPos = 0;
 
-        // ETXTREME RIGHT CLIKED
         if (anchorRect.left + rootWidth > screenWidth) {
             xPos = (screenWidth - rootWidth);
         }
-        // ETXTREME LEFT CLIKED
         else if (anchorRect.left - (rootWidth / 2) < 0) {
             xPos = anchorRect.left;
         }
-        // INBETWEEN
         else {
             xPos = (anchorRect.centerX() - (rootWidth / 2));
         }
 
         param.leftMargin = (requestedX - xPos) - (arrowWidth / 2);
 
-        if (onTop) {
+        if (onTop)
             mHelpTextView.setMaxHeight(anchorRect.top - anchorRect.height());
-            mWindow.showAtLocation(anchor, Gravity.NO_GRAVITY, xPos, yPos -
-                    CORRECTION_BOTTOM_COORDINATES);
-
-
-        } else {
+         else
             mHelpTextView.setMaxHeight(screenHeight - yPos);
-            mWindow.showAtLocation(anchor, Gravity.NO_GRAVITY, xPos, yPos -
-                    CORRECTION_TOP_COORDINATES);
 
-        }
-
+        mWindow.showAtLocation(anchor, Gravity.NO_GRAVITY, xPos, yPos);
         mView.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.float_anim));
 
     }

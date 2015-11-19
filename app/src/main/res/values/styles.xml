@@ -191,14 +191,14 @@
         <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
     </style>
 
-    <style name="ChromeStylePopup" parent="android:Widget.TextView">
+    <style name="StylePopup" parent="android:Widget.TextView">
         <item name="android:gravity">center</item>
         <item name="android:minHeight">50dp</item>
         <item name="android:minWidth">75dp</item>
         <item name="android:maxWidth">175dp</item>
         <item name="android:padding">6dp</item>
         <item name="android:textColor">@color/cyan_dark</item>
-        <item name="android:textStyle">bold</item>
+        <!--<item name="android:textStyle">bold</item>-->
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
 

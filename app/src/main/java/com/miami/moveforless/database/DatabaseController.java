@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
+import com.raizlabs.android.dbflow.sql.builder.Condition;
+import com.raizlabs.android.dbflow.sql.language.OrderBy;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.List;
@@ -27,7 +29,13 @@ public class DatabaseController implements AbstractControllerData {
     @Override
     public List<JobModel> getListJob() {
 //        return new Select().from(JobResponse.class).where("WHERE DATA > DATENOW || ISACTIVE = 1 ORDER BY ASC DATE").queryCustomList(JobModel.class);
-        return new Select().from(JobResponse.class).queryCustomList(JobModel.class);
+//        return new Select().from(JobResponse.class).queryCustomList(JobModel.class);
+        return new Select().from(JobResponse.class).orderBy(OrderBy.columns("isActive").descending()).queryCustomList(JobModel.class);
+    }
+
+    @Override
+    public JobModel getActiveJob() {
+        return new Select().from(JobResponse.class).where(Condition.column("isActive").eq(1)).queryCustomSingle(JobModel.class);
     }
 
     @Override
