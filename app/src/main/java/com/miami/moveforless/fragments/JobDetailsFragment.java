@@ -26,13 +26,10 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
         scrollView.parallaxViewBackgroundBy(scrollView, getResources().getDrawable(R.drawable.job_details_background), .2f);
-
     }
 
     @Override
     protected boolean isAllowGoHome() {
         return false;
     }
-
-
 }
