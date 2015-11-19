@@ -21,7 +21,7 @@
     <string name="ok">Ok</string>
     <string name="back__pressed_confirm_message">Do you really want go to the home screen?</string>
     <string name="payment_error">Entered amount is not enough. Please pay the required amount</string>
-
+    <string name="connection_error">Server is now responding. Do you want to continue in offline mode?</string>
 
     <!--Login-->
     <string name="email">E-mail</string>

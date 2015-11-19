@@ -122,7 +122,7 @@ public class RestClient {
         final String token = SharedPrefManager.getInstance().retrieveToken();
         Observable<List<JobResponse>> resp =  getInstance().getIMoverApi().jobList(new JobRequest("soslan", token))
                         .subscribeOn(Schedulers.io()).retry(2)
-                        .timeout(40, TimeUnit.SECONDS)
+                        .timeout(10, TimeUnit.SECONDS)
                         .observeOn(AndroidSchedulers.mainThread());
         return resp;
     }
@@ -160,7 +160,7 @@ public class RestClient {
                 token)
                 .subscribeOn(Schedulers.io())
                 .retry(2)
-                .timeout(40, TimeUnit.SECONDS)
+                .timeout(10, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -169,7 +169,7 @@ public class RestClient {
         return getInstance().getIMoverApi().numberMenList("2069", "soslan", token)
                 .subscribeOn(Schedulers.io())
                 .retry(2)
-                .timeout(40, TimeUnit.SECONDS)
+                .timeout(10, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 

@@ -10,9 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.miami.moveforless.App;
+import com.miami.moveforless.Exceptions.ConnectionException;
 import com.miami.moveforless.R;
 import com.miami.moveforless.customviews.CustomProgressBar;
 import com.miami.moveforless.database.DatabaseController;
+import com.miami.moveforless.dialogs.ConfirmDialog;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
@@ -20,6 +22,7 @@ import com.miami.moveforless.utils.RxUtils;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -31,6 +34,7 @@ import rx.Subscription;
  */
 public class LoginActivity extends BaseActivity {
     @BindString(R.string.login_loading)         String strLogin;
+    @BindString(R.string.connection_error)      String strConnectionError;
     @Bind(R.id.etEmail_AL)                      EditText etEmail;
     @Bind(R.id.etPassword_AL)                   EditText etPassword;
     @Bind(R.id.btnLogin_AL)                     Button btnLogin;
@@ -60,7 +64,7 @@ public class LoginActivity extends BaseActivity {
             mNonAnimLogoContainer.setVisibility(View.INVISIBLE);
             mLoginContainer.setVisibility(View.GONE);
             mProgressBar.setVisibility(View.VISIBLE);
-            getData();
+            getJobsData();
         }
 
     }
@@ -75,21 +79,30 @@ public class LoginActivity extends BaseActivity {
 
     private void onLoginSuccess(String _token) {
         SharedPrefManager.getInstance().storeToken(_token);
-        getData();
+        getJobsData();
     }
 
     private void onError(Throwable _throwable) {
         hideLoadingDialog();
-        String error = ErrorParser.parse(_throwable);
-        if (error.equals("Invalid token")) {
-            startTransitionAnimation();
+
+        if (ErrorParser.checkConnectionError(_throwable) instanceof ConnectionException) {
+            ConfirmDialog dialog = new ConfirmDialog();
+            dialog.setMesssage(strConnectionError);
+            dialog.setOnPositiveListener(view -> startMainActivity(0));
+            dialog.setOnNegativeListener(view -> finish());
+            dialog.show(getSupportFragmentManager(), "");
         } else {
-            showErrorDialog(error);
+            String error = ErrorParser.parse(_throwable);
+            if (error.equals("Invalid token")) {
+                startTransitionAnimation();
+            } else {
+                showErrorDialog(error);
+            }
         }
     }
 
 
-    private void getData() {
+    private void getJobsData() {
         if (mJobDataSubscription != null) removeSubscription(mJobDataSubscription);
         mJobDataSubscription = Observable.combineLatest(
                 RestClient.getInstance().jobList(),
@@ -115,7 +128,7 @@ public class LoginActivity extends BaseActivity {
 
     private void onJobDataSuccess(boolean _isloaded) {
         hideLoadingDialog();
-        startMainActivity();
+        startMainActivity(2);
     }
 
     public void startTransitionAnimation() {
@@ -149,10 +162,14 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-    private void startMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+    private void startMainActivity(int _delay) {
+        addSubscription(Observable.just(null)
+                .delay(_delay, TimeUnit.SECONDS)
+                .subscribe(o -> {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }));
     }
 }

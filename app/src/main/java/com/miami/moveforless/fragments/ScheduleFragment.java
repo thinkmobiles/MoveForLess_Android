@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -85,6 +86,17 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_schedule, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_details) {
+            if (getActivity() instanceof FragmentChanger) {
+                ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0,
+                        null), true);
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

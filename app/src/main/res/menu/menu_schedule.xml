@@ -8,5 +8,9 @@
         android:icon="@drawable/icn_refresh"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/menu_details"
+        android:title="details"
+        app:showAsAction="never"/>
 
 </menu>

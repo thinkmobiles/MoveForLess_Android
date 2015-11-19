@@ -69,6 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void showLoadingDialog(String _message) {
         progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
         progressDialog.setMessage(_message);
         progressDialog.show();
     }
