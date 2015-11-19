@@ -21,7 +21,7 @@ public class InfoDialog extends BaseDialog {
     @Bind(R.id.btnNegative_DIL)
     Button btnClose;
 
-    private String mMessage = "";
+    private String mMessage;
     private View.OnClickListener mListener;
 
     @Override

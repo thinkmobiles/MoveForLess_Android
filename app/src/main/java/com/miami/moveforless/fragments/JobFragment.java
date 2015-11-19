@@ -12,6 +12,7 @@ import com.miami.moveforless.R;
 import com.miami.moveforless.adapters.JobPageAdapter;
 import com.miami.moveforless.customviews.CustomTabLayout;
 import com.miami.moveforless.dialogs.ConfirmDialog;
+import com.miami.moveforless.dialogs.RouteDialog;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.FragmentEvent;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
@@ -38,15 +39,14 @@ public class JobFragment extends BaseFragment {
     CustomTabLayout mTabLayout;
     @Bind(R.id.viewPager_FJ)
     ViewPager mViewPager;
-    JobResponse mJobResponse;
 
     private int selectedTab = 0;
     private JobPageAdapter mAdapter;
 
-    public static Fragment newInstance(int _id, JobResponse _jobResponse) {
+    public static Fragment newInstance(int _id) {
         Bundle bundle = new Bundle();
-//        bundle.putParcelable("key", _jobResponse);
         bundle.putInt(Const.JOB_ID_KEY, _id);
+
         JobFragment fragment = new JobFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -59,18 +59,14 @@ public class JobFragment extends BaseFragment {
 
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
-//        mJobResponse = getArguments().getParcelable("key");
-//        try {
-//            new CreatePdf(this).createPdf();
         setHasOptionsMenu(true);
+
         mTabLayout.setBackgroundColor(clrCyanDark);
         mAdapter = new JobPageAdapter(getChildFragmentManager());
-//        mViewPager.setOffscreenPageLimit(1);
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.customizeTabs(mViewPager);
         mViewPager.setCurrentItem(selectedTab);
-        mViewPager.addOnPageChangeListener(mAdapter);
 
     }
 
@@ -124,17 +120,24 @@ public class JobFragment extends BaseFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            Fragment fragment = mAdapter.getItem(mViewPager.getCurrentItem());
-            if (fragment != null && fragment instanceof BaseJobDetailFragment) {
-                if (((BaseJobDetailFragment) fragment).isAllowGoHome()) {
-                    getActivity().getSupportFragmentManager().popBackStack();
-                } else {
-                    ConfirmDialog dialog = new ConfirmDialog();
-                    dialog.setMesssage(strBackPressed);
-                    dialog.setOnPositiveListener(view -> getActivity().getSupportFragmentManager().popBackStack());
-                    dialog.show(getActivity().getSupportFragmentManager(), "");
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Fragment fragment = mAdapter.getItem(mViewPager.getCurrentItem());
+                if (fragment != null && fragment instanceof BaseJobDetailFragment) {
+                    if (((BaseJobDetailFragment) fragment).isAllowGoHome()) {
+                        getActivity().getSupportFragmentManager().popBackStack();
+                    } else {
+                        ConfirmDialog dialog = new ConfirmDialog();
+                        dialog.setMessage(strBackPressed);
+                        dialog.setOnPositiveListener(view -> getActivity().getSupportFragmentManager().popBackStack());
+                        dialog.show(getActivity().getSupportFragmentManager(), "");
+                    }
                 }
+                break;
+            case R.id.menu_navigation: {
+                RouteDialog dialog = new RouteDialog();
+                dialog.show(getChildFragmentManager(), "");
+                break;
             }
         }
         return super.onOptionsItemSelected(item);

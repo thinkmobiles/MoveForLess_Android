@@ -5,10 +5,4 @@ package com.miami.moveforless.fragments.eventbus;
  */
 public class SwitchJobDetailsEvent {
 
-    FragmentType mType;
-
-    public SwitchJobDetailsEvent(/*FragmentType _type*/) {
-//        mType = _type;
-    }
-
 }

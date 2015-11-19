@@ -42,7 +42,7 @@ public class PhotoLayout extends GridLayout {
             placeholder.setLayoutParams(new FrameLayout.LayoutParams(width, width));
             addView(placeholder);
             calculateMargins();
-            placeholder.setEventListener(_view -> deletePhoto(_view));
+            placeholder.setEventListener(this::deletePhoto);
         } catch (IOException e) {
             e.printStackTrace();
         }

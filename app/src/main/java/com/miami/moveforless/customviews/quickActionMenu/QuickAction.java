@@ -1,16 +1,12 @@
 package com.miami.moveforless.customviews.quickActionMenu;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
@@ -23,76 +19,37 @@ import com.miami.moveforless.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * QuickAction dialog, shows action list as icon and text like the one in Gallery3D app. Currently supports vertical
- * and horizontal layout.
- *
- * @author Lorensius W. L. T <lorenz@londatiga.net>
- *         <p>
- *         Contributors:
- *         - Kevin Peck <kevinwpeck@gmail.com>
- */
-public class QuickAction extends PopupWindows implements OnDismissListener {
+public class QuickAction extends PopupWindows {
     private View mRootView;
     private LayoutInflater mInflater;
     private ViewGroup mTrack;
     private OnActionItemClickListener mItemClickListener;
-    private OnDismissListener mDismissListener;
-
     private List<ActionItem> actionItems = new ArrayList<ActionItem>();
 
     private int mChildPos;
     private int mInsertPos;
     private int rootHeight = 0;
 
-    /**
-     * Constructor allowing orientation override
-     *
-     * @param context Context
-     */
     public QuickAction(Context context) {
         super(context);
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         setRootViewId(R.layout.spinner_dropdown_layout);
-
-
         mChildPos = 0;
 
     }
 
-    /**
-     * Set root view.
-     *
-     * @param id Layout resource id
-     */
     public void setRootViewId(int id) {
         mRootView = mInflater.inflate(id, null);
         mTrack = (ViewGroup) mRootView.findViewById(R.id.tracks);
-
-        //This was previously defined on show() method, moved here to prevent force close that occured
-        //when tapping fastly on a view to show quickaction dialog.
-        //Thanx to zammbi (github.com/zammbi)
         mRootView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-
         setContentView(mRootView);
     }
 
-    /**
-     * Set listener for action item clicked.
-     *
-     * @param listener Listener
-     */
     public void setOnActionItemClickListener(OnActionItemClickListener listener) {
         mItemClickListener = listener;
     }
 
-    /**
-     * Add action item
-     *
-     * @param action {@link ActionItem}
-     */
     public void addActionItem(ActionItem action) {
         actionItems.add(action);
 
@@ -196,13 +153,6 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
         return y;
     }
 
-    @Override
-    public void onDismiss() {
-        if (mDismissListener != null) {
-            mDismissListener.onDismiss();
-        }
-    }
-
     /**
      * Listener for item click
      */
@@ -210,10 +160,4 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
         void onItemClick(QuickAction source, int pos, int actionId);
     }
 
-    /**
-     * Listener for window dismiss
-     */
-    public interface OnDismissListener {
-        void onDismiss();
-    }
 }

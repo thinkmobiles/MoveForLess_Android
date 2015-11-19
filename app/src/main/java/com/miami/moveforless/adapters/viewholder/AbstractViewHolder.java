@@ -3,7 +3,6 @@ package com.miami.moveforless.adapters.viewholder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.miami.moveforless.adapters.models.ExampleModel;
 import com.miami.moveforless.database.model.JobModel;
 
 /**

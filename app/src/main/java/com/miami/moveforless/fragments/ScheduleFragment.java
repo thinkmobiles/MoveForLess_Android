@@ -12,31 +12,23 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.miami.moveforless.App;
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
-import com.miami.moveforless.adapters.ExampleAdapter;
-import com.miami.moveforless.adapters.models.ExampleModel;
+import com.miami.moveforless.adapters.ScheduleAdapter;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
 import com.miami.moveforless.database.DatabaseController;
 import com.miami.moveforless.database.model.JobModel;
-import com.miami.moveforless.rest.ErrorParser;
-import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.rest.response.JobResponse;
-import com.miami.moveforless.utils.TimeUtil;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
 import butterknife.BindString;
-import rx.Observable;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
-import rx.Subscription;
 
 /**
  * Created by SetKrul on 30.10.2015.
@@ -56,8 +48,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     TextView tvBegin;
     @Bind(R.id.tvEnd_FS)
     TextView tvEnd;
-    private ExampleAdapter mAdapter;
-    private List<ExampleModel> mModels;
+    private ScheduleAdapter mAdapter;
+
     private CaldroidFragment dialogCaldroidFragment;
     private Date dateNow;
     private CaldroidListener listener;
@@ -77,9 +69,6 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         tvEnd.setOnClickListener(this);
 
         jobModels = DatabaseController.getInstance().getListJob();
-//        mAdapter = new ExampleAdapter(getActivity(), jobModels);
-//        mRecyclerView.setAdapter(mAdapter);
-
     }
 
     @Override
@@ -92,8 +81,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_details) {
             if (getActivity() instanceof FragmentChanger) {
-                ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0,
-                        null), true);
+                ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0), true);
             }
         }
         return super.onOptionsItemSelected(item);
@@ -179,31 +167,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        setHasOptionsMenu(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-//        jobModels = DatabaseController.getInstance().getListJob();
-
-//        mModels = new ArrayList<>();
-
-//        for (int i = 0; i < 5; i++) {
-//            List<ExampleModel> child = new ArrayList<>();
-//            List<ExampleModel> child2 = new ArrayList<>();
-//            child2.add(new ExampleModel("Text child2 " + i, false, null));
-//            child2.add(new ExampleModel("Text child2 " + i, false, null));
-//            child2.add(new ExampleModel("Text child2 " + i, false, null));
-//            child2.add(new ExampleModel("Text child2 " + i, false, null));
-//            child2.add(new ExampleModel("Text child2 " + i, false, null));
-//            child2.add(new ExampleModel("Text child2 " + i, false, null));
-//            child.add(new ExampleModel("Text child with child " + i, false, child2));
-//            child.add(new ExampleModel("Text child " + i, false, null));
-//            child.add(new ExampleModel("Text child with child " + i, false, child2));
-//            child.add(new ExampleModel("Text child " + i, false, null));
-//            child.add(new ExampleModel("Text child with child " + i, false, child2));
-//            mModels.add(new ExampleModel("Header " + i, false, child));
-//        }
-//        mAdapter = new ExampleAdapter(getActivity(), jobModels);
-//        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity()
                 .getApplicationContext(), (_context, _view, _position) -> {
             if (mAdapter.getItem(_position).child != null) {
@@ -223,8 +188,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                 }
             } else {
                 if (getActivity() instanceof FragmentChanger) {
-                    ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0,
-                            null), true);
+                    ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0), true);
                 }
             }
         }));
@@ -248,29 +212,6 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             }
         });
     }
-
-
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-////        inflater.inflate(R.menu.menu_main, menu);
-//
-//        final MenuItem item = menu.findItem(R.id.action_search);
-//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-//
-//    }
-
-//    @Override
-//    public boolean onQueryTextChange(String query) {
-//        final List<ExampleModel> filteredModelList = filter(mModels, query);
-//        mAdapter.animateTo(filteredModelList);
-//        mRecyclerView.scrollToPosition(0);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onQueryTextSubmit(String query) {
-//        return false;
-//    }
 
     private List<JobModel> filter(List<JobModel> models, String query) {
         query = query.toLowerCase();

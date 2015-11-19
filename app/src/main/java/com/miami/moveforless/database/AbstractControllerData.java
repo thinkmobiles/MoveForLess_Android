@@ -16,7 +16,5 @@ public interface AbstractControllerData {
 
     void updateJob(JobResponse jobResponse);
 
-    void deleteJob(JobResponse jobResponse);
-
     void dropDataBase(Context context);
 }

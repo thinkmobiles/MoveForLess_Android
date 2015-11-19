@@ -51,15 +51,15 @@ public abstract class BaseFragment extends Fragment {
         super.onCreateView(_inflater, _container, savedInstanceState);
         mLayoutInflater = _inflater;
         View view = _inflater.inflate(getLayoutResource(), _container, false);
+        ButterKnife.bind(this, view);
+        RxUtils.getNewCompositeSubIfUnsubscribed(mSubscriptions);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
         setupViews(savedInstanceState);
-        RxUtils.getNewCompositeSubIfUnsubscribed(mSubscriptions);
     }
 
     @Override
@@ -122,11 +122,6 @@ public abstract class BaseFragment extends Fragment {
 
     public final void destroyFragment(final Fragment _fragment) {
         getChildFragmentManager().beginTransaction().remove(_fragment).commit();
-    }
-
-    @SuppressWarnings("unchecked")
-    public final <T extends Fragment> T getFragmentById(final @IdRes int _containerId) {
-        return (T) getChildFragmentManager().findFragmentById(_containerId);
     }
 
     public final void popBackStack() {

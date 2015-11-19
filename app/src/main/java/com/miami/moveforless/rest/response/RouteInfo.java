@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by klim on 17.09.15.
  */
-public final class RouteInfo extends BaseModel implements Serializable {
+public final class RouteInfo implements Serializable {
     private List<LatLng> mDirectionPoints;
     private String mDistance;
     private String mDuration;
@@ -59,16 +59,14 @@ public final class RouteInfo extends BaseModel implements Serializable {
         mDuration = _builder.duration;
     }
 
-//    public String serialize() {
-//        // Serialize this class into a JSON string using GSON
-//        Gson gson = new Gson();
-//        return gson.toJson(this);
-//    }
-//
-//    static public RouteInfo deserialize(String serializedData) {
-//        // Use GSON to instantiate this class using the JSON representation of the state
-//        Gson gson = new Gson();
-//        return gson.fromJson(serializedData, RouteInfo.class);
-//    }
+    public String serialize() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    static public RouteInfo deserialize(String serializedData) {
+        Gson gson = new Gson();
+        return gson.fromJson(serializedData, RouteInfo.class);
+    }
 
 }

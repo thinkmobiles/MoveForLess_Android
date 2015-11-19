@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.customviews.CustomFontStyle;
 import com.miami.moveforless.utils.TypefaceManager;
 
 /**
@@ -63,10 +62,6 @@ public class HelveticaEditText extends EditText {
         } finally {
             a.recycle();
         }
-    }
-
-    public void setFontStyle(CustomFontStyle style) {
-        setTypefaceBasedOnInt(style.ordinal());
     }
 
     private void setTypefaceBasedOnInt(int fontEnum) {

@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.customviews.CustomFontStyle;
 import com.miami.moveforless.utils.TypefaceManager;
 
 /**
@@ -41,10 +40,6 @@ public class HelveticaTextView extends TextView {
         } finally {
             a.recycle();
         }
-    }
-
-    public void setFontStyle(CustomFontStyle style) {
-        setTypefaceBasedOnInt(style.ordinal());
     }
 
     private void setTypefaceBasedOnInt(int fontEnum) {

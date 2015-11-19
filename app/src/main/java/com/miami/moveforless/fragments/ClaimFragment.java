@@ -153,7 +153,7 @@ public class ClaimFragment extends BaseJobDetailFragment implements TextWatcher{
         showLoadingDialog();
 
         if (sendSubscription != null) removeSubscription(sendSubscription);
-        sendSubscription = RestClient.getInstance().sendFeedback().subscribe(aBoolean -> onSendSuccess(), this::onSendError);
+        sendSubscription = RestClient.getInstance().sendClaim().subscribe(aBoolean -> onSendSuccess(), this::onSendError);
         addSubscription(sendSubscription);
     }
 

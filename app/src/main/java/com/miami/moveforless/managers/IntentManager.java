@@ -30,11 +30,6 @@ public class IntentManager {
         });
     }
 
-    public static Intent getGoogleMapsOnPlayStore() {
-        Intent intent  = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.apps.maps"));
-        return intent;
-    }
-
     public static Intent getGpsSettingsIntent() {
         return new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
     }

@@ -58,7 +58,7 @@ public class ConfirmDialog extends BaseDialog {
 
     }
 
-    public void setMesssage(String _message) {
+    public void setMessage(String _message) {
         mMessage = _message;
     }
 

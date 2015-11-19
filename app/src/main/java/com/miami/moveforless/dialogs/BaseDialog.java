@@ -24,9 +24,6 @@ import rx.subscriptions.CompositeSubscription;
  */
 public abstract class BaseDialog extends DialogFragment {
 
-//    private DialogListener positiveOnClick;
-//    private DialogListener negativeOnClick;
-
     private int mContentResource = getLayoutResource();
 
     private CompositeSubscription mSubscriptions = new CompositeSubscription();

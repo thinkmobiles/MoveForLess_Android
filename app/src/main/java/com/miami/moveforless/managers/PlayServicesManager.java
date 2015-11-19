@@ -20,36 +20,15 @@ public class PlayServicesManager implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-    private static final String TAG = "GooglePlayServicesActiv";
+    private static final String TAG = "PlayServicesManager";
 
-    private static final String KEY_IN_RESOLUTION = "is_in_resolution";
     private AppCompatActivity mActivity;
     private ConnectionResult mResult;
     private boolean isConnected = false;
 
-    /**
-     * Request code for auto Google Play Services error resolution.
-     */
     protected static final int REQUEST_CODE_RESOLUTION = 1;
-
-    /**
-     * Google API client.
-     */
     private GoogleApiClient mGoogleApiClient;
-
-    /**
-     * Determines if the client is in a resolution state, and
-     * waiting for resolution intent to return.
-     */
     private boolean mIsInResolution;
-
-    /**
-     * Called when the Activity is made visible.
-     * A connection to Play Services need to be initiated as
-     * soon as the activity is visible. Registers {@code ConnectionCallbacks}
-     * and {@code OnConnectionFailedListener} on the
-     * activities itself.
-     */
 
     public PlayServicesManager(Activity _activity) {
         mActivity = (AppCompatActivity) _activity;
@@ -58,7 +37,6 @@ public class PlayServicesManager implements
     public void onStart() {
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(mActivity)
-                    // Optionally, add additional APIs and scopes if required.
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
@@ -67,19 +45,12 @@ public class PlayServicesManager implements
         mGoogleApiClient.connect();
     }
 
-    /**
-     * Called when activity gets invisible. Connection to Play Services needs to
-     * be disconnected as soon as an activity is invisible.
-     */
     public void onStop() {
         if (mGoogleApiClient != null) {
             mGoogleApiClient.disconnect();
         }
     }
 
-    /**
-     * Handles Google Play Services resolution callbacks.
-     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_CODE_RESOLUTION:
@@ -95,29 +66,18 @@ public class PlayServicesManager implements
         }
     }
 
-    /**
-     * Called when {@code mGoogleApiClient} is connected.
-     */
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "GoogleApiClient connected");
         isConnected = true;
     }
 
-    /**
-     * Called when {@code mGoogleApiClient} connection is suspended.
-     */
     @Override
     public void onConnectionSuspended(int cause) {
         Log.i(TAG, "GoogleApiClient connection suspended");
         retryConnecting();
     }
 
-    /**
-     * Called when {@code mGoogleApiClient} is trying to connect but failed.
-     * Handle {@code result.getResolution()} if there is a resolution
-     * available.
-     */
     @Override
     public void onConnectionFailed(ConnectionResult _result) {
         mResult = _result;
@@ -136,14 +96,10 @@ public class PlayServicesManager implements
         if (mResult != null) {
             Log.i(TAG, "GoogleApiClient connection failed: " + mResult.toString());
             if (!mResult.hasResolution()) {
-                // Show a localized error dialog.
                 GooglePlayServicesUtil.getErrorDialog(
                         mResult.getErrorCode(), mActivity, 0, null).show();
                 return;
             }
-            // If there is an existing resolution error being displayed or a resolution
-            // activity has started before, do nothing and wait for resolution
-            // progress to be completed.
             if (mIsInResolution) {
                 return;
             }
@@ -162,7 +118,7 @@ public class PlayServicesManager implements
             Location currentLocation = getCurrentLocation();
             if (currentLocation != null) {
                 IntentManager.getGoogleMapsIntent(mActivity)
-                        .subscribe(intent -> mActivity.startActivity(intent), throwable -> showGoogleMapsErrorDialog());
+                        .subscribe(mActivity::startActivity, throwable -> showGoogleMapsErrorDialog());
             } else showGpsOffDialog();
         } else onFailedConnection();
     }
@@ -176,7 +132,7 @@ public class PlayServicesManager implements
 
     private void showGpsOffDialog() {
         ConfirmDialog dialog = new ConfirmDialog();
-        dialog.setMesssage("Gps is not enabled. Do you want to change settings?");
+        dialog.setMessage("Gps is not enabled. Do you want to change settings?");
         dialog.setOnPositiveListener(view -> mActivity.startActivity(IntentManager.getGpsSettingsIntent()));
         dialog.show(mActivity.getSupportFragmentManager(), "");
     }

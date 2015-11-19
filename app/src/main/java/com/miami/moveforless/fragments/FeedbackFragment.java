@@ -106,7 +106,7 @@ public class FeedbackFragment extends BaseJobDetailFragment implements TextWatch
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        changeSendButton(charSequence.length() == 0 ? false : true);
+        changeSendButton(charSequence.length() != 0);
     }
 
     @Override

@@ -14,7 +14,7 @@ import butterknife.Bind;
 public class PhotoDialog extends BaseDialog {
 
     @Bind(R.id.btnGallery_DP)
-    Button btnGalery;
+    Button btnGallery;
     @Bind(R.id.btnCamera_DP)
     Button btnCamera;
 
@@ -30,7 +30,7 @@ public class PhotoDialog extends BaseDialog {
     protected void setupViews() {
         setCancelable(true);
 
-        RxUtils.click(btnGalery).subscribe(o -> {
+        RxUtils.click(btnGallery).subscribe(o -> {
             if (mListenerGallery != null) mListenerGallery.onClick(null);
             dismiss();
         });

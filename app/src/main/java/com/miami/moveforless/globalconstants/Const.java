@@ -29,9 +29,7 @@ public class Const {
     final public static String IMAGE_MIME_TYPE_PREFIX = "image";
     final public static String IMAGE_MIME_TYPE = IMAGE_MIME_TYPE_PREFIX + "/*";
 
-    final public static String REQUEST_INTENT_TYPE_PHOTO = "type";
-    final public static int REQUEST_TYPE_PHOTO = 0;
-    final public static int REQUEST_PHOTO = 10000;
+    final public static int REQUEST_PHOTO = 10001;
     final public static int REQUEST_GALLERY_IMAGE = 10002;
 
     //pay
@@ -50,7 +48,7 @@ public class Const {
     public static PayPalConfiguration config = new PayPalConfiguration().environment(CONFIG_ENVIRONMENT).clientId
             (CONFIG_CLIENT_ID).rememberUser(false);
 
-    public static final String TIME_12_HOUR_FORMAT = "hh:mmaa";
+    public static final String TIME_12_HOUR_FORMAT = "hh:mm aa";
     public static final String TIME_MONTH_DAY_FORMAT = "MM/dd";
     public static final String TIME_MONTH_DAY_YEAR_FORMAT = "E MM/dd/yyyy";
 

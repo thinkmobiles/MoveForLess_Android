@@ -3,7 +3,7 @@ package com.miami.moveforless.rest;
 import com.miami.moveforless.Exceptions.ConnectionException;
 import com.miami.moveforless.Exceptions.LocationException;
 import com.miami.moveforless.Exceptions.RouteException;
-import com.miami.moveforless.rest.response.ErrorModel;
+import com.miami.moveforless.rest.response.ErrorResponse;
 
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeoutException;
@@ -38,7 +38,7 @@ public class ErrorParser {
                 Response response = error.getResponse();
                 switch (response.getStatus()) {
                     case 404:
-                        result = parseCustomError(_e, ErrorModel.class).error;
+                        result = parseCustomError(_e, ErrorResponse.class).error;
                         if (result == null) {
                             result = "Bad error response";
                         }

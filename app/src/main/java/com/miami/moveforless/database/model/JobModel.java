@@ -18,10 +18,6 @@ public class JobModel extends BaseQueryModel {
     public Boolean mSub;
     public List<JobModel> child;
 
-    public JobModel(List<JobModel> child) {
-        this.child = child;
-    }
-
     @Column
     public String status_slug;
 
@@ -61,6 +57,4 @@ public class JobModel extends BaseQueryModel {
     @Column
     public Integer isActive;
 
-    public JobModel() {
-    }
 }

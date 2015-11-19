@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.adapters.models.ExampleModel;
 import com.miami.moveforless.adapters.viewholder.AbstractViewHolder;
 import com.miami.moveforless.adapters.viewholder.ConstantHolder;
 import com.miami.moveforless.adapters.viewholder.HeaderViewHolder;
@@ -16,18 +15,17 @@ import com.miami.moveforless.adapters.viewholder.SubHeaderViewHolder;
 import com.miami.moveforless.adapters.viewholder.SubItemViewHolder;
 import com.miami.moveforless.database.model.JobModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by SetKrul on 30.10.2015.
  */
-public class ExampleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
+public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
 
     private final LayoutInflater mInflater;
     private final List<JobModel> mModels;
 
-    public ExampleAdapter(Context context, List<JobModel> models) {
+    public ScheduleAdapter(Context context, List<JobModel> models) {
         this.mInflater = LayoutInflater.from(context);
         this.mModels = models;
     }

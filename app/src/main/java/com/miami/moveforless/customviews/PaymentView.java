@@ -97,7 +97,7 @@ public class PaymentView extends LinearLayout {
         mActionListener.onConfirm(this, amount);
     }
 
-    public void setOnPaymentListner(PaymentAction _action) {
+    public void setOnPaymentListener(PaymentAction _action) {
         mActionListener = _action;
     }
 
@@ -120,14 +120,6 @@ public class PaymentView extends LinearLayout {
         } catch (Exception e) {
             return -1;
         }
-    }
-
-    private List<ActionItem> createDropDownList() {
-        List<ActionItem> items = new ArrayList<>();
-
-
-
-        return items;
     }
 
 }

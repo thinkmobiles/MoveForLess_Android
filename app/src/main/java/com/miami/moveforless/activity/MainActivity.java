@@ -87,9 +87,8 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
                 showLoadingDialog(getString(R.string.logout_loading));
                 logout();
                 break;
-            case R.id.menu_navigation:
-                RouteDialog dialog = new RouteDialog();
-                dialog.show(getSupportFragmentManager(), "");
+            case R.id.menu_refresh:
+                // TODO: add refresh logic
                 break;
             case R.id.menu_dummy_signature_dialog:
                 SignatureDialog dialog1 = new SignatureDialog();
@@ -115,7 +114,6 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
         if (mLogoutSubscription != null) {
             removeSubscription(mLogoutSubscription);
         }
-
         mLogoutSubscription = RestClient.getInstance().logout()
                 .subscribe(this::logoutSuccess, this::logoutError);
         addSubscription(mLogoutSubscription);
@@ -126,7 +124,6 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
         if (_logoutResponse.getResult()) {
             SharedPrefManager.getInstance().storeToken("");
             SharedPrefManager.getInstance().storeUsername("");
-            SharedPrefManager.getInstance().storeUserPassword("");
             Intent intent = new Intent(this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
@@ -138,6 +135,7 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
     }
 
     private void logoutError(Throwable _throwable) {
+        // TODO: maybe add logic if token expired when user use app
         hideLoadingDialog();
         Toast.makeText(MainActivity.this, ErrorParser.parse(_throwable), Toast.LENGTH_SHORT).show();
     }

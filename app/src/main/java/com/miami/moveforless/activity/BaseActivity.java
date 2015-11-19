@@ -24,11 +24,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private CompositeSubscription mSubscriptions = new CompositeSubscription();
 
-    @SuppressWarnings("unchecked")
-    public final <T extends View> T findView(@IdRes int id) {
-        return (T) findViewById(id);
-    }
-
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
@@ -61,10 +56,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void removeSubscription(Subscription _subscription) {
         mSubscriptions.remove(_subscription);
-    }
-
-    protected void showLoadingDialog() {
-        showLoadingDialog(loadingText);
     }
 
     protected void showLoadingDialog(String _message) {

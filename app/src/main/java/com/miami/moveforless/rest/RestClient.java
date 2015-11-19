@@ -17,7 +17,6 @@ import com.miami.moveforless.rest.response.ListMoveSizeResponse;
 import com.miami.moveforless.rest.response.ListNumberMenResponse;
 import com.miami.moveforless.rest.response.LoginResponse;
 import com.miami.moveforless.rest.response.LogoutResponse;
-import com.miami.moveforless.rest.response.MoveSizeResponse;
 import com.miami.moveforless.rest.response.RouteInfo;
 import com.miami.moveforless.utils.RouteUtils;
 import com.raizlabs.android.dbflow.structure.ModelAdapter;
@@ -108,7 +107,7 @@ public class RestClient {
     }
 
     public Observable<LogoutResponse> logout() {
-        final String username = SharedPrefManager.getInstance().retriveUsername();
+        final String username = SharedPrefManager.getInstance().retrieveUsername();
         final String token = SharedPrefManager.getInstance().retrieveToken();
         return getInstance().getIMoverApi().logout(username, token)
                 .subscribeOn(Schedulers.io())
@@ -118,12 +117,12 @@ public class RestClient {
     }
 
     public Observable<List<JobResponse>> jobList() {
-        final String username = SharedPrefManager.getInstance().retriveUsername();
+        final String username = SharedPrefManager.getInstance().retrieveUsername();
         final String token = SharedPrefManager.getInstance().retrieveToken();
-        Observable<List<JobResponse>> resp =  getInstance().getIMoverApi().jobList(new JobRequest("soslan", token))
-                        .subscribeOn(Schedulers.io()).retry(2)
-                        .timeout(10, TimeUnit.SECONDS)
-                        .observeOn(AndroidSchedulers.mainThread());
+        Observable<List<JobResponse>> resp = getInstance().getIMoverApi().jobList(new JobRequest("soslan", token))
+                .subscribeOn(Schedulers.io()).retry(2)
+                .timeout(10, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread());
         return resp;
     }
 
@@ -181,5 +180,5 @@ public class RestClient {
         return Observable.just(new Boolean(true)).delay(3, TimeUnit.SECONDS);
     }
 
-
+// TODO: create base observable
 }

@@ -105,7 +105,8 @@ public class SignatureDialog extends BaseDialog implements GestureOverlayView.On
                 getTargetFragment().onActivityResult(REQUEST_CODE, Activity.RESULT_OK, data);
             dismiss();
         } catch (Exception e) {
-            getTargetFragment().onActivityResult(REQUEST_CODE, Activity.RESULT_CANCELED, null);
+            if (getTargetFragment() != null)
+                getTargetFragment().onActivityResult(REQUEST_CODE, Activity.RESULT_CANCELED, null);
             dismiss();
         }
 

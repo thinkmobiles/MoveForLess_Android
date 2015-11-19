@@ -9,14 +9,12 @@ import android.widget.TextView;
 import com.miami.moveforless.R;
 import com.miami.moveforless.customviews.PaymentView;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
-import com.miami.moveforless.fragments.eventbus.FragmentType;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.utils.RxUtils;
 
 import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.BindString;
-import butterknife.ButterKnife;
 
 /**
  * Created by klim on 29.10.15.
@@ -59,7 +57,7 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
 
     private void addPaymentRow() {
         PaymentView view = new PaymentView(getContext());
-        view.setOnPaymentListner(this);
+        view.setOnPaymentListener(this);
 
         mContainer.addView(view);
     }

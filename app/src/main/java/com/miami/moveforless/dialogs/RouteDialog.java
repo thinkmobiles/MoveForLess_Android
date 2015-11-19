@@ -29,6 +29,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.BindString;
+import rx.Subscription;
 
 /**
  * Created by klim on 02.11.15.
@@ -90,8 +91,9 @@ public class RouteDialog extends BaseDialog {
     }
 
     private void tryToShowRoute() {
-        addSubscription(RestClient.getInstance().getRoute("Uzhorod", "Kiev")
-                .subscribe(routeInfo -> showRoute(routeInfo), throwable -> onError(throwable)));
+
+        addSubscription(RestClient.getInstance().getRoute("Uzhhorod", "Kiev")
+                .subscribe(this::showRoute, this::onError));
     }
 
     @Override

@@ -36,11 +36,6 @@ public class DatabaseController implements AbstractControllerData {
     }
 
     @Override
-    public void deleteJob(JobResponse jobResponse) {
-        jobResponse.delete();
-    }
-
-    @Override
     public void dropDataBase(Context context) {
         context.deleteDatabase(MoveForLessDatabase.NAME +".db");
     }

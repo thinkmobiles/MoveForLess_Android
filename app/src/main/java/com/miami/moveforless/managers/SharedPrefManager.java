@@ -54,16 +54,9 @@ public class SharedPrefManager {
         saveString(SharedPrefConst.SHARED_PREF_USER_NAME, _username);
     }
 
-    public String retriveUsername() {
+    public String retrieveUsername() {
         return retrieveString(SharedPrefConst.SHARED_PREF_USER_NAME);
     }
 
-    public void storeUserPassword(String _username) {
-        saveString(SharedPrefConst.SHARED_PREF_USER_PASSWORD, _username);
-    }
-
-    public String retriveUserPassword() {
-        return retrieveString(SharedPrefConst.SHARED_PREF_USER_PASSWORD);
-    }
 
 }

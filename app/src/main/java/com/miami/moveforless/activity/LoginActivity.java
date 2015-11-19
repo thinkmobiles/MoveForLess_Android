@@ -79,6 +79,7 @@ public class LoginActivity extends BaseActivity {
 
     private void onLoginSuccess(String _token) {
         SharedPrefManager.getInstance().storeToken(_token);
+        SharedPrefManager.getInstance().storeUsername(etEmail.getText().toString());
         getJobsData();
     }
 
@@ -87,7 +88,7 @@ public class LoginActivity extends BaseActivity {
 
         if (ErrorParser.checkConnectionError(_throwable) instanceof ConnectionException) {
             ConfirmDialog dialog = new ConfirmDialog();
-            dialog.setMesssage(strConnectionError);
+            dialog.setMessage(strConnectionError);
             dialog.setOnPositiveListener(view -> startMainActivity(0));
             dialog.setOnNegativeListener(view -> finish());
             dialog.show(getSupportFragmentManager(), "");

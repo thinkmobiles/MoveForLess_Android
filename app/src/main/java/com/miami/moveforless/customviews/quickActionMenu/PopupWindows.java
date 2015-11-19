@@ -32,26 +32,17 @@ public class PopupWindows {
 		mContext	= context;
 		mWindow 	= new PopupWindow(context);
 
-		mWindow.setTouchInterceptor(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-					mWindow.dismiss();
-					
-					return true;
-				}
-				
-				return false;
-			}
-		});
+		mWindow.setTouchInterceptor((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                mWindow.dismiss();
+
+                return true;
+            }
+
+            return false;
+        });
 
 		mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-	}
-	
-	/**
-	 * On dismiss
-	 */
-	protected void onDismiss() {		
 	}
 	
 	/**
@@ -84,15 +75,6 @@ public class PopupWindows {
 	}
 
 	/**
-	 * Set background drawable.
-	 * 
-	 * @param background Background drawable
-	 */
-	public void setBackgroundDrawable(Drawable background) {
-		mBackground = background;
-	}
-
-	/**
 	 * Set content view.
 	 * 
 	 * @param root Root view
@@ -101,26 +83,6 @@ public class PopupWindows {
 		mRootView = root;
 		
 		mWindow.setContentView(root);
-	}
-
-	/**
-	 * Set content view.
-	 * 
-	 * @param layoutResID Resource id
-	 */
-	public void setContentView(int layoutResID) {
-		LayoutInflater inflator = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
-		setContentView(inflator.inflate(layoutResID, null));
-	}
-
-	/**
-	 * Set listener on window dismissed.
-	 * 
-	 * @param listener
-	 */
-	public void setOnDismissListener(PopupWindow.OnDismissListener listener) {
-		mWindow.setOnDismissListener(listener);  
 	}
 
 	/**

@@ -1,9 +1,6 @@
 package com.miami.moveforless.utils;
 
-import android.content.Context;
 import android.text.format.DateFormat;
-
-import java.util.Date;
 
 
 /**
