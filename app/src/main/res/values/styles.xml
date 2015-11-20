@@ -17,6 +17,7 @@
         <item name="colorControlActivated">@color/white</item>
         <item name="colorControlHighlight">@color/white</item>
         <item name="colorAccent">#00ff00</item>
+        <item name="android:editTextStyle">@style/LoginEditText</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -91,7 +92,7 @@
         <item name="android:paddingLeft">15dp</item>
     </style>
 
-    <style name="BaseEditTextStyle">
+    <style name="BaseEditTextStyle" parent="Base.Widget.AppCompat.EditText">
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textSize">@dimen/base_edit_text_size</item>
@@ -156,7 +157,9 @@
 
     <!--login screen-->
     <style name="LoginEditText" parent="BaseEditTextStyle">
-        <item name="android:paddingLeft">10dp</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
     </style>
 
     <style name="LoginButton" parent="NavigateButtonStyle">

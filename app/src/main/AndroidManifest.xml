@@ -31,7 +31,7 @@
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/LoginActivityStyle"
+            android:theme="@style/MainTheme"
             android:windowSoftInputMode="stateHidden|adjustPan">
 
         </activity>
@@ -39,7 +39,7 @@
             android:name=".activity.LoginActivity"
             android:screenOrientation="sensorLandscape"
             android:windowSoftInputMode="stateHidden"
-            android:theme="@style/MainTheme">
+            android:theme="@style/LoginActivityStyle">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
