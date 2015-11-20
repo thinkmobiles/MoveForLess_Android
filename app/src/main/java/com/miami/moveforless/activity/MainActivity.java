@@ -23,6 +23,7 @@ import butterknife.Bind;
 import rx.Subscription;
 
 /**
+ * main activity
  * Created by klim on 20.10.15.
  */
 public class MainActivity extends BaseFragmentActivity implements FragmentChanger {
@@ -30,7 +31,7 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
     Toolbar mToolbar;
 
     private Subscription mLogoutSubscription;
-    private PlayServicesManager mPlayServices;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
         if (getFragmentById(R.id.contentContainer_AM) == null) {
             switchContent(ScheduleFragment.newInstance(), false);
         }
-        mPlayServices = new PlayServicesManager(this);
+
     }
 
     @Override
@@ -61,25 +62,6 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
     }
 
     @Override
-    protected void onStop() {
-        mPlayServices.onStop();
-        super.onStop();
-    }
-
-    @Override
-    protected void onStart() {
-        mPlayServices.onStart();
-        super.onStart();
-    }
-
-
-    @Override
-    protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
-        super.onActivityResult(_requestCode, _resultCode, _data);
-        mPlayServices.onActivityResult(_requestCode, _resultCode, _data);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
@@ -93,9 +75,6 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
             case R.id.menu_dummy_signature_dialog:
                 SignatureDialog dialog1 = new SignatureDialog();
                 dialog1.show(getSupportFragmentManager(), "");
-                break;
-            case R.id.menu_dummy_google_maps:
-                mPlayServices.startNavigation();
                 break;
         }
         return super.onOptionsItemSelected(item);

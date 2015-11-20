@@ -16,9 +16,4 @@
         android:title="signature dialog"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/menu_dummy_google_maps"
-        android:title="google maps"
-        app:showAsAction="never" />
-
 </menu>

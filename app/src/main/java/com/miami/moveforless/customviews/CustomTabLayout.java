@@ -17,6 +17,7 @@ import butterknife.BindColor;
 import butterknife.ButterKnife;
 
 /**
+ * custom tab bar
  * Created by klim on 22.10.15.
  */
 public class CustomTabLayout extends TabLayout {
@@ -41,7 +42,6 @@ public class CustomTabLayout extends TabLayout {
     }
 
     public void customizeTabs(ViewPager _viewPager) {
-
         final String[] titles = getResources().getStringArray(R.array.tabs_titles);
         for (int i = 0; i < getTabCount(); i++) {
             if (i < titles.length) {
@@ -98,15 +98,16 @@ public class CustomTabLayout extends TabLayout {
                 }
             }
         });
-
     }
 
     private View getTabView(String _title, boolean _isSelected) {
         View tabView = LayoutInflater.from(getContext()).inflate(R.layout.tab_layout, this, false);
         TextView title = (TextView) tabView.findViewById(R.id.tvTitle_TL);
+        ImageView icon = (ImageView) tabView.findViewById(R.id.ivTitleIcon_TL);
         title.setText(_title);
         tabView.setBackgroundColor(_isSelected ? yellow : cyan_800);
         title.setTextColor(_isSelected ? cyan_800 : cyan_200);
+        icon.setImageResource(_isSelected ? R.drawable.icn_right_green : R.drawable.icn_right);
         return tabView;
     }
 

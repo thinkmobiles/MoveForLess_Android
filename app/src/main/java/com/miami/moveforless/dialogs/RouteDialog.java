@@ -2,6 +2,7 @@ package com.miami.moveforless.dialogs;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import butterknife.BindString;
 import rx.Subscription;
 
 /**
+ * route dialog
  * Created by klim on 02.11.15.
  */
 public class RouteDialog extends BaseDialog {
@@ -66,7 +68,7 @@ public class RouteDialog extends BaseDialog {
         View view = super.onCreateView(_inflater, _container, _savedInstanceState);
         final int height = ScreenUtils.getScreenHeight(App.getAppContext());
         mMapContainer.getLayoutParams().height = (int) (height * 0.6);
-        mMapContainer.getLayoutParams().width = (int) (height *0.8);
+        mMapContainer.getLayoutParams().width = (int) (height * 0.8);
 
         return view;
     }
@@ -82,11 +84,20 @@ public class RouteDialog extends BaseDialog {
                 android.graphics.PorterDuff.Mode.MULTIPLY);
         pbLoading.setVisibility(View.VISIBLE);
 
+        FragmentManager fm = getChildFragmentManager();
+        mMapFragment = (SupportMapFragment) fm.findFragmentById(R.id.map_container_DR);
+        if (mMapFragment == null) {
+            mMapFragment = SupportMapFragment.newInstance();
+            fm.beginTransaction().replace(R.id.map_container_DR, mMapFragment).commit();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         if (mMap == null) {
-            mMapFragment = (SupportMapFragment) getFragmentManager().findFragmentById(R.id.map_DR);
             mMap = mMapFragment.getMap();
         }
-        getFragmentManager().beginTransaction().hide(mMapFragment).commit();
         tryToShowRoute();
     }
 
@@ -96,17 +107,9 @@ public class RouteDialog extends BaseDialog {
                 .subscribe(this::showRoute, this::onError));
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        SupportMapFragment f = (SupportMapFragment) getFragmentManager().findFragmentById(R.id.map_DR);
-        if (f != null)
-            getFragmentManager().beginTransaction().remove(f).commit();
-    }
-
     private void addMap(List<LatLng> _points) {
         Log.d(TAG, "add map");
-        getFragmentManager().beginTransaction().show(mMapFragment).commit();
+        getChildFragmentManager().beginTransaction().show(mMapFragment).commit();
         new MapManager(mMap, _points);
 
     }

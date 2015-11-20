@@ -71,7 +71,7 @@
     <!--BASE WIDGETS STYLE-->
     <style name="BaseTitleStyle">
         <item name="android:textSize">@dimen/base_title_size</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/cyan_dark</item>
     </style>
 
@@ -144,7 +144,7 @@
         <item name="android:textColorHint">@color/cyan_dark</item>
         <item name="android:textSize">@dimen/review_text_size</item>
         <item name="android:textCursorDrawable">@drawable/cursor_cyan</item>
-        <item name="customFont">light_italic</item>
+        <item name="android:textStyle">italic</item>
     </style>
 
 

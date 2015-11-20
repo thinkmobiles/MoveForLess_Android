@@ -17,6 +17,7 @@ import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.FragmentEvent;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.globalconstants.Const;
+import com.miami.moveforless.managers.PlayServicesManager;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.squareup.otto.Subscribe;
 
@@ -27,6 +28,7 @@ import butterknife.BindColor;
 import butterknife.BindString;
 
 /**
+ * base job
  * Created by klim on 22.10.15.
  */
 public class JobFragment extends BaseFragment {
@@ -42,6 +44,8 @@ public class JobFragment extends BaseFragment {
 
     private int selectedTab = 0;
     private JobPageAdapter mAdapter;
+    private PlayServicesManager mPlayServices;
+
 
     public static Fragment newInstance(int _id) {
         Bundle bundle = new Bundle();
@@ -67,7 +71,7 @@ public class JobFragment extends BaseFragment {
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.customizeTabs(mViewPager);
         mViewPager.setCurrentItem(selectedTab);
-
+        mPlayServices = new PlayServicesManager(getActivity());
     }
 
     @Override
@@ -83,14 +87,26 @@ public class JobFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onStop() {
+        mPlayServices.onStop();
+        super.onStop();
+    }
 
+    @Override
+    public void onStart() {
+        mPlayServices.onStart();
+        super.onStart();
+    }
+
+    @Override
+    public void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
+        super.onActivityResult(_requestCode, _resultCode, _data);
+        mPlayServices.onActivityResult(_requestCode, _resultCode, _data);
         List<Fragment> fragments = getChildFragmentManager().getFragments();
         if (fragments != null) {
             for (Fragment fragment : fragments) {
                 if (fragment != null)
-                    fragment.onActivityResult(requestCode, resultCode, data);
+                    fragment.onActivityResult(_requestCode, _resultCode, _data);
             }
         }
     }
@@ -135,8 +151,7 @@ public class JobFragment extends BaseFragment {
                 }
                 break;
             case R.id.menu_navigation: {
-                RouteDialog dialog = new RouteDialog();
-                dialog.show(getChildFragmentManager(), "");
+                mPlayServices.startNavigation();
                 break;
             }
         }
