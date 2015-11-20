@@ -90,6 +90,7 @@ public class LoginActivity extends BaseActivity {
         showErrorDialog(ErrorParser.parse(_throwable));
     }
 
+    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     private void onJobDataError(Throwable _throwable) {
         if (ErrorParser.checkConnectionError(_throwable) instanceof ConnectionException) {
             ConfirmDialog dialog = new ConfirmDialog();
@@ -115,7 +116,7 @@ public class LoginActivity extends BaseActivity {
                 RestClient.getInstance().getListNumberMen(),
                 RestClient.getInstance().getListMoveSize(),
                 (jobResponses1, listNumberMenResponse, listMoveSizeResponse) -> {
-//                    DatabaseController.getInstance().dropDataBase(App.getAppContext());
+                    DatabaseController.getInstance().dropDataBase(App.getAppContext());
 //                    saveInDatabase(jobResponses1);
 //                    saveInDatabase(listNumberMenResponse.number_men);
 //                    saveInDatabase(listMoveSizeResponse.move_sizes);
@@ -128,8 +129,8 @@ public class LoginActivity extends BaseActivity {
         addSubscription(mJobDataSubscription);
     }
 
-    private void saveInDatabase(List<? extends BaseModel> list) {
-        for (BaseModel item : list) {
+    private void saveInDatabase(List<? extends BaseModel> _list) {
+        for (BaseModel item : _list) {
             item.save();
         }
     }

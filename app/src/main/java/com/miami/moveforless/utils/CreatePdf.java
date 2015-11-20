@@ -37,9 +37,11 @@ import java.io.IOException;
 public class CreatePdf {
     Context mContext;
     Document document;
+    Bitmap sign;
 
-    public CreatePdf(Context _context) {
+    public CreatePdf(Context _context, Bitmap _sign) {
         this.mContext = _context;
+        this.sign = _sign;
     }
 
     public File createPdf() throws DocumentException, IOException {
@@ -251,7 +253,7 @@ public class CreatePdf {
 //        table.addCell(cell);
 
         cell = new PdfPCell(addTableToCell(new float[]{1}, Element.ALIGN_BOTTOM, new PdfPCell[]{setBoarder(newCell
-                (null, null, 0), 0f), setBoarder(newCellWithImage(mContext, R.drawable.logo, 237f, 48f), 0f, 0f, 0f,
+                (null, null, 0), 0f), setBoarder(newCellWithImage(mContext, sign, 237f, 48f), 0f, 0f, 0f,
                 0.5f)}));
         table.addCell(setBoarder(cell, 0f));
 
@@ -341,6 +343,13 @@ public class CreatePdf {
         return cell;
     }
 
+    public PdfPCell newCellWithImage(Context _context, Bitmap _logo, float _height, float _width) {
+        PdfPCell cell;
+        cell = new PdfPCell();
+        cell.setImage(getImage(_context, _logo, _height, _width));
+        return cell;
+    }
+
 
     public Paragraph addSpace(float _space) {
         Paragraph paragraph = new Paragraph(_space);
@@ -369,6 +378,23 @@ public class CreatePdf {
         }
         if (image != null) {
             image.scaleAbsolute(_height, _width);
+        }
+        return image;
+    }
+
+    public Image getImage(Context _context, Bitmap _image, float _height, float _width) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        Image image = null;
+        if (_image != null) {
+            _image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            try {
+                image = Image.getInstance(stream.toByteArray());
+            } catch (BadElementException | IOException e) {
+                e.printStackTrace();
+            }
+            if (image != null) {
+                image.scaleAbsolute(_height, _width);
+            }
         }
         return image;
     }

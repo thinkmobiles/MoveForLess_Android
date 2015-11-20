@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.miami.moveforless.App;
 import com.miami.moveforless.R;
+import com.miami.moveforless.globalconstants.Const;
 import com.miami.moveforless.utils.RxUtils;
 import com.miami.moveforless.utils.ScreenUtils;
 
@@ -25,14 +26,15 @@ import butterknife.BindString;
 /**
  * Created by klim on 26.10.15.
  */
-public class SignatureDialog extends BaseDialog implements GestureOverlayView.OnGestureListener{
-    public static final int REQUEST_CODE = 1000;
-    public static final String SIGNATURE_BITMAP_KEY = "SIGNATURE_BITMAP_KEY";
+public class SignatureDialog extends BaseDialog implements GestureOverlayView.OnGestureListener {
     private boolean isGestured;
 
-    @BindString(R.string.ok) String strOk;
-    @BindString(R.string.close) String strClose;
-    @BindString(R.string.clear) String strClear;
+    @BindString(R.string.ok)
+    String strOk;
+    @BindString(R.string.close)
+    String strClose;
+    @BindString(R.string.clear)
+    String strClear;
 
     @Bind(R.id.gesture_DSL)
     GestureOverlayView mGestureView;
@@ -46,7 +48,6 @@ public class SignatureDialog extends BaseDialog implements GestureOverlayView.On
     Button btnPositive;
     @Bind(R.id.btnNegative_DSL)
     Button btnNegative;
-
 
 
     @Override
@@ -100,13 +101,13 @@ public class SignatureDialog extends BaseDialog implements GestureOverlayView.On
             mGestureView.setDrawingCacheEnabled(true);
             Bitmap bm = Bitmap.createBitmap(mGestureView.getDrawingCache());
             Intent data = new Intent();
-            data.putExtra(SIGNATURE_BITMAP_KEY, bm);
-            if (getTargetFragment() != null)
-                getTargetFragment().onActivityResult(REQUEST_CODE, Activity.RESULT_OK, data);
+            data.putExtra(Const.SIGNATURE_BITMAP_KEY, bm);
+            if (getParentFragment() != null)
+                getParentFragment().onActivityResult(Const.REQUEST_CODE_SIGN, Activity.RESULT_OK, data);
             dismiss();
         } catch (Exception e) {
-            if (getTargetFragment() != null)
-                getTargetFragment().onActivityResult(REQUEST_CODE, Activity.RESULT_CANCELED, null);
+            if (getParentFragment() != null)
+                getParentFragment().onActivityResult(Const.REQUEST_CODE_SIGN, Activity.RESULT_CANCELED, null);
             dismiss();
         }
 

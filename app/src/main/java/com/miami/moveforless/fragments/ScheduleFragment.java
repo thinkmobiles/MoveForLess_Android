@@ -67,7 +67,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         setHasOptionsMenu(true);
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
-//        testGetData();
+        testGetData();
     }
 
     private void testGetData() {
@@ -105,7 +105,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         jobModels = DatabaseController.getInstance().getListJob();
 
 //        isActiveJob = DatabaseController.getInstance().getActiveJob();
-//        mAdapter = new ExampleAdapter(getActivity(), jobModels);
+        mAdapter = new ScheduleAdapter(getActivity(), jobModels);
         mRecyclerView.setAdapter(mAdapter);
     }
 

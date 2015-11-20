@@ -12,6 +12,8 @@ public class Const {
 
     public static final int FEEDBACK_REQUEST_ID = 1234;
     public static final int CLAIM_REQUEST_ID = 1235;
+    public static final int REQUEST_CODE_SIGN = 1000;
+    public static final String SIGNATURE_BITMAP_KEY = "SIGNATURE_BITMAP_KEY";
 
     public static final String JOB_ID_KEY = "job_id_key";
     public static final FragmentType[] JOB_DETAILS_ORDER = {
@@ -48,8 +50,7 @@ public class Const {
     public static PayPalConfiguration config = new PayPalConfiguration().environment(CONFIG_ENVIRONMENT).clientId
             (CONFIG_CLIENT_ID).rememberUser(false);
 
-    public static final String TIME_12_HOUR_FORMAT = "hh:mm aa";
-    public static final String TIME_MONTH_DAY_FORMAT = "MM/dd";
-    public static final String TIME_MONTH_DAY_YEAR_FORMAT = "E MM/dd/yyyy";
+
+
 
 }

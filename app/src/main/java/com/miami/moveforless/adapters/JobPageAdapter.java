@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.miami.moveforless.fragments.ClaimFragment;
 import com.miami.moveforless.fragments.CongratulationFragment;
+import com.miami.moveforless.fragments.ContractFragment;
 import com.miami.moveforless.fragments.FeedbackFragment;
 import com.miami.moveforless.fragments.JobDetailsFragment;
 import com.miami.moveforless.fragments.PaymentFragment;
@@ -31,6 +32,8 @@ public class JobPageAdapter extends FragmentStatePagerAdapter {
                 return JobDetailsFragment.newInstance();
             case QUESTIONNAIRE:
                 return QuestionnaireFragment.newInstance();
+            case SIGN_CONTRACT:
+                return ContractFragment.newInstance();
             case PAYMENT:
                 return PaymentFragment.newInstance();
             case CONFIRMATION:

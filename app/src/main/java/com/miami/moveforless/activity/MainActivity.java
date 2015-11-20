@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.dialogs.RouteDialog;
 import com.miami.moveforless.dialogs.SignatureDialog;
 import com.miami.moveforless.fragments.BaseFragment;
 import com.miami.moveforless.fragments.ScheduleFragment;
@@ -95,9 +94,9 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
                 SignatureDialog dialog1 = new SignatureDialog();
                 dialog1.show(getSupportFragmentManager(), "");
                 break;
-            case R.id.menu_dummy_google_maps:
-                mPlayServices.startNavigation();
-                break;
+//            case R.id.menu_dummy_google_maps:
+//                mPlayServices.startNavigation();
+//                break;
 
             case R.id.menu_settings:
                 SettingFragment settingFragment = new SettingFragment();
