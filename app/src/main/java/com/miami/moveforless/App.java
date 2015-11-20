@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.miami.moveforless.managers.SharedPrefManager;
-import com.miami.moveforless.utils.TypefaceManager;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 /**
@@ -20,7 +19,6 @@ public class App extends Application {
         MultiDex.install(this);
         super.onCreate();
         mContext = getApplicationContext();
-        TypefaceManager.init(this);
         SharedPrefManager.getInstance();
         FlowManager.init(this);
     }

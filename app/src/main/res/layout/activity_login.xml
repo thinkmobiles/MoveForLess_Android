@@ -82,7 +82,7 @@
                     android:orientation="vertical"
                     android:visibility="gone">
 
-                    <com.miami.moveforless.customviews.Helvetica.HelveticaEditText
+                    <EditText
                         android:id="@+id/etEmail_AL"
                         style="@style/BaseEditTextStyle"
                         android:layout_width="match_parent"
@@ -92,7 +92,7 @@
                         android:inputType="text"
                         android:text="soslan" />
 
-                    <com.miami.moveforless.customviews.Helvetica.HelveticaEditText
+                    <EditText
                         android:id="@+id/etPassword_AL"
                         style="@style/BaseEditTextStyle"
                         android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                         android:inputType="textPassword"
                         android:text="pass123" />
 
-                    <com.miami.moveforless.customviews.Helvetica.HelveticaButton
+                    <Button
                         android:id="@+id/btnLogin_AL"
                         style="@style/LoginButton"
                         android:layout_width="match_parent"

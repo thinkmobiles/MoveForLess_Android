@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/job_details_background"
-    android:orientation="vertical"
     android:fillViewport="true"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/job_content_padding_bottom">
 
 
@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/job_content_padding_left_right"
-        android:paddingRight="@dimen/job_content_padding_left_right"
-        android:orientation="vertical">
+        android:paddingRight="@dimen/job_content_padding_left_right">
 
         <TextView
             style="@style/PagesTitleStyle"
@@ -26,21 +26,21 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/form_borders"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/form_borders">
 
-            <com.miami.moveforless.customviews.Helvetica.HelveticaEditText
+            <EditText
                 android:id="@+id/etClaim_FC"
                 style="@style/ReviewEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:minHeight="150dp"
+                android:background="@android:color/transparent"
                 android:gravity="top|left"
                 android:hint="@string/write_claim"
                 android:inputType="textMultiLine"
-                android:background="@android:color/transparent"
-                android:paddingTop="5dp"
+                android:minHeight="150dp"
                 android:minLines="4"
+                android:paddingTop="5dp"
                 android:singleLine="false" />
 
         </FrameLayout>
@@ -49,36 +49,31 @@
             android:id="@+id/photos_container_FF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
             android:columnCount="6"
-            >
-        </com.miami.moveforless.customviews.PhotoLayout.PhotoLayout>
+            android:paddingTop="10dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
-            android:layout_marginTop="40dp"
             android:layout_marginBottom="10dp"
-            android:gravity="center_vertical"
-            >
+            android:layout_marginTop="40dp"
+            android:gravity="center_vertical">
 
-            <com.miami.moveforless.customviews.Helvetica.HelveticaButton
+            <Button
                 android:id="@+id/btnAdd_FC"
                 style="@style/BaseButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginRight="30dp"
-                android:text="@string/add"
-                />
+                android:text="@string/add" />
 
-            <com.miami.moveforless.customviews.Helvetica.HelveticaButton
+            <Button
                 android:id="@+id/btnSend_FC"
                 style="@style/BaseButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
-                android:text="@string/send"
-                />
+                android:text="@string/send" />
 
         </LinearLayout>
 

@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/icn_location_a" />
 
-            <com.miami.moveforless.customviews.Helvetica.HelveticaTextView
+            <TextView
                 android:id="@+id/tvStartAddress_DR"
                 style="@style/BaseTextStyle"
                 android:layout_width="wrap_content"
@@ -33,7 +33,6 @@
                 android:singleLine="true"
                 android:text="asdfasdf"
                 android:textColor="#829d9a"
-                custom:customFont="medium"
                 />
         </LinearLayout>
 
@@ -49,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/icn_location_b" />
 
-            <com.miami.moveforless.customviews.Helvetica.HelveticaTextView
+            <TextView
                 android:id="@+id/tvEndAddress_DR"
                 style="@style/BaseTextStyle"
                 android:layout_width="wrap_content"
@@ -60,7 +59,6 @@
                 android:singleLine="true"
                 android:text="asdfasdf"
                 android:textColor="@color/yellow"
-                custom:customFont="medium"
                 />
         </LinearLayout>
 

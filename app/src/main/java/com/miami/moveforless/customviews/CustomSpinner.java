@@ -3,8 +3,8 @@ package com.miami.moveforless.customviews;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
-import com.miami.moveforless.customviews.Helvetica.HelveticaTextView;
 import com.miami.moveforless.customviews.quickActionMenu.ActionItem;
 import com.miami.moveforless.customviews.quickActionMenu.QuickAction;
 
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by klim on 09.11.15.
  */
-public class CustomSpinner extends HelveticaTextView {
+public class CustomSpinner extends TextView {
     private OnItemClickListener listener;
     private List<ActionItem> mItems;
 

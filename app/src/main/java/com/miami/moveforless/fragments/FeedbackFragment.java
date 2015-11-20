@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.customviews.Helvetica.HelveticaEditText;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.rest.ErrorParser;
@@ -35,7 +35,7 @@ public class FeedbackFragment extends BaseJobDetailFragment implements TextWatch
     @Bind(R.id.btnClaim_FF)
     Button btnClaim;
     @Bind(R.id.etFeedBack_FF)
-    HelveticaEditText etFeedback;
+    EditText etFeedback;
     @Bind(R.id.ratingbar_FF)
     RatingBar mRatingBar;
 

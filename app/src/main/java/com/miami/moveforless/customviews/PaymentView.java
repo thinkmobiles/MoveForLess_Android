@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.customviews.Helvetica.HelveticaEditText;
 import com.miami.moveforless.customviews.quickActionMenu.ActionItem;
 import com.miami.moveforless.utils.RxUtils;
 
@@ -34,7 +34,7 @@ public class PaymentView extends LinearLayout {
     @Bind(R.id.amount_dollar_row)
     TextView tvAmountDollar;
     @Bind(R.id.tvAmount_row)
-    HelveticaEditText etAmount;
+    EditText etAmount;
     @Bind(R.id.ivDone_row)
     ImageView ivDone;
 
@@ -53,7 +53,8 @@ public class PaymentView extends LinearLayout {
         inflate(getContext(), R.layout.payment_row_layout, this);
 
         ButterKnife.bind(this);
-        etAmount.setUnderlineColor(R.color.cyan_dark);
+
+//        etAmount.setUnderlineColor(R.color.cyan_dark);
 
         RxUtils.click(ivDelete, o1 -> onDeleteClicked());
         RxUtils.click(tvConfirm, o -> onConfirmClicked());

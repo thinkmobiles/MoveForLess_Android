@@ -17,7 +17,7 @@
             android:layout_gravity="center"
             android:src="@drawable/icn_attention" />
 
-        <com.miami.moveforless.customviews.Helvetica.HelveticaTextView
+        <TextView
             android:id="@+id/tvMessage_DEL"
             style="@style/DialogMessageStyle"
             android:layout_width="wrap_content"

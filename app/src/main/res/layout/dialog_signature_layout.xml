@@ -7,14 +7,14 @@
     android:paddingTop="10dp"
     android:orientation="vertical">
 
-    <com.miami.moveforless.customviews.Helvetica.HelveticaTextView
+    <TextView
         android:id="@+id/tvTitle_DSL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/BaseTitleStyle"
         />
 
-    <com.miami.moveforless.customviews.Helvetica.HelveticaTextView
+    <TextView
         android:id="@+id/tvDescription_DSL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -8,7 +8,7 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
 
-    <com.miami.moveforless.customviews.Helvetica.HelveticaTextView
+    <TextView
         android:id="@+id/tvTitle_TL"
         style="@style/BaseTitleStyle"
         android:layout_width="wrap_content"

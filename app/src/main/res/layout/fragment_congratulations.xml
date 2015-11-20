@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
 
-    <com.miami.moveforless.customviews.Helvetica.HelveticaTextView
+    <TextView
         android:id="@+id/tvMessage_FC"
         style="@style/BaseTitleStyle"
         android:layout_width="wrap_content"
@@ -27,24 +27,24 @@
 
         >
 
-        <com.miami.moveforless.customviews.Helvetica.HelveticaButton
+        <Button
             android:id="@+id/btnReview_FC"
             style="@style/BaseButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_marginRight="30dp"
             android:text="@string/write_review"
-            custom:customFont="light" />
+            />
 
 
-        <com.miami.moveforless.customviews.Helvetica.HelveticaButton
+        <Button
             android:id="@+id/btnBack_FC"
             style="@style/BaseButtonStyle"
 
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:text="@string/back_to_schedule"
-            custom:customFont="light" />
+            />
 
     </LinearLayout>
 </FrameLayout>
