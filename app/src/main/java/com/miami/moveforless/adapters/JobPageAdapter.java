@@ -20,7 +20,6 @@ public class JobPageAdapter extends FragmentStatePagerAdapter {
 
     public JobPageAdapter(FragmentManager fm) {
         super(fm);
-
     }
 
     @Override

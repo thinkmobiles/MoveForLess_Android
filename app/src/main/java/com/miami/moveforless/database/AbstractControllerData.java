@@ -14,6 +14,8 @@ public interface AbstractControllerData {
 
     List<JobModel> getListJob();
 
+    JobModel getActiveJob();
+
     void updateJob(JobResponse jobResponse);
 
     void dropDataBase(Context context);

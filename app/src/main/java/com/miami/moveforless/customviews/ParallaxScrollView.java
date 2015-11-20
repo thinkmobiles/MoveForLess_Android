@@ -11,8 +11,7 @@ import uk.co.chrisjenx.paralloid.Parallaxor;
 import uk.co.chrisjenx.paralloid.transform.Transformer;
 
 /**
- * Created by chris on 02/10/2013
- * Project: Paralloid
+ * Created by SetKrul on 17.11.2015.
  */
 public class ParallaxScrollView extends ScrollView implements Parallaxor {
 

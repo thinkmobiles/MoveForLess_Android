@@ -50,10 +50,9 @@ public class ItemViewHolder extends AbstractViewHolder implements View.OnClickLi
         tvFromZipcode.setText(model.from_zipcode.trim());
         tvFullname.setText(model.from_fullname.trim());
         tvToZipcode.setText(model.to_zipcode.trim());
-        tvRequiredPickupDate.setText(TimeUtil.getDate(model.RequiredPickupDate.trim(), Const
-                .TIME_12_HOUR_FORMAT));
-        tvPickupDate.setText(TimeUtil.getDate(model.pickup_date.trim(), Const
-                .TIME_MONTH_DAY_FORMAT));
+
+        tvRequiredPickupDate.setText(model.getRequiredPickupDate());
+        tvPickupDate.setText(model.getPickup_date());
     }
 
 

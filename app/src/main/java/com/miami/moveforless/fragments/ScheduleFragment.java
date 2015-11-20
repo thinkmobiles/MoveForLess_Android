@@ -16,19 +16,17 @@ import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ScheduleAdapter;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
-import com.miami.moveforless.database.DatabaseController;
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
-
-import butterknife.BindString;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.BindString;
 
 /**
  * Created by SetKrul on 30.10.2015.
@@ -67,8 +65,6 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         setHasOptionsMenu(true);
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
-
-        jobModels = DatabaseController.getInstance().getListJob();
     }
 
     @Override
@@ -201,7 +197,6 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override

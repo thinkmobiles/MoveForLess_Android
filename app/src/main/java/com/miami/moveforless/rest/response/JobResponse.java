@@ -25,6 +25,9 @@ public class JobResponse extends BaseModel {
     public long _id;
 
     @Column
+    public Integer isActive;
+
+    @Column
     @SerializedName("ID")
     public Integer id;
     @Column
