@@ -53,6 +53,7 @@
     <string name="open_claim">Open a Claim</string>
     <string name="send">Send</string>
     <string name="add">Add</string>
+
     <string name="send_feedback_successfull">Feedback has been sent successfully</string>
     <string name="send_claim_successfull">Claim has been sent successfully</string>
 
@@ -61,7 +62,8 @@
     <string name="proceed">Proceed</string>
     <string name="choose_payment_type">Choose payment type</string>
     <string name="amount_error_message">Please, enter amount</string>
-
+    <string name="pay">Pay</string>
+    <string name="check_payment">Check Payment</string>
     <string name="amount">amount</string>
 
     <!--congratulation screen-->

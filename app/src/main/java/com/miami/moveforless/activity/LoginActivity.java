@@ -28,6 +28,8 @@ import butterknife.Bind;
 import butterknife.BindString;
 import rx.Observable;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by klim on 20.10.15.
@@ -73,7 +75,7 @@ public class LoginActivity extends BaseActivity {
         showLoadingDialog(strLogin);
         if (loginSubscription != null) removeSubscription(loginSubscription);
         loginSubscription = RestClient.getInstance().login(etEmail.getText().toString(), etPassword.getText().toString())
-                .subscribe(this::onLoginSuccess, this::onError);
+                .subscribe(this::onLoginSuccess, this::onLoginError);
         addSubscription(loginSubscription);
     }
 
@@ -83,9 +85,12 @@ public class LoginActivity extends BaseActivity {
         getJobsData();
     }
 
-    private void onError(Throwable _throwable) {
+    private void onLoginError(Throwable _throwable) {
         hideLoadingDialog();
+        showErrorDialog(ErrorParser.parse(_throwable));
+    }
 
+    private void onJobDataError(Throwable _throwable) {
         if (ErrorParser.checkConnectionError(_throwable) instanceof ConnectionException) {
             ConfirmDialog dialog = new ConfirmDialog();
             dialog.setMessage(strConnectionError);
@@ -117,7 +122,9 @@ public class LoginActivity extends BaseActivity {
 
                     return jobResponses1 != null && listNumberMenResponse != null && listMoveSizeResponse != null;
                 })
-                .subscribe(this::onJobDataSuccess, this::onError);
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onJobDataSuccess, this::onJobDataError);
         addSubscription(mJobDataSubscription);
     }
 

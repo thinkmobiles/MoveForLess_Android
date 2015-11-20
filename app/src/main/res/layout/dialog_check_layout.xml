@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/content_container_DCL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:minHeight="200dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_payment"
+            style="@style/PagesTitleStyle"
+            />
+
+        <com.miami.moveforless.customviews.PhotoLayout.CheckLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:columnCount="1"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/btnNegative_DCL"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/add"
+                style="@style/DialogButtonStyle"
+                />
+
+            <Button
+                android:id="@+id/btnPositive_DCL"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@+id/btnNegative_DCL"
+                android:layout_toRightOf="@+id/btnNegative_DCL"
+                android:background="@drawable/button_yellow"
+                android:textColor="@color/cyan_dark"
+                android:text="@string/pay"
+                android:visibility="visible"
+                style="@style/DialogButtonStyle"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>
