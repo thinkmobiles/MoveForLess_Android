@@ -12,10 +12,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.miami.moveforless.App;
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ScheduleAdapter;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
+import com.miami.moveforless.database.DatabaseController;
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.roomorama.caldroid.CaldroidFragment;
@@ -65,6 +67,46 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         setHasOptionsMenu(true);
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
+//        testGetData();
+    }
+
+    private void testGetData() {
+        jobModels = new ArrayList<>();
+        DatabaseController.getInstance().dropDataBase(App.getAppContext());
+
+        for (int i = 0; i < 8; i++) {
+
+            JobResponse jobModel = new JobResponse();
+
+            if (i == 3){
+                jobModel.isActive = 1;
+                jobModel.from_fullname = "isActive";
+
+            }
+            else {
+                jobModel.isActive = 0;
+                jobModel.from_fullname = "from_fullname";
+            }
+            jobModel.from_address = "address from Test";
+            jobModel.to_address = "address  to " +
+                    "Test";
+            jobModel.from_city = "from_city";
+            jobModel.from_phone = "from_phone";
+            jobModel.from_zipcode = "787887";
+            jobModel.to_zipcode = "2389456";
+            jobModel.pickup_date = 1184654652;
+            jobModel.status_slug = "1184654652";
+            jobModel.to_city = "to city";
+            jobModel.post_title = "post tittle" + i;
+            jobModel.RequiredPickupDate = 1184654656;
+            jobModel.save();
+        }
+
+        jobModels = DatabaseController.getInstance().getListJob();
+
+//        isActiveJob = DatabaseController.getInstance().getActiveJob();
+//        mAdapter = new ExampleAdapter(getActivity(), jobModels);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override

@@ -110,10 +110,10 @@ public class LoginActivity extends BaseActivity {
                 RestClient.getInstance().getListNumberMen(),
                 RestClient.getInstance().getListMoveSize(),
                 (jobResponses1, listNumberMenResponse, listMoveSizeResponse) -> {
-                    DatabaseController.getInstance().dropDataBase(App.getAppContext());
-                    saveInDatabase(jobResponses1);
-                    saveInDatabase(listNumberMenResponse.number_men);
-                    saveInDatabase(listMoveSizeResponse.move_sizes);
+//                    DatabaseController.getInstance().dropDataBase(App.getAppContext());
+//                    saveInDatabase(jobResponses1);
+//                    saveInDatabase(listNumberMenResponse.number_men);
+//                    saveInDatabase(listMoveSizeResponse.move_sizes);
 
                     return jobResponses1 != null && listNumberMenResponse != null && listMoveSizeResponse != null;
                 })
