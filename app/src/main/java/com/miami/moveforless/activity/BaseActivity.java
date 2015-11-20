@@ -16,6 +16,7 @@ import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
+ * Base activity
  * Created by SetKrul on 14.07.2015.
  */
 public abstract class BaseActivity extends AppCompatActivity {
@@ -48,6 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onPause();
         RxUtils.unsubscribeIfNotNull(mSubscriptions);
         BusProvider.getInstance().unregister(this);
+        hideLoadingDialog();
     }
 
     protected void addSubscription(Subscription _subscription) {

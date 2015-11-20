@@ -33,6 +33,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
+ * rest client
  * Created by SetKrul on 28.07.2015.
  */
 public class RestClient {
@@ -95,35 +96,33 @@ public class RestClient {
         return getInstance().mRouteApi;
     }
 
+    private <T> Observable<T> responseWrapper(Observable<T> _response) {
+        return _response
+                .subscribeOn(Schedulers.io())
+                .retry(2)
+                .timeout(20, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
     public Observable<String> login(String _username, String _password) {
         final LoginRequest loginRequest = new LoginRequest(_username, _password);
-        return getInstance().getIMoverApi().login(loginRequest)
-                .subscribeOn(Schedulers.io())
-                .retry(2)
-                .timeout(30, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
+
+        return responseWrapper(getInstance().getIMoverApi().login(loginRequest))
                 .map(LoginResponse::getToken);
     }
 
     public Observable<LogoutResponse> logout() {
         final String username = SharedPrefManager.getInstance().retrieveUsername();
         final String token = SharedPrefManager.getInstance().retrieveToken();
-        return getInstance().getIMoverApi().logout(username, token)
-                .subscribeOn(Schedulers.io())
-                .retry(2)
-                .timeout(10, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread());
+
+        return responseWrapper(getInstance().getIMoverApi().logout(username, token));
     }
 
     public Observable<List<JobResponse>> jobList() {
         final String username = SharedPrefManager.getInstance().retrieveUsername();
         final String token = SharedPrefManager.getInstance().retrieveToken();
-        Observable<List<JobResponse>> resp = getInstance().getIMoverApi().jobList(new JobRequest("soslan", token))
-                .subscribeOn(Schedulers.io()).retry(2)
-                .timeout(10, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread());
-        return resp;
+
+        return responseWrapper(getInstance().getIMoverApi().jobList(new JobRequest(username, token)));
     }
 
     public Observable<RouteInfo> getRoute(String _startLocation, String _endLocation) {
@@ -135,11 +134,7 @@ public class RestClient {
         } catch (NullPointerException ignored) {
 
         }
-        return getInstance().getRouteApi().getRoute(_startLocation, _endLocation, "imperial", "driving", API_KEY)
-                .subscribeOn(Schedulers.io())
-                .retry(2)
-                .timeout(40, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
+        return responseWrapper(getInstance().getRouteApi().getRoute(_startLocation, _endLocation, "imperial", "driving", API_KEY))
                 .map(RouteUtils::parseRouteResponse)
                 .doOnNext(routeInfo1 -> {
                     if (routeInfo1 != null) mCacheManager.put(key, routeInfo1.serialize());
@@ -154,31 +149,26 @@ public class RestClient {
     }
 
     public Observable<ListMoveSizeResponse> getListMoveSize() {
+        final String username = SharedPrefManager.getInstance().retrieveUsername();
         final String token = SharedPrefManager.getInstance().retrieveToken();
-        return getInstance().getIMoverApi().moveSizeList("26", "1988", "soslan",
-                token)
-                .subscribeOn(Schedulers.io())
-                .retry(2)
-                .timeout(10, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread());
+
+        return responseWrapper(getInstance().getIMoverApi().moveSizeList("26", "1988", username,
+                token));
     }
 
     public Observable<ListNumberMenResponse> getListNumberMen() {
         final String token = SharedPrefManager.getInstance().retrieveToken();
-        return getInstance().getIMoverApi().numberMenList("2069", "soslan", token)
-                .subscribeOn(Schedulers.io())
-                .retry(2)
-                .timeout(10, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread());
+        final String username = SharedPrefManager.getInstance().retrieveUsername();
+
+        return getInstance().getIMoverApi().numberMenList("2069", username, token);
     }
 
     public Observable<Boolean> sendFeedback() {
-        return Observable.just(new Boolean(true)).delay(3, TimeUnit.SECONDS);
+        return Observable.just(true).delay(3, TimeUnit.SECONDS);
     }
 
     public Observable<Boolean> sendClaim() {
-        return Observable.just(new Boolean(true)).delay(3, TimeUnit.SECONDS);
+        return Observable.just(true).delay(3, TimeUnit.SECONDS);
     }
 
-// TODO: create base observable
 }
