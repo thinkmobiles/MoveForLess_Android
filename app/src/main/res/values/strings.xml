@@ -95,5 +95,14 @@
     <string name="file_is_not_found">File not found</string>
     <string name="uncompilable_type">Uncompatible type</string>
 
+    <!--setting fragment-->
+    <string name="change_password">Change password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="change">Change</string>
+    <string name="enable_notification">Enable notification</string>
+
+
 </resources>
 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include
+        layout="@layout/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/job_details_background"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/job_content_padding_bottom">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/job_content_padding_left_right"
+            android:paddingRight="@dimen/job_content_padding_left_right">
+
+            <TextView
+                style="@style/BaseTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_settings"/>
+
+            <TextView
+                style="@style/PagesTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/change_password"/>
+
+            <EditText
+                android:id="@+id/edOldPassword_FS"
+                style="@style/EditSettingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/old_password"
+                android:inputType="textPassword"
+                android:minWidth="300dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/cyan_dark"
+                android:orientation="vertical"/>
+
+
+            <EditText
+                android:id="@+id/edNewPassword_FS"
+                style="@style/EditSettingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/new_password"
+                android:inputType="textPassword"
+                android:minWidth="300dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/cyan_dark"
+                android:orientation="vertical"/>
+
+            <EditText
+                android:id="@+id/edConfirmPassword_FS"
+                style="@style/EditSettingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:minWidth="300dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/cyan_dark"
+                android:orientation="vertical"/>
+
+
+            <Button
+                android:id="@+id/btnChange_FS"
+                style="@style/NavigateButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:text="@string/change"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cbEnableNotification_FS"
+                    android:layout_width="wrap_content"
+                    android:button="@drawable/radiobutton_button"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    style="@style/BaseTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/enable_notification"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

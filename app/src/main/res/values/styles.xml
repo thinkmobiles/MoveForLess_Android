@@ -191,6 +191,7 @@
         <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
     </style>
 
+    <!--PopupWindow-->
     <style name="StylePopup" parent="android:Widget.TextView">
         <item name="android:gravity">center</item>
         <item name="android:minHeight">50dp</item>
@@ -202,5 +203,15 @@
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
 
+    <!--setting screen-->
+    <style name="EditSettingText"  parent="BaseEditTextStyle">
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:textSize">@dimen/review_text_size</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 
 </resources>
