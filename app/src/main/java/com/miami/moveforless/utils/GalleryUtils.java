@@ -36,6 +36,16 @@ public class GalleryUtils {
         }
     }
 
+    public void openGallery(Activity _activity) {
+        if (isCanGetGalleryPicture() != null) {
+            Intent galleryIntent = IntentManager.getGalleryStartIntent();
+            if (galleryIntent.resolveActivity(mActivity.getPackageManager()) != null) {
+                _activity.startActivityForResult(galleryIntent, Const.REQUEST_GALLERY_IMAGE);
+            }
+        }
+    }
+
+
     public void addPhotoToGallery(String _mPhotoFilePath) {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File f = new File(_mPhotoFilePath);

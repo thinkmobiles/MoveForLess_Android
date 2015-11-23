@@ -41,14 +41,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mSubscriptions = RxUtils.getNewCompositeSubIfUnsubscribed(mSubscriptions);
-        BusProvider.getInstance().register(this);
+//        BusProvider.getInstance().register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         RxUtils.unsubscribeIfNotNull(mSubscriptions);
-        BusProvider.getInstance().unregister(this);
+//        BusProvider.getInstance().unregister(this);
         hideLoadingDialog();
     }
 
