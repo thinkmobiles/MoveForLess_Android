@@ -3,7 +3,6 @@
     android:id="@+id/content_container_DCL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
     android:minHeight="200dp"
     android:orientation="vertical"
     android:padding="20dp">
@@ -14,12 +13,18 @@
         android:layout_height="wrap_content"
         android:text="@string/check_payment" />
 
-    <com.miami.moveforless.customviews.PhotoLayout.CheckLayout
-        android:id="@+id/photos_container_DCL"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:columnCount="1" />
+        android:layout_weight="1">
+
+        <com.miami.moveforless.customviews.PhotoLayout.CheckLayout
+            android:id="@+id/photos_container_DCL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:columnCount="1" />
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,18 +35,20 @@
             android:id="@+id/btnAdd_DCL"
             style="@style/DialogButtonStyle"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40dp"
+            android:layout_toLeftOf="@+id/btnPay_DCL"
+            android:layout_toStartOf="@+id/btnPay_DCL"
             android:text="@string/add" />
 
         <Button
             android:id="@+id/btnPay_DCL"
             style="@style/DialogButtonStyle"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:layout_toEndOf="@+id/btnNegative_DCL"
-            android:layout_toRightOf="@+id/btnNegative_DCL"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
             android:background="@drawable/button_yellow"
             android:text="@string/pay"
             android:textColor="@color/cyan_dark"

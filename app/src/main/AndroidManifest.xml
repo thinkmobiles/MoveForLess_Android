@@ -50,6 +50,12 @@
 
         </activity>
 
+        <activity android:name=".dialogs.CheckDialog"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/CheckDialogTheme"
+            />
+
         <service
             android:name="com.paypal.android.sdk.payments.PayPalService"
             android:exported="false"/>

@@ -66,6 +66,37 @@ public class CameraUtils {
         return mPhotoFilePath;
     }
 
+    public String openCamera(Activity _activity) {
+        String mPhotoFilePath = null;
+        if (isCanGetCameraPicture()) {
+            final File imageFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            boolean isFolderExist = imageFolder.exists() || imageFolder.mkdir();
+            if (isFolderExist) {
+                @SuppressLint("SimpleDateFormat") String imageFileName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+
+                File imageFile;
+                try {
+                    imageFile = File.createTempFile(imageFileName, PHOTO_FILE_EXTENSION, imageFolder);
+                } catch (IOException e) {
+                    imageFile = null;
+                }
+                if (imageFile != null) {
+                    mPhotoFilePath = imageFile.getPath();
+                    Intent takePictureIntent = IntentManager.getCameraStartIntent(Uri.fromFile(imageFile));
+                    _activity.startActivityForResult(takePictureIntent, Const.REQUEST_PHOTO);
+                }
+
+            } else {
+                Toast.makeText(mActivity, mActivity.getResources().getString(R.string.cant_create_photo), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(mActivity, mActivity.getResources().getString(R.string.not_found_camera), Toast.LENGTH_SHORT).show();
+        }
+        return mPhotoFilePath;
+    }
+
+
+
     public void deleteImage(Activity _activity, File _file) {
         try {
 

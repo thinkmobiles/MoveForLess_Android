@@ -2,6 +2,7 @@ package com.miami.moveforless.customviews.PhotoLayout;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -57,4 +58,7 @@ public class PhotoPlaceholder extends FrameLayout {
         void delete(View _view);
     }
 
+    public Bitmap getPhoto() {
+        return ((BitmapDrawable)ivPhoto.getDrawable()).getBitmap();
+    }
 }

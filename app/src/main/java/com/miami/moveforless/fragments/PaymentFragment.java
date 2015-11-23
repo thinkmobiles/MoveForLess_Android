@@ -2,8 +2,11 @@ package com.miami.moveforless.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,7 +49,7 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
     Button btnNext;
 
     private List<PaymentView> payments;
-
+    private String mCheckPhotoPath;
     private float requiredAmount = 150;
 
     public static PaymentFragment newInstance() {
@@ -74,10 +77,13 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case Const.REQUEST_CHECK_PAYMENT:
-
+                case Const.CHECK_DIALOG_RESULT_KEY:
+                    float amount = data.getFloatExtra(Const.AMOUNT_KEY, 0);
+                    addConfirmedAmount(amount);
+                    int paymentId = data.getIntExtra(Const.PAYMENT_ID_KEY, -1);
+                    ((PaymentCallback)mContainer.getChildAt(paymentId)).onConfirmed();
+                    mCheckPhotoPath = data.getStringExtra(Const.CHECK_PHOTO_KEY);
                     break;
-
             }
         }
     }
@@ -92,7 +98,9 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
     public void onConfirmNeeded(int _position, PaymentType _type, float _value) {
         switch (_type) {
             case CASH:
+            case TERMINAL:
                 if (validateSimplePayment(_value)) {
+                    addConfirmedAmount(_value);
                     ((PaymentCallback)mContainer.getChildAt(_position)).onConfirmed();
                 }
                 break;
@@ -100,6 +108,12 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
                 if (validateSimplePayment(_value)) {
                     showCheckDialog(_position, _value);
                 }
+                break;
+            case VISA:
+            case MASTERCARD:
+            case AMERICANEXPRESS:
+            case DISCOVER:
+
                 break;
         }
 
@@ -136,25 +150,27 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
 
     private boolean validateSimplePayment(float _value) {
         if (_value > 0) {
-            float totalAmount = Float.valueOf(tvTotalAmount.getText().toString());
-            tvTotalAmount.setText("" + (totalAmount += _value));
-            if (totalAmount >= requiredAmount) {
-                btnNext.setBackgroundResource(R.drawable.button_yellow);
-                btnNext.setTextColor(cyanDark);
-            }
         } else {
             showErrorDialog(strAmountMessage);
         }
         return true;
     }
 
+    private void addConfirmedAmount(float _value){
+        float totalAmount = Float.valueOf(tvTotalAmount.getText().toString());
+        tvTotalAmount.setText("" + (totalAmount += _value));
+        if (totalAmount >= requiredAmount) {
+            btnNext.setBackgroundResource(R.drawable.button_yellow);
+            btnNext.setTextColor(cyanDark);
+        }
+
+    }
+
     private void showCheckDialog(int _paymentId, float _amount) {
-        CheckDialog dialog = new CheckDialog();
-        Bundle bundle = new Bundle();
-        bundle.putInt(Const.PAYMENT_ID_KEY, _paymentId);
-        bundle.putFloat(Const.AMOUNT_KEY, _amount);
-        dialog.setArguments(bundle);
-        dialog.show(getChildFragmentManager(), "");
+        Intent intent = new Intent(getActivity(), CheckDialog.class);
+        intent.putExtra(Const.PAYMENT_ID_KEY, _paymentId);
+        intent.putExtra(Const.AMOUNT_KEY, _amount);
+        getParentFragment().startActivityForResult(intent, Const.CHECK_DIALOG_RESULT_KEY);
     }
 
 }

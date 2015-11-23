@@ -13,10 +13,13 @@ public class Const {
     public static final int FEEDBACK_REQUEST_ID = 1234;
     public static final int CLAIM_REQUEST_ID = 1235;
     public static final int REQUEST_CODE_SIGN = 1236;
-    public static final int REQUEST_CHECK_PAYMENT = 1237;
+    public static final int CHECK_DIALOG_RESULT_KEY = 1237;
+
+
     public static final String SIGNATURE_BITMAP_KEY = "SIGNATURE_BITMAP_KEY";
     public static final String AMOUNT_KEY = "entered amount";
     public static final String PAYMENT_ID_KEY = "payment id key";
+    public static final String CHECK_PHOTO_KEY = "check photo key";
     public static final String JOB_ID_KEY = "job_id_key";
 
     public static final FragmentType[] JOB_DETAILS_ORDER = {

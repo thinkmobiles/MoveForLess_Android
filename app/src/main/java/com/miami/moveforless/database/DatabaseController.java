@@ -5,6 +5,9 @@ import android.content.Context;
 
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
+import com.miami.moveforless.rest.response.MoveSizeResponse;
+import com.miami.moveforless.rest.response.NumberMenResponse;
+import com.miami.moveforless.utils.TimeUtil;
 import com.raizlabs.android.dbflow.sql.builder.Condition;
 import com.raizlabs.android.dbflow.sql.language.OrderBy;
 import com.raizlabs.android.dbflow.sql.language.Select;
@@ -28,9 +31,9 @@ public class DatabaseController implements AbstractControllerData {
 
     @Override
     public List<JobModel> getListJob() {
-//        return new Select().from(JobResponse.class).where("WHERE DATA > DATENOW || ISACTIVE = 1 ORDER BY ASC DATE").queryCustomList(JobModel.class);
-//        return new Select().from(JobResponse.class).queryCustomList(JobModel.class);
-        return new Select().from(JobResponse.class).orderBy(OrderBy.columns("isActive").descending()).queryCustomList(JobModel.class);
+        return new Select().from(JobResponse.class).where(Condition.column("pickup_date")
+                .greaterThan(TimeUtil.getUnixTime())).or(Condition.column("isActive").eq(1))
+                .orderBy("isActive DESC, pickup_date").queryCustomList(JobModel.class);
     }
 
     @Override
@@ -39,12 +42,27 @@ public class DatabaseController implements AbstractControllerData {
     }
 
     @Override
-    public void updateJob(JobResponse jobResponse) {
-        jobResponse.update();
+    public JobModel getNumberJob(String _number) {
+        return new Select().from(JobResponse.class).where(Condition.column("post_title").eq(_number)).queryCustomSingle(JobModel.class);
     }
 
     @Override
-    public void dropDataBase(Context context) {
-        context.deleteDatabase(MoveForLessDatabase.NAME +".db");
+    public List<NumberMenResponse> getListNumberMen() {
+        return new Select().from(NumberMenResponse.class).queryList();
+    }
+
+    @Override
+    public List<MoveSizeResponse> getListMoveSize() {
+        return new Select().from(MoveSizeResponse.class).queryList();
+    }
+
+    @Override
+    public void updateJob(JobResponse _jobResponse) {
+        _jobResponse.update();
+    }
+
+    @Override
+    public void dropDataBase(Context _context) {
+        _context.deleteDatabase(MoveForLessDatabase.NAME +".db");
     }
 }
