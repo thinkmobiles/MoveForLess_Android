@@ -9,7 +9,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="left"
             android:orientation="horizontal"
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
@@ -22,7 +22,7 @@
             <CheckBox
                 android:id="@+id/cbHaveNotesTo"
                 style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
@@ -30,7 +30,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="left"
             android:orientation="horizontal"
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
@@ -43,7 +43,7 @@
             <CheckBox
                 android:id="@+id/cbHaveStopsTo"
                 style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
@@ -51,7 +51,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="left"
             android:orientation="horizontal"
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
@@ -64,7 +64,7 @@
             <CheckBox
                 android:id="@+id/cbHavePackageTo"
                 style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
@@ -72,7 +72,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="left"
             android:orientation="horizontal"
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
@@ -85,7 +85,7 @@
             <CheckBox
                 android:id="@+id/cbHaveTacksTo"
                 style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
@@ -93,7 +93,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="left"
             android:orientation="horizontal"
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
@@ -106,7 +106,7 @@
             <CheckBox
                 android:id="@+id/cbHaveTrailerAccessTo"
                 style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>

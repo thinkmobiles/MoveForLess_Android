@@ -1,15 +1,11 @@
 package com.miami.moveforless.rest.response;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
+import com.google.gson.annotations.SerializedName;
 import com.miami.moveforless.database.MoveForLessDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
-
-import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by SetKrul on 30.10.2015.
