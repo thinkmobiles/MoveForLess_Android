@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
+import com.miami.moveforless.rest.response.MoveSizeResponse;
+import com.miami.moveforless.rest.response.NumberMenResponse;
 
 import java.util.List;
 
@@ -16,7 +18,13 @@ public interface AbstractControllerData {
 
     JobModel getActiveJob();
 
-    void updateJob(JobResponse jobResponse);
+    JobModel getNumberJob(String _number);
 
-    void dropDataBase(Context context);
+    List<NumberMenResponse> getListNumberMen();
+
+    List<MoveSizeResponse> getListMoveSize();
+
+    void updateJob(JobResponse _jobResponse);
+
+    void dropDataBase(Context _context);
 }
