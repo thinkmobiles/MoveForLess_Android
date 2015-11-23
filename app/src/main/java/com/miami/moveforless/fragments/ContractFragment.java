@@ -3,8 +3,13 @@ package com.miami.moveforless.fragments;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.itextpdf.text.DocumentException;
 import com.joanzapata.pdfview.PDFView;
@@ -15,17 +20,22 @@ import com.miami.moveforless.utils.CreatePdf;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by SetKrul on 20.11.2015.
  */
 public class ContractFragment extends BaseJobDetailFragment implements View.OnClickListener {
-    @Bind(R.id.viewPdf_CF)
-    PDFView mPDFView;
+
     @Bind(R.id.btnSign_CF)
     Button btnSing;
+    @Bind(R.id.pdf_container_PVF)
+    FrameLayout mPdfContainer;
 
     public static ContractFragment newInstance() {
         return new ContractFragment();
@@ -37,23 +47,56 @@ public class ContractFragment extends BaseJobDetailFragment implements View.OnCl
     }
 
     @Override
+    public void onPageSelected() {
+        generatePdf(null, 200);
+    }
+
+    @Override
     protected int getLayoutResource() {
         return R.layout.pdf_view_fragment;
     }
 
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
-        File file = null;
-        try {
-            file = new CreatePdf(getActivity(), null).createPdf();
-        } catch (DocumentException | IOException e) {
-            e.printStackTrace();
-        }
-        assert file != null;
-        if (file.exists()) {
-            mPDFView.fromFile(file).enableSwipe(true).showMinimap(true).load();
-        }
+
+
         btnSing.setOnClickListener(this);
+    }
+
+    private void showPdf(File _file) {
+        hideLoadingDialog();
+
+        if (_file.exists()) {
+            mPdfContainer.removeAllViews();
+            PDFView pdfView = new PDFView(getContext(), null);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            pdfView.setLayoutParams(params);
+            mPdfContainer.addView(pdfView);
+            pdfView.fromFile(_file).enableSwipe(true).showMinimap(true).load();
+        }
+
+    }
+
+    private void generatePdf(Bitmap _signature, int delay) {
+        showLoadingDialog("Generating Contract...");
+            Observable.timer(delay, TimeUnit.MILLISECONDS)
+                    .map(aLong -> {
+                        File file = null;
+                        try {
+                            file = new CreatePdf(getContext(), _signature).createPdf();
+                        } catch (DocumentException e) {
+                            e.printStackTrace();
+                            return null;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                        return file;
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::showPdf, throwable -> {
+                    });
     }
 
     @Override
@@ -69,21 +112,7 @@ public class ContractFragment extends BaseJobDetailFragment implements View.OnCl
         super.onActivityResult(requestCode, resultCode, data);
         Bundle extras = data.getExtras();
         Bitmap bm = (Bitmap) extras.get(Const.SIGNATURE_BITMAP_KEY);
-        File file = null;
-        try {
-            file = new CreatePdf(getActivity(), bm).createPdf();
-        } catch (DocumentException | IOException e) {
-            e.printStackTrace();
-        }
-        assert file != null;
-        if (file.exists()) {
-            mPDFView.fromFile(file).enableSwipe(true).showMinimap(true).load();
-        }
+        generatePdf(bm, 0);
     }
 
-    @Override
-    public void onDetach() {
-        btnSing.setOnClickListener(null);
-        super.onDetach();
-    }
 }

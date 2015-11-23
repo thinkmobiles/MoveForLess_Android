@@ -61,6 +61,11 @@ public class CongratulationFragment extends BaseJobDetailFragment {
     }
 
     @Override
+    public void onPageSelected() {
+
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Const.FEEDBACK_REQUEST_ID) {
             if (resultCode == Activity.RESULT_OK) {

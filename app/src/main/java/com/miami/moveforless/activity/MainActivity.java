@@ -30,7 +30,6 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
     Toolbar mToolbar;
 
     private Subscription mLogoutSubscription;
-    private PlayServicesManager mPlayServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,6 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
         if (getFragmentById(R.id.contentContainer_AM) == null) {
             switchContent(ScheduleFragment.newInstance(), false);
         }
-        mPlayServices = new PlayServicesManager(this);
     }
 
     @Override
@@ -58,25 +56,6 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
             replaceFragmentWithBackStack(R.id.contentContainer_AM, _fragment);
         else
             replaceFragmentWithoutBackStack(R.id.contentContainer_AM, _fragment);
-    }
-
-    @Override
-    protected void onStop() {
-        mPlayServices.onStop();
-        super.onStop();
-    }
-
-    @Override
-    protected void onStart() {
-        mPlayServices.onStart();
-        super.onStart();
-    }
-
-
-    @Override
-    protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
-        super.onActivityResult(_requestCode, _resultCode, _data);
-        mPlayServices.onActivityResult(_requestCode, _resultCode, _data);
     }
 
     @Override
@@ -94,10 +73,6 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
                 SignatureDialog dialog1 = new SignatureDialog();
                 dialog1.show(getSupportFragmentManager(), "");
                 break;
-//            case R.id.menu_dummy_google_maps:
-//                mPlayServices.startNavigation();
-//                break;
-
             case R.id.menu_settings:
                 SettingFragment settingFragment = new SettingFragment();
                 replaceFragmentWithBackStack(R.id.contentContainer_AM,settingFragment);

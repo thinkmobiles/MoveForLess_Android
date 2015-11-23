@@ -4,7 +4,7 @@
     <string-array name="payments_titles">
         <item>Cash</item>
         <item>Check</item>
-        <item>MasterCard</item>
+        <item>MasterCard &amp; Vise</item>
         <item>Visa</item>
         <item>AmericanExpress</item>
         <item>Discover</item>

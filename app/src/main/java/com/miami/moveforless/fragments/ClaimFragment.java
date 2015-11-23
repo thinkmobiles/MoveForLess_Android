@@ -67,6 +67,11 @@ public class ClaimFragment extends BaseJobDetailFragment implements TextWatcher{
     }
 
     @Override
+    public void onPageSelected() {
+
+    }
+
+    @Override
     protected int getLayoutResource() {
         return R.layout.fragment_claim;
     }

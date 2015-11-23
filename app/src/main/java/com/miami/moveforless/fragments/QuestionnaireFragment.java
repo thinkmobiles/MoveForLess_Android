@@ -94,4 +94,9 @@ public class QuestionnaireFragment extends BaseJobDetailFragment {
     protected boolean isAllowGoHome() {
         return false;
     }
+
+    @Override
+    public void onPageSelected() {
+
+    }
 }

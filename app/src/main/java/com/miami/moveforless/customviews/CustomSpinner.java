@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.miami.moveforless.customviews.quickActionMenu.ActionItem;
+import com.miami.moveforless.customviews.quickActionMenu.PaymentActionItem;
 import com.miami.moveforless.customviews.quickActionMenu.QuickAction;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class CustomSpinner extends TextView {
     private OnItemClickListener listener;
-    private List<ActionItem> mItems;
+    private List<? extends ActionItem> mItems;
 
     public CustomSpinner(Context context) {
         this(context, null);
@@ -30,7 +31,7 @@ public class CustomSpinner extends TextView {
         setOnClickListener(view -> showDropDown(view));
     }
 
-    public void setDropDownItems(List<ActionItem>_items) {
+    public void setDropDownItems(List<? extends ActionItem>_items) {
         mItems = _items;
     }
 

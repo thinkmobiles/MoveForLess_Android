@@ -7,4 +7,5 @@ public abstract class BaseJobDetailFragment extends BaseFragment {
 
     protected abstract boolean isAllowGoHome();
 
+    public abstract void onPageSelected();
 }

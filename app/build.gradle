@@ -91,4 +91,5 @@ dependencies {
     compile 'com.raizlabs.android:DBFlow:2.2.1'
     compile files('libs/PayPalAndroidSDK-2.11.2.jar')
     compile(name: "paralloid", ext: "aar")
+
 }

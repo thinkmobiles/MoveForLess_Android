@@ -58,6 +58,11 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
         return false;
     }
 
+    @Override
+    public void onPageSelected() {
+
+    }
+
     private void showRoute() {
         RouteDialog dialog = new RouteDialog();
         dialog.show(getChildFragmentManager(), "");

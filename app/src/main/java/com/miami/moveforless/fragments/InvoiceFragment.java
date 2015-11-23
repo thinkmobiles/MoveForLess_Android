@@ -12,6 +12,11 @@ public class InvoiceFragment extends BaseJobDetailFragment {
     }
 
     @Override
+    public void onPageSelected() {
+
+    }
+
+    @Override
     protected int getLayoutResource() {
         return 0;
     }

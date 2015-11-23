@@ -1,16 +1,17 @@
-package com.miami.moveforless.customviews;
+package com.miami.moveforless.customviews.payment;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.customviews.quickActionMenu.ActionItem;
+import com.miami.moveforless.customviews.CustomSpinner;
+import com.miami.moveforless.customviews.quickActionMenu.PaymentActionItem;
 import com.miami.moveforless.utils.RxUtils;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * Created by klim on 29.10.15.
  */
-public class PaymentView extends LinearLayout {
+public class PaymentView extends LinearLayout implements PaymentCallback{
     @BindString(R.string.choose_payment_type) String strChoosePayment;
     @Bind(R.id.btnPaymentDelete_row)
     ImageView ivDelete;
@@ -39,6 +40,8 @@ public class PaymentView extends LinearLayout {
     ImageView ivDone;
 
     private PaymentAction mActionListener;
+    private List<PaymentActionItem> mDropDownList;
+    private PaymentType mSelectedType;
 
     public PaymentView(Context context) {
         this(context, null);
@@ -54,28 +57,19 @@ public class PaymentView extends LinearLayout {
 
         ButterKnife.bind(this);
 
-//        etAmount.setUnderlineColor(R.color.cyan_dark);
-
         RxUtils.click(ivDelete, o1 -> onDeleteClicked());
         RxUtils.click(tvConfirm, o -> onConfirmClicked());
 
-        final String[] mPaymentType = getResources().getStringArray(R.array.payments_titles);
-        final TypedArray icons = getResources().obtainTypedArray(R.array.payment_icons);
-
-
-        List<ActionItem> items = new ArrayList<>();
-        for (int i = 0; i < mPaymentType.length; i++) {
-            items.add(new ActionItem(i, mPaymentType[i], icons.getResourceId(i, -1)));
-
-        }
-        mSpinner.setDropDownItems(items);
+        mDropDownList = generateDropDownList();
+        mSpinner.setDropDownItems(mDropDownList);
         mSpinner.setOnDropDownItemClicked(_position -> {
             tvAmountDollar.setVisibility(View.VISIBLE);
             etAmount.setVisibility(View.VISIBLE);
             ivDelete.setVisibility(View.VISIBLE);
             tvConfirm.setVisibility(View.VISIBLE);
             etAmount.requestFocus();
-            mActionListener.onPaymentTypeSelected(PaymentView.this, mPaymentType[_position]);
+            mActionListener.onPaymentTypeSelected();
+            mSelectedType = mDropDownList.get(_position).getType();
         });
         mSpinner.setHint(strChoosePayment);
 
@@ -87,27 +81,34 @@ public class PaymentView extends LinearLayout {
 
     private void onConfirmClicked() {
         float amount = parseAmountInput(etAmount.getText().toString());
-        if (amount > 0) {
-            ivDelete.setVisibility(View.INVISIBLE);
-            ivDone.setVisibility(View.VISIBLE);
-            tvConfirm.setVisibility(View.GONE);
-            tvAmountDollar.setEnabled(false);
-            etAmount.setEnabled(false);
-            mSpinner.setEnabled(false);
-        }
-        mActionListener.onConfirm(this, amount);
+        int position = ((ViewGroup)getParent()).indexOfChild(this);
+        mActionListener.onConfirmNeeded(position, mSelectedType, amount);
     }
 
     public void setOnPaymentListener(PaymentAction _action) {
         mActionListener = _action;
     }
 
-    public interface PaymentAction {
-        void onConfirm(View _view, float _value);
+    @Override
+    public void onConfirmed() {
+        ivDelete.setVisibility(View.INVISIBLE);
+        ivDone.setVisibility(View.VISIBLE);
+        tvConfirm.setVisibility(View.GONE);
+        tvAmountDollar.setEnabled(false);
+        etAmount.setEnabled(false);
+        mSpinner.setEnabled(false);
+    }
 
-        void onPaymentTypeSelected(View _view, String _type);
+    public interface PaymentAction {
+        void onConfirmNeeded(int position, PaymentType _type, float _value);
+
+        void onPaymentTypeSelected();
 
         void onDelete(View _view);
+    }
+
+    public interface ConfirmPaymentCallBack {
+        void onConfirm();
     }
 
     private float parseAmountInput(String _stringAmount) {
@@ -121,6 +122,23 @@ public class PaymentView extends LinearLayout {
         } catch (Exception e) {
             return -1;
         }
+    }
+
+    private List<PaymentActionItem> generateDropDownList() {
+        List<PaymentActionItem> items = new ArrayList<>();
+        items.add(new PaymentActionItem(0, "Cash", R.drawable.icn_quote, PaymentType.CASH));
+        items.add(new PaymentActionItem(1, "Check", R.drawable.icn_check_book, PaymentType.CHECK));
+        items.add(new PaymentActionItem(2, "MasterCard", R.drawable.icn_mastercard, PaymentType.MASTERCARD));
+        items.add(new PaymentActionItem(3, "Visa", R.drawable.icn_visa, PaymentType.VISA));
+        items.add(new PaymentActionItem(4, "AmericanExpress", R.drawable.icn_american_express, PaymentType.AMERICANEXPRESS));
+        items.add(new PaymentActionItem(5, "Discover", R.drawable.icn_discover, PaymentType.DISCOVER));
+        items.add(new PaymentActionItem(6, "PayPal", R.drawable.icn_paypal, PaymentType.PAYPAL));
+        items.add(new PaymentActionItem(7, "Terminal", R.drawable.icn_terminal, PaymentType.TERMINAL));
+        return items;
+    }
+
+    public float getAmount() {
+        return parseAmountInput(etAmount.getText().toString());
     }
 
 }

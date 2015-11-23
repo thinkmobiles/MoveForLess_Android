@@ -31,7 +31,7 @@ import butterknife.BindString;
  * base job
  * Created by klim on 22.10.15.
  */
-public class JobFragment extends BaseFragment {
+public class JobFragment extends BaseFragment  implements ViewPager.OnPageChangeListener {
     @BindString(R.string.back__pressed_confirm_message)
     String strBackPressed;
     @BindColor(R.color.cyan_dark)
@@ -45,6 +45,7 @@ public class JobFragment extends BaseFragment {
     private int selectedTab = 0;
     private JobPageAdapter mAdapter;
     private PlayServicesManager mPlayServices;
+    private int scrolledFragmentIndex;
 
 
     public static Fragment newInstance(int _id) {
@@ -71,6 +72,7 @@ public class JobFragment extends BaseFragment {
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.customizeTabs(mViewPager);
         mViewPager.setCurrentItem(selectedTab);
+        mViewPager.addOnPageChangeListener(this);
         mPlayServices = new PlayServicesManager(getActivity());
     }
 
@@ -176,6 +178,26 @@ public class JobFragment extends BaseFragment {
             getFragmentManager().popBackStack();
         } else {
             mViewPager.setCurrentItem(position + 1);
+        }
+    }
+
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        scrolledFragmentIndex = position;
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        if (state == ViewPager.SCROLL_STATE_IDLE) {
+            Fragment fragment = mAdapter.getRegisteredFragment(scrolledFragmentIndex);
+            ((BaseJobDetailFragment) fragment).onPageSelected();
+
         }
     }
 

@@ -94,6 +94,11 @@ public class FeedbackFragment extends BaseJobDetailFragment implements TextWatch
         return false;
     }
 
+    @Override
+    public void onPageSelected() {
+
+    }
+
     private void clearAll() {
         etFeedback.setText("");
         mRatingBar.setRating(0f);
