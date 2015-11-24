@@ -24,13 +24,13 @@
             android:paddingRight="@dimen/job_content_padding_left_right">
 
             <TextView
-                style="@style/BaseTitleStyle"
+                style="@style/PagesTitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/menu_settings"/>
 
             <TextView
-                style="@style/PagesTitleStyle"
+                style="@style/BaseTitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"

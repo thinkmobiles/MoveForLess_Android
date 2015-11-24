@@ -103,7 +103,7 @@ public class LoginActivity extends BaseActivity {
             if (error.equals("Invalid token")) {
                 startTransitionAnimation();
             } else {
-                showErrorDialog(error);
+                showErrorDialog(error, view -> finish());
             }
         }
     }

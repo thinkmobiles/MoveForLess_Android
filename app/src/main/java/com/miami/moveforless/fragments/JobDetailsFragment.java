@@ -186,8 +186,10 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
     CheckBox cbIsFromInsurance;
     @Bind(R.id.etFromState_From)
     EditText etFromState_From;
+/*
     @Bind(R.id.etFromZipCode_From)
     EditText etFromZipCode_From;
+*/
     @Bind(R.id.cbHaveInventoryFrom)
     CheckBox cbHaveInventoryFrom;
     @Bind(R.id.cbIsReferralFrom)
@@ -396,7 +398,7 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
         etFromCity.setText(mJob.from_city);
         cbIsFromInsurance.setChecked(!mJob.is_from_insurance.equals("0"));
         etFromState_From.setText(mJob.from_state);
-        etFromZipCode_From.setText(mJob.from_zipcode);
+//        etFromZipCode_From.setText(mJob.from_zipcode);
         //cbHaveInventoryFrom not found
         cbIsReferralFrom.setChecked(!mJob.is_referral.equals("0"));
         cbIsFromRepeated.setChecked(!mJob.is_from_repeated.equals("0"));

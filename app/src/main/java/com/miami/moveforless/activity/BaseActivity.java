@@ -77,4 +77,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         dialog.setMessage(_message);
         dialog.show(getSupportFragmentManager(), "");
     }
+
+    protected void showErrorDialog(String _message, View.OnClickListener _listener) {
+        ErrorDialog dialog = new ErrorDialog();
+        dialog.setMessage(_message);
+        dialog.setOnClickListener(_listener);
+        dialog.show(getSupportFragmentManager(), "");
+    }
+
 }

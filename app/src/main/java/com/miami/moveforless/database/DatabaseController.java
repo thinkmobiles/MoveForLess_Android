@@ -9,6 +9,7 @@ import com.miami.moveforless.rest.response.MoveSizeResponse;
 import com.miami.moveforless.rest.response.NumberMenResponse;
 import com.miami.moveforless.utils.TimeUtil;
 import com.raizlabs.android.dbflow.sql.builder.Condition;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.OrderBy;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
@@ -64,5 +65,8 @@ public class DatabaseController implements AbstractControllerData {
     @Override
     public void dropDataBase(Context _context) {
         _context.deleteDatabase(MoveForLessDatabase.NAME +".db");
+//        Delete.table(JobModel.class);
     }
+
+
 }

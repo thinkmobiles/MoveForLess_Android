@@ -67,7 +67,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         setHasOptionsMenu(true);
 //        tvBegin.setOnClickListener(this);
 //        tvEnd.setOnClickListener(this);
-        testGetData();
+//        testGetData();
     }
 
     private void testGetData() {

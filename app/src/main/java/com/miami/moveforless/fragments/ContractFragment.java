@@ -3,9 +3,6 @@ package com.miami.moveforless.fragments;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -72,7 +69,8 @@ public class ContractFragment extends BaseJobDetailFragment implements View.OnCl
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             pdfView.setLayoutParams(params);
             mPdfContainer.addView(pdfView);
-            pdfView.fromFile(_file).enableSwipe(true).showMinimap(true).load();
+            pdfView.fromFile(_file).enableSwipe(true).showMinimap(true).onDraw((canvas, pageWidth, pageHeight, displayedPage) -> pdfView.zoomTo(2.5f)).load();
+
         }
 
     }

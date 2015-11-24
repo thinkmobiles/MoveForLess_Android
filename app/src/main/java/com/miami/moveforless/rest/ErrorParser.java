@@ -65,9 +65,9 @@ public class ErrorParser {
                 return "Bad network connection";
             }
         } catch (Exception exception) {
-            return "Unknown error: " + _e.getLocalizedMessage();
+            return "Unknown error: " + _e.getCause();
         }
-        return "Unknown error: " + _e.getLocalizedMessage();
+        return "Unknown error: " + _e.getCause();
     }
 
     public static String parseRouteError(Throwable _e) {

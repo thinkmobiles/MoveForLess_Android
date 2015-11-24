@@ -44,6 +44,12 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        // TODO: implement change account api
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        popBackStack();
     }
 }

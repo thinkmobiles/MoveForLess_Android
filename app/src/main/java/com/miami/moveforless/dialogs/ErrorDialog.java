@@ -1,5 +1,6 @@
 package com.miami.moveforless.dialogs;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,10 +19,10 @@ public class ErrorDialog extends BaseDialog {
     @Bind(R.id.btnNegative_DEL)
     Button btnClose;
 
-
     @BindString(R.string.close) String strClose;
 
     private String mMessage = "";
+    private View.OnClickListener mListener;
 
     @Override
     protected int getLayoutResource() {
@@ -35,9 +36,16 @@ public class ErrorDialog extends BaseDialog {
         if (!mMessage.isEmpty()) {
             tvMessage.setText(mMessage);
         }
+        if (mListener != null) {
+            RxUtils.click(btnClose, o -> mListener.onClick(null));
+        }
     }
 
     public void setMessage(String _message) {
         mMessage = _message;
+    }
+
+    public void setOnClickListener(View.OnClickListener _listener) {
+        mListener = _listener;
     }
 }
