@@ -2,7 +2,10 @@ package com.miami.moveforless.fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.PixelFormat;
+import android.graphics.PointF;
 import android.os.Bundle;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -56,7 +59,6 @@ public class ContractFragment extends BaseJobDetailFragment implements View.OnCl
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
 
-
         btnSing.setOnClickListener(this);
     }
 
@@ -68,9 +70,13 @@ public class ContractFragment extends BaseJobDetailFragment implements View.OnCl
             PDFView pdfView = new PDFView(getContext(), null);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             pdfView.setLayoutParams(params);
-            mPdfContainer.addView(pdfView);
-            pdfView.fromFile(_file).enableSwipe(true).showMinimap(true).onDraw((canvas, pageWidth, pageHeight, displayedPage) -> pdfView.zoomTo(2.5f)).load();
 
+            pdfView.setZOrderOnTop(true);    // necessary
+            SurfaceHolder sfhTrackHolder = pdfView.getHolder();
+            sfhTrackHolder.setFormat(PixelFormat.TRANSPARENT);
+
+            mPdfContainer.addView(pdfView);
+            pdfView.fromFile(_file).enableSwipe(true).showMinimap(true).load();
         }
 
     }
