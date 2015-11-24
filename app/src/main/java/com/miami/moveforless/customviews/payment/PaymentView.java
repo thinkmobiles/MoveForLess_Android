@@ -22,6 +22,7 @@ import butterknife.BindString;
 import butterknife.ButterKnife;
 
 /**
+ * custom view for payment
  * Created by klim on 29.10.15.
  */
 public class PaymentView extends LinearLayout implements PaymentCallback{
@@ -107,10 +108,6 @@ public class PaymentView extends LinearLayout implements PaymentCallback{
         void onDelete(View _view);
     }
 
-    public interface ConfirmPaymentCallBack {
-        void onConfirm();
-    }
-
     private float parseAmountInput(String _stringAmount) {
         if (_stringAmount.isEmpty()) return 0;
 
@@ -135,10 +132,6 @@ public class PaymentView extends LinearLayout implements PaymentCallback{
         items.add(new PaymentActionItem(6, "PayPal", R.drawable.icn_paypal, PaymentType.PAYPAL));
         items.add(new PaymentActionItem(7, "Terminal", R.drawable.icn_terminal, PaymentType.TERMINAL));
         return items;
-    }
-
-    public float getAmount() {
-        return parseAmountInput(etAmount.getText().toString());
     }
 
 }

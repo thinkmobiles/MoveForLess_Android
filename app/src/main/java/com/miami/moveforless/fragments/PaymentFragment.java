@@ -2,11 +2,8 @@ package com.miami.moveforless.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,20 +12,19 @@ import com.miami.moveforless.R;
 import com.miami.moveforless.customviews.payment.PaymentCallback;
 import com.miami.moveforless.customviews.payment.PaymentView;
 import com.miami.moveforless.customviews.payment.PaymentType;
-import com.miami.moveforless.dialogs.CheckDialog;
+import com.miami.moveforless.activity.CheckActivity;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.globalconstants.Const;
+import com.miami.moveforless.utils.PayPalManager;
 import com.miami.moveforless.utils.RxUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.BindString;
 
 /**
+ * payment fragment
  * Created by klim on 29.10.15.
  */
 public class PaymentFragment extends BaseJobDetailFragment implements PaymentView.PaymentAction {
@@ -48,9 +44,14 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
     @Bind(R.id.btnNext_FP)
     Button btnNext;
 
-    private List<PaymentView> payments;
     private String mCheckPhotoPath;
-    private float requiredAmount = 150;
+    private float mRequiredAmount = 150;
+    private PayPalManager mPayPalManager;
+    private int mConfirmPosition;
+    private float mConfirmAmount;
+    private PaymentType mConfirmType;
+    private String mConfirmDescription;
+
 
     public static PaymentFragment newInstance() {
         Bundle args = new Bundle();
@@ -66,23 +67,39 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
 
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
+        mPayPalManager = new PayPalManager();
+        mPayPalManager.onCreate(getActivity());
+
         addPaymentRow();
-        tvRequiredAmount.setText("" + requiredAmount);
-        payments = new ArrayList<>();
+        tvRequiredAmount.setText("" + mRequiredAmount);
         RxUtils.click(btnNext).subscribe(o -> nextClicked());
+    }
+
+    @Override
+    public void onDestroyView() {
+        mPayPalManager.onDestroy(getActivity());
+        super.onDestroyView();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case Const.CHECK_DIALOG_RESULT_KEY:
-                    float amount = data.getFloatExtra(Const.AMOUNT_KEY, 0);
-                    addConfirmedAmount(amount);
-                    int paymentId = data.getIntExtra(Const.PAYMENT_ID_KEY, -1);
-                    ((PaymentCallback)mContainer.getChildAt(paymentId)).onConfirmed();
+
+                    addConfirmedAmount(mConfirmAmount);
+                    storeConfirmedPayment(mConfirmType, mConfirmDescription, mConfirmAmount);
+                    ((PaymentCallback) mContainer.getChildAt(mConfirmPosition)).onConfirmed();
                     mCheckPhotoPath = data.getStringExtra(Const.CHECK_PHOTO_KEY);
+                    break;
+                case Const.REQUEST_CODE_PAYMENT:
+                    if (mPayPalManager.onActivityResult(requestCode, resultCode, data)) {
+                        addConfirmedAmount(mConfirmAmount);
+                        storeConfirmedPayment(mConfirmType, mConfirmDescription, mConfirmAmount);
+                        ((PaymentCallback) mContainer.getChildAt(mConfirmPosition)).onConfirmed();
+                    }
                     break;
             }
         }
@@ -96,32 +113,39 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
 
     @Override
     public void onConfirmNeeded(int _position, PaymentType _type, float _value) {
-        switch (_type) {
-            case CASH:
-            case TERMINAL:
-                if (validateSimplePayment(_value)) {
+        mConfirmPosition = _position;
+        mConfirmAmount = _value;
+        mConfirmType = _type;
+        mConfirmDescription = "Payment ID LD0000111";
+
+        if (_value > 0) {
+            switch (_type) {
+                case CASH:
+                case TERMINAL:
                     addConfirmedAmount(_value);
-                    ((PaymentCallback)mContainer.getChildAt(_position)).onConfirmed();
-                }
-                break;
-            case CHECK:
-                if (validateSimplePayment(_value)) {
-                    showCheckDialog(_position, _value);
-                }
-                break;
-            case VISA:
-            case MASTERCARD:
-            case AMERICANEXPRESS:
-            case DISCOVER:
-
-                break;
+                    storeConfirmedPayment(mConfirmType, mConfirmDescription, mConfirmAmount);
+                    ((PaymentCallback) mContainer.getChildAt(mConfirmPosition)).onConfirmed();
+                    break;
+                case CHECK:
+                    showCheckDialog();
+                    break;
+                case VISA:
+                case MASTERCARD:
+                case AMERICANEXPRESS:
+                case DISCOVER:
+                    showPayPalActivity(mConfirmDescription, mConfirmAmount);
+                    break;
+            }
+        } else {
+            showErrorDialog(strAmountMessage);
         }
-
     }
 
     private void nextClicked() {
         float totalAmount = Float.valueOf(tvTotalAmount.getText().toString());
-        if (totalAmount >= requiredAmount) {
+        if (totalAmount >= mRequiredAmount) {
+
+
             BusProvider.getInstance().post(new SwitchJobDetailsEvent());
         } else {
             showErrorDialog(strPaymentError);
@@ -148,29 +172,27 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
 
     }
 
-    private boolean validateSimplePayment(float _value) {
-        if (_value > 0) {
-        } else {
-            showErrorDialog(strAmountMessage);
-        }
-        return true;
-    }
-
-    private void addConfirmedAmount(float _value){
+    private void addConfirmedAmount(float _value) {
         float totalAmount = Float.valueOf(tvTotalAmount.getText().toString());
         tvTotalAmount.setText("" + (totalAmount += _value));
-        if (totalAmount >= requiredAmount) {
+        if (totalAmount >= mRequiredAmount) {
             btnNext.setBackgroundResource(R.drawable.button_yellow);
             btnNext.setTextColor(cyanDark);
         }
 
     }
 
-    private void showCheckDialog(int _paymentId, float _amount) {
-        Intent intent = new Intent(getActivity(), CheckDialog.class);
-        intent.putExtra(Const.PAYMENT_ID_KEY, _paymentId);
-        intent.putExtra(Const.AMOUNT_KEY, _amount);
+    private void showCheckDialog() {
+        Intent intent = new Intent(getActivity(), CheckActivity.class);
         getParentFragment().startActivityForResult(intent, Const.CHECK_DIALOG_RESULT_KEY);
+    }
+
+    private void showPayPalActivity(String _title, float _amount) {
+        mPayPalManager.onBuyPressed(this, _title, _amount);
+    }
+
+    private void storeConfirmedPayment(PaymentType _type, String _description, float _amount) {
+        // TODO: add storing confirmed payment to DB
     }
 
 }
