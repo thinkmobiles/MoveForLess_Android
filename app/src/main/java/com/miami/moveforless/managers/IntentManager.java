@@ -8,10 +8,12 @@ import android.provider.Settings;
 
 import com.miami.moveforless.Exceptions.GoogleMapsException;
 import com.miami.moveforless.globalconstants.Const;
+import com.paypal.android.sdk.payments.PayPalService;
 
 import rx.Observable;
 
 /**
+ * All needed intents
  * Created by klim on 05.11.15.
  */
 public class IntentManager {
@@ -47,5 +49,11 @@ public class IntentManager {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, _fileUri);
         return takePictureIntent;
+    }
+
+    public static Intent getPayPalIntent(Activity _activity) {
+        Intent intent = new Intent(_activity, PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, Const.config);
+        return intent;
     }
 }

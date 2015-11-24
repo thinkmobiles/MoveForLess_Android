@@ -1,4 +1,4 @@
-package com.miami.moveforless.dialogs;
+package com.miami.moveforless.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.BaseActivity;
 import com.miami.moveforless.customviews.PhotoLayout.CheckLayout;
+import com.miami.moveforless.dialogs.PhotoDialog;
 import com.miami.moveforless.globalconstants.Const;
 import com.miami.moveforless.utils.BitmapUtils;
 import com.miami.moveforless.utils.CameraUtils;
@@ -28,9 +29,10 @@ import butterknife.Bind;
 import butterknife.BindString;
 
 /**
+ * Activity for adding photo check
  * Created by klim on 20.11.15.
  */
-public class CheckDialog extends BaseActivity {
+public class CheckActivity extends BaseActivity {
     @BindString(R.string.check_error) String strCheckError;
 
     @Bind(R.id.photos_container_DCL)
@@ -45,17 +47,12 @@ public class CheckDialog extends BaseActivity {
     private CameraUtils mCamera;
     private GalleryUtils mGallery;
     private String mPhotoFilePath = "";
-    private float mAmount;
-    private int mPaymentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_check_layout);
-
-        mAmount = getIntent().getFloatExtra(Const.AMOUNT_KEY, -1);
-        mPaymentId = getIntent().getIntExtra(Const.PAYMENT_ID_KEY, -1);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -93,7 +90,7 @@ public class CheckDialog extends BaseActivity {
                         }
                     }
                     if (_resultCode == Activity.RESULT_CANCELED) {
-                        imageFile.delete();
+                        boolean isDeleted = imageFile.delete();
                     }
                 }
                 break;
@@ -128,8 +125,6 @@ public class CheckDialog extends BaseActivity {
     private void pay() {
         if (!mPhotoFilePath.isEmpty()) {
             Intent intent = new Intent();
-            intent.putExtra(Const.PAYMENT_ID_KEY, mPaymentId);
-            intent.putExtra(Const.AMOUNT_KEY, mAmount);
             intent.putExtra(Const.CHECK_PHOTO_KEY, mPhotoFilePath);
             setResult(Activity.RESULT_OK, intent);
             finish();
