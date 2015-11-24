@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import butterknife.Bind;
 
 /**
- * job details screen
  * Created by SetKrul on 03.11.2015.
  */
 public class JobDetailsFragment extends BaseJobDetailFragment {
@@ -272,22 +271,22 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
 
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
-        //left
-        setJobTypeSpinner();
-        setCalendars();
-        setCommissions();
-        setFreight();
-        TimeJob();
-        setFromTextDetails();
-        setToTextDetails();
-
-        //right
-        setNames();
-        setConfrimWithClient();
-        setLocation();
-        localDetails();
-        setFromDetailsCheck();
-        setToDetailsCheck();
+//        //left
+//        setJobTypeSpinner();
+//        setCalendars();
+//        setCommissions();
+//        setFreight();
+//        TimeJob();
+//        setFromTextDetails();
+//        setToTextDetails();
+//
+//        //right
+//        setNames();
+//        setConfrimWithClient();
+//        setLocation();
+//        localDetails();
+//        setFromDetailsCheck();
+//        setToDetailsCheck();
 
         scrollView.parallaxViewBackgroundBy(scrollView, ContextCompat.getDrawable(getContext(), R.drawable
                 .job_details_background), .2f);

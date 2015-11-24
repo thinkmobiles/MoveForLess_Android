@@ -14,8 +14,6 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 @Table(databaseName = MoveForLessDatabase.NAME)
 public class JobResponse extends BaseModel {
 
-
-
     @Column
     @PrimaryKey(autoincrement = true)
     public long _id;
@@ -399,8 +397,8 @@ public class JobResponse extends BaseModel {
     public String status_slug;
 
 
-    public JobResponse() {
-    }
+//    public JobResponse() {
+//    }
 
 //    protected JobResponse(Parcel in) {
 //        id = in.readInt();

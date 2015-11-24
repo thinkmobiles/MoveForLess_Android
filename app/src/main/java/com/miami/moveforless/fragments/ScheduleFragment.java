@@ -65,8 +65,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
         setHasOptionsMenu(true);
-        tvBegin.setOnClickListener(this);
-        tvEnd.setOnClickListener(this);
+//        tvBegin.setOnClickListener(this);
+//        tvEnd.setOnClickListener(this);
         testGetData();
     }
 
