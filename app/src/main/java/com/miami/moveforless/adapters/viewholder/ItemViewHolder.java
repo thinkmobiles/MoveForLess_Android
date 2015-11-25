@@ -25,7 +25,6 @@ public class ItemViewHolder extends AbstractViewHolder implements View.OnClickLi
     private TextView tvPickupDate;
     private TextView tvRequiredPickupDate;
     private TextView tvToZipcode;
-    private TextView tvDetailAddress;
 
     public ItemViewHolder(View itemView) {
         super(itemView);
@@ -44,35 +43,16 @@ public class ItemViewHolder extends AbstractViewHolder implements View.OnClickLi
     @Override
     public void bind(JobModel model) {
         mJobModel = model;
-        tvFullname.setText(model.from_fullname.trim());
-        tvPostTitle.setText(model.post_title.trim());
-        tvPhone.setText(model.from_phone.trim());
-        tvFromZipcode.setText(model.from_zipcode.trim());
-        tvFullname.setText(model.from_fullname.trim());
-        tvToZipcode.setText(model.to_zipcode.trim());
+        tvFullname.setText(model.from_fullname);
+        tvPostTitle.setText(model.post_title);
+        tvPhone.setText(model.from_phone);
+        tvFromZipcode.setText(model.from_zipcode);
+        tvFullname.setText(model.from_fullname);
+        tvToZipcode.setText(model.to_zipcode);
 
         tvRequiredPickupDate.setText(model.getRequiredPickupDate());
         tvPickupDate.setText(model.getPickup_date());
     }
-
-
-    private Rect locateView(View v) {
-        int[] loc_int = new int[2];
-        if (v == null) return null;
-        try {
-            v.getLocationOnScreen(loc_int);
-        } catch (NullPointerException npe) {
-            return null;
-        }
-        Rect location = new Rect();
-        location.left = loc_int[0];
-        location.top = loc_int[1];
-        location.right = location.left + v.getWidth();
-        location.bottom = location.top + v.getHeight() + 30;
-
-        return location;
-    }
-
 
     @Override
     public void onClick(View v) {

@@ -2,9 +2,12 @@ package com.miami.moveforless.adapters.viewholder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.miami.moveforless.R;
 
 /**
  * Created by SetKrul on 30.10.2015.
