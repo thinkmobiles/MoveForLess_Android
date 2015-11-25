@@ -35,6 +35,7 @@ public final class MapManager {
         if (_isMyLocation)
             marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.icn_location_a));
         else marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.icn_location_b));
+
         return marker;
     }
 

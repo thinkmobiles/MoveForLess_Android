@@ -26,28 +26,30 @@ public class SharedPrefManager {
         return instance;
     }
 
-    public void saveString(String key, String value) {
+    private void saveString(String key, String value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.commit();
     }
 
-    public void saveInt(String key, int value) {
+    private void saveInt(String key, int value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(key, value);
         editor.commit();
     }
 
-    public String retrieveString(String _s) {
+    private void saveBoolean(String key, boolean value) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+    private String retrieveString(String _s) {
         return sharedPreferences.getString(_s, "");
     }
 
-    public String retrieveToken() {
-        return retrieveString(SharedPrefConst.SHARED_PREF_USER_TOKEN);
-    }
-
-    public void storeToken(String _token) {
-        saveString(SharedPrefConst.SHARED_PREF_USER_TOKEN, _token);
+    private boolean retrieveBoolean(String _s) {
+        return sharedPreferences.getBoolean(_s, false);
     }
 
     public void storeUsername(String _username) {
@@ -58,5 +60,19 @@ public class SharedPrefManager {
         return retrieveString(SharedPrefConst.SHARED_PREF_USER_NAME);
     }
 
+    public void storeToken(String _token) {
+        saveString(SharedPrefConst.SHARED_PREF_USER_TOKEN, _token);
+    }
 
+    public String retrieveToken() {
+        return retrieveString(SharedPrefConst.SHARED_PREF_USER_TOKEN);
+    }
+
+    public void storeNotificationState(boolean _value) {
+        saveBoolean(SharedPrefConst.SHARED_PREF_NOTIFICATION_STATE, _value);
+    }
+
+    public boolean retrieveNotificationState() {
+        return retrieveBoolean(SharedPrefConst.SHARED_PREF_NOTIFICATION_STATE);
+    }
 }

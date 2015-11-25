@@ -22,9 +22,9 @@ public class ConfirmDialog extends BaseDialog {
     @Bind(R.id.tvMessage_DCL)
     TextView tvMessage;
     @Bind(R.id.btnNegative_DCL)
-    Button btnNegative;
+    TextView btnNegative;
     @Bind(R.id.btnPositive_DCL)
-    Button btnPositive;
+    TextView btnPositive;
 
     private String mMessage;
     private View.OnClickListener mPositiveListener;

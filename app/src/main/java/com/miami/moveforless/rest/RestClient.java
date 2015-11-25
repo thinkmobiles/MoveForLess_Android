@@ -11,6 +11,7 @@ import com.miami.moveforless.globalconstants.RestConst;
 import com.miami.moveforless.managers.CacheManager;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.request.JobRequest;
+import com.miami.moveforless.rest.request.UserEditRequest;
 import com.miami.moveforless.rest.request.LoginRequest;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.miami.moveforless.rest.response.ListMoveSizeResponse;
@@ -100,7 +101,7 @@ public class RestClient {
         return _response
                 .subscribeOn(Schedulers.io())
                 .retry(2)
-                .timeout(20, TimeUnit.SECONDS)
+                .timeout(3, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -117,6 +118,15 @@ public class RestClient {
 
         return responseWrapper(getInstance().getIMoverApi().logout(username, token));
     }
+
+    public Observable<Boolean> UserEdit(String _password, String _newPassword, String _repeatPassword) {
+        final String username = SharedPrefManager.getInstance().retrieveUsername();
+        final String token = SharedPrefManager.getInstance().retrieveToken();
+
+        UserEditRequest request = new UserEditRequest(username, token, _password, _newPassword, _repeatPassword);
+        return responseWrapper(getInstance().getIMoverApi().edit(request));
+    }
+
 
     public Observable<List<JobResponse>> jobList() {
         final String username = SharedPrefManager.getInstance().retrieveUsername();

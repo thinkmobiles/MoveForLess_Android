@@ -17,7 +17,7 @@ public class ErrorDialog extends BaseDialog {
     @Bind(R.id.tvMessage_DEL)
     TextView tvMessage;
     @Bind(R.id.btnNegative_DEL)
-    Button btnClose;
+    TextView btnClose;
 
     @BindString(R.string.close) String strClose;
 

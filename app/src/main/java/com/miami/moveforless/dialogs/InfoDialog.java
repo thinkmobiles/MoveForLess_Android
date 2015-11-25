@@ -19,7 +19,7 @@ public class InfoDialog extends BaseDialog {
     @Bind(R.id.tvMessage_DIL)
     TextView tvTitle;
     @Bind(R.id.btnNegative_DIL)
-    Button btnClose;
+    TextView btnClose;
 
     private String mMessage;
     private View.OnClickListener mListener;

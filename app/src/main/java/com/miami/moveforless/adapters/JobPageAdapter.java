@@ -12,6 +12,7 @@ import com.miami.moveforless.fragments.ClaimFragment;
 import com.miami.moveforless.fragments.CongratulationFragment;
 import com.miami.moveforless.fragments.ContractFragment;
 import com.miami.moveforless.fragments.FeedbackFragment;
+import com.miami.moveforless.fragments.InvoiceFragment;
 import com.miami.moveforless.fragments.JobDetailsFragment;
 import com.miami.moveforless.fragments.PaymentFragment;
 import com.miami.moveforless.fragments.QuestionnaireFragment;
@@ -43,6 +44,8 @@ public class JobPageAdapter extends FragmentStatePagerAdapter{
                 return QuestionnaireFragment.newInstance();
             case SIGN_CONTRACT:
                 return ContractFragment.newInstance();
+            case SIGN_INVOICE:
+                return InvoiceFragment.newInstance();
             case PAYMENT:
                 return PaymentFragment.newInstance();
             case CONFIRMATION:

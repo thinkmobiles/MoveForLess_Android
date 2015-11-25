@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -44,10 +43,10 @@ public class SignatureDialog extends BaseDialog implements GestureOverlayView.On
     TextView tvDescription;
     @Bind(R.id.gesture_container_SL)
     FrameLayout gestureContainer;
-    @Bind(R.id.btnPositive_DSL)
-    Button btnPositive;
-    @Bind(R.id.btnNegative_DSL)
-    Button btnNegative;
+    @Bind(R.id.btnClose_DSL)
+    TextView btnClose;
+    @Bind(R.id.btnClear_DSL)
+    TextView btnClear;
 
 
     @Override
@@ -69,55 +68,48 @@ public class SignatureDialog extends BaseDialog implements GestureOverlayView.On
 
     @Override
     protected void setupViews() {
-
-        RxUtils.click(btnPositive, o -> onPositiveClicked());
-        RxUtils.click(btnNegative, o -> onNegativeClicked());
+        RxUtils.click(btnClose, o -> onCloseClicked());
+        RxUtils.click(btnClear, o -> onClearClicked());
 
         tvTitle.setText(getString(R.string.signature_title));
         tvDescription.setText(getString(R.string.signature_description));
-        btnNegative.setText(strClose);
-        btnPositive.setText(strOk);
+        btnClear.setText(strClear);
+        btnClose.setText(strClose);
 
         setCancelable(true);
         isGestured = false;
         mGestureView.addOnGestureListener(this);
     }
 
-    public void onNegativeClicked() {
-        if (isGestured) {
+    public void onClearClicked() {
             mGestureView.cancelClearAnimation();
             mGestureView.clear(true);
             mGestureView.addOnGestureListener(this);
-            btnNegative.setText(strClose);
-            btnPositive.setVisibility(View.GONE);
+            btnClose.setText(strClose);
+            btnClear.setVisibility(View.GONE);
             isGestured = false;
-        } else {
-            dismiss();
-        }
     }
 
-    public void onPositiveClicked() {
-        try {
-            mGestureView.setDrawingCacheEnabled(true);
-            Bitmap bm = Bitmap.createBitmap(mGestureView.getDrawingCache());
-            Intent data = new Intent();
-            data.putExtra(Const.SIGNATURE_BITMAP_KEY, bm);
-            if (getParentFragment() != null)
+    public void onCloseClicked() {
+        if (isGestured) {
+            try {
+                mGestureView.setDrawingCacheEnabled(true);
+                Bitmap bm = Bitmap.createBitmap(mGestureView.getDrawingCache());
+                Intent data = new Intent();
+                data.putExtra(Const.SIGNATURE_BITMAP_KEY, bm);
                 getParentFragment().onActivityResult(Const.REQUEST_CODE_SIGN, Activity.RESULT_OK, data);
-            dismiss();
-        } catch (Exception e) {
-            if (getParentFragment() != null)
-                getParentFragment().onActivityResult(Const.REQUEST_CODE_SIGN, Activity.RESULT_CANCELED, null);
-            dismiss();
+            } catch (Exception e) {
+                dismiss();
+            }
         }
-
+        dismiss();
     }
 
     @Override
     public void onGestureStarted(GestureOverlayView gestureOverlayView, MotionEvent motionEvent) {
         mGestureView.removeAllOnGestureListeners();
-        btnPositive.setVisibility(View.VISIBLE);
-        btnNegative.setText(strClear);
+        btnClear.setVisibility(View.VISIBLE);
+        btnClose.setText(strOk);
         isGestured = true;
     }
 

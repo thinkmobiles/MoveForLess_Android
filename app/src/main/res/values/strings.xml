@@ -70,7 +70,7 @@
     <!--congratulation screen-->
     <string name="back_to_schedule">Back to Schedule</string>
     <string name="write_review">Write Review</string>
-    <string name="congratulation_text">Congratulation! \n Your feedback \n has been saved</string>
+    <string name="congratulation_text">Congratulation! \n Your feedback \n has been sent</string>
     <string name="invoice_successfull">Congratulation! \n Your invoice \n has been paid successfully</string>
 
     <!--dialogs-->
@@ -104,6 +104,7 @@
     <string name="change">Change</string>
     <string name="enable_notification">Enable notification</string>
 
-
+    <string name="edit_user_success">User has changed successfully</string>
+    <string name="edit_user_error">User has not changed. Please, try later</string>
 </resources>
 

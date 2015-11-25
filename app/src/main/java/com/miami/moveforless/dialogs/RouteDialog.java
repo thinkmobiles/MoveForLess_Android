@@ -52,7 +52,7 @@ public class RouteDialog extends BaseDialog {
     @Bind(R.id.map_container_DR)
     FrameLayout mMapContainer;
     @Bind(R.id.btnNegative_DR)
-    Button btnClose;
+    TextView btnClose;
 
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
