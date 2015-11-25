@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.adapters.viewholder.AbstractViewHolder;
+import com.miami.moveforless.adapters.viewholder.ActiveHeaderViewHolder;
+import com.miami.moveforless.adapters.viewholder.ActiveItemViewHolder;
 import com.miami.moveforless.adapters.viewholder.ConstantHolder;
 import com.miami.moveforless.adapters.viewholder.HeaderViewHolder;
 import com.miami.moveforless.adapters.viewholder.ItemViewHolder;
@@ -32,21 +34,24 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
 
     @Override
     public int getItemViewType(int _position) {
-//        if (getItem(_position).child == null){
-//            return ConstantHolder.Item;
-//        } else {
-//            if (getItem(_position).child != null && getItem(_position).child.get(0).child == null){
-//                return ConstantHolder.SubHeader;
-//            } else {
-//                return ConstantHolder.Header;
-//            }
-//        }
-//        return getItem(_position).child == null ? ConstantHolder.Item :  ConstantHolder.Header;
-
-        if (getItem(_position).isActive == 1){
-            return ConstantHolder.Header;
-        } else {
+        if (getItem(_position).mSub) {
+            return ConstantHolder.SubItem;
+        }
+        if (getItem(_position).isActive != null) {
+            if (getItem(_position).child != null) {
+                return ConstantHolder.Active_Header;
+            } else {
+                return ConstantHolder.Active_Item;
+            }
+        }
+        if (getItem(_position).child == null) {
             return ConstantHolder.Item;
+        } else {
+            if (getItem(_position).child != null && getItem(_position).child.get(0).child == null) {
+                return ConstantHolder.SubHeader;
+            } else {
+                return ConstantHolder.Header;
+            }
         }
     }
 
@@ -55,19 +60,25 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
         final View itemView;
         switch (viewType) {
             case ConstantHolder.Item:
-                itemView = mInflater.inflate(R.layout.item_example, parent, false);
+                itemView = mInflater.inflate(R.layout.schedule_item, parent, false);
                 return new ItemViewHolder(itemView);
             case ConstantHolder.Header:
-                itemView = mInflater.inflate(R.layout.header_example, parent, false);
+                itemView = mInflater.inflate(R.layout.schedule_header, parent, false);
                 return new HeaderViewHolder(itemView);
             case ConstantHolder.SubHeader:
-                itemView = mInflater.inflate(R.layout.sub_header_example, parent, false);
+                itemView = mInflater.inflate(R.layout.schedule_sub_header, parent, false);
                 return new SubHeaderViewHolder(itemView);
             case ConstantHolder.SubItem:
-                itemView = mInflater.inflate(R.layout.sub_item_example, parent, false);
+                itemView = mInflater.inflate(R.layout.schedule_sub_item, parent, false);
                 return new SubItemViewHolder(itemView);
+            case ConstantHolder.Active_Header:
+                itemView = mInflater.inflate(R.layout.schedule_active_header, parent, false);
+                return new ActiveHeaderViewHolder(itemView);
+            case ConstantHolder.Active_Item:
+                itemView = mInflater.inflate(R.layout.schedule_active_item, parent, false);
+                return new ActiveItemViewHolder(itemView);
             default:
-                itemView = mInflater.inflate(R.layout.header_example, parent, false);
+                itemView = mInflater.inflate(R.layout.schedule_header, parent, false);
                 return new HeaderViewHolder(itemView);
         }
     }

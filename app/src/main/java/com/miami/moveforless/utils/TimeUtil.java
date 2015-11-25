@@ -10,15 +10,15 @@ import java.util.Calendar;
  */
 public class TimeUtil {
 
-    public static int getUnixTime() {
-        return (int) (System.currentTimeMillis() / 1000L);
+    public static long getUnixTime() {
+        return (int) (System.currentTimeMillis());
     }
 
     public static String getDate(String unixTime, String format) {
 
-        Integer intUnixTime = Integer.valueOf(unixTime);
+        Long intUnixTime = Long.valueOf(unixTime);
 
-        return DateFormat.format(format, intUnixTime * 1000L).toString();
+        return DateFormat.format(format, intUnixTime).toString();
     }
 
     public static int getCurrentDay() {

@@ -56,6 +56,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private List<JobResponse> jobResponses;
 
     private List<JobModel> jobModels;
+    private List<JobModel> jobModelsSorted;
 
     @Override
     protected int getLayoutResource() {
@@ -67,45 +68,107 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         setHasOptionsMenu(true);
 //        tvBegin.setOnClickListener(this);
 //        tvEnd.setOnClickListener(this);
-//        testGetData();
+        testGetData();
     }
 
     private void testGetData() {
         jobModels = new ArrayList<>();
         DatabaseController.getInstance().dropDataBase(App.getAppContext());
 
-        for (int i = 0; i < 8; i++) {
-
             JobResponse jobModel = new JobResponse();
-
-            if (i == 3){
-                jobModel.isActive = 1;
-                jobModel.from_fullname = "isActive";
-
-            }
-            else {
-                jobModel.isActive = 0;
-                jobModel.from_fullname = "from_fullname";
-            }
-            jobModel.from_address = "address from Test";
-            jobModel.to_address = "address  to " +
-                    "Test";
-            jobModel.from_city = "from_city";
-            jobModel.from_phone = "from_phone";
-            jobModel.from_zipcode = "787887";
-            jobModel.to_zipcode = "2389456";
-            jobModel.pickup_date = 1184654652;
-            jobModel.status_slug = "1184654652";
-            jobModel.to_city = "to city";
-            jobModel.post_title = "post tittle" + i;
-            jobModel.RequiredPickupDate = 1184654656;
+            jobModel.isActive = 1;
+            jobModel.from_fullname = "Lesley";
+            jobModel.from_address = "from some address";
+            jobModel.to_address = "to some address";
+            jobModel.from_city = "From some City";
+            jobModel.to_city = "To some City";
+            jobModel.from_phone = "783-223-5111";
+            jobModel.from_zipcode = "31522";
+            jobModel.to_zipcode = "33525";
+            jobModel.pickup_date = "1448091900000";
+            jobModel.status_slug = "assign";
+            jobModel.post_title = "LD025135";
+            jobModel.RequiredPickupDate = "1448091900000";
             jobModel.save();
+
+        for (int i = 0; i < 5; i++){
+            JobResponse jobModelToday = new JobResponse();
+            jobModelToday.isActive = 0;
+            jobModelToday.from_fullname = "Dominique " + i;
+            jobModelToday.from_address = "from some address";
+            jobModelToday.to_address = "to some address";
+            jobModelToday.from_city = "From some City";
+            jobModelToday.to_city = "To some City";
+            jobModelToday.from_phone = "326-562-891" + i;
+            jobModelToday.from_zipcode = "31522";
+            jobModelToday.to_zipcode = "33525";
+            jobModelToday.pickup_date = "1448437500000";
+            jobModelToday.status_slug = "assign";
+            jobModelToday.post_title = "LD02513" + i;
+            jobModelToday.RequiredPickupDate = "1448437500000";
+            jobModelToday.save();
+        }
+
+        for (int i = 0; i < 7; i++){
+            JobResponse jobModelFuture = new JobResponse();
+            jobModelFuture.isActive = 0;
+            jobModelFuture.from_fullname = "Gav " + i;
+            jobModelFuture.from_address = "from some address";
+            jobModelFuture.to_address = "to some address";
+            jobModelFuture.from_city = "From some City";
+            jobModelFuture.to_city = "To some City";
+            jobModelFuture.from_phone = "456-312-8945" + i;
+            jobModelFuture.from_zipcode = "31522";
+            jobModelFuture.to_zipcode = "33525";
+            jobModelFuture.pickup_date = "1448696700000";
+            jobModelFuture.status_slug = "assign";
+            jobModelFuture.post_title = "LD02525" + i;
+            jobModelFuture.RequiredPickupDate = "1448696700000";
+            jobModelFuture.save();
+        }
+
+        for (int i = 0; i < 7; i++){
+            JobResponse jobModelFuture2 = new JobResponse();
+            jobModelFuture2.isActive = 0;
+            jobModelFuture2.from_fullname = "May " + i;
+            jobModelFuture2.from_address = "from some address";
+            jobModelFuture2.to_address = "to some address";
+            jobModelFuture2.from_city = "From some City";
+            jobModelFuture2.to_city = "To some City";
+            jobModelFuture2.from_phone = "456-312-8945" + i;
+            jobModelFuture2.from_zipcode = "31522";
+            jobModelFuture2.to_zipcode = "33525";
+            jobModelFuture2.pickup_date = "1448783100000";
+            jobModelFuture2.status_slug = "assign";
+            jobModelFuture2.post_title = "LD02535" + i;
+            jobModelFuture2.RequiredPickupDate = "1448783100000";
+            jobModelFuture2.save();
         }
 
         jobModels = DatabaseController.getInstance().getListJob();
+        jobModelsSorted = new ArrayList<>();
+        String currentDate;
+        for (JobModel job : jobModels){
+            JobModel header;
+            if (job.isActive == 1){
+                JobModel headerActive = new JobModel();
+                headerActive.pickup_date = job.pickup_date;
+                headerActive.isActive = 1;
+                headerActive.child = new ArrayList<>();
+                headerActive.child.add(job);
+                jobModelsSorted.add(headerActive);
+            } else {
+//                if (TimeUtil.getCurrentDay() == job.getDay())
+//                header = new JobModel();
+//                header.pickup_date = job.pickup_date;
+//                currentDate = job.getPickup_date();
+//                header.child = new ArrayList<>();
+//                header.child.add(job);
+//                jobModelsSorted.add(header);
+            }
+        }
 
-//        isActiveJob = DatabaseController.getInstance().getActiveJob();
-        mAdapter = new ScheduleAdapter(getActivity(), jobModels);
+        mAdapter = new ScheduleAdapter(getActivity(), jobModelsSorted);
         mRecyclerView.setAdapter(mAdapter);
     }
 

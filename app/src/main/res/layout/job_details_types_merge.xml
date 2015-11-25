@@ -20,14 +20,16 @@
                 android:gravity="center_vertical"
                 android:src="@drawable/icn_job"/>
 
-            <Spinner
+            <com.miami.moveforless.customviews.CustomSpinner
                 android:id="@+id/spJobTypeId"
+                style="@style/BaseSpinnerStyle"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="35dp"
                 android:layout_weight="3"
-                android:background="@drawable/form_borders"
+                android:focusable="false"
+                android:enabled="false"
                 android:gravity="center_vertical"/>
 
             <View
@@ -51,13 +53,14 @@
                 android:layout_height="40dp"
                 android:src="@drawable/icn_cust"/>
 
-            <Spinner
+            <com.miami.moveforless.customviews.CustomSpinner
                 android:id="@+id/spCustTypeId"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
                 android:layout_weight="3"
-                android:background="@drawable/form_borders"/>
+                android:enabled="false"
+                style="@style/BaseSpinnerStyle"/>
 
             <View
                 android:layout_width="0dp"
@@ -79,13 +82,14 @@
                 android:layout_height="40dp"
                 android:src="@drawable/icn_quote"/>
 
-            <Spinner
+            <com.miami.moveforless.customviews.CustomSpinner
                 android:id="@+id/spQuoteTypeId"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
                 android:layout_weight="3"
-                android:background="@drawable/form_borders"/>
+                android:enabled="false"
+                style="@style/BaseSpinnerStyle"/>
 
             <View
                 android:layout_width="0dp"

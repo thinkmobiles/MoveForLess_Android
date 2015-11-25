@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -19,8 +18,6 @@ import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.miami.moveforless.utils.RxUtils;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 
@@ -45,11 +42,11 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
 
     //job details types merge
     @Bind(R.id.spJobTypeId)
-    Spinner spJobTypeId;
+    com.miami.moveforless.customviews.CustomSpinner spJobTypeId;
     @Bind(R.id.spCustTypeId)
-    Spinner spCustTypeId;
+    com.miami.moveforless.customviews.CustomSpinner spCustTypeId;
     @Bind(R.id.spQuoteTypeId)
-    Spinner spQuoteTypeId;
+    com.miami.moveforless.customviews.CustomSpinner spQuoteTypeId;
 
     //job details calendars merge
     @Bind(R.id.tvCreateDate)
@@ -104,8 +101,8 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
     //job details location merge
     @Bind(R.id.etFromState)
     EditText etFromState;
-    @Bind(R.id.etFromZipCode_From)
-    EditText etFromZipCode;
+    @Bind(R.id.etZipCodeFrom2)
+    EditText etFromZipCode2;
     @Bind(R.id.etToState)
     EditText etToState;
     @Bind(R.id.etToZipCode)
@@ -186,10 +183,8 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
     CheckBox cbIsFromInsurance;
     @Bind(R.id.etFromState_From)
     EditText etFromState_From;
-/*
-    @Bind(R.id.etFromZipCode_From)
-    EditText etFromZipCode_From;
-*/
+//    @Bind(R.id.etZipCodeFrom2)
+//    EditText etZipCodeFrom2;
     @Bind(R.id.cbHaveInventoryFrom)
     CheckBox cbHaveInventoryFrom;
     @Bind(R.id.cbIsReferralFrom)
@@ -335,20 +330,20 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
 
     //left
     private void setJobTypeSpinner() {
-        ArrayList<String> moving = new ArrayList<>();
-        ArrayAdapter<String> adapterMoving = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,
-                moving);
-        spJobTypeId.setAdapter(adapterMoving); //not found
-
-        ArrayList<String> reidenting = new ArrayList<>();
-        ArrayAdapter<String> adapterReidenting = new ArrayAdapter<>(getActivity(), android.R.layout
-                .simple_spinner_item, reidenting);
-        spJobTypeId.setAdapter(adapterReidenting); //not found
-
-        ArrayList<String> nonBinding = new ArrayList<>();
-        ArrayAdapter<String> adapterNonBinding = new ArrayAdapter<>(getActivity(), android.R.layout
-                .simple_spinner_item, nonBinding);
-        spJobTypeId.setAdapter(adapterNonBinding); //not found
+//        ArrayList<String> moving = new ArrayList<>();
+//        ArrayAdapter<String> adapterMoving = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,
+//                moving);
+//        spJobTypeId.setAdapter(adapterMoving); //not found
+//
+//        ArrayList<String> reidenting = new ArrayList<>();
+//        ArrayAdapter<String> adapterReidenting = new ArrayAdapter<>(getActivity(), android.R.layout
+//                .simple_spinner_item, reidenting);
+//        spJobTypeId.setAdapter(adapterReidenting); //not found
+//
+//        ArrayList<String> nonBinding = new ArrayList<>();
+//        ArrayAdapter<String> adapterNonBinding = new ArrayAdapter<>(getActivity(), android.R.layout
+//                .simple_spinner_item, nonBinding);
+//        spJobTypeId.setAdapter(adapterNonBinding); //not found
     }
 
     private void setCalendars() {
@@ -398,7 +393,7 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
         etFromCity.setText(mJob.from_city);
         cbIsFromInsurance.setChecked(!mJob.is_from_insurance.equals("0"));
         etFromState_From.setText(mJob.from_state);
-//        etFromZipCode_From.setText(mJob.from_zipcode);
+//        etZipCodeFrom.setText(mJob.from_zipcode);
         //cbHaveInventoryFrom not found
         cbIsReferralFrom.setChecked(!mJob.is_referral.equals("0"));
         cbIsFromRepeated.setChecked(!mJob.is_from_repeated.equals("0"));
@@ -442,7 +437,7 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
 
     private void setLocation() {
         etFromState.setText(mJob.from_state);
-        etFromZipCode.setText(mJob.from_zipcode);
+        etFromZipCode2.setText(mJob.from_zipcode);
         etToState.setText(mJob.to_state);
         etToZipCode.setText(mJob.to_zipcode);
         etDistanceTotal.setText(mJob.DistanceTotal);

@@ -127,7 +127,7 @@ public class JobResponse extends BaseModel {
     public Integer BookingDate;
     @Column
     @SerializedName("RequiredPickupDate")
-    public Integer RequiredPickupDate;
+    public String RequiredPickupDate;
     @Column
     @SerializedName("FollowUpDate")
     public Integer FollowUpDate;
@@ -139,7 +139,7 @@ public class JobResponse extends BaseModel {
     public String StopTime;
     @Column
     @SerializedName("pickup_date")
-    public Integer pickup_date;
+    public String pickup_date;
     @Column
     @SerializedName("from_fullname")
     public String from_fullname;

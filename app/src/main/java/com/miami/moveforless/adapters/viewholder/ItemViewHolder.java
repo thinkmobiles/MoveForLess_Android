@@ -1,6 +1,5 @@
 package com.miami.moveforless.adapters.viewholder;
 
-import android.graphics.Rect;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,8 +7,6 @@ import com.miami.moveforless.App;
 import com.miami.moveforless.R;
 import com.miami.moveforless.customviews.DetailAddressPopupWindow;
 import com.miami.moveforless.database.model.JobModel;
-import com.miami.moveforless.globalconstants.Const;
-import com.miami.moveforless.utils.TimeUtil;
 
 
 /**
@@ -28,13 +25,13 @@ public class ItemViewHolder extends AbstractViewHolder implements View.OnClickLi
 
     public ItemViewHolder(View itemView) {
         super(itemView);
-        tvFullname = (TextView) itemView.findViewById(R.id.tvFullname_IE);
-        tvPostTitle = (TextView) itemView.findViewById(R.id.tvPostTitle_IE);
-        tvPhone = (TextView) itemView.findViewById(R.id.tvPhone_IE);
-        tvFromZipcode = (TextView) itemView.findViewById(R.id.tvFromZipcode_IE);
-        tvToZipcode = (TextView) itemView.findViewById(R.id.tvToZipcode_IE);
-        tvPickupDate = (TextView) itemView.findViewById(R.id.tvPickupDate_IE);
-        tvRequiredPickupDate = (TextView) itemView.findViewById(R.id.tvRequiredPickupDate_IE);
+        tvFullname = (TextView) itemView.findViewById(R.id.tvFullName_SI);
+        tvPostTitle = (TextView) itemView.findViewById(R.id.tvPostTitle_SI);
+        tvPhone = (TextView) itemView.findViewById(R.id.tvPhone_SI);
+        tvFromZipcode = (TextView) itemView.findViewById(R.id.tvFromZipCode_SI);
+        tvToZipcode = (TextView) itemView.findViewById(R.id.tvToZipCode_SI);
+        tvPickupDate = (TextView) itemView.findViewById(R.id.tvPickupDate_SI);
+        tvRequiredPickupDate = (TextView) itemView.findViewById(R.id.tvRequiredPickupTime_SI);
 
         tvToZipcode.setOnClickListener(this);
         tvFromZipcode.setOnClickListener(this);
@@ -58,13 +55,15 @@ public class ItemViewHolder extends AbstractViewHolder implements View.OnClickLi
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.tvToZipcode_IE:
-                DetailAddressPopupWindow toPopup = new DetailAddressPopupWindow(App.getAppContext(), mJobModel.to_city + " " +
+            case R.id.tvToZipCode_SI:
+                DetailAddressPopupWindow toPopup = new DetailAddressPopupWindow(App.getAppContext(), mJobModel
+                        .to_city + " " +
                         mJobModel.to_address);
                 toPopup.show(v);
                 break;
-            case R.id.tvFromZipcode_IE:
-                DetailAddressPopupWindow fromPopups = new DetailAddressPopupWindow(App.getAppContext(), mJobModel.from_city + " " +
+            case R.id.tvFromZipCode_SI:
+                DetailAddressPopupWindow fromPopups = new DetailAddressPopupWindow(App.getAppContext(), mJobModel
+                        .from_city + " " +
                         mJobModel.from_address);
                 fromPopups.show(v);
                 break;

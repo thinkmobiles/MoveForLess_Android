@@ -8,5 +8,7 @@ public class ConstantHolder {
     final public static int Item = 1;
     final public static int SubHeader = 2;
     final public static int SubItem = 3;
+    final public static int Active_Header = 4;
+    final public static int Active_Item = 5;
 
 }
