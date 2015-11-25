@@ -3,27 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:paddingTop="30dp"
+    android:paddingBottom="10dp"
+    >
 
     <LinearLayout
-        android:layout_width="350dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:minHeight="200dp"
+        android:minHeight="150dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvMessage_DIL"
             style="@style/DialogMessageStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center_vertical|left"
+            android:text="asdf" />
 
-        <Button
+        <TextView
             android:id="@+id/btnNegative_DIL"
             style="@style/DialogButtonStyle"
-            android:layout_height="wrap_content" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:text="close" />
 
     </LinearLayout>
 </LinearLayout>

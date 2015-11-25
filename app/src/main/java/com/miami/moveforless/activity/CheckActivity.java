@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
@@ -38,9 +39,9 @@ public class CheckActivity extends BaseActivity {
     @Bind(R.id.photos_container_DCL)
     CheckLayout mPhotoContainer;
     @Bind(R.id.btnAdd_DCL)
-    Button btnAdd;
+    TextView btnAdd;
     @Bind(R.id.btnPay_DCL)
-    Button btnPay;
+    TextView btnPay;
     @Bind(R.id.content_container_DCL)
     LinearLayout mContentContainer;
 

@@ -11,6 +11,7 @@ import android.widget.RatingBar;
 import com.miami.moveforless.R;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
+import com.miami.moveforless.globalconstants.Const;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.utils.RxUtils;
@@ -79,7 +80,7 @@ public class FeedbackFragment extends BaseJobDetailFragment implements TextWatch
         hideLoadingDialog();
         showInfoDialog(strSendSuccessfull, view -> {
             clearAll();
-            getParentFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, null);
+            getParentFragment().onActivityResult(Const.FEEDBACK_REQUEST_ID, Activity.RESULT_OK, null);
             getActivity().onBackPressed();
         });
     }

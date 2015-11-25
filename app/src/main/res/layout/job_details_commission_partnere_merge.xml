@@ -31,7 +31,7 @@
                     android:layout_weight="1"
                     android:layout_height="40dp"
                     android:layout_marginLeft="35dp"
-                    android:background="@drawable/form_borders"/>
+                    android:background="@drawable/form_borders_gray"/>
 
                 <RadioButton
                     android:id="@+id/rbCommissionDol"

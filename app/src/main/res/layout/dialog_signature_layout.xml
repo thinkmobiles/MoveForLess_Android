@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
     android:paddingTop="10dp"
     android:orientation="vertical">
 
@@ -11,6 +11,8 @@
         android:id="@+id/tvTitle_DSL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
         style="@style/BaseTitleStyle"
         />
 
@@ -18,7 +20,8 @@
         android:id="@+id/tvDescription_DSL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@android:color/black"
         style="@style/BaseTextStyle"
         />
 
@@ -26,9 +29,10 @@
     <FrameLayout
         android:id="@+id/gesture_container_SL"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/signature_background">
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/signature_background"
+        android:layout_weight="1">
 
         <android.gesture.GestureOverlayView
             android:id="@+id/gesture_DSL"
@@ -46,34 +50,32 @@
 
     </FrameLayout>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:layout_gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/btnNegative_DSL"
+        <TextView
+            android:id="@+id/btnClear_DSL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="@dimen/base_button_text_size"
-            style="@style/BaseButtonStyle"
-            />
+            android:text="asdf"
+            android:textColor="@color/grey"
+            android:layout_gravity="center_horizontal"
+            style="@style/DialogButtonStyle"
+            android:visibility="gone" />
 
-        <Button
-            android:id="@+id/btnPositive_DSL"
+        <TextView
+            android:id="@+id/btnClose_DSL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:layout_toEndOf="@+id/btnNegative_DSL"
-            android:layout_toRightOf="@+id/btnNegative_DSL"
-            android:visibility="gone"
-            style="@style/NavigateButtonStyle"
+            android:visibility="visible"
+            android:layout_marginRight="-10dp"
+            android:text="asasdf"
+            style="@style/DialogButtonStyle"
             />
-    </RelativeLayout>
+    </FrameLayout>
 
 </LinearLayout>

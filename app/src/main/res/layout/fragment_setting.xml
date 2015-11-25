@@ -37,7 +37,7 @@
                 android:text="@string/change_password"/>
 
             <EditText
-                android:id="@+id/edOldPassword_FS"
+                android:id="@+id/etOldPassword_FS"
                 style="@style/EditSettingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
 
 
             <EditText
-                android:id="@+id/edNewPassword_FS"
+                android:id="@+id/etNewPassword_FS"
                 style="@style/EditSettingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:orientation="vertical"/>
 
             <EditText
-                android:id="@+id/edConfirmPassword_FS"
+                android:id="@+id/etConfirmPassword_FS"
                 style="@style/EditSettingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

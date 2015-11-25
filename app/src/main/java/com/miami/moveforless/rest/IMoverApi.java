@@ -1,6 +1,7 @@
 package com.miami.moveforless.rest;
 
 import com.miami.moveforless.rest.request.JobRequest;
+import com.miami.moveforless.rest.request.UserEditRequest;
 import com.miami.moveforless.rest.request.LoginRequest;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.miami.moveforless.rest.response.ListMoveSizeResponse;
@@ -26,6 +27,9 @@ public interface IMoverApi {
 
     @GET("/user/logout")
     Observable<LogoutResponse> logout(@Query("key") String _key, @Query("token") String _token);
+
+    @POST("/user/edit")
+    Observable<Boolean> edit(@Body UserEditRequest _editRequest);
 
     @POST("/job/list")
     Observable<List<JobResponse>> jobList(@Body JobRequest _jobRequest);

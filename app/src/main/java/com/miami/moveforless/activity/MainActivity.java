@@ -69,10 +69,6 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
             case R.id.menu_refresh:
                 // TODO: add refresh logic
                 break;
-            case R.id.menu_dummy_signature_dialog:
-                SignatureDialog dialog1 = new SignatureDialog();
-                dialog1.show(getSupportFragmentManager(), "");
-                break;
             case R.id.menu_settings:
                 SettingFragment settingFragment = new SettingFragment();
                 replaceFragmentWithBackStack(R.id.contentContainer_AM,settingFragment);

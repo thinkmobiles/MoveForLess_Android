@@ -9,4 +9,5 @@ public class SharedPrefConst {
     public final static String SHARED_PREF_USER_TOKEN = "SharedPreferenceUserToken";
     public final static String SHARED_PREF_USER_NAME = "SharedPreferenceUserName";
     public final static String SHARED_PREF_USER_PASSWORD = "SharedPreferenceUserPassword";
+    public final static String SHARED_PREF_NOTIFICATION_STATE = "SharedPreferenceNotificationState";
 }

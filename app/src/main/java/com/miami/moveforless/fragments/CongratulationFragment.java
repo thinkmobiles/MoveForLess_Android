@@ -44,7 +44,7 @@ public class CongratulationFragment extends BaseJobDetailFragment {
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
         mMessage = strCongratulationsInvoice;
-
+        btnReview.setVisibility(View.VISIBLE);
         RxUtils.click(btnBack, o -> btnBackClicked());
         RxUtils.click(btnReview, o -> btnReviewClicked());
     }
@@ -70,6 +70,7 @@ public class CongratulationFragment extends BaseJobDetailFragment {
         if (requestCode == Const.FEEDBACK_REQUEST_ID) {
             if (resultCode == Activity.RESULT_OK) {
                 tvMessage.setText(strCongratulationsFeedback);
+                btnReview.setVisibility(View.GONE);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

@@ -2,6 +2,7 @@ package com.miami.moveforless.dialogs;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.utils.RxUtils;
@@ -14,9 +15,9 @@ import butterknife.Bind;
 public class PhotoDialog extends BaseDialog {
 
     @Bind(R.id.btnGallery_DP)
-    Button btnGallery;
+    TextView btnGallery;
     @Bind(R.id.btnCamera_DP)
-    Button btnCamera;
+    TextView btnCamera;
 
     private View.OnClickListener mListenerCamera;
     private View.OnClickListener mListenerGallery;

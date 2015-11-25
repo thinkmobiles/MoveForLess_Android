@@ -11,9 +11,4 @@
         android:title="@string/menu_logout"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/menu_dummy_signature_dialog"
-        android:title="signature dialog"
-        app:showAsAction="never" />
-
 </menu>

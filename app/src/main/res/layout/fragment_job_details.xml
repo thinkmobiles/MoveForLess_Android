@@ -205,7 +205,7 @@
             android:layout_marginBottom="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:background="@drawable/form_borders"
+            android:background="@drawable/form_borders_gray"
             android:orientation="horizontal"
             android:paddingTop="15dp">
 

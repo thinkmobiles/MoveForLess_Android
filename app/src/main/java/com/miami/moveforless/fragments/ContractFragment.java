@@ -3,7 +3,6 @@ package com.miami.moveforless.fragments;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
-import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -17,6 +16,7 @@ import com.miami.moveforless.R;
 import com.miami.moveforless.dialogs.SignatureDialog;
 import com.miami.moveforless.globalconstants.Const;
 import com.miami.moveforless.utils.CreatePdf;
+import com.miami.moveforless.utils.RxUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,10 +30,10 @@ import rx.schedulers.Schedulers;
 /**
  * Created by SetKrul on 20.11.2015.
  */
-public class ContractFragment extends BaseJobDetailFragment implements View.OnClickListener {
+public class ContractFragment extends BaseJobDetailFragment {
 
     @Bind(R.id.btnSign_CF)
-    Button btnSing;
+    Button btnSign;
     @Bind(R.id.pdf_container_PVF)
     FrameLayout mPdfContainer;
 
@@ -59,7 +59,7 @@ public class ContractFragment extends BaseJobDetailFragment implements View.OnCl
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
 
-        btnSing.setOnClickListener(this);
+        RxUtils.click(btnSign, o -> onSignClicked());
     }
 
     private void showPdf(File _file) {
@@ -83,32 +83,28 @@ public class ContractFragment extends BaseJobDetailFragment implements View.OnCl
 
     private void generatePdf(Bitmap _signature, int delay) {
         showLoadingDialog("Generating Contract...");
-            Observable.timer(delay, TimeUnit.MILLISECONDS)
-                    .map(aLong -> {
-                        File file = null;
-                        try {
-                            file = new CreatePdf(getContext(), _signature).createPdf();
-                        } catch (DocumentException e) {
-                            e.printStackTrace();
-                            return null;
-                        } catch (IOException e) {
-                            e.printStackTrace();
+        Observable.timer(delay, TimeUnit.MILLISECONDS)
+                .map(aLong -> {
+                    File file = null;
+                    try {
+                        file = new CreatePdf(getContext(), _signature).createPdf();
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                        return null;
+                    } catch (IOException e) {
+                        e.printStackTrace();
 
-                        }
-                        return file;
-                    })
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::showPdf, throwable -> {
-                    });
+                    }
+                    return file;
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::showPdf, throwable -> {
+                });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnSign_CF:
-                new SignatureDialog().show(getChildFragmentManager(), "");
-        }
+    public void onSignClicked() {
+        new SignatureDialog().show(getChildFragmentManager(), "");
     }
 
     @Override

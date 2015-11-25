@@ -6,32 +6,64 @@
               android:padding="20dp">
 
     <LinearLayout
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
             android:text="Select From"
-            android:textColor="@color/cyan_dark"
-            android:gravity="center"
             android:textStyle="bold"
-            android:textSize="25sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            style="@style/BaseTitleStyle"
+            />
 
-        <Button
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@color/grey_light"
+            />
+
+        <TextView
             android:text="Gallery"
             android:id="@+id/btnGallery_DP"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:background="@drawable/photo_dialog_button_background"
+            android:textColor="@android:color/black"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textAllCaps="false"
             style="@style/DialogButtonStyle"
-            android:layout_width="match_parent"/>
+            />
 
-        <Button
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@color/grey_light"
+            />
+
+
+        <TextView
             android:text="Camera"
             android:id="@+id/btnCamera_DP"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:background="@drawable/photo_dialog_button_background"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@android:color/black"
+            android:textAllCaps="false"
             style="@style/DialogButtonStyle"
-            android:layout_width="match_parent"/>
+            />
     </LinearLayout>
 </LinearLayout>

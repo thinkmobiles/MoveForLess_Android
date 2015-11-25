@@ -25,7 +25,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/form_borders"/>
+                android:background="@drawable/form_borders_gray"/>
 
             <ImageView
                 style="@style/JobDetailsEditText"
@@ -39,7 +39,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/form_borders"/>
+                android:background="@drawable/form_borders_gray"/>
         </LinearLayout>
 
         <LinearLayout
@@ -61,7 +61,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/form_borders"/>
+                android:background="@drawable/form_borders_gray"/>
 
             <ImageView
                 style="@style/JobDetailsEditText"
@@ -74,7 +74,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/form_borders">
+                android:background="@drawable/form_borders_gray">
 
                 <EditText
                     android:id="@+id/etNumberMan"
@@ -132,7 +132,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/form_borders"/>
+                android:background="@drawable/form_borders_gray"/>
 
             <ImageView
             style="@style/JobDetailsEditText"
@@ -147,7 +147,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/form_borders"/>
+                android:background="@drawable/form_borders_gray"/>
 
             <ImageView
                 style="@style/JobDetailsEditText"
@@ -162,7 +162,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/form_borders"/>
+                android:background="@drawable/form_borders_gray"/>
         </LinearLayout>
 
         <LinearLayout
@@ -184,7 +184,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/form_borders"/>
+                android:background="@drawable/form_borders_gray"/>
 
             <ImageView
                 style="@style/JobDetailsEditText"
@@ -199,7 +199,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/form_borders"/>
+                android:background="@drawable/form_borders_gray"/>
 
             <ImageView
                 style="@style/JobDetailsEditText"
@@ -214,7 +214,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/form_borders"/>
+                android:background="@drawable/form_borders_gray"/>
         </LinearLayout>
 
     </LinearLayout>
