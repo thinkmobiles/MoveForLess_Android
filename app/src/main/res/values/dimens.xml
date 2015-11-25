@@ -20,7 +20,7 @@
 
     <!--job fragment-->
     <dimen name="job_content_padding_left_right">10dp</dimen>
-    <dimen name="job_content_padding_bottom">20dp</dimen>
+    <dimen name="job_content_padding_bottom">30dp</dimen>
     <dimen name="job_title_margin_top">10dp</dimen>
     <dimen name="job_title_margin_bottom">10dp</dimen>
     <dimen name="job_divider_height">20dp</dimen>

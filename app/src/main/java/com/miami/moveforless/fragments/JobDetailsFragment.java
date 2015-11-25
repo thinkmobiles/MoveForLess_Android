@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +32,9 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
     ParallaxScrollView scrollView;
     @Bind(R.id.etNotes_FJD)
     EditText etNotes;
+
+    @Bind(R.id.etNotes_container_FJD)
+    LinearLayout mNotesContainer;
     @Bind(R.id.btnEditNotes_FJD)
     View btnEditNotes;
     @Bind(R.id.btnShowRoute_FJD)
@@ -287,6 +291,10 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
 
         scrollView.parallaxViewBackgroundBy(scrollView, ContextCompat.getDrawable(getContext(), R.drawable
                 .job_details_background), .2f);
+
+        mNotesContainer.setEnabled(false);
+        etNotes.setEnabled(false);
+
         RxUtils.click(btnEditNotes, o -> switchNotes());
         RxUtils.click(btnShowRoute, o -> showRoute());
         RxUtils.click(btnStartJob, o -> startJob());
@@ -314,14 +322,16 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
     }
 
     private void saveJob() {
-        // TODO: add updating job to database and on server
+        // TODO: add updating job in database and on server
     }
 
     private void switchNotes() {
         if (etNotes.isEnabled()) {
+            mNotesContainer.setEnabled(false);
             etNotes.setEnabled(false);
             etNotes.clearFocus();
         } else {
+            mNotesContainer.setEnabled(true);
             etNotes.setEnabled(true);
             etNotes.requestFocus();
         }

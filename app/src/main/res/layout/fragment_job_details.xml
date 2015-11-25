@@ -200,13 +200,15 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/etNotes_container_FJD"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:background="@drawable/form_borders_gray"
+            android:background="@drawable/job_details_notes_background"
             android:orientation="horizontal"
+            android:enabled="false"
             android:paddingTop="15dp">
 
             <EditText
@@ -215,9 +217,8 @@
                 android:layout_height="300dp"
                 android:layout_weight="1"
                 android:paddingRight="30dp"
-                android:background="@android:color/transparent"
-                style="@style/ReviewEditTextStyle"
                 android:enabled="false"
+                style="@style/ReviewEditTextStyle"
                 android:gravity="top|left"
                 android:inputType="textMultiLine" />
 
@@ -226,6 +227,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingRight="10dp"
+                android:focusable="true"
+                android:clickable="true"
                 android:src="@drawable/icn_edit" />
         </LinearLayout>
 
@@ -236,7 +239,7 @@
             android:orientation="horizontal"
             android:paddingLeft="@dimen/job_content_padding_left_right"
             android:paddingRight="@dimen/job_content_padding_left_right"
-            android:paddingTop="15dp">
+            >
 
             <Button
                 android:id="@+id/btnShowRoute_FJD"

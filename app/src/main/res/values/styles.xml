@@ -165,6 +165,8 @@
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
         <item name="android:textCursorDrawable">@drawable/cursor_cyan</item>
         <item name="android:textStyle">italic</item>
+        <item name="android:background">@android:color/transparent</item>
+
     </style>
 
 
