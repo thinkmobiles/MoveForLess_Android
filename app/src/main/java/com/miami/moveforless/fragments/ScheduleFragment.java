@@ -21,6 +21,7 @@ import com.miami.moveforless.database.DatabaseController;
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.miami.moveforless.utils.TimeUtil;
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -30,8 +31,10 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.BindString;
+import rx.Observable;
 
 /**
+ * schedule screen
  * Created by SetKrul on 30.10.2015.
  */
 public class ScheduleFragment extends BaseFragment implements View.OnClickListener {
@@ -71,14 +74,19 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
         setHasOptionsMenu(true);
-//        tvBegin.setOnClickListener(this);
-//        tvEnd.setOnClickListener(this);
-        testGetData();
+        tvBegin.setOnClickListener(this);
+        tvEnd.setOnClickListener(this);
+        Observable.just(testGetData())
+                .subscribe(jobModels1 -> {
+                    mAdapter = new ScheduleAdapter(getActivity(), jobModelsSorted);
+                    mRecyclerView.setAdapter(mAdapter);
+                });
+
     }
 
-    private void testGetData() {
+    private List<JobModel> testGetData() {
         jobModels = new ArrayList<>();
-//        DatabaseController.getInstance().dropDataBase(App.getAppContext());
+        DatabaseController.getInstance().dropDataBase(App.getAppContext());
 
         JobResponse jobModel = new JobResponse();
         jobModel.isActive = 1;
@@ -173,8 +181,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             }
         }
 
-        mAdapter = new ScheduleAdapter(getActivity(), jobModelsSorted);
-        mRecyclerView.setAdapter(mAdapter);
+        return jobModelsSorted;
     }
 
     private void dayControl(JobModel job) {
@@ -342,9 +349,9 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void afterTextChanged(Editable s) {
-                final List<JobModel> filteredModelList = filter(jobModels, s.toString());
-                mAdapter.animateTo(filteredModelList);
-                mRecyclerView.scrollToPosition(0);
+//                final List<JobModel> filteredModelList = filter(jobModels, s.toString());
+//                mAdapter.animateTo(filteredModelList);
+//                mRecyclerView.scrollToPosition(0);
             }
         });
     }

@@ -9,6 +9,7 @@ import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.utils.TimeUtil;
 
 /**
+ * header holder
  * Created by SetKrul on 30.10.2015.
  */
 public class HeaderViewHolder extends AbstractViewHolder {
@@ -25,10 +26,12 @@ public class HeaderViewHolder extends AbstractViewHolder {
     @SuppressLint("SetTextI18n")
     @Override
     public void bind(JobModel model) {
-        if (TimeUtil.getCurrentDay() == model.getDay())
-            tvHeaderJob.setText("Today " + model.getFullDate());
-        else if (TimeUtil.getNextDay() == model.getDay())
-            tvHeaderJob.setText("Tomorrow " + model.getFullDate());
-        tvHeaderJobSize.setText(model.getChildSize());
+        if (model != null) {
+//            if (TimeUtil.getCurrentDay() == model.getDay())
+//                tvHeaderJob.setText("Today " + model.getFullDate());
+//            else if (TimeUtil.getNextDay() == model.getDay())
+//                tvHeaderJob.setText("Tomorrow " + model.getFullDate());
+//            tvHeaderJobSize.setText(model.getChildSize());
+        }
     }
 }

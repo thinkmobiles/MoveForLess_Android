@@ -45,6 +45,8 @@ public class ContractFragment extends BaseJobDetailFragment {
     @Bind(R.id.pdf_container_PVF)
     FrameLayout mPdfContainer;
 
+    private File mPdfDocument;
+
     private Subscription mSendContractSubscription;
 
     public static ContractFragment newInstance() {
@@ -58,7 +60,8 @@ public class ContractFragment extends BaseJobDetailFragment {
 
     @Override
     public void onPageSelected() {
-        generatePdf(null, 200);
+        if (mPdfDocument == null)
+            generatePdf(null, 200);
     }
 
     @Override
@@ -76,6 +79,7 @@ public class ContractFragment extends BaseJobDetailFragment {
         hideLoadingDialog();
 
         if (_file.exists()) {
+            mPdfDocument = _file;
             mPdfContainer.removeAllViews();
             PDFView pdfView = new PDFView(getContext(), null);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

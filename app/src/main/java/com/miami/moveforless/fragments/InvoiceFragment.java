@@ -45,6 +45,7 @@ public class InvoiceFragment extends BaseJobDetailFragment {
     FrameLayout mPdfContainer;
 
     private Subscription mSendContractSubscription;
+    private File mInvoiceDocument;
 
     public static ContractFragment newInstance() {
         return new ContractFragment();
@@ -57,7 +58,8 @@ public class InvoiceFragment extends BaseJobDetailFragment {
 
     @Override
     public void onPageSelected() {
-        generatePdf(null, 200);
+        if (mInvoiceDocument == null)
+            generatePdf(null, 200);
     }
 
     @Override
@@ -75,6 +77,7 @@ public class InvoiceFragment extends BaseJobDetailFragment {
         hideLoadingDialog();
 
         if (_file.exists()) {
+            mInvoiceDocument = _file;
             mPdfContainer.removeAllViews();
             PDFView pdfView = new PDFView(getContext(), null);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

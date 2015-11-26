@@ -20,6 +20,7 @@ import com.miami.moveforless.database.model.JobModel;
 import java.util.List;
 
 /**
+ * schedule adapter
  * Created by SetKrul on 30.10.2015.
  */
 public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
@@ -49,7 +50,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
         }
         if (getItem(_position).child == null) {
             return ConstantHolder.Item;
-        } else {
+        }
+        else {
             return ConstantHolder.Header;
         }
     }
