@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.miami.moveforless.App;
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ScheduleAdapter;
@@ -21,7 +20,6 @@ import com.miami.moveforless.database.DatabaseController;
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.miami.moveforless.utils.TimeUtil;
-import com.raizlabs.android.dbflow.config.FlowManager;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -76,17 +74,46 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         setHasOptionsMenu(true);
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
-        Observable.just(testGetData())
-                .subscribe(jobModels1 -> {
+        if (mAdapter == null) {
+            Observable.just(generatedData()).subscribe(fin -> {
+                Observable.just(getData()).subscribe(job ->{
                     mAdapter = new ScheduleAdapter(getActivity(), jobModelsSorted);
                     mRecyclerView.setAdapter(mAdapter);
                 });
+            });
+        }
 
     }
 
-    private List<JobModel> testGetData() {
+    private List<JobModel> getData(){
+        jobModels = DatabaseController.getInstance().getListJob();
+        for (JobModel job : jobModels) {
+            if (job.isActive == 1) {
+                JobModel headerActive = new JobModel();
+                headerActive.pickup_date = job.pickup_date;
+                headerActive.isActive = 1;
+                headerActive.child = new ArrayList<>();
+                headerActive.child.add(job);
+                jobModelsSorted.add(headerActive);
+            } else {
+                if (currentDate == null) {
+                    currentDate = job.getDay();
+                }
+                if (currentDate == job.getDay()) {
+                    dayControl(job);
+                } else {
+                    currentDate = job.getDay();
+                    header = null;
+                    dayControl(job);
+                }
+            }
+        }
+        return  jobModelsSorted;
+    }
+
+    private boolean generatedData() {
         jobModels = new ArrayList<>();
-        DatabaseController.getInstance().dropDataBase(App.getAppContext());
+//        DatabaseController.getInstance().dropDataBase(App.getAppContext());
 
         JobResponse jobModel = new JobResponse();
         jobModel.isActive = 1;
@@ -103,6 +130,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         jobModel.post_title = "LD025135";
         jobModel.RequiredPickupDate = "1448091900000";
         jobModel.save();
+        jobModel.insert();
 
         for (int i = 0; i < 2; i++) {
             JobResponse jobModelToday = new JobResponse();
@@ -157,31 +185,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             jobModelFuture2.RequiredPickupDate = "1448783100000";
             jobModelFuture2.save();
         }
-
-        jobModels = DatabaseController.getInstance().getListJob();
-        for (JobModel job : jobModels) {
-            if (job.isActive == 1) {
-                JobModel headerActive = new JobModel();
-                headerActive.pickup_date = job.pickup_date;
-                headerActive.isActive = 1;
-                headerActive.child = new ArrayList<>();
-                headerActive.child.add(job);
-                jobModelsSorted.add(headerActive);
-            } else {
-                if (currentDate == null) {
-                    currentDate = job.getDay();
-                }
-                if (currentDate == job.getDay()) {
-                    dayControl(job);
-                } else {
-                    currentDate = job.getDay();
-                    header = null;
-                    dayControl(job);
-                }
-            }
-        }
-
-        return jobModelsSorted;
+        return true;
     }
 
     private void dayControl(JobModel job) {
