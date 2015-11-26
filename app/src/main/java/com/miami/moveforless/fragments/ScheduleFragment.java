@@ -20,6 +20,7 @@ import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
 import com.miami.moveforless.database.DatabaseController;
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
+import com.miami.moveforless.utils.TimeUtil;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -39,7 +40,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         return new ScheduleFragment();
     }
 
-    @BindString(R.string.loading) String strLoading;
+    @BindString(R.string.loading)
+    String strLoading;
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @Bind(R.id.etSearch_FS)
@@ -56,7 +58,10 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private List<JobResponse> jobResponses;
 
     private List<JobModel> jobModels;
-    private List<JobModel> jobModelsSorted;
+    private List<JobModel> jobModelsSorted = new ArrayList<>();
+    Integer currentDate = null;
+    JobModel header = null;
+    JobModel headerFuture = null;
 
     @Override
     protected int getLayoutResource() {
@@ -75,23 +80,23 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         jobModels = new ArrayList<>();
         DatabaseController.getInstance().dropDataBase(App.getAppContext());
 
-            JobResponse jobModel = new JobResponse();
-            jobModel.isActive = 1;
-            jobModel.from_fullname = "Lesley";
-            jobModel.from_address = "from some address";
-            jobModel.to_address = "to some address";
-            jobModel.from_city = "From some City";
-            jobModel.to_city = "To some City";
-            jobModel.from_phone = "783-223-5111";
-            jobModel.from_zipcode = "31522";
-            jobModel.to_zipcode = "33525";
-            jobModel.pickup_date = "1448091900000";
-            jobModel.status_slug = "assign";
-            jobModel.post_title = "LD025135";
-            jobModel.RequiredPickupDate = "1448091900000";
-            jobModel.save();
+        JobResponse jobModel = new JobResponse();
+        jobModel.isActive = 1;
+        jobModel.from_fullname = "Lesley";
+        jobModel.from_address = "from some address";
+        jobModel.to_address = "to some address";
+        jobModel.from_city = "From some City";
+        jobModel.to_city = "To some City";
+        jobModel.from_phone = "783-223-5111";
+        jobModel.from_zipcode = "31522";
+        jobModel.to_zipcode = "33525";
+        jobModel.pickup_date = "1448091900000";
+        jobModel.status_slug = "assign";
+        jobModel.post_title = "LD025135";
+        jobModel.RequiredPickupDate = "1448091900000";
+        jobModel.save();
 
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 2; i++) {
             JobResponse jobModelToday = new JobResponse();
             jobModelToday.isActive = 0;
             jobModelToday.from_fullname = "Dominique " + i;
@@ -102,14 +107,14 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             jobModelToday.from_phone = "326-562-891" + i;
             jobModelToday.from_zipcode = "31522";
             jobModelToday.to_zipcode = "33525";
-            jobModelToday.pickup_date = "1448437500000";
+            jobModelToday.pickup_date = "1448523900000";
             jobModelToday.status_slug = "assign";
             jobModelToday.post_title = "LD02513" + i;
-            jobModelToday.RequiredPickupDate = "1448437500000";
+            jobModelToday.RequiredPickupDate = "1448523900000";
             jobModelToday.save();
         }
 
-        for (int i = 0; i < 7; i++){
+        for (int i = 0; i < 2; i++) {
             JobResponse jobModelFuture = new JobResponse();
             jobModelFuture.isActive = 0;
             jobModelFuture.from_fullname = "Gav " + i;
@@ -120,14 +125,14 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             jobModelFuture.from_phone = "456-312-8945" + i;
             jobModelFuture.from_zipcode = "31522";
             jobModelFuture.to_zipcode = "33525";
-            jobModelFuture.pickup_date = "1448696700000";
+            jobModelFuture.pickup_date = "1448610300000";
             jobModelFuture.status_slug = "assign";
             jobModelFuture.post_title = "LD02525" + i;
-            jobModelFuture.RequiredPickupDate = "1448696700000";
+            jobModelFuture.RequiredPickupDate = "1448610300000";
             jobModelFuture.save();
         }
 
-        for (int i = 0; i < 7; i++){
+        for (int i = 0; i < 3; i++) {
             JobResponse jobModelFuture2 = new JobResponse();
             jobModelFuture2.isActive = 0;
             jobModelFuture2.from_fullname = "May " + i;
@@ -146,11 +151,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         }
 
         jobModels = DatabaseController.getInstance().getListJob();
-        jobModelsSorted = new ArrayList<>();
-        String currentDate;
-        for (JobModel job : jobModels){
-            JobModel header;
-            if (job.isActive == 1){
+        for (JobModel job : jobModels) {
+            if (job.isActive == 1) {
                 JobModel headerActive = new JobModel();
                 headerActive.pickup_date = job.pickup_date;
                 headerActive.isActive = 1;
@@ -158,19 +160,55 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                 headerActive.child.add(job);
                 jobModelsSorted.add(headerActive);
             } else {
-//                if (TimeUtil.getCurrentDay() == job.getDay())
-//                header = new JobModel();
-//                header.pickup_date = job.pickup_date;
-//                currentDate = job.getPickup_date();
-//                header.child = new ArrayList<>();
-//                header.child.add(job);
-//                jobModelsSorted.add(header);
+                if (currentDate == null) {
+                    currentDate = job.getDay();
+                }
+                if (currentDate == job.getDay()) {
+                    dayControl(job);
+                } else {
+                    currentDate = job.getDay();
+                    header = null;
+                    dayControl(job);
+                }
             }
         }
 
         mAdapter = new ScheduleAdapter(getActivity(), jobModelsSorted);
         mRecyclerView.setAdapter(mAdapter);
     }
+
+    private void dayControl(JobModel job) {
+        if (TimeUtil.getCurrentDay() == job.getDay()) {
+            addDay(job);
+        } else if (TimeUtil.getNextDay() == job.getDay()) {
+            addDay(job);
+        } else {
+            addFuture(job);
+        }
+    }
+
+    private void addFuture(JobModel job) {
+//        if (headerFuture == null) {
+//        headerFuture = new JobModel();
+//
+//        } else {
+//
+//        }
+    }
+
+    private void addDay(JobModel job) {
+        if (header == null) {
+            header = new JobModel();
+            header.pickup_date = job.pickup_date;
+            header.child = new ArrayList<>();
+            header.child.add(job);
+            jobModelsSorted.add(header);
+        } else {
+            header.child.add(job);
+            jobModelsSorted.add(header);
+        }
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -260,8 +298,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 //                    bundle.putString(CaldroidFragment.DIALOG_TITLE, "Select a date");
 //                    dialogCaldroidFragment.setArguments(bundle);
 
-        dialogCaldroidFragment.show(getActivity().getSupportFragmentManager(),
-                "CALDROID_DIALOG_FRAGMENT");
+        dialogCaldroidFragment.show(getActivity().getSupportFragmentManager(), "CALDROID_DIALOG_FRAGMENT");
         return "";
     }
 
@@ -270,8 +307,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity()
-                .getApplicationContext(), (_context, _view, _position) -> {
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
+                (_context, _view, _position) -> {
             if (mAdapter.getItem(_position).child != null) {
                 if (!mAdapter.getItem(_position).mExpand) {
                     mAdapter.getItem(_position).mExpand = true;
@@ -281,8 +318,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                     for (int i = 0; i < mAdapter.getItem(_position).child.size(); i++) {
                         if (mAdapter.getItem(_position).child.get(i).mExpand) {
                             mAdapter.getItem(_position).child.get(i).mExpand = false;
-                            mAdapter.removeChild(_position + i + 1, mAdapter.getItem(_position)
-                                    .child.get(i));
+                            mAdapter.removeChild(_position + i + 1, mAdapter.getItem(_position).child.get(i));
                         }
                     }
                     mAdapter.removeChild(_position + 1, mAdapter.getItem(_position));

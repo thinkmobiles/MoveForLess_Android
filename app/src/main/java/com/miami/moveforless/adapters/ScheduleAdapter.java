@@ -37,7 +37,10 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
         if (getItem(_position).mSub) {
             return ConstantHolder.SubItem;
         }
-        if (getItem(_position).isActive != null) {
+        if (getItem(_position).mSub && getItem(_position).child != null) {
+            return ConstantHolder.SubHeader;
+        }
+        if (getItem(_position).isActive != null && getItem(_position).isActive == 1) {
             if (getItem(_position).child != null) {
                 return ConstantHolder.Active_Header;
             } else {
@@ -47,11 +50,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
         if (getItem(_position).child == null) {
             return ConstantHolder.Item;
         } else {
-            if (getItem(_position).child != null && getItem(_position).child.get(0).child == null) {
-                return ConstantHolder.SubHeader;
-            } else {
-                return ConstantHolder.Header;
-            }
+            return ConstantHolder.Header;
         }
     }
 
