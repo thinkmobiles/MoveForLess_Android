@@ -7,9 +7,11 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Display;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,8 @@ public class CheckActivity extends BaseActivity {
     TextView btnPay;
     @Bind(R.id.content_container_DCL)
     LinearLayout mContentContainer;
+    @Bind(R.id.ivDefaultPicture_DCL)
+    ImageView ivDefaultImage;
 
     private CameraUtils mCamera;
     private GalleryUtils mGallery;
@@ -72,6 +76,11 @@ public class CheckActivity extends BaseActivity {
 
         RxUtils.click(btnAdd, o -> addPhoto());
         RxUtils.click(btnPay, o -> pay());
+        btnPay.setVisibility(View.GONE);
+        mPhotoContainer.setCheckCallBack(() -> {
+            mPhotoFilePath = "";
+            btnPay.setVisibility(View.GONE);
+        });
     }
 
     @Override
@@ -85,6 +94,7 @@ public class CheckActivity extends BaseActivity {
                         if (imageFile.exists()) {
                             mGallery.addPhotoToGallery(mPhotoFilePath);
                             mPhotoContainer.addImage(imageFile);
+                            btnPay.setVisibility(View.VISIBLE);
                         } else {
                             Toast.makeText(this, this.getResources().getString(R.string.file_is_not_found),
                                     Toast.LENGTH_SHORT).show();
@@ -103,6 +113,7 @@ public class CheckActivity extends BaseActivity {
                         File imageFile1 = new File(mPhotoFilePath);
                         if (imageFile1.exists()) {
                             mPhotoContainer.addImage(imageFile1);
+                            btnPay.setVisibility(View.VISIBLE);
                         } else {
                             Toast.makeText(this, this.getResources().getString(R.string.file_is_not_found),
                                     Toast.LENGTH_SHORT).show();

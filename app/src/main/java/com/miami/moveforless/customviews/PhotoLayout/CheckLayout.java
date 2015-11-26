@@ -18,12 +18,11 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * layout for adding check`s photo
  * Created by klim on 17.11.15.
  */
 public class CheckLayout extends GridLayout {
-    private final int HORIZONTAL_SPACING = 20;
-    private final int VERTICAL_SPACING = 20;
-    private final int MIN_SIZE = 200;
+    private CheckCallBack mCallBack;
 
     public CheckLayout(Context context) {
         this(context, null);
@@ -37,8 +36,11 @@ public class CheckLayout extends GridLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    public interface CheckCallBack {
+        void onDelete();
+    }
+
     public void addImage(File _file) {
-//        final int width = calculateSize();
         PhotoPlaceholder placeholder = new PhotoPlaceholder(getContext(), this);
         try {
 
@@ -48,10 +50,8 @@ public class CheckLayout extends GridLayout {
 
                     placeholder.setPhoto(BitmapUtils.handleSamplingAndRotationBitmap(getContext(), Uri
                             .fromFile(_file), width /2 , height / 2));
-//            placeholder.setLayoutParams(new FrameLayout.LayoutParams(width, width));
             removeAllViews();
             addView(placeholder);
-//            calculateMargins();
             placeholder.setEventListener(this::deletePhoto);
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,33 +63,12 @@ public class CheckLayout extends GridLayout {
         return holder.getPhoto();
     }
 
-    private int calculateSize() {
-
-        int size = getMeasuredHeight();
-        if (size < MIN_SIZE) {
-            setColumnCount(getColumnCount() -1 );
-            size = calculateSize();
-        }
-        return size;
+    public void setCheckCallBack(CheckCallBack _callBack) {
+        mCallBack = _callBack;
     }
 
     private void deletePhoto(View _view) {
         removeView(_view);
-//        calculateMargins();
-    }
-
-    private void calculateMargins() {
-
-        for (int i = 0; i < getChildCount(); i++) {
-            PhotoPlaceholder holder = (PhotoPlaceholder) getChildAt(i);
-            LayoutParams params = (LayoutParams) holder.getLayoutParams();
-
-            if ((i+1) % getChildCount() != 0) {
-                params.setMargins(0, VERTICAL_SPACING, HORIZONTAL_SPACING, 0);
-            } else {
-                params.setMargins(0, VERTICAL_SPACING, 0, 0);
-            }
-            holder.setLayoutParams(params);
-        }
+        if (mCallBack != null) mCallBack.onDelete();
     }
 }

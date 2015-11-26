@@ -32,6 +32,7 @@ import butterknife.BindString;
 import rx.Subscription;
 
 /**
+ * claim screen
  * Created by klim on 16.11.15.
  */
 public class ClaimFragment extends BaseJobDetailFragment implements TextWatcher{
@@ -198,11 +199,9 @@ public class ClaimFragment extends BaseJobDetailFragment implements TextWatcher{
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         if (charSequence.length() == 0) {
-            btnSend.setBackgroundResource(R.drawable.button_green);
-            btnSend.setTextColor(cyanLight);
+            btnSend.setEnabled(false);
         } else {
-            btnSend.setBackgroundResource(R.drawable.button_yellow);
-            btnSend.setTextColor(cyanDark);
+            btnSend.setEnabled(true);
         }
     }
 

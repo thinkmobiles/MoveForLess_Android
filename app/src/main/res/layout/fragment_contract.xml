@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="top"
+    android:gravity="top"
+    android:paddingLeft="@dimen/job_content_padding_left_right"
+    android:paddingRight="@dimen/job_content_padding_left_right"
+    android:paddingBottom="@dimen/job_content_padding_bottom"
+    android:background="@drawable/job_details_background"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/pdf_container_PVF"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contract"
+            style="@style/PagesTitleStyle"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/btnSign_CF"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:text="@string/sign"
+            style="@style/BaseButtonStyle"
+            />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnNext_CF"
+        android:layout_gravity="right|bottom"
+        android:text="@string/next"
+        android:enabled="false"
+        style="@style/NavigateButtonStyle"
+        />
+
+</FrameLayout>

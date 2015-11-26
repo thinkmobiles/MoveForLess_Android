@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -14,7 +13,11 @@ import com.itextpdf.text.DocumentException;
 import com.joanzapata.pdfview.PDFView;
 import com.miami.moveforless.R;
 import com.miami.moveforless.dialogs.SignatureDialog;
+import com.miami.moveforless.fragments.eventbus.BusProvider;
+import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.globalconstants.Const;
+import com.miami.moveforless.rest.ErrorParser;
+import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.utils.CreatePdf;
 import com.miami.moveforless.utils.RxUtils;
 
@@ -24,18 +27,24 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import rx.Observable;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
+ * invoice screen
  * Created by SetKrul on 20.11.2015.
  */
 public class InvoiceFragment extends BaseJobDetailFragment {
 
     @Bind(R.id.btnSign_CF)
-    Button btnSing;
+    Button btnSign;
+    @Bind(R.id.btnNext_CF)
+    Button btnNext;
     @Bind(R.id.pdf_container_PVF)
     FrameLayout mPdfContainer;
+
+    private Subscription mSendContractSubscription;
 
     public static ContractFragment newInstance() {
         return new ContractFragment();
@@ -53,13 +62,13 @@ public class InvoiceFragment extends BaseJobDetailFragment {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.pdf_view_fragment;
+        return R.layout.fragment_contract;
     }
 
     @Override
     protected void setupViews(Bundle _savedInstanceState) {
-
-        RxUtils.click(btnSing, o -> btnSignClicked());
+        RxUtils.click(btnNext, o1 -> onNextClicked());
+        RxUtils.click(btnSign, o -> onSignClicked());
     }
 
     private void showPdf(File _file) {
@@ -103,9 +112,29 @@ public class InvoiceFragment extends BaseJobDetailFragment {
                 });
     }
 
-    public void btnSignClicked() {
+    private void onSendContractSuccess() {
+        hideLoadingDialog();
+        BusProvider.getInstance().post(new SwitchJobDetailsEvent());
+    }
+
+    private void onSendContractError(Throwable _throwable) {
+        hideLoadingDialog();
+        showErrorDialog(ErrorParser.parse(_throwable));
+    }
+
+    private void onSignClicked() {
         new SignatureDialog().show(getChildFragmentManager(), "");
     }
+
+    private void onNextClicked() {
+        showLoadingDialog();
+        if (mSendContractSubscription != null) removeSubscription(mSendContractSubscription);
+
+        mSendContractSubscription = RestClient.getInstance().sendContract()
+                .subscribe(aBoolean -> onSendContractSuccess(), this::onSendContractError);
+        addSubscription(mSendContractSubscription);
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -113,6 +142,7 @@ public class InvoiceFragment extends BaseJobDetailFragment {
         Bundle extras = data.getExtras();
         Bitmap bm = (Bitmap) extras.get(Const.SIGNATURE_BITMAP_KEY);
         generatePdf(bm, 0);
+        btnNext.setEnabled(true);
     }
 
 

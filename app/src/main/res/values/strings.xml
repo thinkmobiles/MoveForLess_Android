@@ -67,6 +67,11 @@
     <string name="check_payment">Check Payment</string>
     <string name="amount">amount</string>
 
+    <!--contract screen-->
+    <string name="sign">Sign</string>
+    <string name="contract">Contract</string>
+    <string name="invoice">Invoice</string>
+
     <!--congratulation screen-->
     <string name="back_to_schedule">Back to Schedule</string>
     <string name="write_review">Write Review</string>

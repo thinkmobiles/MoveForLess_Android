@@ -78,7 +78,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 
     private void testGetData() {
         jobModels = new ArrayList<>();
-        DatabaseController.getInstance().dropDataBase(App.getAppContext());
+//        DatabaseController.getInstance().dropDataBase(App.getAppContext());
 
         JobResponse jobModel = new JobResponse();
         jobModel.isActive = 1;

@@ -200,13 +200,15 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/etNotes_container_FJD"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:background="@drawable/form_borders_gray"
+            android:background="@drawable/job_details_notes_background"
             android:orientation="horizontal"
+            android:enabled="false"
             android:paddingTop="15dp">
 
             <EditText
@@ -215,9 +217,8 @@
                 android:layout_height="300dp"
                 android:layout_weight="1"
                 android:paddingRight="30dp"
-                android:background="@android:color/transparent"
-                style="@style/ReviewEditTextStyle"
                 android:enabled="false"
+                style="@style/ReviewEditTextStyle"
                 android:gravity="top|left"
                 android:inputType="textMultiLine" />
 
@@ -226,6 +227,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingRight="10dp"
+                android:focusable="true"
+                android:clickable="true"
                 android:src="@drawable/icn_edit" />
         </LinearLayout>
 
@@ -236,13 +239,11 @@
             android:orientation="horizontal"
             android:paddingLeft="@dimen/job_content_padding_left_right"
             android:paddingRight="@dimen/job_content_padding_left_right"
-            android:paddingTop="15dp">
+            >
 
             <Button
                 android:id="@+id/btnShowRoute_FJD"
                 style="@style/BaseButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/btnSave_FJD"
                 android:clickable="true"
                 android:minWidth="120dp"
@@ -251,23 +252,17 @@
             <Button
                 android:id="@+id/btnSave_FJD"
                 style="@style/BaseButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_toLeftOf="@+id/btnStartJob_FJD"
-                android:background="@drawable/button_green"
+                android:layout_toLeftOf="@+id/btnNext_FJD"
                 android:minWidth="120dp"
                 android:text="@string/save" />
 
             <Button
-                android:id="@+id/btnStartJob_FJD"
+                android:id="@+id/btnNext_FJD"
                 style="@style/NavigateButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="20dp"
-                android:minWidth="120dp"
-                android:text="@string/start_job" />
+                android:text="@string/next" />
         </RelativeLayout>
 
 

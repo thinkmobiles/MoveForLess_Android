@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.miami.moveforless.utils.RxUtils;
 import butterknife.Bind;
 
 /**
+ * job details screen
  * Created by SetKrul on 03.11.2015.
  */
 public class JobDetailsFragment extends BaseJobDetailFragment {
@@ -31,12 +33,15 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
     ParallaxScrollView scrollView;
     @Bind(R.id.etNotes_FJD)
     EditText etNotes;
+
+    @Bind(R.id.etNotes_container_FJD)
+    LinearLayout mNotesContainer;
     @Bind(R.id.btnEditNotes_FJD)
     View btnEditNotes;
     @Bind(R.id.btnShowRoute_FJD)
     Button btnShowRoute;
-    @Bind(R.id.btnStartJob_FJD)
-    Button btnStartJob;
+    @Bind(R.id.btnNext_FJD)
+    Button btnNext;
     @Bind(R.id.btnSave_FJD)
     Button btnSaveJob;
 
@@ -287,10 +292,14 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
 
         scrollView.parallaxViewBackgroundBy(scrollView, ContextCompat.getDrawable(getContext(), R.drawable
                 .job_details_background), .2f);
+
+        mNotesContainer.setEnabled(false);
+        etNotes.setEnabled(false);
+
         RxUtils.click(btnEditNotes, o -> switchNotes());
-        RxUtils.click(btnShowRoute, o -> showRoute());
-        RxUtils.click(btnStartJob, o -> startJob());
-        RxUtils.click(btnSaveJob, o -> saveJob());
+        RxUtils.click(btnShowRoute, o -> onShowRouteClicked());
+        RxUtils.click(btnNext, o -> onNextClicked());
+        RxUtils.click(btnSaveJob, o -> onSaveClicked());
     }
 
 
@@ -304,24 +313,31 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
 
     }
 
-    private void showRoute() {
+    private void onShowRouteClicked() {
         RouteDialog dialog = new RouteDialog();
         dialog.show(getChildFragmentManager(), "");
     }
 
-    private void startJob() {
+    private void onNextClicked() {
         BusProvider.getInstance().post(new SwitchJobDetailsEvent());
     }
 
-    private void saveJob() {
-        // TODO: add updating job to database and on server
+    private void onSaveClicked() {
+        storeJobDetails();
+        getActivity().onBackPressed();
+    }
+
+    private void storeJobDetails() {
+        // TODO: add updating job in database
     }
 
     private void switchNotes() {
         if (etNotes.isEnabled()) {
+            mNotesContainer.setEnabled(false);
             etNotes.setEnabled(false);
             etNotes.clearFocus();
         } else {
+            mNotesContainer.setEnabled(true);
             etNotes.setEnabled(true);
             etNotes.requestFocus();
         }

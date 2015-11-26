@@ -63,16 +63,13 @@
             <Button
                 android:id="@+id/btnAdd_FC"
                 style="@style/BaseButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
                 android:layout_marginRight="30dp"
                 android:text="@string/add" />
 
             <Button
                 android:id="@+id/btnSend_FC"
-                style="@style/BaseButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:enabled="false"
+                style="@style/NavigateButtonStyle"
                 android:text="@string/send" />
 
         </LinearLayout>

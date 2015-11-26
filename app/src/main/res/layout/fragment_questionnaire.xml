@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/job_content_padding_left_right"
     android:paddingRight="@dimen/job_content_padding_left_right"
+    android:paddingBottom="@dimen/job_content_padding_bottom"
     android:background="@drawable/job_details_background"
     android:orientation="vertical">
 
@@ -44,11 +45,9 @@
 
     <Button
         android:id="@+id/btnNext_FQ"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:text="@string/next"
+        android:text="@string/start_job"
         android:layout_gravity="right"
-        android:layout_marginBottom="40dp"
-        style="@style/BaseButtonStyle"
+        android:enabled="false"
+        style="@style/NavigateButtonStyle"
         />
 </LinearLayout>

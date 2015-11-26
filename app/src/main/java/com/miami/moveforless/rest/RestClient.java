@@ -101,7 +101,7 @@ public class RestClient {
         return _response
                 .subscribeOn(Schedulers.io())
                 .retry(2)
-                .timeout(3, TimeUnit.SECONDS)
+                .timeout(30, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -174,11 +174,28 @@ public class RestClient {
     }
 
     public Observable<Boolean> sendFeedback() {
-        return Observable.just(true).delay(3, TimeUnit.SECONDS);
+        // TODO: replace mock request on real
+        return responseWrapper(Observable.just(true).delay(3, TimeUnit.SECONDS));
     }
 
     public Observable<Boolean> sendClaim() {
-        return Observable.just(true).delay(3, TimeUnit.SECONDS);
+        // TODO: replace mock request on real
+        return responseWrapper(Observable.just(true).delay(3, TimeUnit.SECONDS));
+    }
+
+    public Observable<Boolean> sendContract() {
+        // TODO: replace mock request on real
+        return responseWrapper(Observable.just(true).delay(3, TimeUnit.SECONDS));
+    }
+
+    public Observable<Boolean> sendJobDetails() {
+        // TODO: replace mock request on real
+        return responseWrapper(Observable.just(true).delay(3, TimeUnit.SECONDS));
+    }
+
+    public Observable<Boolean> sendPayment() {
+        // TODO: replace mock request on real
+        return responseWrapper(Observable.just(true).delay(3, TimeUnit.SECONDS));
     }
 
 }
