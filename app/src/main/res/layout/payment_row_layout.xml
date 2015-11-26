@@ -31,7 +31,7 @@
 
     <com.miami.moveforless.customviews.CustomSpinner
         android:id="@+id/spinnerSelector_row"
-        style="@style/BaseSpinnerStyle"
+        style="@style/PaymentSpinnerStyle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

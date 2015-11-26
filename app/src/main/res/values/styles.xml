@@ -101,11 +101,16 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@drawable/base_text_color_selector</item>
         <item name="android:textColorHint">@color/cyan_dark</item>
-        <!--<item name="android:textSize">@dimen/base_spinner_size</item>-->
         <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">40dp</item>
+    </style>
+
+    <style name="PaymentSpinnerStyle" parent="BaseSpinnerStyle">
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
-        <item name="android:paddingLeft">15dp</item>
     </style>
 
     <style name="BaseEditTextStyle" parent="Base.Widget.AppCompat.EditText">
@@ -114,6 +119,7 @@
         <!--<item name="android:textSize">@dimen/base_edit_text_size</item>-->
         <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
         <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">5dp</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="android:textCursorDrawable">@drawable/cursor_white</item>
     </style>
@@ -179,8 +185,21 @@
     <style name="QuestionnaireDescriptionTextStyle" parent="BaseTextStyle">
         <item name="android:layout_marginTop">@dimen/questionnaire_text_margin_top_bottom</item>
         <item name="android:layout_marginBottom">@dimen/questionnaire_text_margin_top_bottom</item>
-
     </style>
+
+    <style name="QuestionnaireInputNumber"  parent="BaseEditTextStyle">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:textColor">@color/cyan_dark</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <!--<item name="android:textSize">@dimen/review_text_size</item>-->
+        <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="android:background">@drawable/form_borders_gray</item>
+        <item name="android:gravity">right</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_cyan</item>
+    </style>
+
 
     <!--login screen-->
     <style name="LoginEditText" parent="BaseEditTextStyle">

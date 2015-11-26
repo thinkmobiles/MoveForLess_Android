@@ -37,4 +37,24 @@
         <item>Claim</item>
     </string-array>
 
+    <string-array name="questionnaire">
+
+        <item>Elevator Reservation FROM</item>
+        <item>Elevator Reservation TO</item>
+        <item>Are there any stairs? (if yes - which floor?)</item>
+        <item>Do you have Truck/Trailer access to the building?</item>
+        <item>Do you need Move out Insurance?</item>
+        <item>Do you need Move in Insurance?</item>
+        <item>Move Size?</item>
+        <item>How many movers?</item>
+        <item>How many trucks?</item>
+        <item>How many bedroom sets you have?</item>
+        <item>Is your apartment fully furnished?</item>
+        <item>Are there any time restrictions at the pick up or drop off location?</item>
+        <item>What kind of building are you moving from and to?</item>
+        <item>Are you packing miscellaneous items yourself?</item>
+        <item>Do you have any fragile items such as mirror, tv, glass, picture, painting, or any other?</item>
+        <item>Will you be able to provide bubble wrap, tv/mirror/picture box and shrink wrap to avoid charges for packing supplies?</item>
+    </string-array>
+
 </resources>

@@ -1,53 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.miami.moveforless.customviews.ParallaxScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view_FQ"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/job_content_padding_left_right"
-    android:paddingRight="@dimen/job_content_padding_left_right"
-    android:paddingBottom="@dimen/job_content_padding_bottom"
-    android:background="@drawable/job_details_background"
-    android:orientation="vertical">
+    android:layout_weight="1"
+    android:fillViewport="true"
+    android:overScrollMode="never"
+    android:scrollbars="none">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/questionnaire"
-        style="@style/PagesTitleStyle"
-        />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/job_content_padding_bottom"
+        android:paddingLeft="@dimen/job_content_padding_left_right"
+        android:paddingRight="@dimen/job_content_padding_left_right">
+
+        <TextView
+            style="@style/PagesTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/questionnaire" />
 
         <LinearLayout
             android:id="@+id/questions_container_FQ"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="vertical">
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-
-                layout="@layout/questionnaire_row" />
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                layout="@layout/questionnaire_row" />
 
         </LinearLayout>
 
-    </ScrollView>
-
-    <Button
-        android:id="@+id/btnNext_FQ"
-        android:text="@string/start_job"
-        android:layout_gravity="right"
-        android:enabled="false"
-        style="@style/NavigateButtonStyle"
-        />
-</LinearLayout>
+        <Button
+            android:id="@+id/btnNext_FQ"
+            style="@style/NavigateButtonStyle"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="right"
+            android:enabled="false"
+            android:text="@string/start_job" />
+    </LinearLayout>
+</com.miami.moveforless.customviews.ParallaxScrollView>
