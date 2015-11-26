@@ -9,11 +9,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.dialogs.SignatureDialog;
 import com.miami.moveforless.fragments.BaseFragment;
 import com.miami.moveforless.fragments.ScheduleFragment;
-import com.miami.moveforless.fragments.SettingFragment;
-import com.miami.moveforless.managers.PlayServicesManager;
+import com.miami.moveforless.fragments.SettingsFragment;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
@@ -23,6 +21,7 @@ import butterknife.Bind;
 import rx.Subscription;
 
 /**
+ * main activity
  * Created by klim on 20.10.15.
  */
 public class MainActivity extends BaseFragmentActivity implements FragmentChanger {
@@ -70,8 +69,8 @@ public class MainActivity extends BaseFragmentActivity implements FragmentChange
                 // TODO: add refresh logic
                 break;
             case R.id.menu_settings:
-                SettingFragment settingFragment = new SettingFragment();
-                replaceFragmentWithBackStack(R.id.contentContainer_AM,settingFragment);
+                SettingsFragment settingsFragment = new SettingsFragment();
+                replaceFragmentWithBackStack(R.id.contentContainer_AM, settingsFragment);
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -43,6 +43,8 @@ public class PaymentView extends LinearLayout implements PaymentCallback{
     private PaymentAction mActionListener;
     private List<PaymentActionItem> mDropDownList;
     private PaymentType mSelectedType;
+    private boolean wasSelected = false;
+
 
     public PaymentView(Context context) {
         this(context, null);
@@ -69,7 +71,10 @@ public class PaymentView extends LinearLayout implements PaymentCallback{
             ivDelete.setVisibility(View.VISIBLE);
             tvConfirm.setVisibility(View.VISIBLE);
             etAmount.requestFocus();
-            mActionListener.onPaymentTypeSelected();
+            if (!wasSelected) {
+                wasSelected = true;
+                mActionListener.onPaymentTypeSelected();
+            }
             mSelectedType = mDropDownList.get(_position).getType();
         });
         mSpinner.setHint(strChoosePayment);

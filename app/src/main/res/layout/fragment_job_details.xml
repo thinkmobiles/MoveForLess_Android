@@ -244,8 +244,6 @@
             <Button
                 android:id="@+id/btnShowRoute_FJD"
                 style="@style/BaseButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/btnSave_FJD"
                 android:clickable="true"
                 android:minWidth="120dp"
@@ -254,23 +252,17 @@
             <Button
                 android:id="@+id/btnSave_FJD"
                 style="@style/BaseButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_toLeftOf="@+id/btnStartJob_FJD"
-                android:background="@drawable/button_green"
+                android:layout_toLeftOf="@+id/btnNext_FJD"
                 android:minWidth="120dp"
                 android:text="@string/save" />
 
             <Button
-                android:id="@+id/btnStartJob_FJD"
+                android:id="@+id/btnNext_FJD"
                 style="@style/NavigateButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="20dp"
-                android:minWidth="120dp"
-                android:text="@string/start_job" />
+                android:text="@string/next" />
         </RelativeLayout>
 
 

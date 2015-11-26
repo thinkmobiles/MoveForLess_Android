@@ -1,29 +1,29 @@
 package com.miami.moveforless.fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
-import com.miami.moveforless.fragments.eventbus.FragmentType;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
-import com.miami.moveforless.utils.BitmapUtils;
+import com.miami.moveforless.rest.ErrorParser;
+import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.utils.RxUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 /**
+ * questionnaire screen
  * Created by klim on 22.10.15.
  */
 public class QuestionnaireFragment extends BaseJobDetailFragment {
@@ -31,6 +31,8 @@ public class QuestionnaireFragment extends BaseJobDetailFragment {
     Button btnNext;
     @Bind(R.id.questions_container_FQ)
     LinearLayout mQuestionsContainer;
+
+    private Subscription mJobDetailsSubscription;
 
     public static Fragment newInstance() {
         return new QuestionnaireFragment();
@@ -59,8 +61,6 @@ public class QuestionnaireFragment extends BaseJobDetailFragment {
             yes.setOnCheckedChangeListener((compoundButton, b) -> {
                 yes.setButtonDrawable(R.drawable.radiobutton_button);
                 no.setButtonDrawable(R.drawable.radiobutton_button);
-
-
             });
             no.setOnCheckedChangeListener((compoundButton, b) -> {
                 yes.setButtonDrawable(R.drawable.radiobutton_button);
@@ -86,8 +86,16 @@ public class QuestionnaireFragment extends BaseJobDetailFragment {
                 no.setButtonDrawable(R.drawable.icn_checkbox_error);
             }
         } else {
-            BusProvider.getInstance().post(new SwitchJobDetailsEvent());
+            sendJobDetails();
         }
+    }
+
+    private void sendJobDetails() {
+        showLoadingDialog();
+        if (mJobDetailsSubscription != null) removeSubscription(mJobDetailsSubscription);
+        mJobDetailsSubscription = RestClient.getInstance().sendJobDetails()
+                .subscribe(aBoolean -> onSendJobDetailsSuccess(), this::onSendJobDetailsError);
+        addSubscription(mJobDetailsSubscription);
     }
 
     @Override
@@ -98,5 +106,20 @@ public class QuestionnaireFragment extends BaseJobDetailFragment {
     @Override
     public void onPageSelected() {
 
+    }
+
+    private void onSendJobDetailsSuccess() {
+        hideLoadingDialog();
+        storeJobDetails();
+        BusProvider.getInstance().post(new SwitchJobDetailsEvent());
+    }
+
+    private void onSendJobDetailsError(Throwable _throwable) {
+        hideLoadingDialog();
+        showErrorDialog(ErrorParser.parse(_throwable));
+    }
+
+    private void storeJobDetails() {
+        // TODO: add storing job details to DB
     }
 }

@@ -17,9 +17,10 @@ import butterknife.BindString;
 import rx.Subscription;
 
 /**
+ * settings screen
  * Created by Sergbek on 20.11.2015.
  */
-public class SettingFragment extends BaseFragment {
+public class SettingsFragment extends BaseFragment {
     @BindString(R.string.edit_user_error)           String strEditError;
     @BindString(R.string.edit_user_success)         String strEditSuccess;
     @Bind(R.id.etOldPassword_FS)                    EditText etOldPassword;

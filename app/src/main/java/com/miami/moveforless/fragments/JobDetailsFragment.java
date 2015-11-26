@@ -23,6 +23,7 @@ import com.miami.moveforless.utils.RxUtils;
 import butterknife.Bind;
 
 /**
+ * job details screen
  * Created by SetKrul on 03.11.2015.
  */
 public class JobDetailsFragment extends BaseJobDetailFragment {
@@ -39,8 +40,8 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
     View btnEditNotes;
     @Bind(R.id.btnShowRoute_FJD)
     Button btnShowRoute;
-    @Bind(R.id.btnStartJob_FJD)
-    Button btnStartJob;
+    @Bind(R.id.btnNext_FJD)
+    Button btnNext;
     @Bind(R.id.btnSave_FJD)
     Button btnSaveJob;
 
@@ -296,9 +297,9 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
         etNotes.setEnabled(false);
 
         RxUtils.click(btnEditNotes, o -> switchNotes());
-        RxUtils.click(btnShowRoute, o -> showRoute());
-        RxUtils.click(btnStartJob, o -> startJob());
-        RxUtils.click(btnSaveJob, o -> saveJob());
+        RxUtils.click(btnShowRoute, o -> onShowRouteClicked());
+        RxUtils.click(btnNext, o -> onNextClicked());
+        RxUtils.click(btnSaveJob, o -> onSaveClicked());
     }
 
 
@@ -312,17 +313,22 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
 
     }
 
-    private void showRoute() {
+    private void onShowRouteClicked() {
         RouteDialog dialog = new RouteDialog();
         dialog.show(getChildFragmentManager(), "");
     }
 
-    private void startJob() {
+    private void onNextClicked() {
         BusProvider.getInstance().post(new SwitchJobDetailsEvent());
     }
 
-    private void saveJob() {
-        // TODO: add updating job in database and on server
+    private void onSaveClicked() {
+        storeJobDetails();
+        getActivity().onBackPressed();
+    }
+
+    private void storeJobDetails() {
+        // TODO: add updating job in database
     }
 
     private void switchNotes() {

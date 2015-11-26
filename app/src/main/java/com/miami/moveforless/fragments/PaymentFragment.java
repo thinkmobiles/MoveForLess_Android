@@ -16,12 +16,15 @@ import com.miami.moveforless.activity.CheckActivity;
 import com.miami.moveforless.fragments.eventbus.BusProvider;
 import com.miami.moveforless.fragments.eventbus.SwitchJobDetailsEvent;
 import com.miami.moveforless.globalconstants.Const;
+import com.miami.moveforless.rest.ErrorParser;
+import com.miami.moveforless.rest.RestClient;
 import com.miami.moveforless.utils.PayPalManager;
 import com.miami.moveforless.utils.RxUtils;
 
 import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.BindString;
+import rx.Subscription;
 
 /**
  * payment fragment
@@ -51,7 +54,7 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
     private float mConfirmAmount;
     private PaymentType mConfirmType;
     private String mConfirmDescription;
-
+    private Subscription mPaymentSubscription;
 
     public static PaymentFragment newInstance() {
         Bundle args = new Bundle();
@@ -106,6 +109,7 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
     }
 
     private void addPaymentRow() {
+
         PaymentView view = new PaymentView(getContext());
         view.setOnPaymentListener(this);
         mContainer.addView(view);
@@ -142,14 +146,11 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
     }
 
     private void nextClicked() {
-        float totalAmount = Float.valueOf(tvTotalAmount.getText().toString());
-        if (totalAmount >= mRequiredAmount) {
-
-
-            BusProvider.getInstance().post(new SwitchJobDetailsEvent());
-        } else {
-            showErrorDialog(strPaymentError);
-        }
+        showLoadingDialog();
+        if (mPaymentSubscription != null) removeSubscription(mPaymentSubscription);
+        mPaymentSubscription = RestClient.getInstance().sendPayment()
+                .subscribe(aBoolean -> onSendPaymentSuccess(), this::onSendPaymentError);
+        addSubscription(mPaymentSubscription);
     }
 
     @Override
@@ -176,8 +177,7 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
         float totalAmount = Float.valueOf(tvTotalAmount.getText().toString());
         tvTotalAmount.setText("" + (totalAmount += _value));
         if (totalAmount >= mRequiredAmount) {
-            btnNext.setBackgroundResource(R.drawable.button_yellow);
-            btnNext.setTextColor(cyanDark);
+            btnNext.setEnabled(true);
         }
 
     }
@@ -193,6 +193,16 @@ public class PaymentFragment extends BaseJobDetailFragment implements PaymentVie
 
     private void storeConfirmedPayment(PaymentType _type, String _description, float _amount) {
         // TODO: add storing confirmed payment to DB
+    }
+
+    private void onSendPaymentSuccess() {
+        hideLoadingDialog();
+        BusProvider.getInstance().post(new SwitchJobDetailsEvent());
+    }
+
+    private void onSendPaymentError(Throwable _throwable) {
+        hideLoadingDialog();
+        showErrorDialog(ErrorParser.parse(_throwable));
     }
 
 }

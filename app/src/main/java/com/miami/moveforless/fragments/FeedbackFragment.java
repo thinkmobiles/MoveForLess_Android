@@ -22,6 +22,7 @@ import butterknife.BindString;
 import rx.Subscription;
 
 /**
+ * feedback screen
  * Created by klim on 12.11.15.
  */
 public class FeedbackFragment extends BaseJobDetailFragment implements TextWatcher {
@@ -121,13 +122,7 @@ public class FeedbackFragment extends BaseJobDetailFragment implements TextWatch
     }
 
     private void changeSendButton(boolean _isEnabled) {
-        if (_isEnabled) {
-            btnSend.setBackgroundResource(R.drawable.button_yellow);
-            btnSend.setTextColor(cyanDark);
-        } else {
-            btnSend.setBackgroundResource(R.drawable.button_green);
-            btnSend.setTextColor(cyanLight);
-        }
+         btnSend.setEnabled(_isEnabled);
     }
 
 }

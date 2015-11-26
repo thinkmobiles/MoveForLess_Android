@@ -31,6 +31,7 @@ import butterknife.Bind;
 import butterknife.BindString;
 
 /**
+ * schedule screen
  * Created by SetKrul on 30.10.2015.
  */
 public class ScheduleFragment extends BaseFragment implements View.OnClickListener {
@@ -73,7 +74,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 
     private void testGetData() {
         jobModels = new ArrayList<>();
-        DatabaseController.getInstance().dropDataBase(App.getAppContext());
+//        DatabaseController.getInstance().dropDataBase(App.getAppContext());
 
             JobResponse jobModel = new JobResponse();
             jobModel.isActive = 1;
@@ -148,6 +149,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         jobModels = DatabaseController.getInstance().getListJob();
         jobModelsSorted = new ArrayList<>();
         String currentDate;
+        /*
         for (JobModel job : jobModels){
             JobModel header;
             if (job.isActive == 1){
@@ -167,7 +169,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 //                jobModelsSorted.add(header);
             }
         }
-
+*/
         mAdapter = new ScheduleAdapter(getActivity(), jobModelsSorted);
         mRecyclerView.setAdapter(mAdapter);
     }

@@ -38,9 +38,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-
                     android:scaleType="fitCenter"
-                    android:src="@drawable/logo_login" />
+                    android:src="@drawable/icn_logo" />
 
             </LinearLayout>
 
@@ -57,14 +56,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/logo_margin_top"
                     android:layout_gravity="center"
-
                     android:visibility="invisible">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-
                         android:scaleType="fitCenter"
                         android:src="@drawable/logo_login" />
 

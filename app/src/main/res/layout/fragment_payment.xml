@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/job_feedback_background"
     android:paddingBottom="@dimen/job_content_padding_bottom">
@@ -107,12 +106,10 @@
 
         <Button
             android:id="@+id/btnNext_FP"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
             android:layout_gravity="right"
             android:text="@string/proceed"
-            android:minWidth="130dp"
-            style="@style/BaseButtonStyle"/>
+            android:enabled="false"
+            style="@style/NavigateButtonStyle"/>
     </FrameLayout>
 
 </LinearLayout>

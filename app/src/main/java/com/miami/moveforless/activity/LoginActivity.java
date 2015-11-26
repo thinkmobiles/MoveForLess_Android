@@ -15,6 +15,7 @@ import com.miami.moveforless.R;
 import com.miami.moveforless.customviews.CustomProgressBar;
 import com.miami.moveforless.database.DatabaseController;
 import com.miami.moveforless.dialogs.ConfirmDialog;
+import com.miami.moveforless.dialogs.WarningDialog;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
@@ -32,6 +33,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
+ * login screen
  * Created by klim on 20.10.15.
  */
 public class LoginActivity extends BaseActivity {
@@ -93,7 +95,7 @@ public class LoginActivity extends BaseActivity {
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     private void onJobDataError(Throwable _throwable) {
         if (ErrorParser.checkConnectionError(_throwable) instanceof ConnectionException) {
-            ConfirmDialog dialog = new ConfirmDialog();
+            WarningDialog dialog = new WarningDialog();
             dialog.setMessage(strConnectionError);
             dialog.setOnPositiveListener(view -> startMainActivity(0));
             dialog.setOnNegativeListener(view -> finish());

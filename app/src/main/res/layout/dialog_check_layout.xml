@@ -5,45 +5,58 @@
     android:layout_height="match_parent"
     android:minHeight="200dp"
     android:orientation="vertical"
-    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:paddingLeft="30dp"
     android:paddingRight="20dp"
-    android:paddingBottom="10dp">
+    android:paddingTop="10dp">
 
     <TextView
         style="@style/PagesTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:text="@string/check_payment" />
+        android:text="@string/check_payment"
+        android:textColor="@android:color/black" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fillViewport="true"
         android:layout_weight="1">
 
-        <com.miami.moveforless.customviews.PhotoLayout.CheckLayout
-            android:id="@+id/photos_container_DCL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:columnCount="1" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivDefaultPicture_DCL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/icn_check_please"
+                />
+            <com.miami.moveforless.customviews.PhotoLayout.CheckLayout
+                android:id="@+id/photos_container_DCL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:columnCount="1" />
+        </FrameLayout>
     </ScrollView>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:gravity="right"
+        android:orientation="horizontal"
+        >
 
         <TextView
             android:id="@+id/btnAdd_DCL"
             style="@style/DialogButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="40dp"
-            android:layout_toLeftOf="@+id/btnPay_DCL"
-            android:layout_toStartOf="@+id/btnPay_DCL"
+            android:layout_gravity="center_horizontal"
             android:text="@string/add" />
 
         <TextView
@@ -51,11 +64,10 @@
             style="@style/DialogButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:layout_gravity="right"
             android:text="@string/pay"
-            android:visibility="visible" />
-    </RelativeLayout>
+            android:visibility="gone" />
+    </FrameLayout>
 
 </LinearLayout>
