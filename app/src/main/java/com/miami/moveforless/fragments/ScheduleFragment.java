@@ -28,10 +28,13 @@ import com.roomorama.caldroid.CaldroidListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.BindString;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * schedule screen
@@ -65,6 +68,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     Integer currentDate = null;
     JobModel header = null;
     JobModel headerFuture = null;
+    static JobModel currentHeader;
 
     @Override
     protected int getLayoutResource() {
@@ -77,18 +81,86 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         tvBegin.setOnClickListener(this);
         tvEnd.setOnClickListener(this);
         if (mAdapter == null) {
-            Observable.just(generatedData()).subscribe(fin -> {
-                Observable.just(getData()).subscribe(job ->{
-                    mAdapter = new ScheduleAdapter(getActivity(), jobModelsSorted);
-                    mRecyclerView.setAdapter(mAdapter);
-                });
-            });
+            Observable.just(generatedData())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .flatMap(aBoolean -> Observable.just(getData()))
+                    .map(models -> createExpandableList(models))
+                    .subscribe(jobModels1 -> {
+                        mAdapter = new ScheduleAdapter(getActivity(), jobModels1);
+                        mRecyclerView.setAdapter(mAdapter);
+                    });
+
         }
 
     }
 
-    private List<JobModel> getData(){
+    private List<JobModel> createExpandableList(List<JobModel> models) {
+        List<JobModel> sortedJobList = new ArrayList<>();
+
+        Observable.from(models)
+                .subscribe(jobModel -> {
+                    if (jobModel.isActive == 1) {
+                        currentHeader = createHeader(jobModel, jobModel.isActive == 1, false);
+                        currentHeader.child.add(jobModel);
+                        sortedJobList.add(0, currentHeader);
+                        return;
+                    } else {
+                        if (sortedJobList.size() == 0) {
+                            currentHeader = createHeader(jobModel, false, false);
+                            sortedJobList.add(currentHeader);
+                        }
+
+                        if (jobModel.getDay() == currentHeader.getDay()) {
+                            currentHeader.child.add(jobModel);
+                        } else {
+                            boolean isFuture = jobModel.getDay() > TimeUtil.getNextDay();
+                            if (isFuture) {
+                                if (!currentHeader.isFuture) {
+                                    currentHeader = createHeader(jobModel, false, true);
+                                    sortedJobList.add(currentHeader);
+                                }
+                                JobModel lastHeader = createHeader(jobModel, false, false);
+                                lastHeader.child.add(jobModel);
+                                currentHeader.child.add(lastHeader);
+                            } else { // if not future and we don`t have a header
+                                currentHeader = createHeader(jobModel, false, false);
+                                currentHeader.child.add(jobModel);
+                                sortedJobList.add(currentHeader);
+                            }
+                        }
+                    }
+                });
+        return sortedJobList;
+    }
+
+    private JobModel createHeader(JobModel _model, boolean _isActive, boolean _isFuture) {
+        JobModel header = new JobModel();
+        header.child = new ArrayList<>();
+
+        if (_isActive) {
+            header.isActive = 1;
+        } else if (_isFuture) {
+            header.title = "FUTURE";
+            header.isFuture = true;
+        } else {
+            header.pickup_date = _model.pickup_date;
+
+            if (TimeUtil.getCurrentDay() == _model.getDay())
+                header.title = "Today " + _model.getFullDate();
+            else if (TimeUtil.getNextDay() == _model.getDay())
+                header.title = "Tomorrow " + _model.getFullDate();
+
+        }
+        return header;
+    }
+
+    private List<JobModel> getData() {
         jobModels = DatabaseController.getInstance().getListJob();
+
+
+
+        /*
         for (JobModel job : jobModels) {
             if (job.isActive == 1) {
                 JobModel headerActive = new JobModel();
@@ -109,12 +181,12 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                     dayControl(job);
                 }
             }
-        }
-        return  jobModelsSorted;
+        }*/
+        return jobModels;
     }
 
     private boolean generatedData() {
-        jobModels = new ArrayList<>();
+//        jobModels = new ArrayList<>();
 
         Delete.tables(JobResponse.class);
 
@@ -133,7 +205,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         jobModel.post_title = "LD025135";
         jobModel.RequiredPickupDate = "1448091900000";
         jobModel.save();
-        jobModel.insert();
+//        jobModel.insert();
 
         for (int i = 0; i < 2; i++) {
             JobResponse jobModelToday = new JobResponse();
@@ -323,26 +395,26 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
                 (_context, _view, _position) -> {
-            if (mAdapter.getItem(_position).child != null) {
-                if (!mAdapter.getItem(_position).mExpand) {
-                    mAdapter.getItem(_position).mExpand = true;
-                    mAdapter.addChild(_position + 1, mAdapter.getItem(_position));
-                } else {
-                    mAdapter.getItem(_position).mExpand = false;
-                    for (int i = 0; i < mAdapter.getItem(_position).child.size(); i++) {
-                        if (mAdapter.getItem(_position).child.get(i).mExpand) {
-                            mAdapter.getItem(_position).child.get(i).mExpand = false;
-                            mAdapter.removeChild(_position + i + 1, mAdapter.getItem(_position).child.get(i));
+                    if (mAdapter.getItem(_position).child != null) {
+                        if (!mAdapter.getItem(_position).mExpand) {
+                            mAdapter.getItem(_position).mExpand = true;
+                            mAdapter.addChild(_position + 1, mAdapter.getItem(_position));
+                        } else {
+                            mAdapter.getItem(_position).mExpand = false;
+                            for (int i = 0; i < mAdapter.getItem(_position).child.size(); i++) {
+                                if (mAdapter.getItem(_position).child.get(i).mExpand) {
+                                    mAdapter.getItem(_position).child.get(i).mExpand = false;
+                                    mAdapter.removeChild(_position + i + 1, mAdapter.getItem(_position).child.get(i));
+                                }
+                            }
+                            mAdapter.removeChild(_position + 1, mAdapter.getItem(_position));
+                        }
+                    } else {
+                        if (getActivity() instanceof FragmentChanger) {
+                            ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0), true);
                         }
                     }
-                    mAdapter.removeChild(_position + 1, mAdapter.getItem(_position));
-                }
-            } else {
-                if (getActivity() instanceof FragmentChanger) {
-                    ((FragmentChanger) getActivity()).switchFragment(JobFragment.newInstance(0), true);
-                }
-            }
-        }));
+                }));
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override

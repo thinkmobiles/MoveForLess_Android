@@ -20,6 +20,8 @@ public class JobModel extends BaseQueryModel {
     public Boolean mExpand = false;
     public Boolean mSub = false;
     public List<JobModel> child;
+    public String title;
+    public boolean isFuture;
 
     @Column
     public Integer isActive;

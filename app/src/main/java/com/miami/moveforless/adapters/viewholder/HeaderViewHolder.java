@@ -14,8 +14,8 @@ import com.miami.moveforless.utils.TimeUtil;
  */
 public class HeaderViewHolder extends AbstractViewHolder {
 
-    private  TextView tvHeaderJob;
-    private  TextView tvHeaderJobSize;
+    private TextView tvHeaderJob;
+    private TextView tvHeaderJobSize;
 
     public HeaderViewHolder(View itemView) {
         super(itemView);
@@ -27,10 +27,13 @@ public class HeaderViewHolder extends AbstractViewHolder {
     @Override
     public void bind(JobModel model) {
         if (model != null) {
+/*
             if (TimeUtil.getCurrentDay() == model.getDay())
                 tvHeaderJob.setText("Today " + model.getFullDate());
             else if (TimeUtil.getNextDay() == model.getDay())
                 tvHeaderJob.setText("Tomorrow " + model.getFullDate());
+*/
+            tvHeaderJob.setText(model.title);
             tvHeaderJobSize.setText(model.getChildSize());
         }
     }
