@@ -3,15 +3,18 @@ package com.miami.moveforless.customviews.quickActionMenu;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Build;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow.OnDismissListener;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.miami.moveforless.R;
@@ -29,6 +32,7 @@ public class QuickAction extends PopupWindows {
     private int mChildPos;
     private int mInsertPos;
     private int rootHeight = 0;
+    private ScrollView scrollView;
 
     public QuickAction(Context context) {
         super(context);
@@ -43,6 +47,7 @@ public class QuickAction extends PopupWindows {
         mRootView = mInflater.inflate(id, null);
         mTrack = (ViewGroup) mRootView.findViewById(R.id.tracks);
         mRootView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        scrollView = (ScrollView) mRootView.findViewById(R.id.scrollView_SDL);
         setContentView(mRootView);
     }
 
@@ -140,7 +145,17 @@ public class QuickAction extends PopupWindows {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) arrow.getLayoutParams();
             params.gravity = Gravity.BOTTOM;
         }
-
+        if (!onTop) {
+            scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                    scrollView.fullScroll(View.FOCUS_DOWN);
+                }
+            });
+        }
         preShow(anchor, anchor.getMeasuredWidth(), rootHeight);
         mWindow.showAtLocation(anchor, Gravity.NO_GRAVITY, xPos, yPos);
     }
