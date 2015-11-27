@@ -1,5 +1,6 @@
 package com.miami.moveforless.adapters.viewholder;
 
+import android.graphics.Rect;
 import android.view.View;
 import android.widget.TextView;
 
@@ -7,12 +8,13 @@ import com.miami.moveforless.App;
 import com.miami.moveforless.R;
 import com.miami.moveforless.customviews.DetailAddressPopupWindow;
 import com.miami.moveforless.database.model.JobModel;
+import com.miami.moveforless.utils.RxUtils;
 
 
 /**
  * Created by SetKrul on 30.10.2015.
  */
-public class ItemViewHolder extends AbstractViewHolder implements View.OnClickListener {
+public class ItemViewHolder extends AbstractViewHolder {
 
     private JobModel mJobModel;
     private TextView tvFullname;
@@ -33,8 +35,8 @@ public class ItemViewHolder extends AbstractViewHolder implements View.OnClickLi
         tvPickupDate = (TextView) itemView.findViewById(R.id.tvPickupDate_SI);
         tvRequiredPickupDate = (TextView) itemView.findViewById(R.id.tvRequiredPickupTime_SI);
 
-        tvToZipcode.setOnClickListener(this);
-        tvFromZipcode.setOnClickListener(this);
+        RxUtils.click(tvToZipcode, o -> tvToZipCodeClicked());
+        RxUtils.click(tvFromZipcode, o -> tvFromZipCodeClicked());
     }
 
     @Override
@@ -51,22 +53,43 @@ public class ItemViewHolder extends AbstractViewHolder implements View.OnClickLi
         tvPickupDate.setText(model.getPickup_date());
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id) {
-            case R.id.tvToZipCode_SI:
-                DetailAddressPopupWindow toPopup = new DetailAddressPopupWindow(App.getAppContext(), mJobModel
-                        .to_city + " " +
-                        mJobModel.to_address);
-                toPopup.show(v);
-                break;
-            case R.id.tvFromZipCode_SI:
-                DetailAddressPopupWindow fromPopups = new DetailAddressPopupWindow(App.getAppContext(), mJobModel
-                        .from_city + " " +
-                        mJobModel.from_address);
-                fromPopups.show(v);
-                break;
-        }
+    public boolean locateView(float x) {
+        int[] toZipLoc_int = new int[2];
+        int[] fromZipLoc_int = new int[2];
+        if (tvToZipcode == null || tvFromZipcode == null) return false;
+
+        tvToZipcode.getLocationOnScreen(toZipLoc_int);
+        tvFromZipcode.getLocationOnScreen(fromZipLoc_int);
+
+        Rect toZipCodeLocation = new Rect();
+        toZipCodeLocation.left = toZipLoc_int[0];
+        toZipCodeLocation.top = toZipLoc_int[1];
+        toZipCodeLocation.right = toZipCodeLocation.left + tvToZipcode.getWidth();
+        toZipCodeLocation.bottom = toZipCodeLocation.top + tvToZipcode.getHeight();
+
+        Rect fromZipCodeLocation = new Rect();
+        fromZipCodeLocation.left = fromZipLoc_int[0];
+        fromZipCodeLocation.top = fromZipLoc_int[1];
+        fromZipCodeLocation.right = fromZipCodeLocation.left + tvFromZipcode.getWidth();
+        fromZipCodeLocation.bottom = fromZipCodeLocation.top + tvFromZipcode.getHeight();
+
+        return toZipCodeLocation.contains((int) x, toZipCodeLocation.centerY())
+                || fromZipCodeLocation.contains((int) x, fromZipCodeLocation.centerY());
     }
+
+
+    private void tvToZipCodeClicked(){
+        DetailAddressPopupWindow toPopup = new DetailAddressPopupWindow(App.getAppContext(), mJobModel
+                .to_city + " " +
+                mJobModel.to_address);
+        toPopup.show(tvToZipcode);
+    }
+
+    private void tvFromZipCodeClicked(){
+        DetailAddressPopupWindow fromPopups = new DetailAddressPopupWindow(App.getAppContext(), mJobModel
+                .from_city + " " +
+                mJobModel.from_address);
+        fromPopups.show(tvFromZipcode);
+    }
+
 }

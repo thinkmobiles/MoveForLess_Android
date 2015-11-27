@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.miami.moveforless.App;
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ScheduleAdapter;
@@ -113,7 +114,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 
     private boolean generatedData() {
         jobModels = new ArrayList<>();
-//        DatabaseController.getInstance().dropDataBase(App.getAppContext());
+        DatabaseController.getInstance().dropDataBase(App.getAppContext());
 
         JobResponse jobModel = new JobResponse();
         jobModel.isActive = 1;
