@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.miami.moveforless.App;
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ScheduleAdapter;
