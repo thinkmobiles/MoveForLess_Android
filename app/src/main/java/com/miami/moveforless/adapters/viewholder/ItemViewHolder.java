@@ -61,17 +61,15 @@ public class ItemViewHolder extends AbstractViewHolder {
         tvToZipcode.getLocationOnScreen(toZipLoc_int);
         tvFromZipcode.getLocationOnScreen(fromZipLoc_int);
 
-        Rect toZipCodeLocation = new Rect();
-        toZipCodeLocation.left = toZipLoc_int[0];
-        toZipCodeLocation.top = toZipLoc_int[1];
-        toZipCodeLocation.right = toZipCodeLocation.left + tvToZipcode.getWidth();
-        toZipCodeLocation.bottom = toZipCodeLocation.top + tvToZipcode.getHeight();
+        Rect toZipCodeLocation = new Rect(toZipLoc_int[0],
+                toZipLoc_int[1],
+                toZipLoc_int[0] + tvToZipcode.getWidth(),
+                toZipLoc_int[1] + tvToZipcode.getHeight());
 
-        Rect fromZipCodeLocation = new Rect();
-        fromZipCodeLocation.left = fromZipLoc_int[0];
-        fromZipCodeLocation.top = fromZipLoc_int[1];
-        fromZipCodeLocation.right = fromZipCodeLocation.left + tvFromZipcode.getWidth();
-        fromZipCodeLocation.bottom = fromZipCodeLocation.top + tvFromZipcode.getHeight();
+        Rect fromZipCodeLocation = new Rect(fromZipLoc_int[0],
+                fromZipLoc_int[1],
+                fromZipLoc_int[0] + tvFromZipcode.getWidth(),
+                fromZipLoc_int[1] + tvFromZipcode.getHeight());
 
         return toZipCodeLocation.contains((int) x, toZipCodeLocation.centerY())
                 || fromZipCodeLocation.contains((int) x, fromZipCodeLocation.centerY());

@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.miami.moveforless.R;
@@ -77,7 +78,9 @@ public final class DetailAddressPopupWindow {
         mView.measure(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams
                 .WRAP_CONTENT);
 
-        int rootHeight = mView.getMeasuredHeight();
+        int margin = ((RelativeLayout.LayoutParams) mUpImageView.getLayoutParams()).bottomMargin;
+
+        int rootHeight = mHelpTextView.getMeasuredHeight() + mUpImageView.getMeasuredHeight() - margin;
         int rootWidth = mView.getMeasuredWidth();
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
@@ -85,6 +88,7 @@ public final class DetailAddressPopupWindow {
 
         int screenWidth = displaymetrics.widthPixels;
         int screenHeight = displaymetrics.heightPixels;
+
 
         int yPos = anchorRect.top - rootHeight;
 
@@ -105,7 +109,7 @@ public final class DetailAddressPopupWindow {
 
         final int arrowWidth = arrow.getMeasuredWidth();
 
-        if (!onTop){
+        if (!onTop) {
             hideArrow.setRotation(180);
         }
 
@@ -115,28 +119,29 @@ public final class DetailAddressPopupWindow {
 
         hideArrow.setVisibility(View.INVISIBLE);
 
-        int xPos = 0;
+        mView.measure(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams
+                .WRAP_CONTENT);
+        yPos = anchorRect.top - mView.getMeasuredHeight();
+
+        int xPos;
 
         if (anchorRect.left + rootWidth > screenWidth) {
             xPos = (screenWidth - rootWidth);
-        }
-        else if (anchorRect.left - (rootWidth / 2) < 0) {
+        } else if (anchorRect.left - (rootWidth / 2) < 0) {
             xPos = anchorRect.left;
-        }
-        else {
+        } else {
             xPos = (anchorRect.centerX() - (rootWidth / 2));
         }
 
         param.leftMargin = (requestedX - xPos) - (arrowWidth / 2);
 
         if (onTop)
-            mHelpTextView.setMaxHeight(anchorRect.top - anchorRect.height());
-         else
+            mHelpTextView.setMaxHeight(anchorRect.centerY() - anchorRect.height());
+        else
             mHelpTextView.setMaxHeight(screenHeight - yPos);
 
         mWindow.showAtLocation(anchor, Gravity.NO_GRAVITY, xPos, yPos);
         mView.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.float_anim));
-
     }
 
     private void preShow() {
