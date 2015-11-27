@@ -20,6 +20,7 @@ import com.miami.moveforless.database.DatabaseController;
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.miami.moveforless.utils.TimeUtil;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -113,7 +114,8 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
 
     private boolean generatedData() {
         jobModels = new ArrayList<>();
-//        DatabaseController.getInstance().dropDataBase(App.getAppContext());
+
+        Delete.tables(JobResponse.class);
 
         JobResponse jobModel = new JobResponse();
         jobModel.isActive = 1;

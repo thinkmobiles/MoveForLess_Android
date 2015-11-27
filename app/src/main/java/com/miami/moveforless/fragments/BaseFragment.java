@@ -4,27 +4,20 @@ package com.miami.moveforless.fragments;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import com.miami.moveforless.R;
-import com.miami.moveforless.dialogs.ConfirmDialog;
 import com.miami.moveforless.dialogs.ErrorDialog;
 import com.miami.moveforless.dialogs.InfoDialog;
-import com.miami.moveforless.utils.BitmapUtils;
 import com.miami.moveforless.utils.RxUtils;
 
-import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
 import rx.Subscription;
@@ -43,7 +36,7 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void setupViews(Bundle _savedInstanceState);
 
     protected LayoutInflater mLayoutInflater;
-    protected ProgressDialog mLoadingialog;
+    protected ProgressDialog mLoadingDialog;
 
     @Nullable
     @Override
@@ -93,14 +86,14 @@ public abstract class BaseFragment extends Fragment {
         showLoadingDialog(strLoading);
     }
     protected void showLoadingDialog(String _message) {
-        mLoadingialog = new ProgressDialog(getContext());
-        mLoadingialog.setMessage(_message);
-        mLoadingialog.show();
+        mLoadingDialog = new ProgressDialog(getContext());
+        mLoadingDialog.setMessage(_message);
+        mLoadingDialog.show();
     }
 
     protected void hideLoadingDialog() {
-        if (mLoadingialog != null && mLoadingialog.isShowing())
-            mLoadingialog.dismiss();
+        if (mLoadingDialog != null && mLoadingDialog.isShowing())
+            mLoadingDialog.dismiss();
     }
 
     public void onBackPressed() {

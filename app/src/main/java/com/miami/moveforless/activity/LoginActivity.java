@@ -14,14 +14,20 @@ import com.miami.moveforless.Exceptions.ConnectionException;
 import com.miami.moveforless.R;
 import com.miami.moveforless.customviews.CustomProgressBar;
 import com.miami.moveforless.database.DatabaseController;
+import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.dialogs.ConfirmDialog;
 import com.miami.moveforless.dialogs.WarningDialog;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
 import com.miami.moveforless.rest.RestClient;
+import com.miami.moveforless.rest.response.JobResponse;
+import com.miami.moveforless.rest.response.MoveSizeResponse;
+import com.miami.moveforless.rest.response.NumberMenResponse;
 import com.miami.moveforless.utils.RxUtils;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -118,12 +124,14 @@ public class LoginActivity extends BaseActivity {
                 RestClient.getInstance().getListNumberMen(),
                 RestClient.getInstance().getListMoveSize(),
                 (jobResponses1, listNumberMenResponse, listMoveSizeResponse) -> {
-                    DatabaseController.getInstance().dropDataBase(App.getAppContext());
-//                    saveInDatabase(jobResponses1);
-//                    saveInDatabase(listNumberMenResponse.number_men);
-//                    saveInDatabase(listMoveSizeResponse.move_sizes);
-
-                    return jobResponses1 != null && listNumberMenResponse != null && listMoveSizeResponse != null;
+                    if (jobResponses1 != null  && listNumberMenResponse != null && listMoveSizeResponse != null) {
+                        Delete.tables(JobResponse.class, NumberMenResponse.class, MoveSizeResponse.class);
+                        saveInDatabase(jobResponses1);
+                        saveInDatabase(listNumberMenResponse.number_men);
+                        saveInDatabase(listMoveSizeResponse.move_sizes);
+                        return true;
+                    }
+                    return false;
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

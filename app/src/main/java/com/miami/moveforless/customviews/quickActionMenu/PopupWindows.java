@@ -54,7 +54,7 @@ public class PopupWindows {
 	/**
 	 * On pre show
 	 */
-	protected void preShow(View _anchor) {
+	protected void preShow(View _anchor, int _width, int _height) {
 		if (mRootView == null) 
 			throw new IllegalStateException("setContentView was not called with a view to display.");
 	
@@ -65,8 +65,8 @@ public class PopupWindows {
 		else 
 			mWindow.setBackgroundDrawable(mBackground);
 
-		mWindow.setWidth(_anchor.getMeasuredWidth());
-		mWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+		mWindow.setWidth(_width);
+		mWindow.setHeight(_height);
 		mWindow.setTouchable(true);
 		mWindow.setFocusable(true);
 		mWindow.setOutsideTouchable(true);

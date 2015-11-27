@@ -18,6 +18,10 @@ import android.widget.TextView;
 
 import com.miami.moveforless.R;
 import com.miami.moveforless.customviews.CustomSpinner;
+import com.miami.moveforless.customviews.quickActionMenu.ActionItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -112,6 +116,11 @@ public class QuestionnaireRow extends LinearLayout {
 
         if (sSpinner != null) {
             sSpinner.setText(mModel.getDefaultSpinnerText());
+            List<ActionItem> items = new ArrayList<>();
+            for (int i = 0; i <mModel.getDropdownItems().size(); i++) {
+                items.add(new ActionItem(i, mModel.getDropdownItems().get(i), 0));
+            }
+            sSpinner.setDropDownItems(items);
         }
 
         if (etInputNumber != null) {

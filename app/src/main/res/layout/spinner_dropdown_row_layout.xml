@@ -18,7 +18,7 @@
         android:id="@+id/tvTitle_SDRL"
         style="@style/BaseTextStyle"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
         android:layout_weight="1"
@@ -32,9 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:paddingBottom="7dp"
-        android:paddingRight="10dp"
-        android:paddingTop="7dp"
+
+        android:paddingRight="12dp"
         android:src="@drawable/ic_spinner_up"
         android:visibility="invisible" />
 

@@ -96,7 +96,7 @@ public class QuickAction extends PopupWindows {
      * Show quickaction popup. Popup is automatically positioned, on top or bottom of anchor view.
      */
     public void show(View anchor) {
-        preShow(anchor);
+
         boolean onTop = false;
         int xPos = 0, yPos = 0, arrowPos = 0;
 
@@ -110,7 +110,7 @@ public class QuickAction extends PopupWindows {
         mRootView.measure(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
         mRootView.getLayoutParams().width = anchor.getMeasuredWidth();
-
+        mRootView.getLayoutParams().height = 200;
         rootHeight = mRootView.getMeasuredHeight();
 
         Display display = mWindowManager.getDefaultDisplay();
@@ -123,7 +123,7 @@ public class QuickAction extends PopupWindows {
             onTop = true;
         }
         xPos = anchorRect.left;
-        yPos = calculateVerticalPosition(anchorRect, rootHeight, onTop);
+        yPos = calculateVerticalPosition(anchorRect, screenHeight, onTop);
 
         if (!onTop) mWindow.setAnimationStyle(R.style.Animations_PopUpMenu_Center);
         else mWindow.setAnimationStyle(R.style.Animations_PopDownMenu_Center);
@@ -141,14 +141,24 @@ public class QuickAction extends PopupWindows {
             params.gravity = Gravity.BOTTOM;
         }
 
+        preShow(anchor, anchor.getMeasuredWidth(), rootHeight);
         mWindow.showAtLocation(anchor, Gravity.NO_GRAVITY, xPos, yPos);
     }
 
-    private int calculateVerticalPosition(Rect anchorRect, int rootHeight, boolean onTop) {
+    private int calculateVerticalPosition(Rect anchorRect, int screenHeight, boolean onTop) {
         int y;
 
-        if (onTop) y = anchorRect.top;
-        else y = anchorRect.bottom - rootHeight;
+        if (!onTop) {
+            if (anchorRect.bottom - rootHeight < 0) {
+                y = 0;
+                rootHeight = anchorRect.top;
+            } else y = anchorRect.bottom - rootHeight;
+        } else {
+            y = anchorRect.top;
+            if (anchorRect.top + rootHeight > screenHeight) {
+                rootHeight = screenHeight - anchorRect.top;
+            }
+        }
 
         return y;
     }
