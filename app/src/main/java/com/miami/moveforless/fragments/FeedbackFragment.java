@@ -28,10 +28,6 @@ import rx.Subscription;
 public class FeedbackFragment extends BaseJobDetailFragment implements TextWatcher {
     @BindString(R.string.send_feedback_successfull)
     String strSendSuccessfull;
-    @BindColor(R.color.cyan_dark)
-    int cyanDark;
-    @BindColor(R.color.cyan_light)
-    int cyanLight;
     @Bind(R.id.btnSend_FF)
     Button btnSend;
     @Bind(R.id.btnClaim_FF)

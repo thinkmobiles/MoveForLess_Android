@@ -5,7 +5,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.miami.moveforless.R;
 import com.miami.moveforless.managers.SharedPrefManager;
 import com.miami.moveforless.rest.ErrorParser;
@@ -33,7 +32,7 @@ public class SettingsFragment extends BaseFragment {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_setting;
+        return R.layout.fragment_settings;
     }
 
     @Override

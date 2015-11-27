@@ -14,6 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:textColor="@color/cyan_ultra_dark"
+        android:textSize="24sp"
         android:text="@string/invoice_successfull" />
 
     <LinearLayout

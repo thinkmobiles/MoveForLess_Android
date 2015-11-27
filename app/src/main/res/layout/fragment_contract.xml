@@ -6,7 +6,6 @@
     android:gravity="top"
     android:paddingLeft="@dimen/job_content_padding_left_right"
     android:paddingRight="@dimen/job_content_padding_left_right"
-    android:paddingBottom="@dimen/job_content_padding_bottom"
     android:background="@drawable/job_details_background"
     android:orientation="horizontal">
 
@@ -44,6 +43,7 @@
         android:layout_gravity="right|bottom"
         android:text="@string/next"
         android:enabled="false"
+        android:layout_marginBottom="@dimen/job_content_padding_bottom"
         style="@style/NavigateButtonStyle"
         />
 

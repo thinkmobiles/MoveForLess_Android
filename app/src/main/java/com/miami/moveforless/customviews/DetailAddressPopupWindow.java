@@ -80,7 +80,7 @@ public final class DetailAddressPopupWindow {
 
         int margin = ((RelativeLayout.LayoutParams) mUpImageView.getLayoutParams()).bottomMargin;
 
-        int rootHeight = mHelpTextView.getMeasuredHeight() + mUpImageView.getMeasuredHeight() - margin;
+        int rootHeight = mView.getMeasuredHeight() - mUpImageView.getMeasuredHeight() - margin;
         int rootWidth = mView.getMeasuredWidth();
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
@@ -118,10 +118,6 @@ public final class DetailAddressPopupWindow {
         ViewGroup.MarginLayoutParams param = (ViewGroup.MarginLayoutParams) arrow.getLayoutParams();
 
         hideArrow.setVisibility(View.INVISIBLE);
-
-        mView.measure(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams
-                .WRAP_CONTENT);
-        yPos = anchorRect.top - mView.getMeasuredHeight();
 
         int xPos;
 

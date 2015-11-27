@@ -6,6 +6,7 @@ import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.miami.moveforless.rest.response.MoveSizeResponse;
 import com.miami.moveforless.rest.response.NumberMenResponse;
+import com.raizlabs.android.dbflow.structure.Model;
 
 import java.util.List;
 
@@ -26,5 +27,5 @@ public interface AbstractControllerData {
 
     void updateJob(JobResponse _jobResponse);
 
-    void dropDataBase(Context _context);
+    void dropDataBase(Class<? extends Model>... tables);
 }

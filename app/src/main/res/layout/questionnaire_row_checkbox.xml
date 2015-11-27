@@ -18,7 +18,7 @@
 
     <RadioGroup
         android:id="@+id/rgCheckBoxes"
-        android:layout_width="wrap_content"
+        android:layout_width="225dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal">
@@ -27,6 +27,7 @@
             android:id="@+id/cbYes"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="left"
             style="@style/BaseRadioButtonStyle"
             android:text="@string/yes" />
 

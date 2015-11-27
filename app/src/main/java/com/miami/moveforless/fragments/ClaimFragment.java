@@ -38,8 +38,6 @@ import rx.Subscription;
 public class ClaimFragment extends BaseJobDetailFragment implements TextWatcher{
     @BindString(R.string.send_claim_successfull)
     String strSendSuccessfull;
-    @BindColor(R.color.cyan_dark) int cyanDark;
-    @BindColor(R.color.cyan_light) int cyanLight;
     @Bind(R.id.photos_container_FF)
     PhotoLayout mPhotosContainer;
     @Bind(R.id.btnAdd_FC)

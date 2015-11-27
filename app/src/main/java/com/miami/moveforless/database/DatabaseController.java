@@ -12,6 +12,8 @@ import com.raizlabs.android.dbflow.sql.builder.Condition;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.OrderBy;
 import com.raizlabs.android.dbflow.sql.language.Select;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.raizlabs.android.dbflow.structure.Model;
 
 import java.util.List;
 
@@ -63,9 +65,8 @@ public class DatabaseController implements AbstractControllerData {
     }
 
     @Override
-    public void dropDataBase(Context _context) {
-        _context.deleteDatabase(MoveForLessDatabase.NAME +".db");
-//        Delete.table(JobModel.class);
+    public void dropDataBase(Class<? extends Model>... tables) {
+        Delete.tables(tables);
     }
 
 

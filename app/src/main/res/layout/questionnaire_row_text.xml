@@ -23,17 +23,18 @@
 
         <RadioGroup
             android:id="@+id/rgCheckBoxes"
-            android:layout_width="wrap_content"
+            android:layout_width="225dp"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/questionnaire_text_margin_top_bottom"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="0dp">
 
             <RadioButton
                 android:id="@+id/cbYes"
                 style="@style/BaseRadioButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
+                android:layout_gravity="left|top"
                 android:text="@string/yes" />
 
             <RadioButton
@@ -53,13 +54,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="150dp"
+        android:layout_marginRight="200dp"
         android:minLines="2"
         android:hint="Write a notes"
         android:textColor="@color/cyan_dark"
         android:textColorHint="@color/grey"
         android:background="@drawable/form_borders_gray"
         android:gravity="top|left"
-        style="@style/BaseEditTextStyle"
+        style="@style/ReviewEditTextStyle"
         />
 </LinearLayout>
