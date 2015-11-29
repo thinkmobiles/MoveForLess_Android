@@ -8,7 +8,8 @@ import com.miami.moveforless.database.model.JobModel;
  * Created by SetKrul on 30.10.2015.
  */
 public class SubItemViewHolder  extends AbstractViewHolder {
-//    private final TextView tvText;
+
+
 
     public SubItemViewHolder(View itemView) {
         super(itemView);

@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="40dp"
-    android:paddingRight="40dp"
     android:background="?attr/selectableItemBackground"
-    android:clickable="true">
+    android:clickable="true"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_gravity="center_vertical"
         android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -22,24 +22,25 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/abc_btn_check_to_on_mtrl_015"/>
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_spinner_up"/>
 
         <TextView
+            android:id="@+id/tvHeaderJob_SSH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:text="SubActive"
-            android:textColor="#006750"
+            android:textColor="@color/cyan_dark"
             android:textSize="24sp"
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/tvHeaderJobSize_SSH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(3)"
-            android:textColor="@android:color/holo_orange_dark"
-            android:textSize="20sp"
+            android:textColor="@color/yellow"
+            android:textSize="24sp"
             android:textStyle="bold"/>
 
     </LinearLayout>

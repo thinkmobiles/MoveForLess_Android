@@ -1,8 +1,6 @@
 package com.miami.moveforless.database;
 
 
-import android.content.Context;
-
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.rest.response.JobResponse;
 import com.miami.moveforless.rest.response.MoveSizeResponse;
@@ -10,9 +8,7 @@ import com.miami.moveforless.rest.response.NumberMenResponse;
 import com.miami.moveforless.utils.TimeUtil;
 import com.raizlabs.android.dbflow.sql.builder.Condition;
 import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.OrderBy;
 import com.raizlabs.android.dbflow.sql.language.Select;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.raizlabs.android.dbflow.structure.Model;
 
 import java.util.List;
@@ -64,8 +60,9 @@ public class DatabaseController implements AbstractControllerData {
         _jobResponse.update();
     }
 
+    @SafeVarargs
     @Override
-    public void dropDataBase(Class<? extends Model>... tables) {
+    public final void dropDataBase(Class<? extends Model>... tables) {
         Delete.tables(tables);
     }
 

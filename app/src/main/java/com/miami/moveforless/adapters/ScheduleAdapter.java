@@ -35,24 +35,24 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
 
     @Override
     public int getItemViewType(int _position) {
-        if (getItem(_position).mSub) {
-            return ConstantHolder.SubItem;
-        }
         if (getItem(_position).mSub && getItem(_position).child != null) {
-            return ConstantHolder.SubHeader;
+            return ConstantHolder.SUB_HEADER;
+        } else if (getItem(_position).mSub) {
+            return ConstantHolder.SUB_ITEM;
         }
+
         if (getItem(_position).isActive != null && getItem(_position).isActive == 1) {
             if (getItem(_position).child != null) {
-                return ConstantHolder.Active_Header;
+                return ConstantHolder.ACTIVE_HEADER;
             } else {
-                return ConstantHolder.Active_Item;
+                return ConstantHolder.ACTIVE_ITEM;
             }
         }
+
         if (getItem(_position).child == null) {
-            return ConstantHolder.Item;
-        }
-        else {
-            return ConstantHolder.Header;
+            return ConstantHolder.ITEM;
+        } else {
+            return ConstantHolder.HEADER;
         }
     }
 
@@ -60,22 +60,24 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
     public AbstractViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View itemView;
         switch (viewType) {
-            case ConstantHolder.Item:
+            case ConstantHolder.ITEM:
                 itemView = mInflater.inflate(R.layout.schedule_item, parent, false);
                 return new ItemViewHolder(itemView);
-            case ConstantHolder.Header:
+            case ConstantHolder.HEADER:
                 itemView = mInflater.inflate(R.layout.schedule_header, parent, false);
                 return new HeaderViewHolder(itemView);
-            case ConstantHolder.SubHeader:
+            case ConstantHolder.SUB_HEADER:
                 itemView = mInflater.inflate(R.layout.schedule_sub_header, parent, false);
                 return new SubHeaderViewHolder(itemView);
-            case ConstantHolder.SubItem:
-                itemView = mInflater.inflate(R.layout.schedule_sub_item, parent, false);
-                return new SubItemViewHolder(itemView);
-            case ConstantHolder.Active_Header:
+            case ConstantHolder.SUB_ITEM:
+//                itemView = mInflater.inflate(R.layout.schedule_sub_item, parent, false);
+//                return new SubItemViewHolder(itemView);
+                itemView = mInflater.inflate(R.layout.schedule_item, parent, false);
+                return new ItemViewHolder(itemView);
+            case ConstantHolder.ACTIVE_HEADER:
                 itemView = mInflater.inflate(R.layout.schedule_active_header, parent, false);
                 return new ActiveHeaderViewHolder(itemView);
-            case ConstantHolder.Active_Item:
+            case ConstantHolder.ACTIVE_ITEM:
                 itemView = mInflater.inflate(R.layout.schedule_active_item, parent, false);
                 return new ActiveItemViewHolder(itemView);
             default:

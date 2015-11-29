@@ -65,7 +65,7 @@ public class JobModel extends BaseQueryModel {
     public String getPickup_date() {
         if (!TextUtils.isEmpty(RequiredPickupDate)) {
             Long intUnixTime = Long.valueOf(pickup_date);
-            return DateFormat.format("MM/dd", intUnixTime).toString();
+            return DateFormat.format("MM/dd", intUnixTime * 1000L).toString();
         }
 
         return "";
@@ -74,34 +74,44 @@ public class JobModel extends BaseQueryModel {
     public String getRequiredPickupDate() {
         if (!TextUtils.isEmpty(RequiredPickupDate)) {
             Long intUnixTime = Long.valueOf(RequiredPickupDate);
-            return DateFormat.format("hh:mmaa", intUnixTime).toString();
+            return DateFormat.format("hh:mmaa", intUnixTime * 1000L).toString();
         }
 
         return "";
     }
 
-    public String getFullDate(){
-        if (!TextUtils.isEmpty(pickup_date)){
+    public String getFullDate() {
+        if (!TextUtils.isEmpty(pickup_date)) {
             Long intUnixTime = Long.valueOf(pickup_date);
-            return DateFormat.format("E MM/dd/yyyy", intUnixTime).toString();
+            return DateFormat.format("E MM/dd/yyyy", intUnixTime * 1000L).toString();
         }
 
         return "";
     }
 
-    public int getDay(){
-        if (!TextUtils.isEmpty(pickup_date)){
+    public int getDay() {
+        if (!TextUtils.isEmpty(pickup_date)) {
             Long intUnixTime = Long.valueOf(pickup_date);
 
-            return Integer.parseInt(DateFormat.format("dd", intUnixTime).toString());
+            return Integer.parseInt(DateFormat.format("dd", intUnixTime * 1000L).toString());
         }
         return 0;
     }
 
-    public String getChildSize(){
-        if (child != null){
+    public String getChildSize() {
+        if (child != null) {
             return "(" + child.size() + ")";
         }
         return "";
+    }
+
+    public String getFutureChildSize() {
+        int size = 0;
+        if (child != null) {
+            for (JobModel jobModel : child) {
+                size += jobModel.child.size();
+            }
+        }
+        return "(" + size + ")";
     }
 }

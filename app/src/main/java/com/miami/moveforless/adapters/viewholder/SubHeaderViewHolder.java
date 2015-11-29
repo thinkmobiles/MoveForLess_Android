@@ -1,7 +1,9 @@
 package com.miami.moveforless.adapters.viewholder;
 
 import android.view.View;
+import android.widget.TextView;
 
+import com.miami.moveforless.R;
 import com.miami.moveforless.database.model.JobModel;
 
 /**
@@ -9,16 +11,21 @@ import com.miami.moveforless.database.model.JobModel;
  */
 public class SubHeaderViewHolder extends AbstractViewHolder {
 
-//    private final TextView tvText;
+    private TextView tvHeaderJob;
+    private TextView tvHeaderJobSize;
 
     public SubHeaderViewHolder(View itemView) {
         super(itemView);
-//        tvText = (TextView) itemView.findViewById(R.id.tvText);
+        tvHeaderJob = (TextView) itemView.findViewById(R.id.tvHeaderJob_SSH);
+        tvHeaderJobSize = (TextView) itemView.findViewById(R.id.tvHeaderJobSize_SSH);
     }
 
     @Override
     public void bind(JobModel model) {
-
+        if (model != null) {
+            tvHeaderJob.setText(model.title);
+            tvHeaderJobSize.setText(model.getChildSize());
+        }
     }
 
 

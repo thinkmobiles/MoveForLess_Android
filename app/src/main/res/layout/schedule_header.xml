@@ -39,7 +39,7 @@
                 android:id="@+id/tvHeaderJobSize_HH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/cyan_dark"
+                android:textColor="@color/yellow"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
 

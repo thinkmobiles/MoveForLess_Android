@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.miami.moveforless.App;
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ScheduleAdapter;
@@ -28,7 +27,6 @@ import com.roomorama.caldroid.CaldroidListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -61,14 +59,10 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private CaldroidFragment dialogCaldroidFragment;
     private Date dateNow;
     private CaldroidListener listener;
-    private List<JobResponse> jobResponses;
 
     private List<JobModel> jobModels;
-    private List<JobModel> jobModelsSorted = new ArrayList<>();
-    Integer currentDate = null;
-    JobModel header = null;
-    JobModel headerFuture = null;
-    static JobModel currentHeader;
+    private static JobModel currentHeader;
+    private JobModel futureHeader;
 
     @Override
     protected int getLayoutResource() {
@@ -85,14 +79,12 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .flatMap(aBoolean -> Observable.just(getData()))
-                    .map(models -> createExpandableList(models))
+                    .map(this::createExpandableList)
                     .subscribe(jobModels1 -> {
                         mAdapter = new ScheduleAdapter(getActivity(), jobModels1);
                         mRecyclerView.setAdapter(mAdapter);
                     });
-
         }
-
     }
 
     private List<JobModel> createExpandableList(List<JobModel> models) {
@@ -101,43 +93,70 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         Observable.from(models)
                 .subscribe(jobModel -> {
                     if (jobModel.isActive == 1) {
-                        currentHeader = createHeader(jobModel, jobModel.isActive == 1, false);
-                        currentHeader.child.add(jobModel);
-                        sortedJobList.add(0, currentHeader);
-                        return;
+                        addActiveItem(sortedJobList, jobModel);
                     } else {
                         if (sortedJobList.size() == 0) {
                             currentHeader = createHeader(jobModel, false, false);
                             sortedJobList.add(currentHeader);
                         }
-
                         if (jobModel.getDay() == currentHeader.getDay()) {
-                            currentHeader.child.add(jobModel);
+                            addItemIfTheSameDay(sortedJobList, jobModel);
                         } else {
-                            boolean isFuture = jobModel.getDay() > TimeUtil.getNextDay();
+                            boolean isFuture = jobModel.getDay() != TimeUtil.getNextDay()
+                                    && jobModel.getDay() != TimeUtil.getCurrentDay();
                             if (isFuture) {
-                                if (!currentHeader.isFuture) {
-                                    currentHeader = createHeader(jobModel, false, true);
-                                    sortedJobList.add(currentHeader);
+                                if (!currentHeader.isFuture && futureHeader == null) {
+                                    futureHeader = createHeader(jobModel, false, true);
+                                    futureHeader.mExpand = true;
+                                    sortedJobList.add(futureHeader);
                                 }
-                                JobModel lastHeader = createHeader(jobModel, false, false);
-                                lastHeader.child.add(jobModel);
-                                currentHeader.child.add(lastHeader);
-                            } else { // if not future and we don`t have a header
-                                currentHeader = createHeader(jobModel, false, false);
-                                currentHeader.child.add(jobModel);
-                                sortedJobList.add(currentHeader);
+                                addFutureItem(sortedJobList, jobModel);
+                            } else {
+                                addItemIfTheNotSameDay(sortedJobList, jobModel);
                             }
                         }
                     }
                 });
+
         return sortedJobList;
+    }
+
+    private void addItemIfTheNotSameDay(List<JobModel> _sortedJobList, JobModel jobModel) {
+        currentHeader = createHeader(jobModel, false, false);
+        currentHeader.child.add(0, jobModel);
+        _sortedJobList.add(currentHeader);
+        _sortedJobList.add(jobModel);
+        jobModel.mSub = true;
+    }
+
+    private void addFutureItem(List<JobModel> _sortedJobList, JobModel jobModel) {
+        currentHeader = createHeader(jobModel, false, false);
+        currentHeader.child.add(0, jobModel);
+        futureHeader.child.add(0, currentHeader);
+        _sortedJobList.add(currentHeader);
+    }
+
+    private void addItemIfTheSameDay(List<JobModel> _sortedJobList, JobModel jobModel) {
+        if (jobModel.getDay() == TimeUtil.getCurrentDay()
+                || jobModel.getDay() == TimeUtil.getNextDay())
+            _sortedJobList.add(jobModel);
+        else
+            jobModel.mSub = true;
+
+        currentHeader.child.add(0, jobModel);
+    }
+
+    private void addActiveItem(List<JobModel> _sortedJobList, JobModel jobModel) {
+        currentHeader = createHeader(jobModel, true, false);
+        currentHeader.child.add(jobModel);
+        currentHeader.mExpand = true;
+        _sortedJobList.add(currentHeader);
+        _sortedJobList.add(jobModel);
     }
 
     private JobModel createHeader(JobModel _model, boolean _isActive, boolean _isFuture) {
         JobModel header = new JobModel();
         header.child = new ArrayList<>();
-
         if (_isActive) {
             header.isActive = 1;
         } else if (_isFuture) {
@@ -146,11 +165,16 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         } else {
             header.pickup_date = _model.pickup_date;
 
-            if (TimeUtil.getCurrentDay() == _model.getDay())
+            if (TimeUtil.getCurrentDay() == _model.getDay()) {
                 header.title = "Today " + _model.getFullDate();
-            else if (TimeUtil.getNextDay() == _model.getDay())
+                header.mExpand = true;
+            } else if (TimeUtil.getNextDay() == _model.getDay()) {
                 header.title = "Tomorrow " + _model.getFullDate();
-
+                header.mExpand = true;
+            } else {
+                header.title = _model.getFullDate();
+                header.mSub = true;
+            }
         }
         return header;
     }
@@ -158,36 +182,10 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private List<JobModel> getData() {
         jobModels = DatabaseController.getInstance().getListJob();
 
-
-
-        /*
-        for (JobModel job : jobModels) {
-            if (job.isActive == 1) {
-                JobModel headerActive = new JobModel();
-                headerActive.pickup_date = job.pickup_date;
-                headerActive.isActive = 1;
-                headerActive.child = new ArrayList<>();
-                headerActive.child.add(job);
-                jobModelsSorted.add(headerActive);
-            } else {
-                if (currentDate == null) {
-                    currentDate = job.getDay();
-                }
-                if (currentDate == job.getDay()) {
-                    dayControl(job);
-                } else {
-                    currentDate = job.getDay();
-                    header = null;
-                    dayControl(job);
-                }
-            }
-        }*/
         return jobModels;
     }
 
     private boolean generatedData() {
-//        jobModels = new ArrayList<>();
-
         Delete.tables(JobResponse.class);
 
         JobResponse jobModel = new JobResponse();
@@ -200,12 +198,11 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         jobModel.from_phone = "783-223-5111";
         jobModel.from_zipcode = "31522";
         jobModel.to_zipcode = "33525";
-        jobModel.pickup_date = "1448091900000";
+        jobModel.pickup_date = "1441835191";
         jobModel.status_slug = "assign";
         jobModel.post_title = "LD025135";
-        jobModel.RequiredPickupDate = "1448091900000";
+        jobModel.RequiredPickupDate = "1449885191";
         jobModel.save();
-//        jobModel.insert();
 
         for (int i = 0; i < 2; i++) {
             JobResponse jobModelToday = new JobResponse();
@@ -218,10 +215,10 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             jobModelToday.from_phone = "326-562-891" + i;
             jobModelToday.from_zipcode = "31522";
             jobModelToday.to_zipcode = "33525";
-            jobModelToday.pickup_date = "1448523900000";
+            jobModelToday.pickup_date = "1448835191";
             jobModelToday.status_slug = "assign";
             jobModelToday.post_title = "LD02513" + i;
-            jobModelToday.RequiredPickupDate = "1448523900000";
+            jobModelToday.RequiredPickupDate = "1448835191";
             jobModelToday.save();
         }
 
@@ -236,10 +233,10 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             jobModelFuture.from_phone = "456-312-8945" + i;
             jobModelFuture.from_zipcode = "31522";
             jobModelFuture.to_zipcode = "33525";
-            jobModelFuture.pickup_date = "1448610300000";
+            jobModelFuture.pickup_date = "1448885191";
             jobModelFuture.status_slug = "assign";
             jobModelFuture.post_title = "LD02525" + i;
-            jobModelFuture.RequiredPickupDate = "1448610300000";
+            jobModelFuture.RequiredPickupDate = "1448885191";
             jobModelFuture.save();
         }
 
@@ -254,45 +251,68 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             jobModelFuture2.from_phone = "456-312-8945" + i;
             jobModelFuture2.from_zipcode = "31522";
             jobModelFuture2.to_zipcode = "33525";
-            jobModelFuture2.pickup_date = "1448783100000";
+            jobModelFuture2.pickup_date = "1449885191";
             jobModelFuture2.status_slug = "assign";
             jobModelFuture2.post_title = "LD02535" + i;
-            jobModelFuture2.RequiredPickupDate = "1448783100000";
+            jobModelFuture2.RequiredPickupDate = "1449885191";
             jobModelFuture2.save();
         }
+
+        for (int i = 0; i < 3; i++) {
+            JobResponse jobModelFuture2 = new JobResponse();
+            jobModelFuture2.isActive = 0;
+            jobModelFuture2.from_fullname = "Mart " + i;
+            jobModelFuture2.from_address = "from some address";
+            jobModelFuture2.to_address = "to some address";
+            jobModelFuture2.from_city = "From some City";
+            jobModelFuture2.to_city = "To some City";
+            jobModelFuture2.from_phone = "456-312-8945" + i;
+            jobModelFuture2.from_zipcode = "31522";
+            jobModelFuture2.to_zipcode = "33525";
+            jobModelFuture2.pickup_date = "1459885191";
+            jobModelFuture2.status_slug = "assign";
+            jobModelFuture2.post_title = "LD02535" + i;
+            jobModelFuture2.RequiredPickupDate = "1449885191";
+            jobModelFuture2.save();
+        }
+
+        for (int i = 0; i < 2; i++) {
+            JobResponse jobModelFuture2 = new JobResponse();
+            jobModelFuture2.isActive = 0;
+            jobModelFuture2.from_fullname = "Mart " + i;
+            jobModelFuture2.from_address = "from some address";
+            jobModelFuture2.to_address = "to some address";
+            jobModelFuture2.from_city = "From some City";
+            jobModelFuture2.to_city = "To some City";
+            jobModelFuture2.from_phone = "456-312-8945" + i;
+            jobModelFuture2.from_zipcode = "31522";
+            jobModelFuture2.to_zipcode = "33525";
+            jobModelFuture2.pickup_date = "1559885191";
+            jobModelFuture2.status_slug = "assign";
+            jobModelFuture2.post_title = "LD02535" + i;
+            jobModelFuture2.RequiredPickupDate = "1449885191";
+            jobModelFuture2.save();
+        }
+
+        for (int i = 0; i < 1; i++) {
+            JobResponse jobModelFuture2 = new JobResponse();
+            jobModelFuture2.isActive = 0;
+            jobModelFuture2.from_fullname = "Mart " + i;
+            jobModelFuture2.from_address = "from some address";
+            jobModelFuture2.to_address = "to some address";
+            jobModelFuture2.from_city = "From some City";
+            jobModelFuture2.to_city = "To some City";
+            jobModelFuture2.from_phone = "456-312-8945" + i;
+            jobModelFuture2.from_zipcode = "31522";
+            jobModelFuture2.to_zipcode = "33525";
+            jobModelFuture2.pickup_date = "1449989191";
+            jobModelFuture2.status_slug = "assign";
+            jobModelFuture2.post_title = "LD02535" + i;
+            jobModelFuture2.RequiredPickupDate = "1449885191";
+            jobModelFuture2.save();
+        }
+
         return true;
-    }
-
-    private void dayControl(JobModel job) {
-        if (TimeUtil.getCurrentDay() == job.getDay()) {
-            addDay(job);
-        } else if (TimeUtil.getNextDay() == job.getDay()) {
-            addDay(job);
-        } else {
-            addFuture(job);
-        }
-    }
-
-    private void addFuture(JobModel job) {
-//        if (headerFuture == null) {
-//        headerFuture = new JobModel();
-//
-//        } else {
-//
-//        }
-    }
-
-    private void addDay(JobModel job) {
-        if (header == null) {
-            header = new JobModel();
-            header.pickup_date = job.pickup_date;
-            header.child = new ArrayList<>();
-            header.child.add(job);
-            jobModelsSorted.add(header);
-        } else {
-            header.child.add(job);
-            jobModelsSorted.add(header);
-        }
     }
 
 

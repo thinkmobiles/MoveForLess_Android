@@ -41,6 +41,8 @@ public class ItemViewHolder extends AbstractViewHolder {
 
     @Override
     public void bind(JobModel model) {
+//        if (model.mSub)
+//            itemView.setPadding(400, 0, 20, 0);
         mJobModel = model;
         tvFullname.setText(model.from_fullname);
         tvPostTitle.setText(model.post_title);
@@ -76,14 +78,14 @@ public class ItemViewHolder extends AbstractViewHolder {
     }
 
 
-    private void tvToZipCodeClicked(){
+    private void tvToZipCodeClicked() {
         DetailAddressPopupWindow toPopup = new DetailAddressPopupWindow(App.getAppContext(), mJobModel
                 .to_city + " " +
                 mJobModel.to_address);
         toPopup.show(tvToZipcode);
     }
 
-    private void tvFromZipCodeClicked(){
+    private void tvFromZipCodeClicked() {
         DetailAddressPopupWindow fromPopups = new DetailAddressPopupWindow(App.getAppContext(), mJobModel
                 .from_city + " " +
                 mJobModel.from_address);

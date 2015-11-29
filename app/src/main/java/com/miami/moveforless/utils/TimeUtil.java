@@ -1,7 +1,5 @@
 package com.miami.moveforless.utils;
 
-import android.text.format.DateFormat;
-
 import java.util.Calendar;
 
 
@@ -11,14 +9,7 @@ import java.util.Calendar;
 public class TimeUtil {
 
     public static long getUnixTime() {
-        return (int) (System.currentTimeMillis());
-    }
-
-    public static String getDate(String unixTime, String format) {
-
-        Long intUnixTime = Long.valueOf(unixTime);
-
-        return DateFormat.format(format, intUnixTime).toString();
+        return System.currentTimeMillis() / 1000L;
     }
 
     public static int getCurrentDay() {
