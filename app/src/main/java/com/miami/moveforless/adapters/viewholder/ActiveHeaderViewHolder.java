@@ -7,13 +7,11 @@ import com.miami.moveforless.database.model.JobModel;
 /**
  * Created by SetKrul on 25.11.2015.
  */
-public class ActiveHeaderViewHolder  extends AbstractViewHolder {
+public class ActiveHeaderViewHolder extends AbstractViewHolder {
 
-    //    private final TextView tvText;
 
     public ActiveHeaderViewHolder(View itemView) {
         super(itemView);
-//        tvText = (TextView) itemView.findViewById(R.id.tvText);
     }
 
     @Override

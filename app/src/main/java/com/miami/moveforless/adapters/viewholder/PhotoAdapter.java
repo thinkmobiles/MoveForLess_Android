@@ -15,7 +15,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
-
  * Created by klim on 17.11.15.
  */
 public class PhotoAdapter extends ArrayAdapter<Bitmap> {
@@ -40,12 +39,13 @@ public class PhotoAdapter extends ArrayAdapter<Bitmap> {
         return view;
     }
 
-    static class ViewHolder{
+    static class ViewHolder {
         @Bind(R.id.ivImagePlaceholder_PP)
         ImageView ivPhoto;
-        @Bind(R.id.btnDelete_PP)                ImageView btnDelete;
+        @Bind(R.id.btnDelete_PP)
+        ImageView btnDelete;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
     }

@@ -9,12 +9,10 @@ import android.view.ViewGroup;
 import com.miami.moveforless.R;
 import com.miami.moveforless.adapters.viewholder.AbstractViewHolder;
 import com.miami.moveforless.adapters.viewholder.ActiveHeaderViewHolder;
-import com.miami.moveforless.adapters.viewholder.ActiveItemViewHolder;
 import com.miami.moveforless.adapters.viewholder.ConstantHolder;
 import com.miami.moveforless.adapters.viewholder.HeaderViewHolder;
 import com.miami.moveforless.adapters.viewholder.ItemViewHolder;
 import com.miami.moveforless.adapters.viewholder.SubHeaderViewHolder;
-import com.miami.moveforless.adapters.viewholder.SubItemViewHolder;
 import com.miami.moveforless.database.model.JobModel;
 
 import java.util.List;
@@ -38,14 +36,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
         if (getItem(_position).mSub && getItem(_position).child != null) {
             return ConstantHolder.SUB_HEADER;
         }
-
-        if (getItem(_position).isActive != null && getItem(_position).isActive == 1) {
-            if (getItem(_position).child != null) {
-                return ConstantHolder.ACTIVE_HEADER;
-            }
+        else if (getItem(_position).isActive != null && getItem(_position).isActive == 1
+                && getItem(_position).child != null) {
+            return ConstantHolder.ACTIVE_HEADER;
         }
-
-        if (getItem(_position).child == null) {
+        else if (getItem(_position).child == null) {
             return ConstantHolder.ITEM;
         } else {
             return ConstantHolder.HEADER;
