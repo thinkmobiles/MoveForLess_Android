@@ -42,7 +42,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_check"
-                android:tag="Paid or Unpaid"/>
+                android:tag="Paid Status"/>
 
             <Spinner
                 android:id="@+id/spPaidStatusId"

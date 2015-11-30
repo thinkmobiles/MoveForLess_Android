@@ -257,6 +257,7 @@
         <item name="android:textColorHint">@color/grey</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
         <item name="android:background">@android:color/transparent</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_cyan</item>
     </style>
 
 </resources>

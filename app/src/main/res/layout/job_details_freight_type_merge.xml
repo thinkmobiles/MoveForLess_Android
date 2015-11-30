@@ -18,7 +18,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_contract_number"
-                android:tag="Booking Date"/>
+                android:tag="Contract Number"/>
 
             <EditText
                 android:id="@+id/etJobCode"
@@ -47,7 +47,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_group"
-                android:tag="Resource Name"/>
+                android:tag="Lead Source"/>
 
             <Spinner
                 android:id="@+id/spResourceName"
@@ -77,7 +77,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_question_local"
-                android:tag="Move type name"/>
+                android:tag="Move Type"/>
 
             <Spinner
                 android:id="@+id/spMoveTypeName"
@@ -107,7 +107,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_question"
-                android:tag="Move size name"/>
+                android:tag="Move Size"/>
 
             <Spinner
                 android:id="@+id/spMoveSizeName"
