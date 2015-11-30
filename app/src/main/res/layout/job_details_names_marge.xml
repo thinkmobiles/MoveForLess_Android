@@ -18,7 +18,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_agent"
-                android:tag="The person who created the Job"/>
+                android:tag="Agent Name"/>
 
             <EditText
                 android:id="@+id/etAgentName"
@@ -41,7 +41,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_manager"
-                android:tag="Manager of Agent"/>
+                android:tag="Manager Name"/>
 
             <EditText
                 android:id="@+id/etManagerName"
@@ -64,7 +64,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_local"
-                android:tag="Estimator belongs to Company"/>
+                android:tag="Estimator Name"/>
 
             <EditText
                 android:id="@+id/etEstimatorName"
@@ -136,29 +136,6 @@
                 android:tag="movers"/>
             <EditText
                 android:id="@+id/etMovers1Name"
-                style="@style/JobDetailsEditText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/form_borders_gray"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:orientation="horizontal"
-            android:paddingBottom="70dp"
-            android:paddingRight="50dp">
-
-            <com.miami.moveforless.customviews.HelpImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/icn_bag"
-                android:tag="movers"/>
-
-            <EditText
-                android:id="@+id/etMovers2Name"
                 style="@style/JobDetailsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

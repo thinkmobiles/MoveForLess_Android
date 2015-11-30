@@ -18,7 +18,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_estim"
-                android:tag="Local Number Estimate"/>
+                android:tag="Estimate"/>
 
             <EditText
                 android:id="@+id/etLocationNumberEstimate"
@@ -55,7 +55,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_man"
-                android:tag="Men-Hour"/>
+                android:tag="Labor"/>
 
             <EditText
                 android:id="@+id/etLocalLabor"
@@ -101,7 +101,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/icn_car"
-                    android:tag="Number truck"/>
+                    android:tag="Number Truck"/>
 
                 <Spinner
                     android:id="@+id/spNumberTruck"
@@ -208,7 +208,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_finish"
-                android:tag="Actual Total Final"/>
+                android:tag="Actual Total"/>
 
             <EditText
                 android:id="@+id/etActualTotalFinal"

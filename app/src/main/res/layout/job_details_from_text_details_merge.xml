@@ -19,7 +19,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_agent"
-                android:tag="Fullname"/>
+                android:tag="Name"/>
 
             <EditText
                 android:id="@+id/etFromFullName"
@@ -235,7 +235,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/swap_vertical"
-                    android:tag="From Elevator Reservation"/>
+                    android:tag="Elevator Reservation"/>
 
                 <CheckBox
                     android:id="@+id/cbHaveFromElevator"
@@ -345,7 +345,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_state"
-                android:tag="From State"/>
+                android:tag="State"/>
 
             <LinearLayout
                 android:layout_width="0dp"

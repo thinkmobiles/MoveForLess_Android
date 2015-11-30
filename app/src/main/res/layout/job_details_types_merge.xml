@@ -19,7 +19,7 @@
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:src="@drawable/icn_job"
-                android:tag="Moving or Storage or Labor"/>
+                android:tag="Job Type"/>
 
             <com.miami.moveforless.customviews.CustomSpinner
                 android:id="@+id/spJobTypeId"
@@ -53,7 +53,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_cust"
-                android:tag="Business, Residential or Commercial"/>
+                android:tag="Cust Type"/>
 
             <com.miami.moveforless.customviews.CustomSpinner
                 android:id="@+id/spCustTypeId"
@@ -83,7 +83,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_quote"
-                android:tag="Binding or Non-Binding"/>
+                android:tag="Quote Type"/>
 
             <com.miami.moveforless.customviews.CustomSpinner
                 android:id="@+id/spQuoteTypeId"
