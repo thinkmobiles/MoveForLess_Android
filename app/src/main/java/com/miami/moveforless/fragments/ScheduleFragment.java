@@ -63,6 +63,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     private List<JobModel> jobModels;
     private static JobModel currentHeader;
     private JobModel futureHeader;
+    private LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
 
     @Override
     protected int getLayoutResource() {
@@ -409,7 +410,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
                 (_context, _view, _position) -> {
@@ -417,6 +418,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                         if (!mAdapter.getItem(_position).mExpand) {
                             mAdapter.getItem(_position).mExpand = true;
                             mAdapter.addChild(_position + 1, mAdapter.getItem(_position));
+                            scrollRecyclerView(_position);
                         } else {
                             mAdapter.getItem(_position).mExpand = false;
                             for (int i = 0; i < mAdapter.getItem(_position).child.size(); i++) {
@@ -464,5 +466,12 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             }
         }
         return filteredModelList;
+    }
+
+    private void scrollRecyclerView(int position) {
+        int lastItem = mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
+        int sizeChild = mAdapter.getItem(position).child.size();
+        if (sizeChild + position > lastItem)
+            mRecyclerView.scrollToPosition(position + sizeChild);
     }
 }
