@@ -57,16 +57,16 @@ public class QuestionnaireFragment extends BaseJobDetailFragment implements Ques
         scrollView.parallaxViewBackgroundBy(scrollView, ContextCompat.getDrawable(getContext(), R.drawable
                 .job_details_background), .2f);
 
-        questions = createQuestionnaireList();
+//        questions = createQuestionnaireList();
 
-        for (QuestionnaireModel item : questions) {
-            QuestionnaireRow row = new QuestionnaireRow(getContext(), item);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 10, 0, 10);
-            row.setLayoutParams(params);
-            row.setCallBack(this);
-            mQuestionsContainer.addView(row);
-        }
+//        for (QuestionnaireModel item : questions) {
+//            QuestionnaireRow row = new QuestionnaireRow(getContext(), item);
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            params.setMargins(0, 10, 0, 10);
+//            row.setLayoutParams(params);
+//            row.setCallBack(this);
+//            mQuestionsContainer.addView(row);
+//        }
 
         RxUtils.click(btnNext, o -> nextClicked());
 

@@ -17,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/arrow_up"
-            android:background="@drawable/bg_popup"/>
+            android:background="@drawable/bg_popup"
+            android:padding="13dp"/>
 
         <ImageView
             android:id="@+id/arrow_up"
@@ -32,8 +33,8 @@
             android:layout_height="20dp"
             android:layout_below="@+id/text"
             android:layout_marginTop="-5.5dp"
-            android:rotation="180"
-            android:background="@drawable/popup_triangle"/>
+            android:background="@drawable/popup_triangle"
+            android:rotation="180"/>
     </RelativeLayout>
 
 </LinearLayout>

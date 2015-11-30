@@ -3,10 +3,8 @@ package com.miami.moveforless.customviews;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,6 +25,7 @@ import com.miami.moveforless.R;
 
 public final class DetailAddressPopupWindow {
 
+    public static final int MARGIN = 15;
     private WindowManager mWindowManager;
 
     private Context mContext;
@@ -122,9 +121,9 @@ public final class DetailAddressPopupWindow {
         int xPos;
 
         if (anchorRect.left + rootWidth > screenWidth) {
-            xPos = (screenWidth - rootWidth);
+            xPos = screenWidth - MARGIN;
         } else if (anchorRect.left - (rootWidth / 2) < 0) {
-            xPos = anchorRect.left;
+            xPos = MARGIN;
         } else {
             xPos = (anchorRect.centerX() - (rootWidth / 2));
         }

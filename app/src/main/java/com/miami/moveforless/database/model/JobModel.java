@@ -24,7 +24,7 @@ public class JobModel extends BaseQueryModel {
     public boolean isFuture;
 
     @Column
-    public Integer isActive;
+    public int isActive;
 
     @Column
     public String status_slug;

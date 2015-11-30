@@ -9,88 +9,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
-            android:paddingBottom="15dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingLeft="50dp">
 
-            <ImageView
+
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_agent"/>
+                android:src="@drawable/icn_agent"
+                android:tag="Fullname"/>
 
             <EditText
                 android:id="@+id/etToFullName"
                 android:layout_width="0dp"
-                android:layout_weight="4"
                 android:layout_height="40dp"
-                android:layout_marginLeft="35dp"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:background="@drawable/form_borders_gray"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
-            android:paddingBottom="15dp"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/icn_mail"/>
-
-            <EditText
-                android:id="@+id/etToEmail"
-                android:layout_width="0dp"
-                android:layout_weight="4"
-                android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:background="@drawable/form_borders_gray"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
-            android:paddingBottom="15dp"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/icn_phone"/>
-
-            <EditText
-                android:id="@+id/etToPhone"
-                android:layout_width="0dp"
                 android:layout_weight="4"
-                android:layout_height="40dp"
-                android:layout_marginLeft="35dp"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:background="@drawable/form_borders_gray"/>
+                android:background="@drawable/form_borders_gray"
+                android:gravity="center_vertical"/>
 
             <View
                 android:layout_width="0dp"
@@ -108,10 +48,75 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_rss_box"/>
+                android:src="@drawable/icn_mail"
+                android:tag="Email"/>
+
+            <EditText
+                android:id="@+id/etToEmail"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="35dp"
+                android:layout_weight="4"
+                android:background="@drawable/form_borders_gray"
+                android:gravity="center_vertical"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingLeft="50dp">
+
+            <com.miami.moveforless.customviews.HelpImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_phone"
+                android:tag="Phone"/>
+
+            <EditText
+                android:id="@+id/etToPhone"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="35dp"
+                android:layout_weight="4"
+                android:background="@drawable/form_borders_gray"
+                android:gravity="center_vertical"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingLeft="50dp">
+
+            <com.miami.moveforless.customviews.HelpImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_rss_box"
+                android:tag="Cellphone"/>
 
             <EditText
                 android:id="@+id/etToCellPhone"
@@ -139,10 +144,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_fax"/>
+                android:src="@drawable/icn_fax"
+                android:tag="Fax"/>
 
             <EditText
                 android:id="@+id/etToFax"
@@ -170,10 +176,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_home"/>
+                android:src="@drawable/icn_home"
+                android:tag="Address"/>
 
             <EditText
                 android:id="@+id/etToAddress"
@@ -201,10 +208,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_index"/>
+                android:src="@drawable/icn_index"
+                android:tag="Apt"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -223,11 +231,11 @@
                     android:background="@drawable/form_borders_gray"
                     android:gravity="center_vertical"/>
 
-                <ImageView
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="4dp"
-                    android:src="@drawable/swap_vertical"/>
+                    android:src="@drawable/swap_vertical"
+                    android:tag="To Elevator Reservation"/>
 
                 <CheckBox
                     android:id="@+id/cbHaveToElevator"
@@ -280,10 +288,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_domain"/>
+                android:src="@drawable/icn_domain"
+                android:tag="From State"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -302,11 +311,11 @@
                     android:background="@drawable/form_borders_gray"
                     android:gravity="center_vertical"/>
 
-                <ImageView
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/icn_umbrella"/>
+                    android:src="@drawable/icn_umbrella"
+                    android:tag="Move In Insurance"/>
 
                 <CheckBox
                     android:id="@+id/cbIsToInsurance"
@@ -330,10 +339,12 @@
             android:paddingBottom="70dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_state"/>
+                android:src="@drawable/icn_state"
+                android:tag="To State"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -362,33 +373,33 @@
                     android:background="@drawable/form_borders_gray"
                     android:gravity="center_vertical"/>
 
-                <ImageView
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/icn_storage"/>
+                    android:src="@drawable/icn_storage"
+                    android:tag="Storage"/>
 
                 <CheckBox
                     android:id="@+id/cbHaveInventoryTo"
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"/>
 
-                <ImageView
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/icn_man"/>
+                    android:src="@drawable/icn_man"
+                    android:tag="Referral"/>
 
                 <CheckBox
                     android:id="@+id/cbIsReferralTo"
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"/>
 
-                <ImageView
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/icn_refreshes"/>
+                    android:src="@drawable/icn_refreshes"
+                    android:tag="Repeated"/>
 
                 <CheckBox
                     android:id="@+id/cbIsToRepeated"

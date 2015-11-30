@@ -15,10 +15,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_agent"/>
+                android:src="@drawable/icn_agent"
+                android:tag="Fullname"/>
 
             <EditText
                 android:id="@+id/etFromFullName"
@@ -46,10 +47,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_mail"/>
+                android:src="@drawable/icn_mail"
+                android:tag="Email"/>
 
             <EditText
                 android:id="@+id/etFromEmail"
@@ -77,10 +79,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_phone"/>
+                android:src="@drawable/icn_phone"
+                android:tag="Phone"/>
 
             <EditText
                 android:id="@+id/etFromPhone"
@@ -108,10 +111,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_rss_box"/>
+                android:src="@drawable/icn_rss_box"
+                android:tag="Cellphone"/>
 
             <EditText
                 android:id="@+id/etFromCellPhone"
@@ -139,10 +143,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_fax"/>
+                android:src="@drawable/icn_fax"
+                android:tag="Fax"/>
 
             <EditText
                 android:id="@+id/etFromFax"
@@ -170,10 +175,12 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_home"/>
+                android:src="@drawable/icn_home"
+                android:tag="Address"/>
 
             <EditText
                 android:id="@+id/etFromAddress"
@@ -201,10 +208,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_index"/>
+                android:src="@drawable/icn_index"
+                android:tag="Apt"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -223,11 +231,11 @@
                     android:background="@drawable/form_borders_gray"
                     android:gravity="center_vertical"/>
 
-                <ImageView
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="4dp"
-                    android:src="@drawable/swap_vertical"/>
+                    android:src="@drawable/swap_vertical"
+                    android:tag="From Elevator Reservation"/>
 
                 <CheckBox
                     android:id="@+id/cbHaveFromElevator"
@@ -280,10 +288,12 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_domain"/>
+                android:src="@drawable/icn_domain"
+                android:tag="City"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -302,11 +312,12 @@
                     android:background="@drawable/form_borders_gray"
                     android:gravity="center_vertical"/>
 
-                <ImageView
+
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/icn_umbrella"/>
+                    android:src="@drawable/icn_umbrella"
+                    android:tag="Move Out Insurance"/>
 
                 <CheckBox
                     android:id="@+id/cbIsFromInsurance"
@@ -330,10 +341,11 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_state"/>
+                android:src="@drawable/icn_state"
+                android:tag="From State"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -362,33 +374,33 @@
                     android:background="@drawable/form_borders_gray"
                     android:gravity="center_vertical"/>
 
-                <ImageView
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/icn_storage"/>
+                    android:src="@drawable/icn_storage"
+                    android:tag="Storage"/>
 
                 <CheckBox
                     android:id="@+id/cbHaveInventoryFrom"
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"/>
 
-                <ImageView
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/icn_man"/>
+                    android:src="@drawable/icn_man"
+                    android:tag="Referral"/>
 
                 <CheckBox
                     android:id="@+id/cbIsReferralFrom"
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"/>
 
-                <ImageView
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/icn_refreshes"/>
+                    android:src="@drawable/icn_refreshes"
+                    android:tag="Repeated"/>
 
                 <CheckBox
                     android:id="@+id/cbIsFromRepeated"

@@ -14,10 +14,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_estim"/>
+                android:src="@drawable/icn_estim"
+                android:tag="Local Number Estimate"/>
 
             <EditText
                 android:id="@+id/etLocationNumberEstimate"
@@ -27,11 +28,11 @@
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/form_borders_gray"/>
 
-            <ImageView
-                style="@style/JobDetailsEditText"
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_rate_type"/>
+                android:src="@drawable/icn_rate_type"
+                android:tag="Hourly or Flat rate"/>
 
             <Spinner
                 android:id="@+id/spLocalRateType"
@@ -50,10 +51,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_man"/>
+                android:src="@drawable/icn_man"
+                android:tag="Men-Hour"/>
 
             <EditText
                 android:id="@+id/etLocalLabor"
@@ -64,7 +66,6 @@
                 android:background="@drawable/form_borders_gray"/>
 
             <ImageView
-                style="@style/JobDetailsEditText"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icn_people"/>
@@ -84,12 +85,11 @@
                     android:background="@android:color/transparent"
                     android:textColor="@android:color/black"/>
 
-                <ImageView
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/icn_man"/>
+                    android:src="@drawable/icn_man"
+                    android:tag="Number Men"/>
 
                 <Spinner
                     android:id="@+id/spNumberMan"
@@ -97,12 +97,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"/>
 
-                <ImageView
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
+                <com.miami.moveforless.customviews.HelpImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/icn_car"/>
+                    android:src="@drawable/icn_car"
+                    android:tag="Number truck"/>
 
                 <Spinner
                     android:id="@+id/spNumberTruck"
@@ -121,10 +120,12 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_earth"/>
+                android:src="@drawable/icn_earth"
+                android:tag="Travel Hours"/>
 
             <EditText
                 android:id="@+id/etLocalTravel"
@@ -134,34 +135,35 @@
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/form_borders_gray"/>
 
-            <ImageView
-            style="@style/JobDetailsEditText"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/icn_rate_time"/>
+
+            <com.miami.moveforless.customviews.HelpImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icn_rate_time"
+                android:tag="Local Rate"/>
 
             <EditText
                 android:id="@+id/etLocalRate"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/form_borders_gray"/>
 
-            <ImageView
-                style="@style/JobDetailsEditText"
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_dropbox"/>
+                android:src="@drawable/icn_dropbox"
+                android:tag="Total Packing"/>
 
             <EditText
                 android:id="@+id/etTotalPacking"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/form_borders_gray"/>
         </LinearLayout>
 
@@ -173,10 +175,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_sum"/>
+                android:src="@drawable/icn_sum"
+                android:tag="LocalTravel + LocalLabor"/>
 
             <EditText
                 android:id="@+id/etLocalTravelPlusLocalLabor"
@@ -186,34 +189,34 @@
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/form_borders_gray"/>
 
-            <ImageView
-                style="@style/JobDetailsEditText"
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_estim"/>
+                android:src="@drawable/icn_estim"
+                android:tag="Estimated Total"/>
 
             <EditText
                 android:id="@+id/etEstimatedTotal"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/form_borders_gray"/>
 
-            <ImageView
-                style="@style/JobDetailsEditText"
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_finish"/>
+                android:src="@drawable/icn_finish"
+                android:tag="Actual Total Final"/>
 
             <EditText
                 android:id="@+id/etActualTotalFinal"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/form_borders_gray"/>
         </LinearLayout>
 

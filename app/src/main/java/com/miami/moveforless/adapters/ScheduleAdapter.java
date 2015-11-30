@@ -36,8 +36,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
         if (getItem(_position).mSub && getItem(_position).child != null) {
             return ConstantHolder.SUB_HEADER;
         }
-        else if (getItem(_position).isActive != null && getItem(_position).isActive == 1
-                && getItem(_position).child != null) {
+        else if (getItem(_position).isActive == 1 && getItem(_position).child != null) {
             return ConstantHolder.ACTIVE_HEADER;
         }
         else if (getItem(_position).child == null) {

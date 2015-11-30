@@ -14,10 +14,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_state"/>
+                android:src="@drawable/icn_state"
+                android:tag="From State"/>
 
             <EditText
                 android:id="@+id/etFromState"
@@ -46,10 +47,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_wisconsin_map"/>
+                android:src="@drawable/icn_wisconsin_map"
+                android:tag="To State"/>
 
             <EditText
                 android:id="@+id/etToState"
@@ -78,10 +80,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_distance"/>
+                android:src="@drawable/icn_distance"
+                android:tag="Distance Total"/>
 
             <EditText
                 android:id="@+id/etDistanceTotal"
@@ -100,10 +103,11 @@
             android:paddingBottom="70dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_purpose"/>
+                android:src="@drawable/icn_purpose"
+                android:tag="Distance Office"/>
 
             <EditText
                 android:id="@+id/etDistanceOffice"

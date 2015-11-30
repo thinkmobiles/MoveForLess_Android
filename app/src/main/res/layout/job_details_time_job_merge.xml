@@ -9,31 +9,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
-            android:paddingBottom="15dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_arrow_up"/>
+                android:src="@drawable/icn_arrow_up"
+                android:tag="Required Pickup Date"/>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="4"
                 android:layout_height="40dp"
-                android:layout_marginLeft="35dp"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:background="@drawable/form_borders_gray">
+                android:layout_marginLeft="35dp"
+                android:layout_weight="4"
+                android:background="@drawable/form_borders_gray"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/tvRequiredPickupDate"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
 
                 <ImageView
                     android:layout_width="35dp"
@@ -44,8 +45,8 @@
                 <TextView
                     android:id="@+id/tvRequiredPickupTime"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <View
@@ -58,31 +59,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
-            android:paddingBottom="15dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_phone"/>
+                android:src="@drawable/icn_phone"
+                android:tag="FollowUpDate"/>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="4"
                 android:layout_height="40dp"
-                android:layout_marginLeft="35dp"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:background="@drawable/form_borders_gray">
+                android:layout_marginLeft="35dp"
+                android:layout_weight="4"
+                android:background="@drawable/form_borders_gray"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/tvFollowUpDate"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
 
                 <ImageView
                     android:layout_width="35dp"
@@ -93,8 +95,8 @@
                 <TextView
                     android:id="@+id/tvFollowUpTime"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <View
@@ -107,31 +109,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
-            android:paddingBottom="15dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_play_circle"/>
+                android:src="@drawable/icn_play_circle"
+                android:tag="Start Time"/>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="4"
                 android:layout_height="40dp"
-                android:layout_marginLeft="35dp"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:background="@drawable/form_borders_gray">
+                android:layout_marginLeft="35dp"
+                android:layout_weight="4"
+                android:background="@drawable/form_borders_gray"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/tvStartDate"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
 
                 <ImageView
                     android:layout_width="35dp"
@@ -142,8 +145,8 @@
                 <Spinner
                     android:id="@+id/spStartTime"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <View
@@ -156,31 +159,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
-            android:paddingBottom="15dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_stop_play"/>
+                android:src="@drawable/icn_stop_play"
+                android:tag="Stop Time"/>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="4"
                 android:layout_height="40dp"
-                android:layout_marginLeft="35dp"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:background="@drawable/form_borders_gray">
+                android:layout_marginLeft="35dp"
+                android:layout_weight="4"
+                android:background="@drawable/form_borders_gray"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/tvStopDate"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
 
                 <ImageView
                     android:layout_width="35dp"
@@ -191,8 +195,8 @@
                 <Spinner
                     android:id="@+id/spStopTime"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <View

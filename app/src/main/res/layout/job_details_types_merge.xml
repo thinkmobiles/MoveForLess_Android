@@ -13,12 +13,13 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
                 android:gravity="center_vertical"
-                android:src="@drawable/icn_job"/>
+                android:src="@drawable/icn_job"
+                android:tag="Moving or Storage or Labor"/>
 
             <com.miami.moveforless.customviews.CustomSpinner
                 android:id="@+id/spJobTypeId"
@@ -28,8 +29,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="35dp"
                 android:layout_weight="3"
-                android:focusable="false"
                 android:enabled="false"
+                android:focusable="false"
                 android:gravity="center_vertical"/>
 
             <View
@@ -48,19 +49,20 @@
             android:paddingBottom="15dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_cust"/>
+                android:src="@drawable/icn_cust"
+                android:tag="Business, Residential or Commercial"/>
 
             <com.miami.moveforless.customviews.CustomSpinner
                 android:id="@+id/spCustTypeId"
+                style="@style/BaseSpinnerStyle"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
                 android:layout_weight="3"
-                android:enabled="false"
-                style="@style/BaseSpinnerStyle"/>
+                android:enabled="false"/>
 
             <View
                 android:layout_width="0dp"
@@ -77,19 +79,20 @@
             android:paddingBottom="70dp"
             android:paddingLeft="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_quote"/>
+                android:src="@drawable/icn_quote"
+                android:tag="Binding or Non-Binding"/>
 
             <com.miami.moveforless.customviews.CustomSpinner
                 android:id="@+id/spQuoteTypeId"
+                style="@style/BaseSpinnerStyle"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="35dp"
                 android:layout_weight="3"
-                android:enabled="false"
-                style="@style/BaseSpinnerStyle"/>
+                android:enabled="false"/>
 
             <View
                 android:layout_width="0dp"
@@ -97,7 +100,5 @@
                 android:layout_weight="2"/>
 
         </LinearLayout>
-
-
     </LinearLayout>
 </merge>

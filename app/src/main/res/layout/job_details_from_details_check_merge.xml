@@ -14,10 +14,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/big_icon_quote"/>
+                android:src="@drawable/big_icon_quote"
+                android:tag="Notes"/>
 
             <CheckBox
                 android:id="@+id/cbHaveNotesFrom"
@@ -35,10 +36,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_stop"/>
+                android:src="@drawable/icn_stop"
+                android:tag="Stops"/>
 
             <CheckBox
                 android:id="@+id/cbHaveStopsFrom"
@@ -56,10 +58,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_dropbox"/>
+                android:src="@drawable/icn_dropbox"
+                android:tag="Material/Misc"/>
 
             <CheckBox
                 android:id="@+id/cbHavePackageFrom"
@@ -77,10 +80,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_job"/>
+                android:src="@drawable/icn_job"
+                android:tag="Tasks"/>
 
             <CheckBox
                 android:id="@+id/cbHaveTacksFrom"
@@ -98,10 +102,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_adifficult"/>
+                android:src="@drawable/icn_adifficult"
+                android:tag="Trailer Access"/>
 
             <CheckBox
                 android:id="@+id/cbHaveTrailerAccessFrom"
@@ -119,10 +124,11 @@
             android:paddingBottom="15dp"
             android:paddingRight="50dp">
 
-            <ImageView
+            <com.miami.moveforless.customviews.HelpImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icn_stairs"/>
+                android:src="@drawable/icn_stairs"
+                android:tag="Stairs"/>
 
             <EditText
                 android:id="@+id/etFromStairsFrom"

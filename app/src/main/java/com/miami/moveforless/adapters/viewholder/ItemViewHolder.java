@@ -48,6 +48,8 @@ public class ItemViewHolder extends AbstractViewHolder {
     public void bind(JobModel model) {
         if (model.isActive == 1)
             itemContainer.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.yellow));
+        else
+            itemContainer.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.blue_light));
         mJobModel = model;
         tvFullname.setText(model.from_fullname);
         tvPostTitle.setText(model.post_title);
