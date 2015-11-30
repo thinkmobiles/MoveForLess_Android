@@ -1,7 +1,9 @@
 package com.miami.moveforless.adapters.viewholder;
 
 import android.graphics.Rect;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.miami.moveforless.App;
@@ -24,8 +26,10 @@ public class ItemViewHolder extends AbstractViewHolder {
     private TextView tvPickupDate;
     private TextView tvRequiredPickupDate;
     private TextView tvToZipcode;
+    private LinearLayout itemContainer;
 
     public ItemViewHolder(View itemView) {
+
         super(itemView);
         tvFullname = (TextView) itemView.findViewById(R.id.tvFullName_SI);
         tvPostTitle = (TextView) itemView.findViewById(R.id.tvPostTitle_SI);
@@ -34,6 +38,7 @@ public class ItemViewHolder extends AbstractViewHolder {
         tvToZipcode = (TextView) itemView.findViewById(R.id.tvToZipCode_SI);
         tvPickupDate = (TextView) itemView.findViewById(R.id.tvPickupDate_SI);
         tvRequiredPickupDate = (TextView) itemView.findViewById(R.id.tvRequiredPickupTime_SI);
+        itemContainer = (LinearLayout) itemView.findViewById(R.id.itemContainer_SI);
 
         RxUtils.click(tvToZipcode, o -> tvToZipCodeClicked());
         RxUtils.click(tvFromZipcode, o -> tvFromZipCodeClicked());
@@ -41,8 +46,8 @@ public class ItemViewHolder extends AbstractViewHolder {
 
     @Override
     public void bind(JobModel model) {
-//        if (model.mSub)
-//            itemView.setPadding(400, 0, 20, 0);
+        if (model.isActive == 1)
+            itemContainer.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.yellow));
         mJobModel = model;
         tvFullname.setText(model.from_fullname);
         tvPostTitle.setText(model.post_title);

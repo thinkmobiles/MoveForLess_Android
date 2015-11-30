@@ -102,9 +102,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                         if (jobModel.getDay() == currentHeader.getDay()) {
                             addItemIfTheSameDay(sortedJobList, jobModel);
                         } else {
-                            boolean isFuture = jobModel.getDay() != TimeUtil.getNextDay()
-                                    && jobModel.getDay() != TimeUtil.getCurrentDay();
-                            if (isFuture) {
+                            if (TimeUtil.isFuture(jobModel.getDay())) {
                                 if (!currentHeader.isFuture && futureHeader == null) {
                                     futureHeader = createHeader(jobModel, false, true);
                                     futureHeader.mExpand = true;
@@ -215,7 +213,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             jobModelToday.from_phone = "326-562-891" + i;
             jobModelToday.from_zipcode = "31522";
             jobModelToday.to_zipcode = "33525";
-            jobModelToday.pickup_date = "1448835191";
+            jobModelToday.pickup_date = "1448885191";
             jobModelToday.status_slug = "assign";
             jobModelToday.post_title = "LD02513" + i;
             jobModelToday.RequiredPickupDate = "1448835191";
@@ -233,7 +231,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
             jobModelFuture.from_phone = "456-312-8945" + i;
             jobModelFuture.from_zipcode = "31522";
             jobModelFuture.to_zipcode = "33525";
-            jobModelFuture.pickup_date = "1448885191";
+            jobModelFuture.pickup_date = "1448985191";
             jobModelFuture.status_slug = "assign";
             jobModelFuture.post_title = "LD02525" + i;
             jobModelFuture.RequiredPickupDate = "1448885191";

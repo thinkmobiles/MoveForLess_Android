@@ -9,5 +9,4 @@ public class ConstantHolder {
     public static final int SUB_HEADER = 2;
     public static final int SUB_ITEM = 3;
     public static final int ACTIVE_HEADER = 4;
-    public static final int ACTIVE_ITEM = 5;
 }

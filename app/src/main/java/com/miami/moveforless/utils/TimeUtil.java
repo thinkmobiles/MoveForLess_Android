@@ -1,6 +1,7 @@
 package com.miami.moveforless.utils;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 /**
@@ -19,12 +20,13 @@ public class TimeUtil {
     }
 
     public static int getNextDay() {
-        Calendar c = Calendar.getInstance();
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
 
-        int maxDayInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-        return getCurrentDay() + 1 <= maxDayInMonth ? getCurrentDay() + 1 : 1;
-
+        return calendar.get(Calendar.DAY_OF_MONTH);
     }
 
+    public static boolean isFuture(int jobDay) {
+        return jobDay != getCurrentDay() && jobDay !=getNextDay();
+    }
 }
