@@ -1,6 +1,7 @@
 package com.miami.moveforless.adapters.viewholder;
 
 import android.graphics.Rect;
+import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -62,6 +63,10 @@ public class ItemViewHolder extends AbstractViewHolder {
 
         tvRequiredPickupDate.setText(model.getRequiredPickupDate());
         tvPickupDate.setText(model.getPickup_date());
+    }
+
+    @Override
+    public void setIconSpinner(@DrawableRes int drawable) {
     }
 
     public boolean locateView(float x) {

@@ -1,5 +1,6 @@
 package com.miami.moveforless.adapters.viewholder;
 
+import android.support.annotation.DrawableRes;
 import android.view.View;
 
 import com.miami.moveforless.database.model.JobModel;
@@ -16,6 +17,11 @@ public class ActiveHeaderViewHolder extends AbstractViewHolder {
 
     @Override
     public void bind(JobModel model) {
+
+    }
+
+    @Override
+    public void setIconSpinner(@DrawableRes int drawable) {
 
     }
 }

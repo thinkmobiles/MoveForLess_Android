@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.miami.moveforless.R;
 import com.miami.moveforless.activity.FragmentChanger;
 import com.miami.moveforless.adapters.ScheduleAdapter;
+import com.miami.moveforless.adapters.viewholder.AbstractViewHolder;
 import com.miami.moveforless.adapters.viewholder.RecyclerItemClickListener;
 import com.miami.moveforless.database.DatabaseController;
 import com.miami.moveforless.database.model.JobModel;
@@ -413,11 +414,12 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
-                (_context, _view, _position) -> {
+                (_context, _view, _position, _viewHolder) -> {
                     if (mAdapter.getItem(_position).child != null) {
                         if (!mAdapter.getItem(_position).mExpand) {
                             mAdapter.getItem(_position).mExpand = true;
                             mAdapter.addChild(_position + 1, mAdapter.getItem(_position));
+                            ((AbstractViewHolder) _viewHolder).setIconSpinner(R.drawable.ic_spinner_up);
                             scrollRecyclerView(_position);
                         } else {
                             mAdapter.getItem(_position).mExpand = false;
@@ -427,6 +429,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                                     mAdapter.removeChild(_position + i + 1, mAdapter.getItem(_position).child.get(i));
                                 }
                             }
+                            ((AbstractViewHolder) _viewHolder).setIconSpinner(R.drawable.ic_spinner_down);
                             mAdapter.removeChild(_position + 1, mAdapter.getItem(_position));
                         }
                     } else {
