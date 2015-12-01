@@ -195,7 +195,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         jobModel.to_address = "to some Citysssssssssssssssssssssss";
         jobModel.from_city = "From some Citysssssssssssssssssssssss";
         jobModel.to_city = "To some Citysssssssssssssssssssssssssss";
-        jobModel.from_phone = "783-223-5111";
+        jobModel.from_phone = "783-223-51111";
         jobModel.from_zipcode = "31522";
         jobModel.to_zipcode = "33525";
         jobModel.pickup_date = "1441835191";
@@ -419,7 +419,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                         if (!mAdapter.getItem(_position).mExpand) {
                             mAdapter.getItem(_position).mExpand = true;
                             mAdapter.addChild(_position + 1, mAdapter.getItem(_position));
-                            ((AbstractViewHolder) _viewHolder).setIconSpinner(R.drawable.ic_spinner_up);
+                            ((AbstractViewHolder) _viewHolder).setIconSpinner(true);
                             scrollRecyclerView(_position);
                         } else {
                             mAdapter.getItem(_position).mExpand = false;
@@ -430,7 +430,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                                 }
                             }
                             mAdapter.removeChild(_position + 1, mAdapter.getItem(_position));
-                            ((AbstractViewHolder) _viewHolder).setIconSpinner(R.drawable.ic_spinner_down);
+                            ((AbstractViewHolder) _viewHolder).setIconSpinner(false);
 
                         }
                     } else {

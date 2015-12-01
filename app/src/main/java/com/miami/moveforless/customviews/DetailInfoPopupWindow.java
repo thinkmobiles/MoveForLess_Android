@@ -23,9 +23,8 @@ import com.miami.moveforless.R;
  * Created by Sergbek on 18.11.2015.
  */
 
-public final class DetailAddressPopupWindow {
+public final class DetailInfoPopupWindow {
 
-    public static final int MARGIN = 15;
     private WindowManager mWindowManager;
 
     private Context mContext;
@@ -38,7 +37,9 @@ public final class DetailAddressPopupWindow {
 
     private Drawable mBackgroundDrawable = null;
 
-    public DetailAddressPopupWindow(Context context, String text, int viewResource) {
+    public static final int MARGIN = 15;
+
+    public DetailInfoPopupWindow(Context context, String text, int viewResource) {
         mContext = context;
         mWindow = new PopupWindow(context);
 
@@ -53,13 +54,14 @@ public final class DetailAddressPopupWindow {
         mUpImageView = (ImageView) mView.findViewById(R.id.arrow_up);
         mDownImageView = (ImageView) mView.findViewById(R.id.arrow_down);
 
+        setText(text);
     }
 
-    public DetailAddressPopupWindow(Context context) {
+    public DetailInfoPopupWindow(Context context) {
         this(context, "", R.layout.popup_window);
     }
 
-    public DetailAddressPopupWindow(Context context, String text) {
+    public DetailInfoPopupWindow(Context context, String text) {
         this(context);
         setText(text);
     }

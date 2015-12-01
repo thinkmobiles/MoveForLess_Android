@@ -18,5 +18,5 @@ public abstract class AbstractViewHolder extends RecyclerView.ViewHolder {
 
     public abstract void bind(JobModel model);
 
-    public abstract void setIconSpinner(@DrawableRes int drawable);
+    public abstract void setIconSpinner(boolean expand);
 }

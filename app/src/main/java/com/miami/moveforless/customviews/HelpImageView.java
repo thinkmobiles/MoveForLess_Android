@@ -26,7 +26,7 @@ public class HelpImageView extends ImageView implements View.OnLongClickListener
 
     @Override
     public boolean onLongClick(View view) {
-        DetailAddressPopupWindow popup = new DetailAddressPopupWindow(getContext(), getTag().toString());
+        DetailInfoPopupWindow popup = new DetailInfoPopupWindow(getContext(), getTag().toString());
         popup.show(view);
         return true;
     }

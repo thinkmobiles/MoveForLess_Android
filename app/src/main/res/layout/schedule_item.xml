@@ -20,19 +20,19 @@
             android:id="@+id/ivStatus_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:src="@drawable/icn_group"/>
 
         <ImageView
             android:id="@+id/ivReadJob_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:src="@drawable/icn_email_open"/>
 
         <View
@@ -113,6 +113,7 @@
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:singleLine="true"
+            android:textColor="#006750"
             android:textSize="24sp"
             />
 
@@ -128,6 +129,7 @@
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:singleLine="true"
+            android:textColor="#006750"
             android:textSize="24sp"
             />
 

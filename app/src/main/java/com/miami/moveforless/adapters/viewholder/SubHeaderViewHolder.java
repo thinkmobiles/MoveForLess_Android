@@ -1,6 +1,5 @@
 package com.miami.moveforless.adapters.viewholder;
 
-import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,20 +29,20 @@ public class SubHeaderViewHolder extends AbstractViewHolder {
     public void bind(JobModel model) {
         if (model != null) {
 
-            if (model.mExpand)
-                setIconSpinner(R.drawable.ic_spinner_up);
-            else
-                setIconSpinner(R.drawable.ic_spinner_down);
-
+            setIconSpinner(model.mExpand);
             tvHeaderJob.setText(model.title);
             tvHeaderJobSize.setText(model.getChildSize());
         }
     }
 
     @Override
-    public void setIconSpinner(@DrawableRes int drawable) {
-        ivSpinnerHeader.setImageDrawable(ContextCompat.getDrawable(App.getAppContext(),drawable));
+    public void setIconSpinner(boolean expand) {
+        if (expand)
+            ivSpinnerHeader.setImageDrawable(ContextCompat.getDrawable(App.getAppContext(),
+                    R.drawable.ic_spinner_up));
+        else
+            ivSpinnerHeader.setImageDrawable(ContextCompat.getDrawable(App.getAppContext(),
+                    R.drawable.ic_spinner_down));
     }
-
 
 }

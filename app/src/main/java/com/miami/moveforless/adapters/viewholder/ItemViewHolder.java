@@ -1,7 +1,6 @@
 package com.miami.moveforless.adapters.viewholder;
 
 import android.graphics.Rect;
-import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,7 +8,7 @@ import android.widget.TextView;
 
 import com.miami.moveforless.App;
 import com.miami.moveforless.R;
-import com.miami.moveforless.customviews.DetailAddressPopupWindow;
+import com.miami.moveforless.customviews.DetailInfoPopupWindow;
 import com.miami.moveforless.database.model.JobModel;
 import com.miami.moveforless.utils.RxUtils;
 
@@ -63,8 +62,8 @@ public class ItemViewHolder extends AbstractViewHolder {
 
     @Override
     public void bind(JobModel model) {
-        if (model.isActive == 1){
-            itemContainer.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.yellows));
+        if (model.isActive == 1) {
+            itemContainer.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.active_item));
             vVerticalDivider1.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.yellow));
             vVerticalDivider2.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.yellow));
             vVerticalDivider3.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.yellow));
@@ -72,8 +71,7 @@ public class ItemViewHolder extends AbstractViewHolder {
             vVerticalDivider5.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.yellow));
             vVerticalDivider6.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.yellow));
             vVerticalDivider7.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.yellow));
-        }
-        else{
+        } else {
             itemContainer.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.blue_light));
             vVerticalDivider1.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.vertical_divider));
             vVerticalDivider2.setBackgroundColor(ContextCompat.getColor(App.getAppContext(), R.color.vertical_divider));
@@ -96,7 +94,7 @@ public class ItemViewHolder extends AbstractViewHolder {
     }
 
     @Override
-    public void setIconSpinner(@DrawableRes int drawable) {
+    public void setIconSpinner(boolean expand) {
     }
 
     public boolean locateView(float x) {
@@ -121,16 +119,15 @@ public class ItemViewHolder extends AbstractViewHolder {
                 || fromZipCodeLocation.contains((int) x, fromZipCodeLocation.centerY());
     }
 
-
     private void tvToZipCodeClicked() {
-        DetailAddressPopupWindow toPopup = new DetailAddressPopupWindow(App.getAppContext(), mJobModel
+        DetailInfoPopupWindow toPopup = new DetailInfoPopupWindow(App.getAppContext(), mJobModel
                 .to_city + " " +
                 mJobModel.to_address);
         toPopup.show(tvToZipcode);
     }
 
     private void tvFromZipCodeClicked() {
-        DetailAddressPopupWindow fromPopups = new DetailAddressPopupWindow(App.getAppContext(), mJobModel
+        DetailInfoPopupWindow fromPopups = new DetailInfoPopupWindow(App.getAppContext(), mJobModel
                 .from_city + " " +
                 mJobModel.from_address);
         fromPopups.show(tvFromZipcode);
