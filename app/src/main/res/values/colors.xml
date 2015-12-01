@@ -8,6 +8,7 @@
     <color name="grey_light">#E0E0E0</color>
     <color name="grey_light_alpha">#44E0E0E0</color>
     <color name="yellow">#FFB800</color>
+    <color name="yellows">#7effb800</color>
     <color name="blue">#00b3f8</color>
 
 
@@ -19,5 +20,6 @@
     <color name="blue_light">#d2eee8</color>
     <color name="blue_ultra_light">#f2faf9</color>
     <color name="blue_dialog">#e4f7f3</color>
+    <color name="vertical_divider">#84B6AD</color>
 
 </resources>

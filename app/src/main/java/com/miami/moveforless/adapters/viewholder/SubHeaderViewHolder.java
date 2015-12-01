@@ -29,6 +29,12 @@ public class SubHeaderViewHolder extends AbstractViewHolder {
     @Override
     public void bind(JobModel model) {
         if (model != null) {
+
+            if (model.mExpand)
+                setIconSpinner(R.drawable.ic_spinner_up);
+            else
+                setIconSpinner(R.drawable.ic_spinner_down);
+
             tvHeaderJob.setText(model.title);
             tvHeaderJobSize.setText(model.getChildSize());
         }

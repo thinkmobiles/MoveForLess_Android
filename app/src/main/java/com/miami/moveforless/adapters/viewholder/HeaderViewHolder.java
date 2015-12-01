@@ -30,6 +30,10 @@ public class HeaderViewHolder extends AbstractViewHolder {
     @Override
     public void bind(JobModel model) {
         if (model != null) {
+            if (model.mExpand)
+                setIconSpinner(R.drawable.ic_spinner_up);
+            else
+                setIconSpinner(R.drawable.ic_spinner_down);
             tvHeaderJob.setText(model.title);
             if (model.isFuture)
                 tvHeaderJobSize.setText(model.getFutureChildSize());
@@ -40,7 +44,7 @@ public class HeaderViewHolder extends AbstractViewHolder {
 
     @Override
     public void setIconSpinner(@DrawableRes int drawable) {
-        ivSpinnerHeader.setImageDrawable(ContextCompat.getDrawable(App.getAppContext(),drawable));
+        ivSpinnerHeader.setImageDrawable(ContextCompat.getDrawable(App.getAppContext(), drawable));
     }
 
 }

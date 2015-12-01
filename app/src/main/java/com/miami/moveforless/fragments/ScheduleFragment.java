@@ -429,8 +429,9 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
                                     mAdapter.removeChild(_position + i + 1, mAdapter.getItem(_position).child.get(i));
                                 }
                             }
-                            ((AbstractViewHolder) _viewHolder).setIconSpinner(R.drawable.ic_spinner_down);
                             mAdapter.removeChild(_position + 1, mAdapter.getItem(_position));
+                            ((AbstractViewHolder) _viewHolder).setIconSpinner(R.drawable.ic_spinner_down);
+
                         }
                     } else {
                         if (getActivity() instanceof FragmentChanger) {

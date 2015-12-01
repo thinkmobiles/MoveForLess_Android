@@ -20,21 +20,25 @@
             android:id="@+id/ivStatus_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:src="@drawable/icn_group"/>
 
         <ImageView
             android:id="@+id/ivReadJob_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="5dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:src="@drawable/icn_email_open"/>
 
         <View
+            android:id="@+id/vVerticalDivider1_SI"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="#84B6AD"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/tvPostTitle_SI"
@@ -50,9 +54,9 @@
             />
 
         <View
+            android:id="@+id/vVerticalDivider2_SI"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="#84B6AD"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/tvRequiredPickupTime_SI"
@@ -65,9 +69,9 @@
             />
 
         <View
+            android:id="@+id/vVerticalDivider3_SI"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="#84B6AD"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/tvFullName_SI"
@@ -98,9 +102,9 @@
             />
 
         <View
+            android:id="@+id/vVerticalDivider4_SI"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="#84B6AD"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/tvFromZipCode_SI"
@@ -113,9 +117,9 @@
             />
 
         <View
+            android:id="@+id/vVerticalDivider5_SI"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="#84B6AD"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/tvToZipCode_SI"
@@ -128,9 +132,9 @@
             />
 
         <View
+            android:id="@+id/vVerticalDivider6_SI"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="#84B6AD"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/tvPickupDate_SI"
@@ -144,9 +148,9 @@
             />
 
         <View
+            android:id="@+id/vVerticalDivider7_SI"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="#84B6AD"/>
+            android:layout_height="wrap_content"/>
 
         <ImageView
             android:id="@+id/ivPaid_SI"
