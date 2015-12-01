@@ -27,6 +27,7 @@ public class ItemViewHolder extends AbstractViewHolder {
     private TextView tvRequiredPickupDate;
     private TextView tvToZipcode;
     private LinearLayout itemContainer;
+    private View vBottomDivider;
 
     public ItemViewHolder(View itemView) {
 
@@ -39,6 +40,7 @@ public class ItemViewHolder extends AbstractViewHolder {
         tvPickupDate = (TextView) itemView.findViewById(R.id.tvPickupDate_SI);
         tvRequiredPickupDate = (TextView) itemView.findViewById(R.id.tvRequiredPickupTime_SI);
         itemContainer = (LinearLayout) itemView.findViewById(R.id.itemContainer_SI);
+        vBottomDivider = itemView.findViewById(R.id.vBottomDivider_LIOH);
 
         RxUtils.click(tvToZipcode, o -> tvToZipCodeClicked());
         RxUtils.click(tvFromZipcode, o -> tvFromZipCodeClicked());
@@ -97,6 +99,11 @@ public class ItemViewHolder extends AbstractViewHolder {
                 .from_city + " " +
                 mJobModel.from_address);
         fromPopups.show(tvFromZipcode);
+    }
+
+    public void enableBottomDivider(boolean enable) {
+        if (enable)
+            vBottomDivider.setVisibility(View.VISIBLE);
     }
 
 }

@@ -3,30 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
     android:clickable="true"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:background="?attr/selectableItemBackground">
+    android:paddingLeft="17dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_gravity="center_vertical"
         android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icn_up_y"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textStyle="bold"
-            android:textSize="24sp"
+            android:text="Active"
             android:textColor="@color/yellow"
-            android:text="Active"/>
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

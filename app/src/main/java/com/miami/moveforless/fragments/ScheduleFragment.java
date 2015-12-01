@@ -412,7 +412,7 @@ public class ScheduleFragment extends BaseFragment implements View.OnClickListen
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
                 (_context, _view, _position) -> {
                     if (mAdapter.getItem(_position).child != null) {
                         if (!mAdapter.getItem(_position).mExpand) {

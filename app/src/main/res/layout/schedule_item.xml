@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
+    android:clickable="true"
     android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:clickable="true">
+    android:paddingRight="20dp">
 
     <LinearLayout
         android:id="@+id/itemContainer_SI"
@@ -18,10 +18,10 @@
 
         <ImageView
             android:id="@+id/ivStatus_SI"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:src="@drawable/icn_group"/>
 
         <ImageView
@@ -41,13 +41,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.95"
+            android:ellipsize="end"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textSize="24sp"
             android:singleLine="true"
-            android:ellipsize="end"
             android:textColor="#006750"
-/>
+            android:textSize="24sp"
+            />
 
         <View
             android:layout_width="1dp"
@@ -60,9 +60,9 @@
             android:layout_height="wrap_content"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textSize="24sp"
             android:textColor="#006750"
-/>
+            android:textSize="24sp"
+            />
 
         <View
             android:layout_width="1dp"
@@ -73,14 +73,15 @@
             android:id="@+id/tvFullName_SI"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:textSize="24sp"
             android:layout_weight="1"
             android:ellipsize="end"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
             android:singleLine="true"
             android:textColor="#006750"
-/>
+            android:textSize="24sp"
+            />
+
         <Space
             android:layout_width="10dp"
             android:layout_height="wrap_content"/>
@@ -91,10 +92,10 @@
             android:layout_height="wrap_content"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textSize="24sp"
             android:singleLine="true"
             android:textColor="#006750"
-/>
+            android:textSize="24sp"
+            />
 
         <View
             android:layout_width="1dp"
@@ -107,9 +108,9 @@
             android:layout_height="wrap_content"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textSize="24sp"
             android:singleLine="true"
-/>
+            android:textSize="24sp"
+            />
 
         <View
             android:layout_width="1dp"
@@ -122,9 +123,9 @@
             android:layout_height="wrap_content"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textSize="24sp"
             android:singleLine="true"
-/>
+            android:textSize="24sp"
+            />
 
         <View
             android:layout_width="1dp"
@@ -137,10 +138,10 @@
             android:layout_height="wrap_content"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textSize="24sp"
             android:singleLine="true"
             android:textColor="#006750"
-/>
+            android:textSize="24sp"
+            />
 
         <View
             android:layout_width="1dp"
@@ -161,6 +162,7 @@
         android:id="@+id/vBottomDivider_LIOH"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#84B6AD"/>
+        android:background="#84B6AD"
+        android:visibility="gone"/>
 
 </FrameLayout>
