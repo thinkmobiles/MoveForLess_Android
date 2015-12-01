@@ -21,7 +21,7 @@ public class TimeUtil {
 
     public static int getNextDay() {
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
 
         return calendar.get(Calendar.DAY_OF_MONTH);
     }
