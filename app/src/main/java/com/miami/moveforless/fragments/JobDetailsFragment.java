@@ -76,8 +76,6 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
     EditText etTruckName;
     @Bind(R.id.etMovers1Name)
     EditText etMovers1Name;
-    @Bind(R.id.etMovers2Name)
-    EditText etMovers2Name;
 
     //job details commission partnere merge
     @Bind(R.id.etCommissionNumber)
@@ -427,7 +425,7 @@ public class JobDetailsFragment extends BaseJobDetailFragment {
         etDriverName.setText(mJob.driver_name);
         etTruckName.setText("");//not found
         etMovers1Name.setText("");//not found
-        etMovers2Name.setText("");//not found
+
     }
 
     private void setConfrimWithClient() {

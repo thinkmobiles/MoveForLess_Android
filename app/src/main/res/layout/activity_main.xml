@@ -18,4 +18,8 @@
 
     </FrameLayout>
 
+    <com.joanzapata.pdfview.PDFView
+        android:layout_width="0px"
+        android:layout_height="match_parent" />
+
 </LinearLayout>
