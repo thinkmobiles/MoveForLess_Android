@@ -1,7 +1,9 @@
 package com.miami.moveforless.adapters.viewholder;
 
+import android.support.annotation.DrawableRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.miami.moveforless.database.model.JobModel;
 
@@ -15,4 +17,6 @@ public abstract class AbstractViewHolder extends RecyclerView.ViewHolder {
     }
 
     public abstract void bind(JobModel model);
+
+    public abstract void setIconSpinner(@DrawableRes int drawable);
 }

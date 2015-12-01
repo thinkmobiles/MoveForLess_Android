@@ -35,14 +35,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
     public int getItemViewType(int _position) {
         if (getItem(_position).mSub && getItem(_position).child != null) {
             return ConstantHolder.SUB_HEADER;
-        }
-        else if (getItem(_position).isActive == 1 && getItem(_position).child != null) {
+        } else if (getItem(_position).isActive == 1 && getItem(_position).child != null) {
             return ConstantHolder.ACTIVE_HEADER;
-        }
-        else if (getItem(_position).child == null) {
+        } else if (getItem(_position).child != null)
+            return ConstantHolder.HEADER;
+        else if (getItem(_position).child == null && getItem(_position - 1).child != null) {
             return ConstantHolder.ITEM;
         } else {
-            return ConstantHolder.HEADER;
+            return ConstantHolder.ITEM_DIVIDER;
         }
     }
 
@@ -53,6 +53,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<AbstractViewHolder> {
             case ConstantHolder.ITEM:
                 itemView = mInflater.inflate(R.layout.schedule_item, parent, false);
                 return new ItemViewHolder(itemView);
+            case ConstantHolder.ITEM_DIVIDER:
+                itemView = mInflater.inflate(R.layout.schedule_item, parent, false);
+                ItemViewHolder itemViewHolder = new ItemViewHolder(itemView);
+                itemViewHolder.enableBottomDivider(true);
+                return itemViewHolder;
             case ConstantHolder.HEADER:
                 itemView = mInflater.inflate(R.layout.schedule_header, parent, false);
                 return new HeaderViewHolder(itemView);
